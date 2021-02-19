@@ -8,8 +8,8 @@ public class Tour extends Pieces {
 	private boolean aBouger;
 	private ArrayList<String> mouvementPossible;
 
-	public Tour(String nom, boolean couleur) {
-		super(nom, couleur);
+	public Tour(String nom, boolean couleur, Point emplacement) {
+		super(nom, couleur, emplacement);
 		aBouger = false;
 	}
 
