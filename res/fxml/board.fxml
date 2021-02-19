@@ -23,8 +23,8 @@
                <items>
                   <Menu mnemonicParsing="false" text="Apparence">
                     <items>
-                        <CheckMenuItem mnemonicParsing="false" selected="true" text="Claire" />
-                        <CheckMenuItem mnemonicParsing="false" text="Sombre" />
+                        <CheckMenuItem mnemonicParsing="false" onAction="#themeClaire" selected="true" text="Claire" />
+                        <CheckMenuItem mnemonicParsing="false" onAction="#themeSombre" text="Sombre" />
                     </items>
                   </Menu>
                </items>
@@ -42,314 +42,314 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Pane fx:id="a8" layoutX="38.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane id="testClaire" fx:id="a8" layoutX="38.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>
-                  <Pane fx:id="b8" layoutX="112.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="b8" layoutX="112.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>
-                  <Pane fx:id="c8" layoutX="186.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="c8" layoutX="186.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>
-                  <Pane fx:id="d8" layoutX="260.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="d8" layoutX="260.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>
-                  <Pane fx:id="e8" layoutX="334.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="e8" layoutX="334.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>
-                  <Pane fx:id="f8" layoutX="408.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="f8" layoutX="408.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>
-                  <Pane fx:id="g8" layoutX="482.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="g8" layoutX="482.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>
-                  <Pane fx:id="h8" layoutX="556.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="h8" layoutX="556.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>
-                  <Pane fx:id="a7" layoutX="38.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="a7" layoutX="38.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="b7" layoutX="112.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="b7" layoutX="112.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="c7" layoutX="186.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="c7" layoutX="186.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="d7" layoutX="260.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="d7" layoutX="260.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="e7" layoutX="334.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="e7" layoutX="334.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="f7" layoutX="408.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="f7" layoutX="408.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="g7" layoutX="482.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="g7" layoutX="482.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="h7" layoutX="556.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="h7" layoutX="556.0" layoutY="115.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="a6" layoutX="38.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="a6" layoutX="38.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="b6" layoutX="112.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="b6" layoutX="112.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="c6" layoutX="186.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="c6" layoutX="186.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="d6" layoutX="260.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="d6" layoutX="260.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="e6" layoutX="334.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="e6" layoutX="334.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="f6" layoutX="408.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="f6" layoutX="408.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="g6" layoutX="482.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="g6" layoutX="482.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="h6" layoutX="556.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="h6" layoutX="556.0" layoutY="189.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="a5" layoutX="38.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="a5" layoutX="38.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="b5" layoutX="112.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="b5" layoutX="112.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="c5" layoutX="186.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="c5" layoutX="186.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="d5" layoutX="260.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="d5" layoutX="260.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="e5" layoutX="334.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="e5" layoutX="334.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="f5" layoutX="408.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="f5" layoutX="408.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="g5" layoutX="482.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="g5" layoutX="482.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="h5" layoutX="556.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="h5" layoutX="556.0" layoutY="263.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="a4" layoutX="38.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="a4" layoutX="38.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="b4" layoutX="112.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="b4" layoutX="112.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="c4" layoutX="186.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="c4" layoutX="186.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="d4" layoutX="260.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="d4" layoutX="260.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="e4" layoutX="334.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="e4" layoutX="334.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="f4" layoutX="408.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="f4" layoutX="408.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="g4" layoutX="482.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="g4" layoutX="482.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="h4" layoutX="556.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="h4" layoutX="556.0" layoutY="337.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="a3" layoutX="38.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="a3" layoutX="38.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="b3" layoutX="112.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="b3" layoutX="112.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="c3" layoutX="186.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="c3" layoutX="186.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="d3" layoutX="260.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="d3" layoutX="260.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="e3" layoutX="334.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="e3" layoutX="334.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="f3" layoutX="408.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="f3" layoutX="408.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="g3" layoutX="482.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="g3" layoutX="482.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="h3" layoutX="556.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="h3" layoutX="556.0" layoutY="411.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="a2" layoutX="38.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="a2" layoutX="38.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="b2" layoutX="112.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="b2" layoutX="112.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="c2" layoutX="186.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="c2" layoutX="186.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="d2" layoutX="260.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="d2" layoutX="260.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="e2" layoutX="334.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="e2" layoutX="334.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="f2" layoutX="408.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="f2" layoutX="408.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="g2" layoutX="482.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="g2" layoutX="482.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="h2" layoutX="556.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="h2" layoutX="556.0" layoutY="485.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="a1" layoutX="38.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="a1" layoutX="38.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="b1" layoutX="112.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="b1" layoutX="112.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="c1" layoutX="186.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="c1" layoutX="186.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="d1" layoutX="260.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="d1" layoutX="260.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="e1" layoutX="334.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="e1" layoutX="334.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="f1" layoutX="408.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="f1" layoutX="408.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="g1" layoutX="482.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
+                  <Pane fx:id="g1" layoutX="482.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Pane fx:id="h1" layoutX="556.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
+                  <Pane fx:id="h1" layoutX="556.0" layoutY="559.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
@@ -394,6 +394,9 @@
                      </padding>
                   </VBox>
                </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
             </AnchorPane>
         </items>
       </SplitPane>

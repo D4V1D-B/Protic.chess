@@ -18,11 +18,20 @@ public class ChessApp extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
+
 		FXMLLoader loader = new FXMLLoader(
-				this.getClass().getResource("/fxml/baord.fxml"));
+				this.getClass().getResource("/fxml/board.fxml"));
 
 		BorderPane root = loader.load();
-		primaryStage.setScene(new Scene(root));
+		Scene scene = new Scene(root);
+		
+//		scene.getStylesheets()
+//				.add(this.getClass().getResource("/css/claire.css").toString());
+
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Échec");
+		primaryStage.setMinHeight(740);
+		primaryStage.setMinWidth(1100);
 		primaryStage.show();
 
 	}
