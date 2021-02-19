@@ -38,7 +38,7 @@ public class Pion extends Pieces
 		//
 		for (int i = 0; i <= 7; i++)
 		{
-			if (plateau[i][this.getEmplacement().y] == null)
+			if (plateau[i][this.getEmplacement().y].equals(null))
 			{
 
 			}
