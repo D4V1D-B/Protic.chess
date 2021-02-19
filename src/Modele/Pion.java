@@ -32,16 +32,36 @@ public class Pion extends Pieces
 	}
 
 	public void setMouvementPossible(Object[][] plateau,
-			ArrayList<Point> mouvementPossible)
+			ArrayList<Point> positionEnnemie)
 	{
 		mouvementPossible.clear();
-		//
-		for (int i = 0; i <= 7; i++)
+		if (super.isWhite())
 		{
-			if (plateau[i][this.getEmplacement().y].equals(null))
+			if (aBouger)
 			{
-
+				mouvementPossible.add(new Point(this.getEmplacement().x,
+						this.getEmplacement().y - 2));
+				setaBouger(true);
 			}
+			else
+			{
+				if (positionEnnemie
+						.equals(plateau[this.getEmplacement().x
+								- 1][this.getEmplacement().y - 1])
+						|| positionEnnemie
+								.equals(plateau[this.getEmplacement().x
+										- 1][this.getEmplacement().y + 1]))
+				{
+
+				}
+				mouvementPossible.add(new Point(this.getEmplacement().x,
+						this.getEmplacement().y - 1));
+			}
+
+		}
+		else
+		{
+
 		}
 
 	}
