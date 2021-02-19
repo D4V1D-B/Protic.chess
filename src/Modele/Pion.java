@@ -50,9 +50,12 @@ public class Pion extends Pieces
 								- 1][this.getEmplacement().y - 1])
 						|| positionEnnemie
 								.equals(plateau[this.getEmplacement().x
-										- 1][this.getEmplacement().y + 1]))
+										+ 1][this.getEmplacement().y - 1]))
 				{
-
+					mouvementPossible.add(new Point(this.getEmplacement().x - 1,
+							this.getEmplacement().y - 1));
+					mouvementPossible.add(new Point(this.getEmplacement().x + 1,
+							this.getEmplacement().y - 1));
 				}
 				mouvementPossible.add(new Point(this.getEmplacement().x,
 						this.getEmplacement().y - 1));
@@ -61,7 +64,29 @@ public class Pion extends Pieces
 		}
 		else
 		{
-
+			if (aBouger)
+			{
+				mouvementPossible.add(new Point(this.getEmplacement().x,
+						this.getEmplacement().y + 2));
+				setaBouger(true);
+			}
+			else
+			{
+				if (positionEnnemie
+						.equals(plateau[this.getEmplacement().x
+								+ 1][this.getEmplacement().y + 1])
+						|| positionEnnemie
+								.equals(plateau[this.getEmplacement().x
+										- 1][this.getEmplacement().y + 1]))
+				{
+					mouvementPossible.add(new Point(this.getEmplacement().x - 1,
+							this.getEmplacement().y + 1));
+					mouvementPossible.add(new Point(this.getEmplacement().x + 1,
+							this.getEmplacement().y + 1));
+				}
+				mouvementPossible.add(new Point(this.getEmplacement().x,
+						this.getEmplacement().y + 1));
+			}
 		}
 
 	}
