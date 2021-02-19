@@ -6,10 +6,10 @@ import java.util.ArrayList;
 public class Tour extends Pieces {
 
 	private boolean aBouger;
-	private ArrayList<String> mouvementPossible;
+	private ArrayList<Point> mouvementPossible;
 
-	public Tour(String nom, boolean couleur, Point emplacement) {
-		super(nom, couleur, emplacement);
+	public Tour(String nom, boolean couleur, Point position) {
+		super(nom, couleur, position);
 		aBouger = false;
 	}
 
@@ -21,13 +21,26 @@ public class Tour extends Pieces {
 		this.aBouger = true;
 	}
 
-	public ArrayList<String> getMouvementPossible() {
+	public ArrayList<Point> getMouvementPossible() {
 		return mouvementPossible;
 	}
 
-	 
-	public void setMouvementPossible(Object[][] plateau) {
-		
+	public void setMouvementPossible(Object[][] plateau, ArrayList<Point> positionEnemie) {
+		mouvementPossible.clear();
+		// ajouter sur la ligne de la tour
+		for (int j = this.getEmplacement().y - 1; j >= 0; j--) {
+			if (plateau[this.getEmplacement().x][j] == null) {
+				mouvementPossible.add(new Point(this.getEmplacement().x, j));
+			} else {
+				boolean estEnemie = false;
+				j = -30;
+				for (Point x : positionEnemie) {
+					estEnemie = x == new Point(this.getEmplacement().x, j);
+				}
+				if (estEnemie)
+					mouvementPossible.add(new Point(this.getEmplacement().x, j));
+			}
+		}
 	}
 
 }
