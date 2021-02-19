@@ -4,6 +4,10 @@ public class Pieces {
 
 	private String nom;
 	private int valeur = 0;
+	//si la pièce est morte
+	private boolean morte = false;
+	//si la pièce met le roi en échec. 
+	private boolean echec = false;
 	// vrai = blanc
 	private boolean couleur = true;
 	private int[][] emplacement;
