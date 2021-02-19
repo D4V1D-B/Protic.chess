@@ -39,7 +39,7 @@ public class Plateau {
 	
 	public ArrayList<Point> getVoidSpace()
 	{
-		ArrayList<Point> positionVide = new ArrayList();
+		ArrayList<Point> positionVide = new ArrayList<Point>();
 		
 		for(int i = 0; i<plateau.length;i++)
 		{
@@ -56,7 +56,7 @@ public class Plateau {
 	
 	public ArrayList<Point> getFillSpace()
 	{
-		ArrayList<Point> positionPlein = new ArrayList();
+		ArrayList<Point> positionPlein = new ArrayList<Point>();
 		
 		for(int i = 0; i<plateau.length;i++)
 		{
