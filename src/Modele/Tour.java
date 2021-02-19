@@ -34,7 +34,7 @@ public class Tour extends Pieces
 			ArrayList<Point> positionEnemie)
 	{
 		mouvementPossible.clear();
-		// ajouter sur la ligne de la tour
+		// ajouter sur la ligne de la tour à gauche
 		for (int j = this.getEmplacement().y - 1; j >= 0; j--)
 		{
 			if (plateau[this.getEmplacement().x][j] == null)
@@ -43,15 +43,68 @@ public class Tour extends Pieces
 			}
 			else
 			{
-				boolean estEnemie = false;
 				j = -30;
 				for (Point x : positionEnemie)
 				{
-					estEnemie = x == new Point(this.getEmplacement().x, j);
+					if (x.equals(new Point(this.getEmplacement().x, j)))
+						mouvementPossible.add(x);
 				}
-				if (estEnemie)
-					mouvementPossible
-							.add(new Point(this.getEmplacement().x, j));
+
+			}
+		}
+
+		// ajouter sur la ligne de la tour à droite
+		for (int j = this.getEmplacement().y + 1; j <= 7; j++)
+		{
+			if (plateau[this.getEmplacement().x][j] == null)
+			{
+				mouvementPossible.add(new Point(this.getEmplacement().x, j));
+			}
+			else
+			{
+				j = 30;
+				for (Point x : positionEnemie)
+				{
+					if (x.equals(new Point(this.getEmplacement().x, j)))
+						mouvementPossible.add(x);
+				}
+			}
+		}
+
+		// ajouter pour la ligne du bas
+		for (int i = this.getEmplacement().x + 1; i <= 7; i++)
+		{
+			if (plateau[i][this.getEmplacement().y] == null)
+			{
+				mouvementPossible.add(new Point(i, this.getEmplacement().y));
+			}
+			else
+			{
+				i = 30;
+				for (Point x : positionEnemie)
+				{
+					if (x.equals(new Point(i, this.getEmplacement().y)))
+						mouvementPossible.add(x);
+				}
+			}
+		}
+
+		// ajouter la ligne du haut
+
+		for (int i = this.getEmplacement().x - 1; i >= 0; i--)
+		{
+			if (plateau[i][this.getEmplacement().y] == null)
+			{
+				mouvementPossible.add(new Point(i, this.getEmplacement().y));
+			}
+			else
+			{
+				i = -30;
+				for (Point x : positionEnemie)
+				{
+					if (x.equals(new Point(i, this.getEmplacement().y)))
+						mouvementPossible.add(x);
+				}
 			}
 		}
 	}
