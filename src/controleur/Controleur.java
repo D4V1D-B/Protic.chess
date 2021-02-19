@@ -1,4 +1,4 @@
-package Controleur;
+package controleur;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
