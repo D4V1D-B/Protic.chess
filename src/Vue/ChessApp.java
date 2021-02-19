@@ -19,7 +19,7 @@ public class ChessApp extends Application
 	public void start(Stage primaryStage) throws Exception
 	{
 		FXMLLoader loader = new FXMLLoader(
-				this.getClass().getResource("baord.fxml"));
+				this.getClass().getResource("/fxml/baord.fxml"));
 
 		BorderPane root = loader.load();
 		primaryStage.setScene(new Scene(root));
