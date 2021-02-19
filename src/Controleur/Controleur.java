@@ -3,7 +3,7 @@ package Controleur;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
-public class controleur
+public class Controleur
 {
 
 	@FXML

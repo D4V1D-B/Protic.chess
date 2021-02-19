@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Pion extends Pieces{
 
-	private boolean aBouger = true;
+	private boolean aBouger = false;
 	private ArrayList<String> mouvementPossible;
 	
 	
