@@ -2,7 +2,7 @@ package Modele;
 
 import java.awt.Point;
 
-public class Pieces {
+public abstract class Pieces {
 
 	private String nom;
 	private int valeur = 0;
