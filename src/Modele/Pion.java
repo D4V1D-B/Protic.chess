@@ -31,8 +31,18 @@ public class Pion extends Pieces
 		return mouvementPossible;
 	}
 
-	public void setMouvementPossible(ArrayList<Point> mouvementPossible)
+	public void setMouvementPossible(Object[][] plateau,
+			ArrayList<Point> mouvementPossible)
 	{
-		this.mouvementPossible = mouvementPossible;
+		mouvementPossible.clear();
+		//
+		for (int i = 0; i <= 7; i++)
+		{
+			if (plateau[i][this.getEmplacement().y] == null)
+			{
+
+			}
+		}
+
 	}
 }
