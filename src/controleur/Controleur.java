@@ -1,5 +1,6 @@
 package controleur;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
@@ -197,5 +198,17 @@ public class Controleur
 
 	@FXML
 	private Pane h1;
+
+	@FXML
+	void themeClaire(ActionEvent event)
+	{
+		
+	}
+
+	@FXML
+	void themeSombre(ActionEvent event)
+	{
+
+	}
 
 }
