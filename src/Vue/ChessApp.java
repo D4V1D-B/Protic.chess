@@ -16,14 +16,14 @@ public class ChessApp extends Application
 	}
 
 	@Override
-	public void start(Stage arg0) throws Exception
+	public void start(Stage primaryStage) throws Exception
 	{
 		FXMLLoader loader = new FXMLLoader(
-				this.getClass().getResource("baord.fxml"));
+				this.getClass().getResource("/fxml/baord.fxml"));
 
 		BorderPane root = loader.load();
-		arg0.setScene(new Scene(root));
-		arg0.show();
+		primaryStage.setScene(new Scene(root));
+		primaryStage.show();
 
 	}
 
