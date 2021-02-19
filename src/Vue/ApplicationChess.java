@@ -16,7 +16,7 @@ public class ApplicationChess extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("baord.fxml"));
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/baord.fxml/"));
 		primaryStage.setScene(new Scene(loader.load()));
 
 		
