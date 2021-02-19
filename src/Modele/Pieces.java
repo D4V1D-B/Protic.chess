@@ -1,5 +1,7 @@
 package Modele;
 
+import java.awt.Point;
+
 public class Pieces {
 
 	private String nom;
@@ -10,13 +12,22 @@ public class Pieces {
 	private boolean echec = false;
 	// vrai = blanc
 	private boolean couleur = true;
-	private int[][] emplacement;
+	private Point emplacement;
 
-	public Pieces(String nom, boolean couleur) {
+	public Pieces(String nom, boolean couleur, Point position) {
 		setNom(nom);
 		setCouleur(couleur);
+		setEmplacement(position);
 	}
 	
+	public Point getEmplacement() {
+		return emplacement;
+	}
+
+	public void setEmplacement(Point emplacement) {
+		this.emplacement = emplacement;
+	}
+
 	public String getNom() {
 		return nom;
 	}

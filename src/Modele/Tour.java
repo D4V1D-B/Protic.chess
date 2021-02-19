@@ -1,5 +1,6 @@
 package Modele;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 public class Tour extends Pieces {
@@ -24,8 +25,8 @@ public class Tour extends Pieces {
 		return mouvementPossible;
 	}
 
-	//TODO 
-	public void setMouvementPossible() {
+	 
+	public void setMouvementPossible(Object[][] plateau) {
 		
 	}
 
