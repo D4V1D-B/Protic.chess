@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -270,7 +271,9 @@ public class Controleur implements Initializable
 			if (a == '/')
 			{
 				int i = placement.indexOf(a);
-				CharSequence row = placement.subSequence(0, i); // prendre le string fen row par row
+				CharSequence row = placement.subSequence(0, i); // prendre le
+																// string fen
+																// row par row
 
 				for (int y = 0; y < row.length(); y++)
 				{
@@ -294,9 +297,16 @@ public class Controleur implements Initializable
 				placement = placement.substring(i + 1);
 
 			}
-			
 
 		}
 
+	}
+
+	@FXML
+	void mouseClick(MouseEvent event)
+	{
+		event.getSource();
+		System.out.println(event.getTarget());
+		
 	}
 }
