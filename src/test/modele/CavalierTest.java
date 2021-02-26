@@ -7,8 +7,9 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import controleur.Plateau;
 import modele.Cavalier;
-import modele.Plateau;
 
 public class CavalierTest
 {
@@ -24,11 +25,10 @@ public class CavalierTest
 	@Before
 	public void testCavalier()
 	{
-		// plateau vide
-		Plateau plateauVide = new Plateau(new Object[8][8]);
-		
-		// plateau vide
-		Plateau plateauVide = new Plateau(new Object[8][8]);
+//		// plateau vide
+
+//		// plateau vide
+
 
 		// cavalier sur le bord
 		cavalierB = new Cavalier("cavalierB", true, new Point(0, 4));
