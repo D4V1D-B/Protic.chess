@@ -13,10 +13,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import modele.Tour;
 
 public class Controleur implements Initializable
 {
-
+	HashMap<String, String> tableau = new HashMap<>();
 	@FXML
 	private Pane a8;
 
@@ -225,6 +226,8 @@ public class Controleur implements Initializable
 	{
 
 		String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
+		placementDepart.indexOf('R');
+		placementDepart.replace('R', '1');
 
 		afficherCodeSecret(placementDepart);
 
@@ -232,13 +235,6 @@ public class Controleur implements Initializable
 
 	public void afficherCodeSecret(String placement)
 	{
-
-		Pane[] allPanes = new Pane[64];
-
-		for (int nb = 0; nb < 64; nb++)
-		{
-			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
-		}
 
 		HashMap<String, Image> association = new HashMap<String, Image>();
 		association.put("r", new Image("images/TourNoir.png"));
@@ -253,7 +249,13 @@ public class Controleur implements Initializable
 		association.put("Q", new Image("images/ReineBlanc.png"));
 		association.put("K", new Image("images/RoiBlanc.png"));
 		association.put("P", new Image("images/PionBlanc.png"));
-		
+
+		Pane[] allPanes = new Pane[64];
+
+		for (int nb = 0; nb < 64; nb++)
+		{
+			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
+		}
 
 		int emplacementSurLeBoard = 0; // entre 0 et 63
 
@@ -276,6 +278,7 @@ public class Controleur implements Initializable
 						int caseVide = z - 48;
 						emplacementSurLeBoard = emplacementSurLeBoard
 								+ caseVide;
+
 					}
 					else
 					{
@@ -293,12 +296,20 @@ public class Controleur implements Initializable
 		}
 
 	}
+	
+	public void start ()
+	{
+		Tour T1 = new Tour("t1", true, null);
+		
+	}
+	
 
 	@FXML
 	void mouseClick(MouseEvent event)
 	{
-		event.getSource();
-		System.out.println(event.getTarget());
 		
+		Pane p = (Pane) event.getSource();
+		System.out.println(p.getId());
+		//System.out.println(tableau.get(p.getId()));
 	}
 }
