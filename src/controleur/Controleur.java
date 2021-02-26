@@ -1,5 +1,6 @@
 package controleur;
 
+import java.awt.Point;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -8,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.RadioMenuItem;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -15,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import modele.Cavalier;
 import modele.Fou;
+import modele.Pion;
 import modele.Reine;
 import modele.Roi;
 import modele.Tour;
@@ -22,6 +25,7 @@ import modele.Tour;
 public class Controleur implements Initializable
 {
 	HashMap<String, String> tableau = new HashMap<>();
+	String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	@FXML
 	private Pane a8;
 
@@ -229,27 +233,42 @@ public class Controleur implements Initializable
 	public void initialize(URL location, ResourceBundle resources)
 	{
 
-		Tour R1 = new Tour("R1", true, null);
-		Cavalier N1 = new Cavalier("N1", true, null);
-		Fou B1 = new Fou("B1", true, null);
-		Reine Q = new Reine("Q", true, null);
-		Roi K = new Roi("K", true, null);
-		Fou B2 = new Fou("B2", true, null);
-		Cavalier N2 = new Cavalier("N2", true, null);
-		Tour R2 = new Tour("R2", true, null);
-		
-		
-		Tour r1 = new Tour("r1", false, null);
-		Cavalier n1 = new Cavalier("n1", false, null);
-		Fou b1 = new Fou("b1", false, null);
-		Reine q = new Reine("q", false, null);
-		Roi k = new Roi("k", false, null);
-		Fou b2 = new Fou("b2", false, null);
-		Cavalier n2 = new Cavalier("n2", false, null);
-		Tour r2 = new Tour("r2", false, null);
-		
-		
-		String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
+		Tour R1 = new Tour("R1", true, chercherCoordonnee('R'));
+		Cavalier N1 = new Cavalier("N1", true, chercherCoordonnee('N'));
+		Fou B1 = new Fou("B1", true, chercherCoordonnee('B'));
+		Reine Q = new Reine("Q", true, chercherCoordonnee('Q'));
+		Roi K = new Roi("K", true, chercherCoordonnee('K'));
+		Fou B2 = new Fou("B2", true, chercherCoordonnee('B'));
+		Cavalier N2 = new Cavalier("N2", true, chercherCoordonnee('N'));
+		Tour R2 = new Tour("R2", true, chercherCoordonnee('R'));
+
+		Pion P1 = new Pion("P1", true, null);
+		Pion P2 = new Pion("P2", true, null);
+		Pion P3 = new Pion("P3", true, null);
+		Pion P4 = new Pion("P4", true, null);
+		Pion P5 = new Pion("P5", true, null);
+		Pion P6 = new Pion("P6", true, null);
+		Pion P7 = new Pion("P7", true, null);
+		Pion P8 = new Pion("P8", true, null);
+
+		Tour r1 = new Tour("r1", false, chercherCoordonnee('r'));
+		Cavalier n1 = new Cavalier("n1", false, chercherCoordonnee('n'));
+		Fou b1 = new Fou("b1", false, chercherCoordonnee('b'));
+		Reine q = new Reine("q", false, chercherCoordonnee('q'));
+		Roi k = new Roi("k", false, chercherCoordonnee('k'));
+		Fou b2 = new Fou("b2", false, chercherCoordonnee('b'));
+		Cavalier n2 = new Cavalier("n2", false, chercherCoordonnee('n'));
+		Tour r2 = new Tour("r2", false, chercherCoordonnee('r'));
+
+		Pion p1 = new Pion("p1", false, null);
+		Pion p2 = new Pion("p2", false, null);
+		Pion p3 = new Pion("p3", false, null);
+		Pion p4 = new Pion("p4", false, null);
+		Pion p5 = new Pion("p5", false, null);
+		Pion p6 = new Pion("p6", false, null);
+		Pion p7 = new Pion("p7", false, null);
+		Pion p8 = new Pion("p8", false, null);
+
 		placementDepart.indexOf('R');
 		placementDepart.replace('R', '1');
 
@@ -320,14 +339,39 @@ public class Controleur implements Initializable
 		}
 
 	}
-	
+
+	private Point chercherCoordonnee(char pieceCherche) // x= range y=colonne
+	{
+
+		Point p = new Point();
+
+		int x = placementDepart.indexOf(pieceCherche);
+		String subString = placementDepart.substring(0, x);
+
+		int nbSlash = 0;
+		int positionDuSlash = 0;
+		int positionActuelle = 0;
+		for (char c : subString.toCharArray())
+		{
+			if (c == '/')
+			{
+				nbSlash++;
+				positionDuSlash = positionActuelle;
+
+			}
+			positionActuelle++;
+		}
+
+		p.setLocation(nbSlash, y);
+		return p;
+	}
 
 	@FXML
 	void mouseClick(MouseEvent event)
 	{
-		
+
 		Pane p = (Pane) event.getSource();
 		System.out.println(p.getId());
-		//System.out.println(tableau.get(p.getId()));
+		// System.out.println(tableau.get(p.getId()));
 	}
 }
