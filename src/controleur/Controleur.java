@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -214,16 +215,9 @@ public class Controleur implements Initializable
 	private AnchorPane anchor;
 
 	@FXML
-	void themeClaire(ActionEvent event)
-	{
-
-	}
+	private RadioMenuItem Claire;
 
 	@FXML
-	void themeSombre(ActionEvent event)
-	{
-
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
@@ -232,9 +226,6 @@ public class Controleur implements Initializable
 		String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 
 		afficherCodeSecret(placementDepart);
-
-		// ImageView a = (ImageView) allPanes[1].getChildren().get(0);
-		// a.setImage(new Image("images/TourNoir.png"));
 
 	}
 
@@ -261,6 +252,7 @@ public class Controleur implements Initializable
 		association.put("Q", new Image("images/ReineBlanc.png"));
 		association.put("K", new Image("images/RoiBlanc.png"));
 		association.put("P", new Image("images/PionBlanc.png"));
+		
 
 		int emplacementSurLeBoard = 0; // entre 0 et 63
 
@@ -270,7 +262,9 @@ public class Controleur implements Initializable
 			if (a == '/')
 			{
 				int i = placement.indexOf(a);
-				CharSequence row = placement.subSequence(0, i); // prendre le string fen row par row
+				CharSequence row = placement.subSequence(0, i); // prendre le
+																// string fen
+																// row par row
 
 				for (int y = 0; y < row.length(); y++)
 				{
@@ -294,7 +288,6 @@ public class Controleur implements Initializable
 				placement = placement.substring(i + 1);
 
 			}
-			
 
 		}
 
