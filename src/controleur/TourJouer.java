@@ -74,5 +74,17 @@ public class TourJouer
 		return roiEchec;
 	}
 	
+	public ArrayList<Point> positionEquipe()
+	{
+		ArrayList<Point> temp = new ArrayList<Point>();
+		
+		for(Pieces p: listePiece)
+		{
+			temp.add(p.getEmplacement());
+		}
+		
+		return temp;
+	}
+	
 
 }
