@@ -25,7 +25,7 @@ import modele.Tour;
 public class Controleur implements Initializable
 {
 	HashMap<String, String> tableau = new HashMap<>();
-	String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
+	public String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	@FXML
 	private Pane a8;
 
@@ -242,14 +242,14 @@ public class Controleur implements Initializable
 		Cavalier N2 = new Cavalier("N2", true, chercherCoordonnee('N'));
 		Tour R2 = new Tour("R2", true, chercherCoordonnee('R'));
 
-		Pion P1 = new Pion("P1", true, null);
-		Pion P2 = new Pion("P2", true, null);
-		Pion P3 = new Pion("P3", true, null);
-		Pion P4 = new Pion("P4", true, null);
-		Pion P5 = new Pion("P5", true, null);
-		Pion P6 = new Pion("P6", true, null);
-		Pion P7 = new Pion("P7", true, null);
-		Pion P8 = new Pion("P8", true, null);
+		Pion P1 = new Pion("P1", true, chercherCoordonnee('P'));
+		Pion P2 = new Pion("P2", true, chercherCoordonnee('P'));
+		Pion P3 = new Pion("P3", true, chercherCoordonnee('P'));
+		Pion P4 = new Pion("P4", true, chercherCoordonnee('P'));
+		Pion P5 = new Pion("P5", true, chercherCoordonnee('P'));
+		Pion P6 = new Pion("P6", true, chercherCoordonnee('P'));
+		Pion P7 = new Pion("P7", true, chercherCoordonnee('P'));
+		Pion P8 = new Pion("P8", true, chercherCoordonnee('P'));
 
 		Tour r1 = new Tour("r1", false, chercherCoordonnee('r'));
 		Cavalier n1 = new Cavalier("n1", false, chercherCoordonnee('n'));
@@ -260,19 +260,24 @@ public class Controleur implements Initializable
 		Cavalier n2 = new Cavalier("n2", false, chercherCoordonnee('n'));
 		Tour r2 = new Tour("r2", false, chercherCoordonnee('r'));
 
-		Pion p1 = new Pion("p1", false, null);
-		Pion p2 = new Pion("p2", false, null);
-		Pion p3 = new Pion("p3", false, null);
-		Pion p4 = new Pion("p4", false, null);
-		Pion p5 = new Pion("p5", false, null);
-		Pion p6 = new Pion("p6", false, null);
-		Pion p7 = new Pion("p7", false, null);
-		Pion p8 = new Pion("p8", false, null);
+		Pion p1 = new Pion("p1", false, chercherCoordonnee('p'));
+		Pion p2 = new Pion("p2", false, chercherCoordonnee('p'));
+		Pion p3 = new Pion("p3", false, chercherCoordonnee('p'));
+		Pion p4 = new Pion("p4", false, chercherCoordonnee('p'));
+		Pion p5 = new Pion("p5", false, chercherCoordonnee('p'));
+		Pion p6 = new Pion("p6", false, chercherCoordonnee('p'));
+		Pion p7 = new Pion("p7", false, chercherCoordonnee('p'));
+		Pion p8 = new Pion("p8", false, chercherCoordonnee('p'));
 
 		placementDepart.indexOf('R');
 		placementDepart.replace('R', '1');
 
 		afficherCodeSecret(placementDepart);
+
+		System.out.println(k.getEmplacement().toString());
+		System.out.println(p3.getEmplacement().toString());
+		System.out.println(N1.getEmplacement().toString());
+		System.out.println(N2.getEmplacement().toString());
 
 	}
 
@@ -346,7 +351,7 @@ public class Controleur implements Initializable
 		Point p = new Point();
 
 		int x = placementDepart.indexOf(pieceCherche);
-		String subString = placementDepart.substring(0, x);
+		String subString = placementDepart.substring(0, x + 1);
 
 		int nbSlash = 0;
 		int positionDuSlash = 0;
@@ -362,7 +367,27 @@ public class Controleur implements Initializable
 			positionActuelle++;
 		}
 
-		p.setLocation(nbSlash, y);
+		
+		//TODO ne focntionne pas coordonne x
+		String subSubString = subString.substring(positionDuSlash + 1,
+				subString.length());
+
+		int positionCherche = 0;
+		int positionActuelle2 = 0;
+		for (char h : subSubString.toCharArray())
+		{
+			if (h == pieceCherche)
+			{
+				positionCherche = positionActuelle2;
+			}
+			positionActuelle2++;
+		}
+		
+		
+		
+		placementDepart.replaceFirst(Character.toString(pieceCherche), "1");
+		System.out.println(placementDepart);
+		p.setLocation(positionCherche, nbSlash);
 		return p;
 	}
 
