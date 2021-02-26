@@ -136,12 +136,7 @@ public class Plateau
 
 		public void actualiserMouvementPossible()
 		{
-			ArrayList<Pieces> listePieceTemp = noir.listePiece;
-			if(isWhite)
-			{
-				listePieceTemp = blanc.listePiece;
-			}
-			
+
 			for(Pieces p: listePiece)
 			{
 				switch(p.getClass().toString()) {
