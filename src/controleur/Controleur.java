@@ -13,6 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import modele.Cavalier;
+import modele.Fou;
+import modele.Reine;
+import modele.Roi;
 import modele.Tour;
 
 public class Controleur implements Initializable
@@ -225,6 +229,26 @@ public class Controleur implements Initializable
 	public void initialize(URL location, ResourceBundle resources)
 	{
 
+		Tour R1 = new Tour("R1", true, null);
+		Cavalier N1 = new Cavalier("N1", true, null);
+		Fou B1 = new Fou("B1", true, null);
+		Reine Q = new Reine("Q", true, null);
+		Roi K = new Roi("K", true, null);
+		Fou B2 = new Fou("B2", true, null);
+		Cavalier N2 = new Cavalier("N2", true, null);
+		Tour R2 = new Tour("R2", true, null);
+		
+		
+		Tour r1 = new Tour("r1", false, null);
+		Cavalier n1 = new Cavalier("n1", false, null);
+		Fou b1 = new Fou("b1", false, null);
+		Reine q = new Reine("q", false, null);
+		Roi k = new Roi("k", false, null);
+		Fou b2 = new Fou("b2", false, null);
+		Cavalier n2 = new Cavalier("n2", false, null);
+		Tour r2 = new Tour("r2", false, null);
+		
+		
 		String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 		placementDepart.indexOf('R');
 		placementDepart.replace('R', '1');
@@ -295,12 +319,6 @@ public class Controleur implements Initializable
 
 		}
 
-	}
-	
-	public void start ()
-	{
-		Tour T1 = new Tour("t1", true, null);
-		
 	}
 	
 
