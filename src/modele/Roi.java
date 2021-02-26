@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Roi extends Pieces
 {
-	private ArrayList<Point> mouvementPossible;
 	private boolean aBouger;
 
 	public Roi(String nom, boolean couleur, Point position)
@@ -24,11 +23,6 @@ public class Roi extends Pieces
 		this.aBouger = true;
 	}
 
-	public ArrayList<Point> getMouvementPossible()
-	{
-		return mouvementPossible;
-	}
-
 	public void setMouvementPossible(Object[][] plateau,
 			ArrayList<Point> positionEnemie)
 	{
@@ -41,7 +35,7 @@ public class Roi extends Pieces
 		variationMouvement.add(new Point(1, 0));
 		variationMouvement.add(new Point(1, -1));
 		variationMouvement.add(new Point(0, -1));
-		mouvementPossible.clear();
+		this.getMouvementPossible().clear();
 
 		int i = this.getEmplacement().x;
 		int j = this.getEmplacement().y;
@@ -50,14 +44,14 @@ public class Roi extends Pieces
 		{
 			if (plateau[(int) (i + a.getX())][(int) (j + a.getY())] == null)
 			{
-				mouvementPossible.add(new Point((int) (i + a.getX()), (int) (j + a.getY())));
+				this.getMouvementPossible().add(new Point((int) (i + a.getX()), (int) (j + a.getY())));
 			}
 			else
 			{
 				for (Point x : positionEnemie)
 				{
 					if (x.equals(new Point((int) (i + a.getX()), (int) (j + a.getY()))))
-						mouvementPossible.add(x);
+						this.getMouvementPossible().add(x);
 				}
 			}
 		}

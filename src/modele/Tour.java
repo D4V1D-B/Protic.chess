@@ -7,7 +7,6 @@ public class Tour extends Pieces
 {
 
 	private boolean aBouger;
-	private ArrayList<Point> mouvementPossible;
 
 	public Tour(String nom, boolean couleur, Point position)
 	{
@@ -25,21 +24,17 @@ public class Tour extends Pieces
 		this.aBouger = true;
 	}
 
-	public ArrayList<Point> getMouvementPossible()
-	{
-		return mouvementPossible;
-	}
 
 	public void setMouvementPossible(Object[][] plateau,
 			ArrayList<Point> positionEnemie)
 	{
-		mouvementPossible.clear();
+		this.getMouvementPossible().clear();
 		// ajouter sur la ligne de la tour à gauche
 		for (int j = this.getEmplacement().y - 1; j >= 0; j--)
 		{
 			if (plateau[this.getEmplacement().x][j] == null)
 			{
-				mouvementPossible.add(new Point(this.getEmplacement().x, j));
+				this.getMouvementPossible().add(new Point(this.getEmplacement().x, j));
 			}
 			else
 			{
@@ -47,7 +42,7 @@ public class Tour extends Pieces
 				for (Point x : positionEnemie)
 				{
 					if (x.equals(new Point(this.getEmplacement().x, j)))
-						mouvementPossible.add(x);
+						this.getMouvementPossible().add(x);
 				}
 
 			}
@@ -58,7 +53,7 @@ public class Tour extends Pieces
 		{
 			if (plateau[this.getEmplacement().x][j] == null)
 			{
-				mouvementPossible.add(new Point(this.getEmplacement().x, j));
+				this.getMouvementPossible().add(new Point(this.getEmplacement().x, j));
 			}
 			else
 			{
@@ -66,7 +61,7 @@ public class Tour extends Pieces
 				for (Point x : positionEnemie)
 				{
 					if (x.equals(new Point(this.getEmplacement().x, j)))
-						mouvementPossible.add(x);
+						this.getMouvementPossible().add(x);
 				}
 			}
 		}
@@ -76,7 +71,7 @@ public class Tour extends Pieces
 		{
 			if (plateau[i][this.getEmplacement().y] == null)
 			{
-				mouvementPossible.add(new Point(i, this.getEmplacement().y));
+				this.getMouvementPossible().add(new Point(i, this.getEmplacement().y));
 			}
 			else
 			{
@@ -84,7 +79,7 @@ public class Tour extends Pieces
 				for (Point x : positionEnemie)
 				{
 					if (x.equals(new Point(i, this.getEmplacement().y)))
-						mouvementPossible.add(x);
+						this.getMouvementPossible().add(x);
 				}
 			}
 		}
@@ -95,7 +90,7 @@ public class Tour extends Pieces
 		{
 			if (plateau[i][this.getEmplacement().y] == null)
 			{
-				mouvementPossible.add(new Point(i, this.getEmplacement().y));
+				this.getMouvementPossible().add(new Point(i, this.getEmplacement().y));
 			}
 			else
 			{
@@ -103,7 +98,7 @@ public class Tour extends Pieces
 				for (Point x : positionEnemie)
 				{
 					if (x.equals(new Point(i, this.getEmplacement().y)))
-						mouvementPossible.add(x);
+						this.getMouvementPossible().add(x);
 				}
 			}
 		}

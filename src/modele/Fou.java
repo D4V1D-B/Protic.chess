@@ -5,28 +5,22 @@ import java.util.ArrayList;
 
 public class Fou extends Pieces{
 	
-	private ArrayList<Point> mouvementPossible;
 
 	public Fou(String nom, boolean couleur, Point position) {
 		super(nom, couleur, position);
 	}
 	
-	public ArrayList<Point> getMouvementPossible()
-	{
-		return mouvementPossible;
-	}
-
 	public void setMouvementPossible(Object[][] plateau,
 			ArrayList<Point> positionEnemie)
 	{
-		mouvementPossible.clear();
+		this.getMouvementPossible().clear();
 		// ligne vers le haut à gauhce donc --
 		
 		for (int i = this.getEmplacement().x-1 , j = this.getEmplacement().y-1; i >= 0 && j >=0; j--, i--)
 		{
 			if (plateau[i][j] == null)
 			{
-				mouvementPossible.add(new Point(i, j));
+				this.getMouvementPossible().add(new Point(i, j));
 			}
 			else
 			{
@@ -34,7 +28,7 @@ public class Fou extends Pieces{
 				for (Point x : positionEnemie)
 				{
 					if (x.equals(new Point(i, j)))
-						mouvementPossible.add(x);
+						this.getMouvementPossible().add(x);
 				}
 			}
 		}
@@ -45,7 +39,7 @@ public class Fou extends Pieces{
 		{
 			if (plateau[i][j] == null)
 			{
-				mouvementPossible.add(new Point(i, j));
+				this.getMouvementPossible().add(new Point(i, j));
 			}
 			else
 			{
@@ -53,7 +47,7 @@ public class Fou extends Pieces{
 				for (Point x : positionEnemie)
 				{
 					if (x.equals(new Point(i, j)))
-						mouvementPossible.add(x);
+						this.getMouvementPossible().add(x);
 				}
 			}
 		}
@@ -65,7 +59,7 @@ public class Fou extends Pieces{
 		{
 			if (plateau[i][j] == null)
 			{
-				mouvementPossible.add(new Point(i, j));
+				this.getMouvementPossible().add(new Point(i, j));
 			}
 			else
 			{
@@ -73,7 +67,7 @@ public class Fou extends Pieces{
 				for (Point x : positionEnemie)
 				{
 					if (x.equals(new Point(i, j)))
-						mouvementPossible.add(x);
+						this.getMouvementPossible().add(x);
 				}
 			}
 		}
@@ -83,7 +77,7 @@ public class Fou extends Pieces{
 		{
 			if (plateau[i][j] == null)
 			{
-				mouvementPossible.add(new Point(i, j));
+				this.getMouvementPossible().add(new Point(i, j));
 			} 
 			else
 			{
@@ -91,7 +85,7 @@ public class Fou extends Pieces{
 				for (Point x : positionEnemie)
 				{
 					if (x.equals(new Point(i, j)))
-						mouvementPossible.add(x);
+						this.getMouvementPossible().add(x);
 				}
 			}
 		}
