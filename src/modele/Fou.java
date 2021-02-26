@@ -18,7 +18,7 @@ public class Fou extends Pieces{
 		
 		for (int i = this.getEmplacement().x-1 , j = this.getEmplacement().y-1; i >= 0 && j >=0; j--, i--)
 		{
-			if (plateau[i][j] == null)
+			if (plateau[i][j].equals(new PositionVide().getClass()))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			}
@@ -37,7 +37,7 @@ public class Fou extends Pieces{
 		
 		for (int i = this.getEmplacement().x-1 , j = this.getEmplacement().y+1; i >= 0 && j <=7; j++, i--)
 		{
-			if (plateau[i][j] == null)
+			if (plateau[i][j].equals(new PositionVide().getClass()))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			}
@@ -57,7 +57,7 @@ public class Fou extends Pieces{
 		
 		for (int i = this.getEmplacement().x+1 , j = this.getEmplacement().y+1; i <=7 && j <=7; j++, i++)
 		{
-			if (plateau[i][j] == null)
+			if (plateau[i][j].equals(new PositionVide().getClass()))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			}
@@ -75,7 +75,7 @@ public class Fou extends Pieces{
 		// ligne vers le bas  à gauche
 		for (int i = this.getEmplacement().x+1 , j = this.getEmplacement().y-1; i <=7 && j >=0; j--, i++)
 		{
-			if (plateau[i][j] == null)
+			if (plateau[i][j].equals(new PositionVide().getClass()))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			} 

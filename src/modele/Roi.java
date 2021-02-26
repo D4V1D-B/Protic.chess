@@ -10,9 +10,9 @@ public class Roi extends Pieces
 	public Roi(String nom, boolean couleur, Point position)
 	{
 		super(nom, couleur, position);
-		aBouger=false;
+		aBouger = false;
 	}
-	
+
 	public boolean isaBouger()
 	{
 		return aBouger;
@@ -42,21 +42,26 @@ public class Roi extends Pieces
 
 		for (Point a : variationMouvement)
 		{
-			if (plateau[(int) (i + a.getX())][(int) (j + a.getY())] == null)
+			if (i + a.getX() < 8 && i + a.getX() >= 0 && j + a.getY() < 8
+					&& j + a.getY() >= 0)
 			{
-				this.getMouvementPossible().add(new Point((int) (i + a.getX()), (int) (j + a.getY())));
-			}
-			else
-			{
-				for (Point x : positionEnemie)
+				if (plateau[(int) (i + a.getX())][(int) (j + a.getY())]
+						.getClass().equals(new PositionVide().getClass()))
 				{
-					if (x.equals(new Point((int) (i + a.getX()), (int) (j + a.getY()))))
-						this.getMouvementPossible().add(x);
+					this.getMouvementPossible().add(new Point(
+							(int) (i + a.getX()), (int) (j + a.getY())));
+				}
+				else
+				{
+					for (Point x : positionEnemie)
+					{
+						if (x.equals(new Point((int) (i + a.getX()),
+								(int) (j + a.getY()))))
+							this.getMouvementPossible().add(x);
+					}
 				}
 			}
 		}
-		
-		
 
 	}
 

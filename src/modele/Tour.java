@@ -32,7 +32,7 @@ public class Tour extends Pieces
 		// ajouter sur la ligne de la tour à gauche
 		for (int j = this.getEmplacement().y - 1; j >= 0; j--)
 		{
-			if (plateau[this.getEmplacement().x][j] == null)
+			if (plateau[this.getEmplacement().x][j].equals(new PositionVide().getClass()))
 			{
 				this.getMouvementPossible().add(new Point(this.getEmplacement().x, j));
 			}
@@ -51,7 +51,7 @@ public class Tour extends Pieces
 		// ajouter sur la ligne de la tour à droite
 		for (int j = this.getEmplacement().y + 1; j <= 7; j++)
 		{
-			if (plateau[this.getEmplacement().x][j] == null)
+			if (plateau[this.getEmplacement().x][j].equals(new PositionVide().getClass()))
 			{
 				this.getMouvementPossible().add(new Point(this.getEmplacement().x, j));
 			}
@@ -69,7 +69,7 @@ public class Tour extends Pieces
 		// ajouter pour la ligne du bas
 		for (int i = this.getEmplacement().x + 1; i <= 7; i++)
 		{
-			if (plateau[i][this.getEmplacement().y] == null)
+			if (plateau[i][this.getEmplacement().y].equals(new PositionVide().getClass()))
 			{
 				this.getMouvementPossible().add(new Point(i, this.getEmplacement().y));
 			}
@@ -88,7 +88,7 @@ public class Tour extends Pieces
 
 		for (int i = this.getEmplacement().x - 1; i >= 0; i--)
 		{
-			if (plateau[i][this.getEmplacement().y] == null)
+			if (plateau[i][this.getEmplacement().y].equals(new PositionVide().getClass()))
 			{
 				this.getMouvementPossible().add(new Point(i, this.getEmplacement().y));
 			}

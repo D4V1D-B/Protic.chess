@@ -3,11 +3,11 @@ package modele;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class Reine extends Pieces {
+public class Reine extends Pieces
+{
 
-
-	
-	public Reine(String nom, boolean couleur, Point position) {
+	public Reine(String nom, boolean couleur, Point position)
+	{
 		super(nom, couleur, position);
 	}
 
@@ -16,10 +16,11 @@ public class Reine extends Pieces {
 	{
 		this.getMouvementPossible().clear();
 		// ligne vers le haut à gauhce donc --
-		
-		for (int i = this.getEmplacement().x-1 , j = this.getEmplacement().y-1; i >= 0 && j >=0; j--, i--)
+
+		for (int i = this.getEmplacement().x - 1, j = this.getEmplacement().y
+				- 1; i >= 0 && j >= 0; j--, i--)
 		{
-			if (plateau[i][j] == null)
+			if (plateau[i][j].equals(new PositionVide().getClass()))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			}
@@ -35,10 +36,11 @@ public class Reine extends Pieces {
 		}
 
 		// ligne vers le haut à droite -+
-		
-		for (int i = this.getEmplacement().x-1 , j = this.getEmplacement().y+1; i >= 0 && j <=7; j++, i--)
+
+		for (int i = this.getEmplacement().x - 1, j = this.getEmplacement().y
+				+ 1; i >= 0 && j <= 7; j++, i--)
 		{
-			if (plateau[i][j] == null)
+			if (plateau[i][j].equals(new PositionVide().getClass()))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			}
@@ -53,12 +55,12 @@ public class Reine extends Pieces {
 			}
 		}
 
-		
 		// ligne vers le bas à droite donc ++
-		
-		for (int i = this.getEmplacement().x+1 , j = this.getEmplacement().y+1; i <=7 && j <=7; j++, i++)
+
+		for (int i = this.getEmplacement().x + 1, j = this.getEmplacement().y
+				+ 1; i <= 7 && j <= 7; j++, i++)
 		{
-			if (plateau[i][j] == null)
+			if (plateau[i][j].equals(new PositionVide().getClass()))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			}
@@ -72,14 +74,15 @@ public class Reine extends Pieces {
 				}
 			}
 		}
-		
-		// ligne vers le bas  à gauche
-		for (int i = this.getEmplacement().x+1 , j = this.getEmplacement().y-1; i <=7 && j >=0; j--, i++)
+
+		// ligne vers le bas à gauche
+		for (int i = this.getEmplacement().x + 1, j = this.getEmplacement().y
+				- 1; i <= 7 && j >= 0; j--, i++)
 		{
-			if (plateau[i][j] == null)
+			if (plateau[i][j].equals(new PositionVide().getClass()))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
-			} 
+			}
 			else
 			{
 				j = -30;
@@ -90,16 +93,16 @@ public class Reine extends Pieces {
 				}
 			}
 		}
-		
-		
 
 		this.getMouvementPossible().clear();
 		// ajouter sur la ligne de la tour à gauche
 		for (int j = this.getEmplacement().y - 1; j >= 0; j--)
 		{
-			if (plateau[this.getEmplacement().x][j] == null)
+			if (plateau[this.getEmplacement().x][j]
+					.equals(new PositionVide().getClass()))
 			{
-				this.getMouvementPossible().add(new Point(this.getEmplacement().x, j));
+				this.getMouvementPossible()
+						.add(new Point(this.getEmplacement().x, j));
 			}
 			else
 			{
@@ -116,9 +119,11 @@ public class Reine extends Pieces {
 		// ajouter sur la ligne de la tour à droite
 		for (int j = this.getEmplacement().y + 1; j <= 7; j++)
 		{
-			if (plateau[this.getEmplacement().x][j] == null)
+			if (plateau[this.getEmplacement().x][j]
+					.equals(new PositionVide().getClass()))
 			{
-				this.getMouvementPossible().add(new Point(this.getEmplacement().x, j));
+				this.getMouvementPossible()
+						.add(new Point(this.getEmplacement().x, j));
 			}
 			else
 			{
@@ -134,9 +139,11 @@ public class Reine extends Pieces {
 		// ajouter pour la ligne du bas
 		for (int i = this.getEmplacement().x + 1; i <= 7; i++)
 		{
-			if (plateau[i][this.getEmplacement().y] == null)
+			if (plateau[i][this.getEmplacement().y]
+					.equals(new PositionVide().getClass()))
 			{
-				this.getMouvementPossible().add(new Point(i, this.getEmplacement().y));
+				this.getMouvementPossible()
+						.add(new Point(i, this.getEmplacement().y));
 			}
 			else
 			{
@@ -153,9 +160,11 @@ public class Reine extends Pieces {
 
 		for (int i = this.getEmplacement().x - 1; i >= 0; i--)
 		{
-			if (plateau[i][this.getEmplacement().y] == null)
+			if (plateau[i][this.getEmplacement().y]
+					.equals(new PositionVide().getClass()))
 			{
-				this.getMouvementPossible().add(new Point(i, this.getEmplacement().y));
+				this.getMouvementPossible()
+						.add(new Point(i, this.getEmplacement().y));
 			}
 			else
 			{
@@ -167,7 +176,7 @@ public class Reine extends Pieces {
 				}
 			}
 		}
-	
+
 	}
-	
+
 }
