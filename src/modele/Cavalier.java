@@ -5,16 +5,10 @@ import java.util.ArrayList;
 
 public class Cavalier extends Pieces
 {
-	private ArrayList<Point> mouvementPossible;
 
 	public Cavalier(String nom, boolean couleur, Point position)
 	{
 		super(nom, couleur, position);
-	}
-
-	public ArrayList<Point> getMouvementPossible()
-	{
-		return mouvementPossible;
 	}
 
 	public void setMouvementPossible(Object[][] plateau,
@@ -29,25 +23,30 @@ public class Cavalier extends Pieces
 		variationMouvement.add(new Point(2, 1));
 		variationMouvement.add(new Point(2, -1));
 		variationMouvement.add(new Point(1, -2));
-		mouvementPossible.clear();
+		this.getMouvementPossible().clear();
+		
 
 		int i = this.getEmplacement().x;
 		int j = this.getEmplacement().y;
 
 		for (Point a : variationMouvement)
 		{
-			if (plateau[(int) (i + a.getX())][(int) (j + a.getY())] == null)
+			if(i + a.getX()<8&&i + a.getX()>=0&& j + a.getY()<8&&j + a.getY()>=0)
 			{
-				mouvementPossible.add(new Point((int) (i + a.getX()), (int) (j + a.getY())));
-			}
-			else
-			{
-				for (Point x : positionEnemie)
+				if (plateau[(int) (i + a.getX())][(int) (j + a.getY())].getClass().equals(new PositionVide().getClass()))
 				{
-					if (x.equals(new Point((int) (i + a.getX()), (int) (j + a.getY()))))
-						mouvementPossible.add(x);
+					getMouvementPossible().add(new Point((int) (i + a.getX()), (int) (j + a.getY())));
+				}
+				else
+				{
+					for (Point x : positionEnemie)
+					{
+						if (x.equals(new Point((int) (i + a.getX()), (int) (j + a.getY()))))
+							getMouvementPossible().add(x);
+					}
 				}
 			}
+		
 		}
 
 	}
