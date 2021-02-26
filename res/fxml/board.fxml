@@ -40,11 +40,11 @@
    <center>
       <SplitPane dividerPositions="0.6713426853707415" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Pane id="testClaire" fx:id="a8" layoutX="38.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
+                  <Pane fx:id="a8" layoutX="38.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
-                        <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="a8Image" fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>
                   <Pane fx:id="b8" layoutX="112.0" layoutY="41.0" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>

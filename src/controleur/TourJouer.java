@@ -2,13 +2,15 @@ package controleur;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import modele.Pieces;
 import modele.Roi;
 
 public class TourJouer
 {
-	private ArrayList<Point> mouvementPossible;
+	private Set<Point> mouvementPossible;
 	private ArrayList<Pieces> listePiece;
 	private Point positionRoi;
 
@@ -16,7 +18,7 @@ public class TourJouer
 	{
 		listePiece = pieces;
 		actualiserPositionRoi();
-		mouvementPossible = new ArrayList<Point>();
+		mouvementPossible =  new HashSet<Point>();
 		actualiserMouvementPossible();
 	}
 
@@ -38,18 +40,23 @@ public class TourJouer
 	public void actualiserPositionRoi()
 	{
 		positionRoi = listePiece.get(indexOfKing()).getEmplacement();
+	
 	}
 
 	public void actualiserMouvementPossible()
 	{
 		for(Pieces p: listePiece)
 		{
-			for(Point point:  p.getMouvementPossible())
-			{
-				
-			}
+			mouvementPossible.addAll(p.getMouvementPossible());
 		}
 	}
+	
+	public  Set<Point> getMouvementPossible()
+	{
+		return mouvementPossible;
+	}
+	
+	
 	
 	public boolean vérifierÉchec(
 			ArrayList<Point> mouvementPossibleEnemy)
@@ -62,7 +69,6 @@ public class TourJouer
 			{
 				roiEchec = positionRoi.equals(p);
 			}
-
 		}
 
 		return roiEchec;

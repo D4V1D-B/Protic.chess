@@ -1,10 +1,18 @@
 package controleur;
 
+import java.net.URL;
+import java.util.HashMap;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-public class Controleur
+public class Controleur implements Initializable
 {
 
 	@FXML
@@ -200,9 +208,15 @@ public class Controleur
 	private Pane h1;
 
 	@FXML
+	private ImageView a8Image;
+
+	@FXML
+	private AnchorPane anchor;
+
+	@FXML
 	void themeClaire(ActionEvent event)
 	{
-		
+
 	}
 
 	@FXML
@@ -211,4 +225,78 @@ public class Controleur
 
 	}
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+
+		String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
+
+		afficherCodeSecret(placementDepart);
+
+		// ImageView a = (ImageView) allPanes[1].getChildren().get(0);
+		// a.setImage(new Image("images/TourNoir.png"));
+
+	}
+
+	public void afficherCodeSecret(String placement)
+	{
+
+		Pane[] allPanes = new Pane[64];
+
+		for (int nb = 0; nb < 64; nb++)
+		{
+			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
+		}
+
+		HashMap<String, Image> association = new HashMap<String, Image>();
+		association.put("r", new Image("images/TourNoir.png"));
+		association.put("n", new Image("images/CavalierNoir.png"));
+		association.put("b", new Image("images/FouNoir.png"));
+		association.put("q", new Image("images/ReineNoir.png"));
+		association.put("k", new Image("images/RoiNoir.png"));
+		association.put("p", new Image("images/PionNoir.png"));
+		association.put("R", new Image("images/TourBlanc.png"));
+		association.put("N", new Image("images/CavalierBlanc.png"));
+		association.put("B", new Image("images/FouBlanc.png"));
+		association.put("Q", new Image("images/ReineBlanc.png"));
+		association.put("K", new Image("images/RoiBlanc.png"));
+		association.put("P", new Image("images/PionBlanc.png"));
+
+		int emplacementSurLeBoard = 0; // entre 0 et 63
+
+		for (char a : placement.toCharArray())
+		{
+
+			if (a == '/')
+			{
+				int i = placement.indexOf(a);
+				CharSequence row = placement.subSequence(0, i); // prendre le string fen row par row
+
+				for (int y = 0; y < row.length(); y++)
+				{
+					char z = row.charAt(y); // Cycle les char de la row
+
+					if (Character.isDigit(z))
+					{
+						int caseVide = z - 48;
+						emplacementSurLeBoard = emplacementSurLeBoard
+								+ caseVide;
+					}
+					else
+					{
+						ImageView paneActuel = (ImageView) allPanes[emplacementSurLeBoard]
+								.getChildren().get(0);
+						paneActuel.setImage(association.get(String.valueOf(z)));
+						emplacementSurLeBoard++;
+					}
+				}
+
+				placement = placement.substring(i + 1);
+
+			}
+			
+
+		}
+
+	}
 }

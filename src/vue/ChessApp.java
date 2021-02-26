@@ -33,6 +33,8 @@ public class ChessApp extends Application
 		primaryStage.setMinHeight(740);
 		primaryStage.setMinWidth(1100);
 		primaryStage.show();
+		
+		
 
 	}
 
