@@ -1,6 +1,7 @@
 package modele;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 public abstract class Pieces
 {
@@ -14,12 +15,15 @@ public abstract class Pieces
 	// vrai = blanc
 	private boolean couleur = true;
 	private Point emplacement;
+	
+	private ArrayList<Point> mouvementPossible;
 
 	public Pieces(String nom, boolean couleur, Point position)
 	{
 		setNom(nom);
 		setCouleur(couleur);
 		setEmplacement(position);
+		mouvementPossible = new ArrayList<Point>();
 	}
 
 	public Point getEmplacement()
@@ -60,6 +64,11 @@ public abstract class Pieces
 	public void setCouleur(boolean couleur)
 	{
 		this.couleur = couleur;
+	}
+	
+	public ArrayList<Point> getMouvementPossible()
+	{
+		return mouvementPossible;
 	}
 
 }
