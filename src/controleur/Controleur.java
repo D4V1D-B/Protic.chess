@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -291,5 +292,13 @@ public class Controleur implements Initializable
 
 		}
 
+	}
+
+	@FXML
+	void mouseClick(MouseEvent event)
+	{
+		event.getSource();
+		System.out.println(event.getTarget());
+		
 	}
 }

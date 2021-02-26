@@ -10,7 +10,14 @@ public class Fou extends Pieces{
 		super(nom, couleur, position);
 	}
 	
-	public void setMouvementPossible(Object[][] plateau,
+	public Fou(String nom, boolean couleur, Point position, Plateau plateau,
+			ArrayList<Point> positionEnemie)
+	{
+		super(nom, couleur, position);
+		setMouvementPossible(plateau, positionEnemie);
+	}
+	
+	public void setMouvementPossible(Plateau plateau,
 			ArrayList<Point> positionEnemie)
 	{
 		this.getMouvementPossible().clear();
@@ -18,7 +25,7 @@ public class Fou extends Pieces{
 		
 		for (int i = this.getEmplacement().x-1 , j = this.getEmplacement().y-1; i >= 0 && j >=0; j--, i--)
 		{
-			if (plateau[i][j] == null)
+			if (plateau.getVoidSpace().contains(new Point(i,j)))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			}
@@ -37,7 +44,7 @@ public class Fou extends Pieces{
 		
 		for (int i = this.getEmplacement().x-1 , j = this.getEmplacement().y+1; i >= 0 && j <=7; j++, i--)
 		{
-			if (plateau[i][j] == null)
+			if (plateau.getVoidSpace().contains(new Point(i,j)))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			}
@@ -57,7 +64,7 @@ public class Fou extends Pieces{
 		
 		for (int i = this.getEmplacement().x+1 , j = this.getEmplacement().y+1; i <=7 && j <=7; j++, i++)
 		{
-			if (plateau[i][j] == null)
+			if (plateau.getVoidSpace().contains(new Point(i,j)))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			}
@@ -75,7 +82,7 @@ public class Fou extends Pieces{
 		// ligne vers le bas  à gauche
 		for (int i = this.getEmplacement().x+1 , j = this.getEmplacement().y-1; i <=7 && j >=0; j--, i++)
 		{
-			if (plateau[i][j] == null)
+			if (plateau.getVoidSpace().contains(new Point(i,j)))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			} 

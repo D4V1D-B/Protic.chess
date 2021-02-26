@@ -8,13 +8,21 @@ public class Pion extends Pieces
 
 	private boolean aBouger;
 
-	
-
 	public Pion(String nom, boolean couleur, Point emplacement)
 	{
 		super(nom, couleur, emplacement);
 		setaBouger(false);
 	}
+	
+	public Pion(String nom, boolean couleur, Point position, Plateau plateau,
+			ArrayList<Point> positionEnemie)
+	{
+		super(nom, couleur, position);
+		setaBouger(false);
+		setMouvementPossible(plateau, positionEnemie);
+		
+	}
+	
 
 	public boolean isaBouger()
 	{
@@ -26,7 +34,7 @@ public class Pion extends Pieces
 		this.aBouger = aBouger;
 	}
 
-	public void setMouvementPossible(Object[][] plateau,
+	public void setMouvementPossible(Plateau plateau,
 			ArrayList<Point> positionEnnemie)
 	{
 		this.getMouvementPossible().clear();
@@ -37,10 +45,10 @@ public class Pion extends Pieces
 				this.getMouvementPossible().add(new Point(this.getEmplacement().x,
 						this.getEmplacement().y - 1));
 				if (positionEnnemie
-						.equals(plateau[this.getEmplacement().x
+						.equals(plateau.getPlateau()[this.getEmplacement().x
 								- 1][this.getEmplacement().y - 1])
 						|| positionEnnemie
-								.equals(plateau[this.getEmplacement().x
+								.equals(plateau.getPlateau()[this.getEmplacement().x
 										+ 1][this.getEmplacement().y - 1]))
 				{
 					this.getMouvementPossible().add(new Point(this.getEmplacement().x - 1,
@@ -64,10 +72,10 @@ public class Pion extends Pieces
 				this.getMouvementPossible().add(new Point(this.getEmplacement().x,
 						this.getEmplacement().y + 1));
 				if (positionEnnemie
-						.equals(plateau[this.getEmplacement().x
+						.equals(plateau.getPlateau()[this.getEmplacement().x
 								+ 1][this.getEmplacement().y + 1])
 						|| positionEnnemie
-								.equals(plateau[this.getEmplacement().x
+								.equals(plateau.getPlateau()[this.getEmplacement().x
 										- 1][this.getEmplacement().y + 1]))
 				{
 					this.getMouvementPossible().add(new Point(this.getEmplacement().x - 1,

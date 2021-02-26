@@ -10,8 +10,15 @@ public class Cavalier extends Pieces
 	{
 		super(nom, couleur, position);
 	}
-
-	public void setMouvementPossible(Object[][] plateau,
+	
+	public Cavalier(String nom, boolean couleur, Point position, Plateau plateau,
+			ArrayList<Point> positionEnemie)
+	{
+		super(nom, couleur, position);
+		setMouvementPossible(plateau, positionEnemie);
+	}
+	
+	public void setMouvementPossible(Plateau plateau,
 			ArrayList<Point> positionEnemie)
 	{
 		ArrayList<Point> variationMouvement = new ArrayList<Point>();
@@ -33,7 +40,7 @@ public class Cavalier extends Pieces
 		{
 			if(i + a.getX()<8&&i + a.getX()>=0&& j + a.getY()<8&&j + a.getY()>=0)
 			{
-				if (plateau[(int) (i + a.getX())][(int) (j + a.getY())].getClass().equals(new PositionVide().getClass()))
+				if (plateau.getVoidSpace().contains(new Point((int)(i + a.getX()),(int)(j + a.getY()))))
 				{
 					getMouvementPossible().add(new Point((int) (i + a.getX()), (int) (j + a.getY())));
 				}
