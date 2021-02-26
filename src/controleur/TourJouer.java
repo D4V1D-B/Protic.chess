@@ -44,7 +44,10 @@ public class TourJouer
 	{
 		for(Pieces p: listePiece)
 		{
-			for(Point point: )
+			for(Point point:  p.getMouvementPossible())
+			{
+				
+			}
 		}
 	}
 	
