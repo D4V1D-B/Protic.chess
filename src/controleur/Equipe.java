@@ -8,13 +8,13 @@ import java.util.Set;
 import modele.Pieces;
 import modele.Roi;
 
-public class TourJouer
+public class Equipe
 {
 	private Set<Point> mouvementPossible;
 	private ArrayList<Pieces> listePiece;
 	private Point positionRoi;
 
-	public TourJouer(ArrayList<Pieces> pieces)
+	public Equipe(ArrayList<Pieces> pieces)
 	{
 		listePiece = pieces;
 		actualiserPositionRoi();
