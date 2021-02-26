@@ -13,6 +13,14 @@ public class Roi extends Pieces
 		aBouger=false;
 	}
 	
+	public Roi(String nom, boolean couleur, Point position, Plateau plateau,
+			ArrayList<Point> positionEnemie)
+	{
+		super(nom, couleur, position);
+		aBouger=false;
+		setMouvementPossible(plateau, positionEnemie);
+	}
+	
 	public boolean isaBouger()
 	{
 		return aBouger;
@@ -23,7 +31,7 @@ public class Roi extends Pieces
 		this.aBouger = true;
 	}
 
-	public void setMouvementPossible(Object[][] plateau,
+	public void setMouvementPossible(Plateau plateau,
 			ArrayList<Point> positionEnemie)
 	{
 		ArrayList<Point> variationMouvement = new ArrayList<Point>();
@@ -42,16 +50,19 @@ public class Roi extends Pieces
 
 		for (Point a : variationMouvement)
 		{
-			if (plateau[(int) (i + a.getX())][(int) (j + a.getY())] == null)
+			if(i + a.getX()<8&&i + a.getX()>=0&& j + a.getY()<8&&j + a.getY()>=0)
 			{
-				this.getMouvementPossible().add(new Point((int) (i + a.getX()), (int) (j + a.getY())));
-			}
-			else
-			{
-				for (Point x : positionEnemie)
+				if (plateau.getVoidSpace().contains(new Point((int)(i + a.getX()),(int)(j + a.getY()))))
 				{
-					if (x.equals(new Point((int) (i + a.getX()), (int) (j + a.getY()))))
-						this.getMouvementPossible().add(x);
+					getMouvementPossible().add(new Point((int) (i + a.getX()), (int) (j + a.getY())));
+				}
+				else
+				{
+					for (Point x : positionEnemie)
+					{
+						if (x.equals(new Point((int) (i + a.getX()), (int) (j + a.getY()))))
+							getMouvementPossible().add(x);
+					}
 				}
 			}
 		}
