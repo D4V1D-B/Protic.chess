@@ -4,9 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-
 import modele.Pieces;
-import modele.Tour;
 
 public class Plateau
 {
@@ -27,8 +25,8 @@ public class Plateau
 	public Plateau(ArrayList<Pieces> pieceBlanc, ArrayList<Pieces> pieceNoir)
 	{
 		refreshPlateau(pieceBlanc, pieceNoir);
-		blanc= new Equipe(pieceBlanc);
-		noir= new Equipe(pieceNoir);
+		blanc= new Equipe(pieceBlanc,true);
+		noir= new Equipe(pieceNoir,false);
 	}
 
 	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc,
@@ -99,16 +97,6 @@ public class Plateau
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public class Equipe
 	{
 		private Set<Point> mouvementPossible;
@@ -116,8 +104,9 @@ public class Plateau
 		private Point positionRoi;
 		private boolean isWhite;
 
-		public Equipe(ArrayList<Pieces> pieces)
+		public Equipe(ArrayList<Pieces> pieces, boolean couleur)
 		{
+			isWhite = couleur;
 			listePiece = pieces;
 			actualiserPositionRoi();
 			mouvementPossible =  new HashSet<Point>();
@@ -147,14 +136,17 @@ public class Plateau
 
 		public void actualiserMouvementPossible()
 		{
-			//TODO
-			Pieces test;
+			ArrayList<Pieces> listePieceTemp = noir.listePiece;
+			if(isWhite)
+			{
+				listePieceTemp = blanc.listePiece;
+			}
+			
 			for(Pieces p: listePiece)
 			{
-				Class temp = p.getClass();
-				switch(temp.toString()) {
+				switch(p.getClass().toString()) {
 					case "class modele.Tour":
-						((Tour)p).setMouvementPossible(plateau, noir.listePiece);;
+//						((Tour)p).setMouvementPossible(plateau);
 						break;
 				}
 			}

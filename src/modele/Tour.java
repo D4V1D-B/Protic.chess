@@ -1,8 +1,6 @@
 package modele;
 
 import java.awt.Point;
-import java.util.ArrayList;
-
 import controleur.Plateau;
 
 public class Tour extends Pieces
@@ -15,13 +13,12 @@ public class Tour extends Pieces
 		super(nom, couleur, position);
 		aBouger = false;
 	}
-	
-	public Tour(String nom, boolean couleur, Point position, Plateau plateau,
-			ArrayList<Point> positionEnemie)
+
+	public Tour(String nom, boolean couleur, Point position, Plateau plateau)
 	{
 		super(nom, couleur, position);
 		aBouger = false;
-		setMouvementPossible(plateau, positionEnemie);
+		setMouvementPossible(plateau);
 	}
 
 	public boolean isaBouger()
@@ -34,63 +31,68 @@ public class Tour extends Pieces
 		this.aBouger = true;
 	}
 
-
-	public void setMouvementPossible(Plateau plateau,
-			ArrayList<Point> positionEnemie)
+	public void setMouvementPossible(Plateau plateau)
 	{
 		this.getMouvementPossible().clear();
 		// ajouter sur la ligne de la tour à gauche
 		for (int j = this.getEmplacement().y - 1; j >= 0; j--)
 		{
-			if (plateau.getVoidSpace().contains(new Point(this.getEmplacement().x,j)))
+			if (plateau.getVoidSpace()
+					.contains(new Point(this.getEmplacement().x, j)))
 			{
-				this.getMouvementPossible().add(new Point(this.getEmplacement().x, j));
+				this.getMouvementPossible()
+						.add(new Point(this.getEmplacement().x, j));
 			}
 			else
 			{
-				j = -30;
-				for (Point x : positionEnemie)
-				{
-					if (x.equals(new Point(this.getEmplacement().x, j)))
-						this.getMouvementPossible().add(x);
-				}
+				if (this.isWhite() != plateau
+						.trouverPieces(new Point(this.getEmplacement().x, j))
+						.isWhite())
+					getMouvementPossible()
+							.add(new Point(this.getEmplacement().x, j));
 
+				j = -30;
 			}
 		}
 
 		// ajouter sur la ligne de la tour à droite
 		for (int j = this.getEmplacement().y + 1; j <= 7; j++)
 		{
-			if (plateau.getVoidSpace().contains(new Point(this.getEmplacement().x,j)))
+			if (plateau.getVoidSpace()
+					.contains(new Point(this.getEmplacement().x, j)))
 			{
-				this.getMouvementPossible().add(new Point(this.getEmplacement().x, j));
+				this.getMouvementPossible()
+						.add(new Point(this.getEmplacement().x, j));
 			}
 			else
 			{
+				if (this.isWhite() != plateau
+						.trouverPieces(new Point(this.getEmplacement().x, j))
+						.isWhite())
+					getMouvementPossible()
+							.add(new Point(this.getEmplacement().x, j));
+
 				j = 30;
-				for (Point x : positionEnemie)
-				{
-					if (x.equals(new Point(this.getEmplacement().x, j)))
-						this.getMouvementPossible().add(x);
-				}
 			}
 		}
 
 		// ajouter pour la ligne du bas
 		for (int i = this.getEmplacement().x + 1; i <= 7; i++)
 		{
-			if (plateau.getVoidSpace().contains(new Point(i,this.getEmplacement().y)))
+			if (plateau.getVoidSpace()
+					.contains(new Point(i, this.getEmplacement().y)))
 			{
-				this.getMouvementPossible().add(new Point(i, this.getEmplacement().y));
+				this.getMouvementPossible()
+						.add(new Point(i, this.getEmplacement().y));
 			}
 			else
 			{
+				if (this.isWhite() != plateau
+						.trouverPieces(new Point(i, this.getEmplacement().y))
+						.isWhite())
+					getMouvementPossible()
+							.add(new Point(i, this.getEmplacement().y));
 				i = 30;
-				for (Point x : positionEnemie)
-				{
-					if (x.equals(new Point(i, this.getEmplacement().y)))
-						this.getMouvementPossible().add(x);
-				}
 			}
 		}
 
@@ -98,18 +100,20 @@ public class Tour extends Pieces
 
 		for (int i = this.getEmplacement().x - 1; i >= 0; i--)
 		{
-			if (plateau.getVoidSpace().contains(new Point(i,this.getEmplacement().y)))
+			if (plateau.getVoidSpace()
+					.contains(new Point(i, this.getEmplacement().y)))
 			{
-				this.getMouvementPossible().add(new Point(i, this.getEmplacement().y));
+				this.getMouvementPossible()
+						.add(new Point(i, this.getEmplacement().y));
 			}
 			else
 			{
+				if (this.isWhite() != plateau
+						.trouverPieces(new Point(i, this.getEmplacement().y))
+						.isWhite())
+					getMouvementPossible()
+							.add(new Point(i, this.getEmplacement().y));
 				i = -30;
-				for (Point x : positionEnemie)
-				{
-					if (x.equals(new Point(i, this.getEmplacement().y)))
-						this.getMouvementPossible().add(x);
-				}
 			}
 		}
 	}

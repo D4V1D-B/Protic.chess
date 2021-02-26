@@ -12,17 +12,16 @@ public class Roi extends Pieces
 	public Roi(String nom, boolean couleur, Point position)
 	{
 		super(nom, couleur, position);
-		aBouger=false;
+		aBouger = false;
 	}
-	
-	public Roi(String nom, boolean couleur, Point position, Plateau plateau,
-			ArrayList<Point> positionEnemie)
+
+	public Roi(String nom, boolean couleur, Point position, Plateau plateau)
 	{
 		super(nom, couleur, position);
-		aBouger=false;
-		setMouvementPossible(plateau, positionEnemie);
+		aBouger = false;
+		setMouvementPossible(plateau);
 	}
-	
+
 	public boolean isaBouger()
 	{
 		return aBouger;
@@ -33,8 +32,7 @@ public class Roi extends Pieces
 		this.aBouger = true;
 	}
 
-	public void setMouvementPossible(Plateau plateau,
-			ArrayList<Point> positionEnemie)
+	public void setMouvementPossible(Plateau plateau)
 	{
 		ArrayList<Point> variationMouvement = new ArrayList<Point>();
 		variationMouvement.add(new Point(-1, -1));
@@ -52,24 +50,27 @@ public class Roi extends Pieces
 
 		for (Point a : variationMouvement)
 		{
-			if(i + a.getX()<8&&i + a.getX()>=0&& j + a.getY()<8&&j + a.getY()>=0)
+			if (i + a.getX() < 8 && i + a.getX() >= 0 && j + a.getY() < 8
+					&& j + a.getY() >= 0)
 			{
-				if (plateau.getVoidSpace().contains(new Point((int)(i + a.getX()),(int)(j + a.getY()))))
+				if (plateau.getVoidSpace().contains(
+						new Point((int) (i + a.getX()), (int) (j + a.getY()))))
 				{
-					getMouvementPossible().add(new Point((int) (i + a.getX()), (int) (j + a.getY())));
+					getMouvementPossible().add(new Point((int) (i + a.getX()),
+							(int) (j + a.getY())));
 				}
 				else
 				{
-					for (Point x : positionEnemie)
-					{
-						if (x.equals(new Point((int) (i + a.getX()), (int) (j + a.getY()))))
-							getMouvementPossible().add(x);
-					}
+					if (this.isWhite() != plateau
+							.trouverPieces(new Point((int) (i + a.getX()),
+									(int) (j + a.getY())))
+							.isWhite())
+						getMouvementPossible().add(new Point(
+								(int) (i + a.getX()), (int) (j + a.getY())));
+
 				}
 			}
 		}
-		
-		
 
 	}
 

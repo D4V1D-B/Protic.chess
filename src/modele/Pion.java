@@ -16,12 +16,11 @@ public class Pion extends Pieces
 		setaBouger(false);
 	}
 	
-	public Pion(String nom, boolean couleur, Point position, Plateau plateau,
-			ArrayList<Point> positionEnemie)
+	public Pion(String nom, boolean couleur, Point position, Plateau plateau)
 	{
 		super(nom, couleur, position);
 		setaBouger(false);
-		setMouvementPossible(plateau, positionEnemie);
+		setMouvementPossible(plateau);
 		
 	}
 	
@@ -36,11 +35,10 @@ public class Pion extends Pieces
 		this.aBouger = aBouger;
 	}
 
-	public void setMouvementPossible(Plateau plateau,
-			ArrayList<Point> positionEnnemie)
+	public void setMouvementPossible(Plateau plateau)
 	{
 		this.getMouvementPossible().clear();
-		if (super.isWhite())
+		if (this.isWhite())
 		{
 			if (aBouger)
 			{
