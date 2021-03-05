@@ -434,10 +434,7 @@ public class Controleur implements Initializable
 	{
 
 		Pane p = (Pane) event.getSource();
-		System.out.println(p.getId());
-		// System.out.println(tableau.get(p.getId()));
-		System.out.println(rechercheCoordonnee(p.getId()));
-		// plateau.trouverPieces(rechercheCoordonnee(p.getId()));
+		plateau.trouverPieces(rechercheCoordonnee(p.getId()));
 	}
 
 	private Point rechercheCoordonnee(String p)
