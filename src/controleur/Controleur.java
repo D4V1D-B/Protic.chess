@@ -309,7 +309,7 @@ public class Controleur implements Initializable
 		noir.add(p8);
 
 		plateau = new Plateau(blanc, noir);
-		
+
 		placementDepart.indexOf('R');
 		placementDepart.replace('R', '1');
 
@@ -435,7 +435,45 @@ public class Controleur implements Initializable
 
 		Pane p = (Pane) event.getSource();
 		System.out.println(p.getId());
-		
 		// System.out.println(tableau.get(p.getId()));
+		System.out.println(rechercheCoordonnee(p.getId()));
+		// plateau.trouverPieces(rechercheCoordonnee(p.getId()));
+	}
+
+	private Point rechercheCoordonnee(String p)
+	{
+		Point coordonnee = new Point();
+		char premiereLettre = p.toUpperCase().charAt(0);
+		switch (premiereLettre)
+		{
+			case 'A':
+				premiereLettre = '1';
+				break;
+			case 'B':
+				premiereLettre = '2';
+				break;
+			case 'C':
+				premiereLettre = '3';
+				break;
+			case 'D':
+				premiereLettre = '4';
+				break;
+			case 'E':
+				premiereLettre = '5';
+				break;
+			case 'F':
+				premiereLettre = '6';
+				break;
+			case 'G':
+				premiereLettre = '7';
+				break;
+			case 'H':
+				premiereLettre = '8';
+				break;
+		}
+		coordonnee.setLocation(Character.getNumericValue(premiereLettre),
+				Character.getNumericValue(p.charAt(1)));
+		return coordonnee;
+
 	}
 }
