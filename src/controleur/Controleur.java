@@ -2,6 +2,7 @@ package controleur;
 
 import java.awt.Point;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -17,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import modele.Cavalier;
 import modele.Fou;
+import modele.Pieces;
 import modele.Pion;
 import modele.Reine;
 import modele.Roi;
@@ -25,6 +27,7 @@ import modele.Tour;
 public class Controleur implements Initializable
 {
 	HashMap<String, String> tableau = new HashMap<>();
+	private Plateau plateau;
 	public String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	@FXML
 	private Pane a8;
@@ -269,6 +272,44 @@ public class Controleur implements Initializable
 		Pion p7 = new Pion("p7", false, chercherCoordonnee('p'));
 		Pion p8 = new Pion("p8", false, chercherCoordonnee('p'));
 
+		ArrayList<Pieces> blanc = new ArrayList<Pieces>();
+		blanc.add(R1);
+		blanc.add(N1);
+		blanc.add(B1);
+		blanc.add(Q);
+		blanc.add(K);
+		blanc.add(B2);
+		blanc.add(N2);
+		blanc.add(R2);
+		blanc.add(P1);
+		blanc.add(P2);
+		blanc.add(P3);
+		blanc.add(P4);
+		blanc.add(P5);
+		blanc.add(P6);
+		blanc.add(P7);
+		blanc.add(P8);
+
+		ArrayList<Pieces> noir = new ArrayList<Pieces>();
+		noir.add(r1);
+		noir.add(n1);
+		noir.add(b1);
+		noir.add(q);
+		noir.add(k);
+		noir.add(b2);
+		noir.add(n2);
+		noir.add(r2);
+		noir.add(p1);
+		noir.add(p2);
+		noir.add(p3);
+		noir.add(p4);
+		noir.add(p5);
+		noir.add(p6);
+		noir.add(p7);
+		noir.add(p8);
+
+		plateau = new Plateau(blanc, noir);
+		
 		placementDepart.indexOf('R');
 		placementDepart.replace('R', '1');
 
@@ -367,8 +408,7 @@ public class Controleur implements Initializable
 			positionActuelle++;
 		}
 
-		
-		//TODO ne focntionne pas coordonne x
+		// TODO ne focntionne pas coordonne x
 		String subSubString = subString.substring(positionDuSlash + 1,
 				subString.length());
 
@@ -382,9 +422,7 @@ public class Controleur implements Initializable
 			}
 			positionActuelle2++;
 		}
-		
-		
-		
+
 		placementDepart.replaceFirst(Character.toString(pieceCherche), "1");
 		System.out.println(placementDepart);
 		p.setLocation(positionCherche, nbSlash);
@@ -397,6 +435,7 @@ public class Controleur implements Initializable
 
 		Pane p = (Pane) event.getSource();
 		System.out.println(p.getId());
+		
 		// System.out.println(tableau.get(p.getId()));
 	}
 }
