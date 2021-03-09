@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import modele.Pieces;
+import modele.Tour;
+import modele.Fou;
+import modele.Roi;
+import modele.Pion;
+import modele.Reine;
+import modele.Cavalier;
 
 public class Plateau
 {
@@ -139,17 +145,26 @@ public class Plateau
 			{
 				switch(p.getClass().toString()) {
 					case "class modele.Tour":
-//						((Tour)p).setMouvementPossible(plateau);
+						((Tour)p).setMouvementPossible(plateau);
+						break;
+					case "class modele.Cavalier":
+						((Cavalier)p).setMouvementPossible(plateau);
+						break;
+					case "class modele.Fou":
+						((Fou)p).setMouvementPossible(plateau);
+						break;
+					case "class modele.Reine":
+						((Reine)p).setMouvementPossible(plateau);
+						break;
+					case "class modele.Pion":
+						((Pion)p).setMouvementPossible(plateau);
+						break;
+					case "class modele.Roi":
+						((Roi)p).setMouvementPossible(plateau);
 						break;
 				}
+				
 			}
-
-//			class modele.Cavalier
-//			class modele.Fou
-//			class modele.Reine
-//			class modele.Pion
-//			class modele.Roi
-
 			
 			for(Pieces p: listePiece)
 			{
