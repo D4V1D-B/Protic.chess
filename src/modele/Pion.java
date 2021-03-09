@@ -15,15 +15,14 @@ public class Pion extends Pieces
 		super(nom, couleur, emplacement);
 		setaBouger(false);
 	}
-	
-	public Pion(String nom, boolean couleur, Point position, Plateau plateau)
+
+	public Pion(String nom, boolean couleur, Point position, Pieces[][] plateau)
 	{
 		super(nom, couleur, position);
 		setaBouger(false);
 		setMouvementPossible(plateau);
-		
+
 	}
-	
 
 	public boolean isaBouger()
 	{
@@ -35,61 +34,78 @@ public class Pion extends Pieces
 		this.aBouger = aBouger;
 	}
 
-	public void setMouvementPossible(Plateau plateau)
+	public void setMouvementPossible(Pieces[][] plateau)
 	{
 		this.getMouvementPossible().clear();
+
+		int i = this.getEmplacement().x;
+		int j = this.getEmplacement().y;
+
 		if (this.isWhite())
 		{
-			if (aBouger)
+			// Premier mouvement 2 case
+			if (!this.aBouger
+					&& OperationSurUneMatrice.getVoidSpace(plateau)
+							.contains(new Point(i, j + 1))
+					&& OperationSurUneMatrice.getVoidSpace(plateau)
+							.contains(new Point(i, j + 2)))
 			{
-				this.getMouvementPossible().add(new Point(this.getEmplacement().x,
-						this.getEmplacement().y - 1));
-				if (positionEnnemie
-						.equals(plateau.getPlateau()[this.getEmplacement().x
-								- 1][this.getEmplacement().y - 1])
-						|| positionEnnemie
-								.equals(plateau.getPlateau()[this.getEmplacement().x
-										+ 1][this.getEmplacement().y - 1]))
-				{
-					this.getMouvementPossible().add(new Point(this.getEmplacement().x - 1,
-							this.getEmplacement().y - 1));
-					this.getMouvementPossible().add(new Point(this.getEmplacement().x + 1,
-							this.getEmplacement().y - 1));
-				}
+				this.getMouvementPossible().add(new Point(i, j + 2));
 			}
-			else
+
+			// 1 case
+			if (OperationSurUneMatrice.getVoidSpace(plateau)
+					.contains(new Point(i, j + 1)))
 			{
-				this.getMouvementPossible().add(new Point(this.getEmplacement().x,
-						this.getEmplacement().y - 2));
-				setaBouger(true);
+				this.getMouvementPossible().add(new Point(i, j + 1));
+			}
+
+			// droite case diagonal
+			if (!OperationSurUneMatrice.getVoidSpace(plateau)
+					.contains(new Point(i - 1, j + 1)) && i - 1 >= 0)
+			{
+				this.getMouvementPossible().add(new Point(i - 1, j + 1));
+			}
+
+			// gauche case diagonal
+			if (!OperationSurUneMatrice.getVoidSpace(plateau)
+					.contains(new Point(i + 1, j + 1)) && i + 1 <= 7)
+			{
+				this.getMouvementPossible().add(new Point(i + 1, j + 1));
 			}
 
 		}
 		else
 		{
-			if (aBouger)
+			// Premier mouvement 2 case
+			if (!this.aBouger
+					&& OperationSurUneMatrice.getVoidSpace(plateau)
+							.contains(new Point(i, j - 1))
+					&& OperationSurUneMatrice.getVoidSpace(plateau)
+							.contains(new Point(i, j - 2)))
 			{
-				this.getMouvementPossible().add(new Point(this.getEmplacement().x,
-						this.getEmplacement().y + 1));
-				if (positionEnnemie
-						.equals(plateau.getPlateau()[this.getEmplacement().x
-								+ 1][this.getEmplacement().y + 1])
-						|| positionEnnemie
-								.equals(plateau.getPlateau()[this.getEmplacement().x
-										- 1][this.getEmplacement().y + 1]))
-				{
-					this.getMouvementPossible().add(new Point(this.getEmplacement().x - 1,
-							this.getEmplacement().y + 1));
-					this.getMouvementPossible().add(new Point(this.getEmplacement().x + 1,
-							this.getEmplacement().y + 1));
-				}
-
+				this.getMouvementPossible().add(new Point(i, j - 2));
 			}
-			else
+
+			// 1 case
+			if (OperationSurUneMatrice.getVoidSpace(plateau)
+					.contains(new Point(i, j - 1)))
 			{
-				this.getMouvementPossible().add(new Point(this.getEmplacement().x,
-						this.getEmplacement().y + 2));
-				setaBouger(true);
+				this.getMouvementPossible().add(new Point(i, j - 1));
+			}
+
+			// droite case diagonal
+			if (!OperationSurUneMatrice.getVoidSpace(plateau)
+					.contains(new Point(i - 1, j - 1)) && i - 1 >= 0)
+			{
+				this.getMouvementPossible().add(new Point(i - 1, j - 1));
+			}
+
+			// gauche case diagonal
+			if (!OperationSurUneMatrice.getVoidSpace(plateau)
+					.contains(new Point(i + 1, j - 1)) && i + 1 <= 7)
+			{
+				this.getMouvementPossible().add(new Point(i + 1, j - 1));
 			}
 		}
 

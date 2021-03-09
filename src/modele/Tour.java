@@ -45,8 +45,7 @@ public class Tour extends Pieces
 			}
 			else
 			{
-				if (this.isWhite() != plateau
-						.trouverPieces(new Point(this.getEmplacement().x, j))
+				if (this.isWhite() != plateau[this.getEmplacement().x][j]
 						.isWhite())
 					getMouvementPossible()
 							.add(new Point(this.getEmplacement().x, j));
@@ -66,8 +65,7 @@ public class Tour extends Pieces
 			}
 			else
 			{
-				if (this.isWhite() != plateau
-						.trouverPieces(new Point(this.getEmplacement().x, j))
+				if (this.isWhite() != plateau[this.getEmplacement().x][j]
 						.isWhite())
 					getMouvementPossible()
 							.add(new Point(this.getEmplacement().x, j));
@@ -87,8 +85,7 @@ public class Tour extends Pieces
 			}
 			else
 			{
-				if (this.isWhite() != plateau
-						.trouverPieces(new Point(i, this.getEmplacement().y))
+				if (this.isWhite() != plateau[i][this.getEmplacement().y]
 						.isWhite())
 					getMouvementPossible()
 							.add(new Point(i, this.getEmplacement().y));
@@ -108,8 +105,7 @@ public class Tour extends Pieces
 			}
 			else
 			{
-				if (this.isWhite() != plateau
-						.trouverPieces(new Point(i, this.getEmplacement().y))
+				if (this.isWhite() != plateau[i][this.getEmplacement().y]
 						.isWhite())
 					getMouvementPossible()
 							.add(new Point(i, this.getEmplacement().y));
