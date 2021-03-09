@@ -3,7 +3,7 @@ package modele;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import controleur.Plateau;
+import modele.OperationSurUneMatrice;
 
 public class Cavalier extends Pieces
 {
@@ -14,13 +14,13 @@ public class Cavalier extends Pieces
 	}
 
 	public Cavalier(String nom, boolean couleur, Point position,
-			Plateau plateau)
+			Pieces[][] plateau)
 	{
 		super(nom, couleur, position);
 		setMouvementPossible(plateau);
 	}
 
-	public void setMouvementPossible(Plateau plateau)
+	public void setMouvementPossible(Pieces[][] plateau)
 	{
 		ArrayList<Point> variationMouvement = new ArrayList<Point>();
 		variationMouvement.add(new Point(-1, -2));
@@ -41,7 +41,7 @@ public class Cavalier extends Pieces
 			if (i + a.getX() < 8 && i + a.getX() >= 0 && j + a.getY() < 8
 					&& j + a.getY() >= 0)
 			{
-				if (plateau.getVoidSpace().contains(
+				if (OperationSurUneMatrice.getVoidSpace(plateau).contains(
 						new Point((int) (i + a.getX()), (int) (j + a.getY()))))
 				{
 					getMouvementPossible().add(new Point((int) (i + a.getX()),
@@ -49,12 +49,12 @@ public class Cavalier extends Pieces
 				}
 				else
 				{
-					if (this.isWhite() != plateau
-							.trouverPieces(new Point((int) (i + a.getX()),
-									(int) (j + a.getY())))
-							.isWhite())
+					if (this.isWhite() != plateau[(int) (i + a.getX())][(int) (j
+							+ a.getY())].isWhite())
+					{
 						getMouvementPossible().add(new Point(
 								(int) (i + a.getX()), (int) (j + a.getY())));
+					}
 				}
 			}
 
