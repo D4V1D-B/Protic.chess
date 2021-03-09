@@ -255,7 +255,7 @@ public class Controleur implements Initializable
 		Pion P7 = new Pion("P7", true, chercherCoordonnee('P'));
 		Pion P8 = new Pion("P8", true, chercherCoordonnee('P'));
 
-		Tour r1 = new Tour("r1", false, chercherCoordonnee('r'));
+		Tour r1 = new Tour("r1", false, new Point(0,0));
 		Cavalier n1 = new Cavalier("n1", false, chercherCoordonnee('n'));
 		Fou b1 = new Fou("b1", false, chercherCoordonnee('b'));
 		Reine q = new Reine("q", false, chercherCoordonnee('q'));
