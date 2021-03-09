@@ -27,9 +27,11 @@ import modele.Tour;
 public class Controleur implements Initializable
 {
 	HashMap<String, String> tableau = new HashMap<>();
+	private HashMap<String, Image> association = new HashMap<String, Image>();
 	private Plateau plateau;
-	public String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
-	public Pieces pieceSelect;
+	private String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
+	private Pieces pieceSelect;
+	private Pane temp;
 
 	@FXML
 	private Pane a8;
@@ -237,41 +239,41 @@ public class Controleur implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		Tour R1 = new Tour("R1", true, new Point(0, 7));
-		Cavalier N1 = new Cavalier("N1", true, new Point(1, 7));
-		Fou B1 = new Fou("B1", true, new Point(2, 7));
-		Reine Q = new Reine("Q", true, new Point(3, 7));
-		Roi K = new Roi("K", true, new Point(4, 7));
-		Fou B2 = new Fou("B2", true, new Point(5, 7));
-		Cavalier N2 = new Cavalier("N2", true, new Point(6, 7));
-		Tour R2 = new Tour("R2", true, new Point(7, 7));
+		Tour R1 = new Tour("R", true, new Point(0, 0));
+		Cavalier N1 = new Cavalier("N", true, new Point(1, 0));
+		Fou B1 = new Fou("B", true, new Point(2, 0));
+		Reine Q = new Reine("Q", true, new Point(3, 0));
+		Roi K = new Roi("K", true, new Point(4, 0));
+		Fou B2 = new Fou("B", true, new Point(5, 0));
+		Cavalier N2 = new Cavalier("N", true, new Point(6, 0));
+		Tour R2 = new Tour("R", true, new Point(7, 0));
 
-		Pion P1 = new Pion("P1", true, new Point(0, 6));
-		Pion P2 = new Pion("P2", true, new Point(1, 6));
-		Pion P3 = new Pion("P3", true, new Point(2, 6));
-		Pion P4 = new Pion("P4", true, new Point(3, 6));
-		Pion P5 = new Pion("P5", true, new Point(4, 6));
-		Pion P6 = new Pion("P6", true, new Point(5, 6));
-		Pion P7 = new Pion("P7", true, new Point(6, 6));
-		Pion P8 = new Pion("P8", true, new Point(7, 6));
+		Pion P1 = new Pion("P", true, new Point(0, 1));
+		Pion P2 = new Pion("P", true, new Point(1, 1));
+		Pion P3 = new Pion("P", true, new Point(2, 1));
+		Pion P4 = new Pion("P", true, new Point(3, 1));
+		Pion P5 = new Pion("P", true, new Point(4, 1));
+		Pion P6 = new Pion("P", true, new Point(5, 1));
+		Pion P7 = new Pion("P", true, new Point(6, 1));
+		Pion P8 = new Pion("P", true, new Point(7, 1));
 
-		Tour r1 = new Tour("r1", false, new Point(0, 0));
-		Cavalier n1 = new Cavalier("n1", false, new Point(1, 0));
-		Fou b1 = new Fou("b1", false, new Point(2, 0));
-		Reine q = new Reine("q", false, new Point(3, 0));
-		Roi k = new Roi("k", false, new Point(4, 0));
-		Fou b2 = new Fou("b2", false, new Point(5, 0));
-		Cavalier n2 = new Cavalier("n2", false, new Point(6, 0));
-		Tour r2 = new Tour("r2", false, new Point(7, 0));
+		Tour r1 = new Tour("r", false, new Point(0, 7));
+		Cavalier n1 = new Cavalier("n", false, new Point(1, 7));
+		Fou b1 = new Fou("b", false, new Point(2, 7));
+		Reine q = new Reine("q", false, new Point(3, 7));
+		Roi k = new Roi("k", false, new Point(4, 7));
+		Fou b2 = new Fou("b", false, new Point(5, 7));
+		Cavalier n2 = new Cavalier("n", false, new Point(6, 7));
+		Tour r2 = new Tour("r", false, new Point(7, 7));
 
-		Pion p1 = new Pion("p1", false, new Point(0, 1));
-		Pion p2 = new Pion("p2", false, new Point(1, 1));
-		Pion p3 = new Pion("p3", false, new Point(2, 1));
-		Pion p4 = new Pion("p4", false, new Point(3, 1));
-		Pion p5 = new Pion("p5", false, new Point(4, 1));
-		Pion p6 = new Pion("p6", false, new Point(5, 1));
-		Pion p7 = new Pion("p7", false, new Point(6, 1));
-		Pion p8 = new Pion("p8", false, new Point(7, 1));
+		Pion p1 = new Pion("p", false, new Point(0, 6));
+		Pion p2 = new Pion("p", false, new Point(1, 6));
+		Pion p3 = new Pion("p", false, new Point(2, 6));
+		Pion p4 = new Pion("p", false, new Point(3, 6));
+		Pion p5 = new Pion("p", false, new Point(4, 6));
+		Pion p6 = new Pion("p", false, new Point(5, 6));
+		Pion p7 = new Pion("p", false, new Point(6, 6));
+		Pion p8 = new Pion("p", false, new Point(7, 6));
 
 		ArrayList<Pieces> blanc = new ArrayList<Pieces>();
 		blanc.add(R1);
@@ -310,23 +312,23 @@ public class Controleur implements Initializable
 		noir.add(p8);
 
 		plateau = new Plateau(blanc, noir);
+		
 
 		placementDepart.indexOf('R');
 		placementDepart.replace('R', '1');
 
 		afficherCodeSecret(placementDepart);
 
-		System.out.println(k.getEmplacement().toString());
-		System.out.println(p3.getEmplacement().toString());
-		System.out.println(N1.getEmplacement().toString());
-		System.out.println(N2.getEmplacement().toString());
+//		System.out.println(k.getEmplacement().toString());
+//		System.out.println(p3.getEmplacement().toString());
+//		System.out.println(N1.getEmplacement().toString());
+//		System.out.println(N2.getEmplacement().toString());
 
 	}
 
 	public void afficherCodeSecret(String placement)
 	{
 
-		HashMap<String, Image> association = new HashMap<String, Image>();
 		association.put("r", new Image("images/TourNoir.png"));
 		association.put("n", new Image("images/CavalierNoir.png"));
 		association.put("b", new Image("images/FouNoir.png"));
@@ -391,8 +393,50 @@ public class Controleur implements Initializable
 	void mouseClick(MouseEvent event)
 	{
 
-		Pane p = (Pane) event.getSource();
-		plateau.trouverPieces(rechercheCoordonnee(p.getId()));
+		Pane p = (Pane) event.getSource(); // coordonne cliquer
+		
+		// System.out.println(plateau.trouverPieces(rechercheCoordonnee(p.getId())));
+		// System.out.println(rechercheCoordonnee(p.getId()));
+		// System.out.println(pieceSelect);
+
+		if (pieceSelect == (null))
+		{
+			
+			pieceSelect = plateau.trouverPieces(rechercheCoordonnee(p.getId()));
+			if(temp != null)
+			{
+				temp = null;
+			}
+			temp = p;
+		}
+		else
+		{
+			//TODO DEPLACER LES PIECES DANS LA PROG AUSSI
+			System.out.println(pieceSelect.getNom());
+			if (true) // regarder si mouvement possible
+			{
+				deplacer(pieceSelect, p);
+				ImageView n  = (ImageView) temp.getChildren().get(0);
+				
+				n.setImage(null);
+				
+				temp = null;
+				pieceSelect = null;
+				//TODO DEPLACER LES PIECES DANS LA PROG AUSSI
+				//TODO DEPLACER LES PIECES DANS LA PROG AUSSI
+			}
+		}
+
+	}
+
+	private void deplacer(Pieces p, Pane positionFinale)
+	{
+		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
+		
+		
+		ImageView n = (ImageView) positionFinale.getChildren().get(0);
+		n.setImage(association.get(p.getNom()));
+		//TODO DEPLACER LES PIECES DANS LA PROG AUSSI
 	}
 
 	private Point rechercheCoordonnee(String p)

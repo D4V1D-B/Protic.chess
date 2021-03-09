@@ -49,10 +49,6 @@ public class Plateau
 		plateau[anciennePosition.x][anciennePosition.y] = null;
 		plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
 				.getEmplacement().y] = piecesDeplacer;
-		
-		noir.actualiserMouvementPossible();
-		blanc.actualiserMouvementPossible();
-		
 		return plateau;
 	}
 
@@ -100,21 +96,7 @@ public class Plateau
 		return plateau[temp.x][temp.y];
 	}
 	
-//	public boolean vérifierÉchec()
-//	{
-//		boolean roiEchec = false;
-//
-//		for (Point p : mouvementPossibleEnemy)
-//		{
-//			if (roiEchec != true)
-//			{
-//				roiEchec = positionRoi.equals(p);
-//			}
-//		}
-//
-//		return roiEchec;
-//	}
-//	
+	
 	public class Equipe
 	{
 		private Set<Point> mouvementPossible;
@@ -130,7 +112,7 @@ public class Plateau
 			mouvementPossible =  new HashSet<Point>();
 			actualiserMouvementPossible();
 		}
-		
+
 		public int indexOfKing()
 		{
 			int index = 0;
@@ -159,7 +141,6 @@ public class Plateau
 			{
 				switch(p.getClass().toString()) {
 					case "class modele.Tour":
-						System.out.println("bonjour");
 //						((Tour)p).setMouvementPossible(plateau);
 						break;
 				}
@@ -181,6 +162,24 @@ public class Plateau
 		public  Set<Point> getMouvementPossible()
 		{
 			return mouvementPossible;
+		}
+		
+		
+		
+		public boolean vérifierÉchec(
+				ArrayList<Point> mouvementPossibleEnemy)
+		{
+			boolean roiEchec = false;
+
+			for (Point p : mouvementPossibleEnemy)
+			{
+				if (roiEchec != true)
+				{
+					roiEchec = positionRoi.equals(p);
+				}
+			}
+
+			return roiEchec;
 		}
 		
 		public ArrayList<Point> positionEquipe()
