@@ -246,33 +246,32 @@ public class Controleur implements Initializable
 		Cavalier N2 = new Cavalier("N2", true, new Point(6, 7));
 		Tour R2 = new Tour("R2", true, new Point(7, 7));
 
-		Pion P1 = new Pion("P1", true,  new Point(0,6));
-		Pion P2 = new Pion("P2", true, new Point(1,6));
-		Pion P3 = new Pion("P3", true, new Point(2,6));
-		Pion P4 = new Pion("P4", true, new Point(3,6));
-		Pion P5 = new Pion("P5", true, new Point(4,6));
-		Pion P6 = new Pion("P6", true, new Point(5,6));
-		Pion P7 = new Pion("P7", true, new Point(6,6));
-		Pion P8 = new Pion("P8", true, new Point(7,6));
-		
-		
-		Tour r1 = new Tour("r1", false, new Point(0, 0));
-		Cavalier n1 = new Cavalier("n1", false, chercherCoordonnee('n'));
-		Fou b1 = new Fou("b1", false, chercherCoordonnee('b'));
-		Reine q = new Reine("q", false, chercherCoordonnee('q'));
-		Roi k = new Roi("k", false, chercherCoordonnee('k'));
-		Fou b2 = new Fou("b2", false, chercherCoordonnee('b'));
-		Cavalier n2 = new Cavalier("n2", false, chercherCoordonnee('n'));
-		Tour r2 = new Tour("r2", false, chercherCoordonnee('r'));
+		Pion P1 = new Pion("P1", true, new Point(0, 6));
+		Pion P2 = new Pion("P2", true, new Point(1, 6));
+		Pion P3 = new Pion("P3", true, new Point(2, 6));
+		Pion P4 = new Pion("P4", true, new Point(3, 6));
+		Pion P5 = new Pion("P5", true, new Point(4, 6));
+		Pion P6 = new Pion("P6", true, new Point(5, 6));
+		Pion P7 = new Pion("P7", true, new Point(6, 6));
+		Pion P8 = new Pion("P8", true, new Point(7, 6));
 
-		Pion p1 = new Pion("p1", false, chercherCoordonnee('p'));
-		Pion p2 = new Pion("p2", false, chercherCoordonnee('p'));
-		Pion p3 = new Pion("p3", false, chercherCoordonnee('p'));
-		Pion p4 = new Pion("p4", false, chercherCoordonnee('p'));
-		Pion p5 = new Pion("p5", false, chercherCoordonnee('p'));
-		Pion p6 = new Pion("p6", false, chercherCoordonnee('p'));
-		Pion p7 = new Pion("p7", false, chercherCoordonnee('p'));
-		Pion p8 = new Pion("p8", false, chercherCoordonnee('p'));
+		Tour r1 = new Tour("r1", false, new Point(0, 0));
+		Cavalier n1 = new Cavalier("n1", false, new Point(1, 0));
+		Fou b1 = new Fou("b1", false, new Point(2, 0));
+		Reine q = new Reine("q", false, new Point(3, 0));
+		Roi k = new Roi("k", false, new Point(4, 0));
+		Fou b2 = new Fou("b2", false, new Point(5, 0));
+		Cavalier n2 = new Cavalier("n2", false, new Point(6, 0));
+		Tour r2 = new Tour("r2", false, new Point(7, 0));
+
+		Pion p1 = new Pion("p1", false, new Point(0, 1));
+		Pion p2 = new Pion("p2", false, new Point(1, 1));
+		Pion p3 = new Pion("p3", false, new Point(2, 1));
+		Pion p4 = new Pion("p4", false, new Point(3, 1));
+		Pion p5 = new Pion("p5", false, new Point(4, 1));
+		Pion p6 = new Pion("p6", false, new Point(5, 1));
+		Pion p7 = new Pion("p7", false, new Point(6, 1));
+		Pion p8 = new Pion("p8", false, new Point(7, 1));
 
 		ArrayList<Pieces> blanc = new ArrayList<Pieces>();
 		blanc.add(R1);
