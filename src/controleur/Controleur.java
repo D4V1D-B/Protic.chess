@@ -30,7 +30,7 @@ public class Controleur implements Initializable
 	private Plateau plateau;
 	public String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	public Pieces pieceSelect;
-	
+
 	@FXML
 	private Pane a8;
 
@@ -237,25 +237,26 @@ public class Controleur implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		Tour R1 = new Tour("R1", true, new Point());
-		Cavalier N1 = new Cavalier("N1", true, chercherCoordonnee('N'));
-		Fou B1 = new Fou("B1", true, chercherCoordonnee('B'));
-		Reine Q = new Reine("Q", true, chercherCoordonnee('Q'));
-		Roi K = new Roi("K", true, chercherCoordonnee('K'));
-		Fou B2 = new Fou("B2", true, chercherCoordonnee('B'));
-		Cavalier N2 = new Cavalier("N2", true, chercherCoordonnee('N'));
-		Tour R2 = new Tour("R2", true, chercherCoordonnee('R'));
+		Tour R1 = new Tour("R1", true, new Point(0, 7));
+		Cavalier N1 = new Cavalier("N1", true, new Point(1, 7));
+		Fou B1 = new Fou("B1", true, new Point(2, 7));
+		Reine Q = new Reine("Q", true, new Point(3, 7));
+		Roi K = new Roi("K", true, new Point(4, 7));
+		Fou B2 = new Fou("B2", true, new Point(5, 7));
+		Cavalier N2 = new Cavalier("N2", true, new Point(6, 7));
+		Tour R2 = new Tour("R2", true, new Point(7, 7));
 
-		Pion P1 = new Pion("P1", true, chercherCoordonnee('P'));
-		Pion P2 = new Pion("P2", true, chercherCoordonnee('P'));
-		Pion P3 = new Pion("P3", true, chercherCoordonnee('P'));
-		Pion P4 = new Pion("P4", true, chercherCoordonnee('P'));
-		Pion P5 = new Pion("P5", true, chercherCoordonnee('P'));
-		Pion P6 = new Pion("P6", true, chercherCoordonnee('P'));
-		Pion P7 = new Pion("P7", true, chercherCoordonnee('P'));
-		Pion P8 = new Pion("P8", true, chercherCoordonnee('P'));
-
-		Tour r1 = new Tour("r1", false, new Point(0,0));
+		Pion P1 = new Pion("P1", true,  new Point(0,6));
+		Pion P2 = new Pion("P2", true, new Point(1,6));
+		Pion P3 = new Pion("P3", true, new Point(2,6));
+		Pion P4 = new Pion("P4", true, new Point(3,6));
+		Pion P5 = new Pion("P5", true, new Point(4,6));
+		Pion P6 = new Pion("P6", true, new Point(5,6));
+		Pion P7 = new Pion("P7", true, new Point(6,6));
+		Pion P8 = new Pion("P8", true, new Point(7,6));
+		
+		
+		Tour r1 = new Tour("r1", false, new Point(0, 0));
 		Cavalier n1 = new Cavalier("n1", false, chercherCoordonnee('n'));
 		Fou b1 = new Fou("b1", false, chercherCoordonnee('b'));
 		Reine q = new Reine("q", false, chercherCoordonnee('q'));
@@ -387,8 +388,6 @@ public class Controleur implements Initializable
 
 	}
 
-	
-
 	@FXML
 	void mouseClick(MouseEvent event)
 	{
@@ -429,51 +428,51 @@ public class Controleur implements Initializable
 				break;
 		}
 		coordonnee.setLocation(Character.getNumericValue(premiereLettre),
-				Character.getNumericValue(p.charAt(1))-1);
+				Character.getNumericValue(p.charAt(1)) - 1);
 		return coordonnee;
 
 	}
-	
-//	private Point chercherCoordonnee(char pieceCherche) // x= range y=colonne
-//	{
-//
-//		Point p = new Point();
-//
-//		int x = placementDepart.indexOf(pieceCherche);
-//		String subString = placementDepart.substring(0, x + 1);
-//
-//		int nbSlash = 0;
-//		int positionDuSlash = 0;
-//		int positionActuelle = 0;
-//		for (char c : subString.toCharArray())
-//		{
-//			if (c == '/')
-//			{
-//				nbSlash++;
-//				positionDuSlash = positionActuelle;
-//
-//			}
-//			positionActuelle++;
-//		}
-//
-//		// TODO ne focntionne pas coordonne x
-//		String subSubString = subString.substring(positionDuSlash + 1,
-//				subString.length());
-//
-//		int positionCherche = 0;
-//		int positionActuelle2 = 0;
-//		for (char h : subSubString.toCharArray())
-//		{
-//			if (h == pieceCherche)
-//			{
-//				positionCherche = positionActuelle2;
-//			}
-//			positionActuelle2++;
-//		}
-//
-//		placementDepart.replaceFirst(Character.toString(pieceCherche), "1");
-//		System.out.println(placementDepart);
-//		p.setLocation(positionCherche, nbSlash);
-//		return p;
-//	}
+
+	// private Point chercherCoordonnee(char pieceCherche) // x= range y=colonne
+	// {
+	//
+	// Point p = new Point();
+	//
+	// int x = placementDepart.indexOf(pieceCherche);
+	// String subString = placementDepart.substring(0, x + 1);
+	//
+	// int nbSlash = 0;
+	// int positionDuSlash = 0;
+	// int positionActuelle = 0;
+	// for (char c : subString.toCharArray())
+	// {
+	// if (c == '/')
+	// {
+	// nbSlash++;
+	// positionDuSlash = positionActuelle;
+	//
+	// }
+	// positionActuelle++;
+	// }
+	//
+	// // TODO ne focntionne pas coordonne x
+	// String subSubString = subString.substring(positionDuSlash + 1,
+	// subString.length());
+	//
+	// int positionCherche = 0;
+	// int positionActuelle2 = 0;
+	// for (char h : subSubString.toCharArray())
+	// {
+	// if (h == pieceCherche)
+	// {
+	// positionCherche = positionActuelle2;
+	// }
+	// positionActuelle2++;
+	// }
+	//
+	// placementDepart.replaceFirst(Character.toString(pieceCherche), "1");
+	// System.out.println(placementDepart);
+	// p.setLocation(positionCherche, nbSlash);
+	// return p;
+	// }
 }
