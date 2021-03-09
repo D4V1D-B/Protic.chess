@@ -256,22 +256,22 @@ public class Controleur implements Initializable
 		Pion P8 = new Pion("P8", true, chercherCoordonnee('P'));
 
 		Tour r1 = new Tour("r1", false, new Point(0,0));
-		Cavalier n1 = new Cavalier("n1", false, chercherCoordonnee('n'));
-		Fou b1 = new Fou("b1", false, chercherCoordonnee('b'));
-		Reine q = new Reine("q", false, chercherCoordonnee('q'));
-		Roi k = new Roi("k", false, chercherCoordonnee('k'));
-		Fou b2 = new Fou("b2", false, chercherCoordonnee('b'));
-		Cavalier n2 = new Cavalier("n2", false, chercherCoordonnee('n'));
-		Tour r2 = new Tour("r2", false, chercherCoordonnee('r'));
+		Cavalier n1 = new Cavalier("n1", false, new Point(1,0));
+		Fou b1 = new Fou("b1", false, new Point(2,0));
+		Reine q = new Reine("q", false, new Point(3,0));
+		Roi k = new Roi("k", false, new Point(4,0));
+		Fou b2 = new Fou("b2", false, new Point(5,0));
+		Cavalier n2 = new Cavalier("n2", false, new Point(6,0));
+		Tour r2 = new Tour("r2", false, new Point(7,0));
 
-		Pion p1 = new Pion("p1", false, chercherCoordonnee('p'));
-		Pion p2 = new Pion("p2", false, chercherCoordonnee('p'));
-		Pion p3 = new Pion("p3", false, chercherCoordonnee('p'));
-		Pion p4 = new Pion("p4", false, chercherCoordonnee('p'));
-		Pion p5 = new Pion("p5", false, chercherCoordonnee('p'));
-		Pion p6 = new Pion("p6", false, chercherCoordonnee('p'));
-		Pion p7 = new Pion("p7", false, chercherCoordonnee('p'));
-		Pion p8 = new Pion("p8", false, chercherCoordonnee('p'));
+		Pion p1 = new Pion("p1", false, new Point(0,1));
+		Pion p2 = new Pion("p2", false, new Point(1,1));
+		Pion p3 = new Pion("p3", false, new Point(2,1));
+		Pion p4 = new Pion("p4", false, new Point(3,1));
+		Pion p5 = new Pion("p5", false, new Point(4,1));
+		Pion p6 = new Pion("p6", false, new Point(5,1));
+		Pion p7 = new Pion("p7", false, new Point(6,1));
+		Pion p8 = new Pion("p8", false, new Point(7,1));
 
 		ArrayList<Pieces> blanc = new ArrayList<Pieces>();
 		blanc.add(R1);
