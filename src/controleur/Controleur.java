@@ -29,6 +29,8 @@ public class Controleur implements Initializable
 	HashMap<String, String> tableau = new HashMap<>();
 	private Plateau plateau;
 	public String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
+	public Pieces pieceSelect;
+	
 	@FXML
 	private Pane a8;
 
@@ -235,7 +237,6 @@ public class Controleur implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-
 		Tour R1 = new Tour("R1", true, chercherCoordonnee('R'));
 		Cavalier N1 = new Cavalier("N1", true, chercherCoordonnee('N'));
 		Fou B1 = new Fou("B1", true, chercherCoordonnee('B'));
@@ -386,48 +387,7 @@ public class Controleur implements Initializable
 
 	}
 
-	private Point chercherCoordonnee(char pieceCherche) // x= range y=colonne
-	{
-
-		Point p = new Point();
-
-		int x = placementDepart.indexOf(pieceCherche);
-		String subString = placementDepart.substring(0, x + 1);
-
-		int nbSlash = 0;
-		int positionDuSlash = 0;
-		int positionActuelle = 0;
-		for (char c : subString.toCharArray())
-		{
-			if (c == '/')
-			{
-				nbSlash++;
-				positionDuSlash = positionActuelle;
-
-			}
-			positionActuelle++;
-		}
-
-		// TODO ne focntionne pas coordonne x
-		String subSubString = subString.substring(positionDuSlash + 1,
-				subString.length());
-
-		int positionCherche = 0;
-		int positionActuelle2 = 0;
-		for (char h : subSubString.toCharArray())
-		{
-			if (h == pieceCherche)
-			{
-				positionCherche = positionActuelle2;
-			}
-			positionActuelle2++;
-		}
-
-		placementDepart.replaceFirst(Character.toString(pieceCherche), "1");
-		System.out.println(placementDepart);
-		p.setLocation(positionCherche, nbSlash);
-		return p;
-	}
+	
 
 	@FXML
 	void mouseClick(MouseEvent event)
@@ -444,33 +404,76 @@ public class Controleur implements Initializable
 		switch (premiereLettre)
 		{
 			case 'A':
-				premiereLettre = '1';
+				premiereLettre = '0';
 				break;
 			case 'B':
-				premiereLettre = '2';
+				premiereLettre = '1';
 				break;
 			case 'C':
-				premiereLettre = '3';
+				premiereLettre = '2';
 				break;
 			case 'D':
-				premiereLettre = '4';
+				premiereLettre = '3';
 				break;
 			case 'E':
-				premiereLettre = '5';
+				premiereLettre = '4';
 				break;
 			case 'F':
-				premiereLettre = '6';
+				premiereLettre = '5';
 				break;
 			case 'G':
-				premiereLettre = '7';
+				premiereLettre = '6';
 				break;
 			case 'H':
-				premiereLettre = '8';
+				premiereLettre = '7';
 				break;
 		}
 		coordonnee.setLocation(Character.getNumericValue(premiereLettre),
-				Character.getNumericValue(p.charAt(1)));
+				Character.getNumericValue(p.charAt(1))-1);
 		return coordonnee;
 
 	}
+	
+//	private Point chercherCoordonnee(char pieceCherche) // x= range y=colonne
+//	{
+//
+//		Point p = new Point();
+//
+//		int x = placementDepart.indexOf(pieceCherche);
+//		String subString = placementDepart.substring(0, x + 1);
+//
+//		int nbSlash = 0;
+//		int positionDuSlash = 0;
+//		int positionActuelle = 0;
+//		for (char c : subString.toCharArray())
+//		{
+//			if (c == '/')
+//			{
+//				nbSlash++;
+//				positionDuSlash = positionActuelle;
+//
+//			}
+//			positionActuelle++;
+//		}
+//
+//		// TODO ne focntionne pas coordonne x
+//		String subSubString = subString.substring(positionDuSlash + 1,
+//				subString.length());
+//
+//		int positionCherche = 0;
+//		int positionActuelle2 = 0;
+//		for (char h : subSubString.toCharArray())
+//		{
+//			if (h == pieceCherche)
+//			{
+//				positionCherche = positionActuelle2;
+//			}
+//			positionActuelle2++;
+//		}
+//
+//		placementDepart.replaceFirst(Character.toString(pieceCherche), "1");
+//		System.out.println(placementDepart);
+//		p.setLocation(positionCherche, nbSlash);
+//		return p;
+//	}
 }
