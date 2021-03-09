@@ -17,8 +17,7 @@ public class Test
 		ArrayList<Pieces> noir = new ArrayList<Pieces>();
 		
 		Plateau plat = new Plateau(blanc, noir);
-		
-		plat
+
 		
 	}
 }
