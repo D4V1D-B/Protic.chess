@@ -387,6 +387,10 @@ public class Controleur implements Initializable
 	}
 
 	private Point chercherCoordonnee(char pieceCherche) // x= range y=colonne
+														// RETOURNE TOUJOURS LES
+														// PIECE DE GAUCHE A
+														// DROITE
+
 	{
 
 		Point p = new Point();
@@ -472,5 +476,15 @@ public class Controleur implements Initializable
 				Character.getNumericValue(p.charAt(1)));
 		return coordonnee;
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 }
