@@ -237,7 +237,7 @@ public class Controleur implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		Tour R1 = new Tour("R1", true, chercherCoordonnee('R'));
+		Tour R1 = new Tour("R1", true, new Point());
 		Cavalier N1 = new Cavalier("N1", true, chercherCoordonnee('N'));
 		Fou B1 = new Fou("B1", true, chercherCoordonnee('B'));
 		Reine Q = new Reine("Q", true, chercherCoordonnee('Q'));
