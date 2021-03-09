@@ -26,7 +26,6 @@ import modele.Tour;
 
 public class Controleur implements Initializable
 {
-	HashMap<String, String> tableau = new HashMap<>();
 	private HashMap<String, Image> association = new HashMap<String, Image>();
 	private Plateau plateau;
 	private String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
@@ -437,6 +436,20 @@ public class Controleur implements Initializable
 		ImageView n = (ImageView) positionFinale.getChildren().get(0);
 		n.setImage(association.get(p.getNom()));
 		//TODO DEPLACER LES PIECES DANS LA PROG AUSSI
+		
+		
+		
+		
+		
+		System.out.println(plateau.blanc.positionEquipe());
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	private Point rechercheCoordonnee(String p)

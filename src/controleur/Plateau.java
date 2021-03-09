@@ -25,8 +25,8 @@ public class Plateau
 	public Plateau(ArrayList<Pieces> pieceBlanc, ArrayList<Pieces> pieceNoir)
 	{
 		refreshPlateau(pieceBlanc, pieceNoir);
-		blanc= new Equipe(pieceBlanc,true);
-		noir= new Equipe(pieceNoir,false);
+		blanc= new Equipe(pieceBlanc);
+		noir= new Equipe(pieceNoir);
 	}
 
 	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc,
@@ -102,11 +102,9 @@ public class Plateau
 		private Set<Point> mouvementPossible;
 		private ArrayList<Pieces> listePiece;
 		private Point positionRoi;
-		private boolean isWhite;
 
-		public Equipe(ArrayList<Pieces> pieces, boolean couleur)
+		public Equipe(ArrayList<Pieces> pieces)
 		{
-			isWhite = couleur;
 			listePiece = pieces;
 			actualiserPositionRoi();
 			mouvementPossible =  new HashSet<Point>();
