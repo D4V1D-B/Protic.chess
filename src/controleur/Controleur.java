@@ -311,17 +311,16 @@ public class Controleur implements Initializable
 		noir.add(p8);
 
 		plateau = new Plateau(blanc, noir);
-		
 
 		placementDepart.indexOf('R');
 		placementDepart.replace('R', '1');
 
 		afficherCodeSecret(placementDepart);
 
-//		System.out.println(k.getEmplacement().toString());
-//		System.out.println(p3.getEmplacement().toString());
-//		System.out.println(N1.getEmplacement().toString());
-//		System.out.println(N2.getEmplacement().toString());
+		// System.out.println(k.getEmplacement().toString());
+		// System.out.println(p3.getEmplacement().toString());
+		// System.out.println(N1.getEmplacement().toString());
+		// System.out.println(N2.getEmplacement().toString());
 
 	}
 
@@ -393,16 +392,16 @@ public class Controleur implements Initializable
 	{
 
 		Pane p = (Pane) event.getSource(); // coordonne cliquer
-		
+
 		// System.out.println(plateau.trouverPieces(rechercheCoordonnee(p.getId())));
 		// System.out.println(rechercheCoordonnee(p.getId()));
 		// System.out.println(pieceSelect);
 
 		if (pieceSelect == (null))
 		{
-			
+
 			pieceSelect = plateau.trouverPieces(rechercheCoordonnee(p.getId()));
-			if(temp != null)
+			if (temp != null)
 			{
 				temp = null;
 			}
@@ -410,19 +409,24 @@ public class Controleur implements Initializable
 		}
 		else
 		{
-			//TODO DEPLACER LES PIECES DANS LA PROG AUSSI
+			// TODO DEPLACER LES PIECES DANS LA PROG AUSSI
 			System.out.println(pieceSelect.getNom());
-			if (true) // regarder si mouvement possible
+			if (pieceSelect.getMouvementPossible()
+					.contains(rechercheCoordonnee(p.getId()))) 
 			{
 				deplacer(pieceSelect, p);
-				ImageView n  = (ImageView) temp.getChildren().get(0);
-				
+				ImageView n = (ImageView) temp.getChildren().get(0);
+
 				n.setImage(null);
-				
+
 				temp = null;
 				pieceSelect = null;
-				//TODO DEPLACER LES PIECES DANS LA PROG AUSSI
-				//TODO DEPLACER LES PIECES DANS LA PROG AUSSI
+				// TODO DEPLACER LES PIECES DANS LA PROG AUSSI
+				// TODO DEPLACER LES PIECES DANS LA PROG AUSSI
+			}
+			else
+			{
+				pieceSelect = (null);
 			}
 		}
 
@@ -431,25 +435,13 @@ public class Controleur implements Initializable
 	private void deplacer(Pieces p, Pane positionFinale)
 	{
 		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
-		
-		
+
 		ImageView n = (ImageView) positionFinale.getChildren().get(0);
 		n.setImage(association.get(p.getNom()));
-		//TODO DEPLACER LES PIECES DANS LA PROG AUSSI
-		
-		
-		
-		
-		
+		// TODO DEPLACER LES PIECES DANS LA PROG AUSSI
+
 		System.out.println(plateau.blanc.positionEquipe());
-		
-		
-		
-		
-		
-		
-		
-		
+
 	}
 
 	private Point rechercheCoordonnee(String p)
