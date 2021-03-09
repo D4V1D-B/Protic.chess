@@ -11,13 +11,13 @@ public class Fou extends Pieces
 		super(nom, couleur, position);
 	}
 
-	public Fou(String nom, boolean couleur, Point position, Plateau plateau)
+	public Fou(String nom, boolean couleur, Point position, Pieces[][] plateau)
 	{
 		super(nom, couleur, position);
 		setMouvementPossible(plateau);
 	}
 
-	public void setMouvementPossible(Plateau plateau)
+	public void setMouvementPossible(Pieces[][] plateau)
 	{
 		this.getMouvementPossible().clear();
 		// ligne vers le haut à gauhce donc --
@@ -25,14 +25,13 @@ public class Fou extends Pieces
 		for (int i = this.getEmplacement().x - 1, j = this.getEmplacement().y
 				- 1; i >= 0 && j >= 0; j--, i--)
 		{
-			if (plateau.getVoidSpace().contains(new Point(i, j)))
+			if (OperationSurUneMatrice.getVoidSpace(plateau).contains(new Point(i, j)))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			}
 			else
 			{
-				if (this.isWhite() != plateau.trouverPieces(new Point(i, j))
-						.isWhite())
+				if (this.isWhite() != plateau[i][j].isWhite())
 					getMouvementPossible().add(new Point(i, j));
 				j = -30;
 			}
@@ -43,14 +42,13 @@ public class Fou extends Pieces
 		for (int i = this.getEmplacement().x - 1, j = this.getEmplacement().y
 				+ 1; i >= 0 && j <= 7; j++, i--)
 		{
-			if (plateau.getVoidSpace().contains(new Point(i, j)))
+			if (OperationSurUneMatrice.getVoidSpace(plateau).contains(new Point(i, j)))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			}
 			else
 			{
-				if (this.isWhite() != plateau.trouverPieces(new Point(i, j))
-						.isWhite())
+				if (this.isWhite() != plateau[i][j].isWhite())
 					getMouvementPossible().add(new Point(i, j));
 				j = -30;
 				
@@ -62,14 +60,13 @@ public class Fou extends Pieces
 		for (int i = this.getEmplacement().x + 1, j = this.getEmplacement().y
 				+ 1; i <= 7 && j <= 7; j++, i++)
 		{
-			if (plateau.getVoidSpace().contains(new Point(i, j)))
+			if (OperationSurUneMatrice.getVoidSpace(plateau).contains(new Point(i, j)))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			}
 			else
 			{
-				if (this.isWhite() != plateau.trouverPieces(new Point(i, j))
-						.isWhite())
+				if (this.isWhite() != plateau[i][j].isWhite())
 					getMouvementPossible().add(new Point(i, j));
 				j = -30;
 			}
@@ -79,14 +76,13 @@ public class Fou extends Pieces
 		for (int i = this.getEmplacement().x + 1, j = this.getEmplacement().y
 				- 1; i <= 7 && j >= 0; j--, i++)
 		{
-			if (plateau.getVoidSpace().contains(new Point(i, j)))
+			if (OperationSurUneMatrice.getVoidSpace(plateau).contains(new Point(i, j)))
 			{
 				this.getMouvementPossible().add(new Point(i, j));
 			}
 			else
 			{
-				if (this.isWhite() != plateau.trouverPieces(new Point(i, j))
-						.isWhite())
+				if (this.isWhite() != plateau[i][j].isWhite())
 					getMouvementPossible().add(new Point(i, j));
 				j = -30;	
 			}

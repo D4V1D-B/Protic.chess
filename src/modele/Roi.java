@@ -15,7 +15,7 @@ public class Roi extends Pieces
 		aBouger = false;
 	}
 
-	public Roi(String nom, boolean couleur, Point position, Plateau plateau)
+	public Roi(String nom, boolean couleur, Point position, Pieces[][] plateau)
 	{
 		super(nom, couleur, position);
 		aBouger = false;
@@ -32,7 +32,7 @@ public class Roi extends Pieces
 		this.aBouger = true;
 	}
 
-	public void setMouvementPossible(Plateau plateau)
+	public void setMouvementPossible(Pieces[][] plateau)
 	{
 		ArrayList<Point> variationMouvement = new ArrayList<Point>();
 		variationMouvement.add(new Point(-1, -1));
@@ -53,7 +53,7 @@ public class Roi extends Pieces
 			if (i + a.getX() < 8 && i + a.getX() >= 0 && j + a.getY() < 8
 					&& j + a.getY() >= 0)
 			{
-				if (plateau.getVoidSpace().contains(
+				if (OperationSurUneMatrice.getVoidSpace(plateau).contains(
 						new Point((int) (i + a.getX()), (int) (j + a.getY()))))
 				{
 					getMouvementPossible().add(new Point((int) (i + a.getX()),
@@ -61,10 +61,7 @@ public class Roi extends Pieces
 				}
 				else
 				{
-					if (this.isWhite() != plateau
-							.trouverPieces(new Point((int) (i + a.getX()),
-									(int) (j + a.getY())))
-							.isWhite())
+					if (this.isWhite() != plateau[(int) (i + a.getX())][(int) (j + a.getY())].isWhite())
 						getMouvementPossible().add(new Point(
 								(int) (i + a.getX()), (int) (j + a.getY())));
 

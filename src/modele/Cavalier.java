@@ -3,8 +3,6 @@ package modele;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import modele.OperationSurUneMatrice;
-
 public class Cavalier extends Pieces
 {
 
