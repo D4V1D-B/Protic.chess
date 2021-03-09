@@ -14,7 +14,7 @@ public class Tour extends Pieces
 		aBouger = false;
 	}
 
-	public Tour(String nom, boolean couleur, Point position, Plateau plateau)
+	public Tour(String nom, boolean couleur, Point position, Pieces[][] plateau)
 	{
 		super(nom, couleur, position);
 		aBouger = false;
@@ -31,13 +31,13 @@ public class Tour extends Pieces
 		this.aBouger = true;
 	}
 
-	public void setMouvementPossible(Plateau plateau)
+	public void setMouvementPossible(Pieces[][] plateau)
 	{
 		this.getMouvementPossible().clear();
 		// ajouter sur la ligne de la tour à gauche
 		for (int j = this.getEmplacement().y - 1; j >= 0; j--)
 		{
-			if (plateau.getVoidSpace()
+			if (OperationSurUneMatrice.getVoidSpace(plateau)
 					.contains(new Point(this.getEmplacement().x, j)))
 			{
 				this.getMouvementPossible()
@@ -58,7 +58,7 @@ public class Tour extends Pieces
 		// ajouter sur la ligne de la tour à droite
 		for (int j = this.getEmplacement().y + 1; j <= 7; j++)
 		{
-			if (plateau.getVoidSpace()
+			if (OperationSurUneMatrice.getVoidSpace(plateau)
 					.contains(new Point(this.getEmplacement().x, j)))
 			{
 				this.getMouvementPossible()
@@ -79,7 +79,7 @@ public class Tour extends Pieces
 		// ajouter pour la ligne du bas
 		for (int i = this.getEmplacement().x + 1; i <= 7; i++)
 		{
-			if (plateau.getVoidSpace()
+			if (OperationSurUneMatrice.getVoidSpace(plateau)
 					.contains(new Point(i, this.getEmplacement().y)))
 			{
 				this.getMouvementPossible()
@@ -100,7 +100,7 @@ public class Tour extends Pieces
 
 		for (int i = this.getEmplacement().x - 1; i >= 0; i--)
 		{
-			if (plateau.getVoidSpace()
+			if (OperationSurUneMatrice.getVoidSpace(plateau)
 					.contains(new Point(i, this.getEmplacement().y)))
 			{
 				this.getMouvementPossible()
