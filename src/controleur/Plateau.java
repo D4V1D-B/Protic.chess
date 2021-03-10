@@ -55,6 +55,9 @@ public class Plateau
 		plateau[anciennePosition.x][anciennePosition.y] = null;
 		plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
 				.getEmplacement().y] = piecesDeplacer;
+		
+		blanc.actualiserMouvementPossible();
+		noir.actualiserMouvementPossible();
 		return plateau;
 	}
 

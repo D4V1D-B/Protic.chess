@@ -30,7 +30,7 @@ public class Controleur implements Initializable
 	private Plateau plateau;
 	private String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	private Pieces pieceSelect;
-	private Pane temp;
+	private Pane paneSelect;
 
 	@FXML
 	private Pane a8;
@@ -397,32 +397,23 @@ public class Controleur implements Initializable
 		// System.out.println(rechercheCoordonnee(p.getId()));
 		// System.out.println(pieceSelect);
 
-		if (pieceSelect == (null))
+		if (pieceSelect == null)
 		{
-
 			pieceSelect = plateau.trouverPieces(rechercheCoordonnee(p.getId()));
-			if (temp != null)
-			{
-				temp = null;
-			}
-			temp = p;
+			paneSelect = p;
 		}
 		else
 		{
 			// TODO DEPLACER LES PIECES DANS LA PROG AUSSI
-			System.out.println(pieceSelect.getNom());
 			if (pieceSelect.getMouvementPossible()
 					.contains(rechercheCoordonnee(p.getId()))) 
 			{
 				deplacer(pieceSelect, p);
-				ImageView n = (ImageView) temp.getChildren().get(0);
-
+				ImageView n = (ImageView) paneSelect.getChildren().get(0);
 				n.setImage(null);
-
-				temp = null;
+				
+				paneSelect = null;
 				pieceSelect = null;
-				// TODO DEPLACER LES PIECES DANS LA PROG AUSSI
-				// TODO DEPLACER LES PIECES DANS LA PROG AUSSI
 			}
 			else
 			{
@@ -435,12 +426,12 @@ public class Controleur implements Initializable
 	private void deplacer(Pieces p, Pane positionFinale)
 	{
 		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
-
+//		deplacement dans la prog
+		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
+		plateau.refreshPlateauDeplacement(lastEmplacement, pieceSelect);
+		
 		ImageView n = (ImageView) positionFinale.getChildren().get(0);
 		n.setImage(association.get(p.getNom()));
-		// TODO DEPLACER LES PIECES DANS LA PROG AUSSI
-
-		System.out.println(plateau.blanc.positionEquipe());
 
 	}
 
