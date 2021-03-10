@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -404,14 +406,27 @@ public class Controleur implements Initializable
 		}
 		else
 		{
-			// TODO DEPLACER LES PIECES DANS LA PROG AUSSI
+
 			if (pieceSelect.getMouvementPossible()
-					.contains(rechercheCoordonnee(p.getId()))) 
+					.contains(rechercheCoordonnee(p.getId())))
 			{
 				deplacer(pieceSelect, p);
 				ImageView n = (ImageView) paneSelect.getChildren().get(0);
 				n.setImage(null);
-				
+
+				if (pieceSelect instanceof Pion)
+				{
+					System.out.println(((Pion) pieceSelect).isaBouger());
+					//((Pion) pieceSelect).setaBouger(true);
+					//System.out.println(((Pion) pieceSelect).isaBouger());
+				}
+				if(pieceSelect instanceof Tour)
+				{
+					System.out.println("tour bouger");
+					((Tour) pieceSelect).setaBouger(true);
+					
+				}
+
 				paneSelect = null;
 				pieceSelect = null;
 			}
@@ -426,10 +441,16 @@ public class Controleur implements Initializable
 	private void deplacer(Pieces p, Pane positionFinale)
 	{
 		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
-//		deplacement dans la prog
+		// deplacement dans la prog
 		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
 		plateau.refreshPlateauDeplacement(lastEmplacement, pieceSelect);
-		
+		if (pieceSelect instanceof Pion)
+		{
+			System.out.println("pion bouger");
+			((Pion) pieceSelect).setaBouger(true);
+			System.out.println(((Pion) pieceSelect).isaBouger());
+		}
+
 		ImageView n = (ImageView) positionFinale.getChildren().get(0);
 		n.setImage(association.get(p.getNom()));
 
