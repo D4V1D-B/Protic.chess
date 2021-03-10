@@ -8,30 +8,16 @@ import controleur.Plateau;
 public class Pion extends Pieces
 {
 
-	private boolean aBouger;
-
 	public Pion(String nom, boolean couleur, Point emplacement)
 	{
 		super(nom, couleur, emplacement);
-		setaBouger(false);
 	}
 
 	public Pion(String nom, boolean couleur, Point position, Pieces[][] plateau)
 	{
 		super(nom, couleur, position);
-		setaBouger(false);
 		setMouvementPossible(plateau);
 
-	}
-
-	public boolean isaBouger()
-	{
-		return aBouger;
-	}
-
-	public void setaBouger(boolean aBouger)
-	{
-		this.aBouger = aBouger;
 	}
 
 	public void setMouvementPossible(Pieces[][] plateau)
@@ -44,7 +30,7 @@ public class Pion extends Pieces
 		if (this.isWhite())
 		{
 			// Premier mouvement 2 case
-			if (!this.aBouger
+			if ((this.getEmplacement().getY()==1)
 					&& OperationSurUneMatrice.getVoidSpace(plateau)
 							.contains(new Point(i, j + 1))
 					&& OperationSurUneMatrice.getVoidSpace(plateau)
@@ -78,7 +64,7 @@ public class Pion extends Pieces
 		else
 		{
 			// Premier mouvement 2 case
-			if (!this.aBouger
+			if (this.getEmplacement().getY()==7
 					&& OperationSurUneMatrice.getVoidSpace(plateau)
 							.contains(new Point(i, j - 1))
 					&& OperationSurUneMatrice.getVoidSpace(plateau)

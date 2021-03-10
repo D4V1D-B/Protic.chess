@@ -21,18 +21,19 @@ public class Plateau
 
 	/**
 	 * Pour des tests
+	 * 
 	 * @param plateau pour des test. (Surtout vide)
 	 */
 	public Plateau(Pieces[][] newPlateau)
 	{
-			this.plateau = newPlateau;
+		this.plateau = newPlateau;
 	}
 
 	public Plateau(ArrayList<Pieces> pieceBlanc, ArrayList<Pieces> pieceNoir)
 	{
 		refreshPlateau(pieceBlanc, pieceNoir);
-		blanc= new Equipe(pieceBlanc);
-		noir= new Equipe(pieceNoir);
+		blanc = new Equipe(pieceBlanc);
+		noir = new Equipe(pieceNoir);
 	}
 
 	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc,
@@ -53,12 +54,47 @@ public class Plateau
 			Pieces piecesDeplacer)
 	{
 		plateau[anciennePosition.x][anciennePosition.y] = null;
-		plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-				.getEmplacement().y] = piecesDeplacer;
-		
+
+		if (plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+				.getEmplacement().y] != null)
+		{
+			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+					.getEmplacement().y] = piecesDeplacer;
+			actualiserTeam();
+		}
+		else
+		{
+			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+					.getEmplacement().y] = piecesDeplacer;
+		}
+
 		blanc.actualiserMouvementPossible();
 		noir.actualiserMouvementPossible();
 		return plateau;
+	}
+
+	public void actualiserTeam()
+	{
+		blanc.clear();
+		noir.clear();
+
+		for (Pieces[] row : plateau)
+		{
+			for (Pieces p : row)
+			{
+				if (p != null)
+				{
+					if (p.isWhite())
+					{
+						blanc.add(p);
+					}
+					else
+					{
+						noir.add(p);
+					}
+				}
+			}
+		}
 	}
 
 	public Pieces[][] getPlateau()
@@ -70,8 +106,7 @@ public class Plateau
 	{
 		return plateau[temp.x][temp.y];
 	}
-	
-	
+
 	public class Equipe
 	{
 		private Set<Point> mouvementPossible;
@@ -82,7 +117,7 @@ public class Plateau
 		{
 			listePiece = pieces;
 			actualiserPositionRoi();
-			mouvementPossible =  new HashSet<Point>();
+			mouvementPossible = new HashSet<Point>();
 			actualiserMouvementPossible();
 		}
 
@@ -104,52 +139,60 @@ public class Plateau
 		public void actualiserPositionRoi()
 		{
 			positionRoi = listePiece.get(indexOfKing()).getEmplacement();
-		
+
+		}
+
+		public void add(Pieces pieces)
+		{
+			listePiece.add(pieces);
+		}
+
+		public void clear()
+		{
+			listePiece.clear();
 		}
 
 		public void actualiserMouvementPossible()
 		{
 
-			for(Pieces p: listePiece)
+			for (Pieces p : listePiece)
 			{
-				switch(p.getClass().toString()) {
+				switch (p.getClass().toString())
+				{
 					case "class modele.Tour":
-						((Tour)p).setMouvementPossible(plateau);
+						((Tour) p).setMouvementPossible(plateau);
 						break;
 					case "class modele.Cavalier":
-						((Cavalier)p).setMouvementPossible(plateau);
+						((Cavalier) p).setMouvementPossible(plateau);
 						break;
 					case "class modele.Fou":
-						((Fou)p).setMouvementPossible(plateau);
+						((Fou) p).setMouvementPossible(plateau);
 						break;
 					case "class modele.Reine":
-						((Reine)p).setMouvementPossible(plateau);
+						((Reine) p).setMouvementPossible(plateau);
 						break;
 					case "class modele.Pion":
-						((Pion)p).setMouvementPossible(plateau);
+						((Pion) p).setMouvementPossible(plateau);
 						break;
 					case "class modele.Roi":
-						((Roi)p).setMouvementPossible(plateau);
+						((Roi) p).setMouvementPossible(plateau);
 						break;
 				}
-				
+
 			}
-			
-			for(Pieces p: listePiece)
+
+			for (Pieces p : listePiece)
 			{
 				mouvementPossible.addAll(p.getMouvementPossible());
 			}
 		}
-		
-		public  Set<Point> getMouvementPossible()
+
+		public Set<Point> getMouvementPossible()
 		{
 			return mouvementPossible;
 		}
-		
-		
-		
-		public boolean vérifierÉchec(
-				ArrayList<Point> mouvementPossibleEnemy)
+
+		public boolean vérifierÉchec(ArrayList<Point> mouvementPossibleEnemy)
 		{
 			boolean roiEchec = false;
 
@@ -163,54 +206,53 @@ public class Plateau
 
 			return roiEchec;
 		}
-		
+
 		public ArrayList<Point> positionEquipe()
 		{
 			ArrayList<Point> temp = new ArrayList<Point>();
-			
-			for(Pieces p: listePiece)
+
+			for (Pieces p : listePiece)
 			{
 				temp.add(p.getEmplacement());
 			}
-			
+
 			return temp;
 		}
-		
 
 	}
 }
 
 //
-//public ArrayList<Point> getVoidSpace()
-//{
-//	ArrayList<Point> positionVide = new ArrayList<Point>();
+// public ArrayList<Point> getVoidSpace()
+// {
+// ArrayList<Point> positionVide = new ArrayList<Point>();
 //
-//	for (int i = 0; i < plateau.length; i++)
-//	{
-//		for (int j = 0; j < plateau[i].length; j++)
-//		{
-//			if (plateau[i][j] == null)
-//			{
-//				positionVide.add(new Point(i, j));
-//			}
-//		}
-//	}
-//	return positionVide;
-//}
+// for (int i = 0; i < plateau.length; i++)
+// {
+// for (int j = 0; j < plateau[i].length; j++)
+// {
+// if (plateau[i][j] == null)
+// {
+// positionVide.add(new Point(i, j));
+// }
+// }
+// }
+// return positionVide;
+// }
 //
-//public ArrayList<Point> getFillSpace()
-//{
-//	ArrayList<Point> positionPlein = new ArrayList<Point>();
+// public ArrayList<Point> getFillSpace()
+// {
+// ArrayList<Point> positionPlein = new ArrayList<Point>();
 //
-//	for (int i = 0; i < plateau.length; i++)
-//	{
-//		for (int j = 0; j < plateau[i].length; j++)
-//		{
-//			if (plateau[i][j] != null)
-//			{
-//				positionPlein.add(new Point(i, j));
-//			}
-//		}
-//	}
-//	return positionPlein;
-//}
+// for (int i = 0; i < plateau.length; i++)
+// {
+// for (int j = 0; j < plateau[i].length; j++)
+// {
+// if (plateau[i][j] != null)
+// {
+// positionPlein.add(new Point(i, j));
+// }
+// }
+// }
+// return positionPlein;
+// }
