@@ -131,7 +131,7 @@ public class Reine extends Pieces
 					{
 						if (this.isWhite() != plateau[i][j].isWhite())
 							getMouvementPossible().add(new Point(i, j));
-						j = 30;
+						j = 29;
 						
 					}
 				}
