@@ -313,7 +313,7 @@ public class Controleur implements Initializable
 		placementDepart.indexOf('R');
 		placementDepart.replace('R', '1');
 
-		afficherCodeSecret(placementDepart);
+		placerPiecesString(placementDepart);
 
 		// System.out.println(k.getEmplacement().toString());
 		// System.out.println(p3.getEmplacement().toString());
@@ -322,7 +322,7 @@ public class Controleur implements Initializable
 
 	}
 
-	public void afficherCodeSecret(String placement)
+	public void placerPiecesString(String placement)
 	{
 
 		association.put("r", new Image("images/TourNoir.png"));
@@ -431,16 +431,16 @@ public class Controleur implements Initializable
 		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
 		// deplacement dans la prog
 		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
-		plateau.refreshPlateauDeplacement(lastEmplacement, pieceSelect);
+		plateau.refreshDeplacement(lastEmplacement, pieceSelect);
 		ImageView n = (ImageView) positionFinale.getChildren().get(0);
 		n.setImage(association.get(p.getNom()));
 
 	}
 
-	private Point rechercheCoordonnee(String p)
+	private Point rechercheCoordonnee(String position)
 	{
 		Point coordonnee = new Point();
-		char premiereLettre = p.toUpperCase().charAt(0);
+		char premiereLettre = position.toUpperCase().charAt(0);
 		switch (premiereLettre)
 		{
 			case 'A':
@@ -469,7 +469,7 @@ public class Controleur implements Initializable
 				break;
 		}
 		coordonnee.setLocation(Character.getNumericValue(premiereLettre),
-				Character.getNumericValue(p.charAt(1)) - 1);
+				Character.getNumericValue(position.charAt(1)) - 1);
 		return coordonnee;
 
 	}

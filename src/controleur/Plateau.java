@@ -16,8 +16,8 @@ public class Plateau
 {
 
 	private Pieces[][] plateau;
-	Equipe blanc;
-	Equipe noir;
+	private Equipe blanc;
+	private Equipe noir;
 
 	/**
 	 * Pour des tests
@@ -50,7 +50,7 @@ public class Plateau
 		return plateau;
 	}
 
-	public Pieces[][] refreshPlateauDeplacement(Point anciennePosition,
+	public Pieces[][] refreshDeplacement(Point anciennePosition,
 			Pieces piecesDeplacer)
 	{
 		plateau[anciennePosition.x][anciennePosition.y] = null;
@@ -102,21 +102,20 @@ public class Plateau
 		return plateau;
 	}
 
-	public Pieces trouverPieces(Point temp)
+	public Pieces trouverPieces(Point position)
 	{
-		return plateau[temp.x][temp.y];
+		return plateau[position.x][position.y];
 	}
 
 	public class Equipe
 	{
 		private Set<Point> mouvementPossible;
 		private ArrayList<Pieces> listePiece;
-		private Point positionRoi;
 
 		public Equipe(ArrayList<Pieces> pieces)
 		{
 			listePiece = pieces;
-			actualiserPositionRoi();
+			getPositionRoi();
 			mouvementPossible = new HashSet<Point>();
 			actualiserMouvementPossible();
 		}
@@ -136,15 +135,15 @@ public class Plateau
 			return index;
 		}
 
-		public void actualiserPositionRoi()
+		public Point getPositionRoi()
 		{
-			positionRoi = listePiece.get(indexOfKing()).getEmplacement();
+			return listePiece.get(indexOfKing()).getEmplacement();
 
 		}
 
-		public void add(Pieces pieces)
+		public void add(Pieces piece)
 		{
-			listePiece.add(pieces);
+			listePiece.add(piece);
 		}
 
 		public void clear()
@@ -200,14 +199,14 @@ public class Plateau
 			{
 				if (roiEchec != true)
 				{
-					roiEchec = positionRoi.equals(p);
+					roiEchec = this.getPositionRoi().equals(p);
 				}
 			}
 
 			return roiEchec;
 		}
 
-		public ArrayList<Point> positionEquipe()
+		public ArrayList<Point> getPositionEquipe()
 		{
 			ArrayList<Point> temp = new ArrayList<Point>();
 
