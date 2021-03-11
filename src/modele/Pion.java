@@ -48,8 +48,13 @@ public class Pion extends Pieces
 
 			// droite case diagonal
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (i+1<=7 &&j-1<=0 &&!OperationSurUneMatrice.getVoidSpace(plateau)
 					.contains(new Point(i - 1, j + 1)) && i - 1 >= 0 && !plateau[i+1][j-1]
+=======
+			if (!OperationSurUneMatrice.getVoidSpace(plateau)
+					.contains(new Point(i - 1, j + 1)) && i - 1 >= 0 && !plateau[this.getEmplacement().x][j]
+>>>>>>> parent of 77eba46 (test pion)
 							.isWhite())
 =======
 			if (!OperationSurUneMatrice.getVoidSpace(plateau)
@@ -61,7 +66,11 @@ public class Pion extends Pieces
 
 			// gauche case diagonal
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (i+1<=7 &&j+1<=7 && !OperationSurUneMatrice.getVoidSpace(plateau)
+=======
+			if (!OperationSurUneMatrice.getVoidSpace(plateau)
+>>>>>>> parent of 77eba46 (test pion)
 					.contains(new Point(i + 1, j + 1)) && i + 1 <= 7 && !plateau[i+1][j+1]
 							.isWhite())
 =======
@@ -94,8 +103,13 @@ public class Pion extends Pieces
 
 			// droite case diagonal
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (i - 1 >= 0 && j - 1 >=0 && !OperationSurUneMatrice.getVoidSpace(plateau)
 					.contains(new Point(i - 1, j - 1)) && plateau[i - 1][j-1]
+=======
+			if (!OperationSurUneMatrice.getVoidSpace(plateau)
+					.contains(new Point(i - 1, j - 1)) && i - 1 >= 0&& plateau[i - 1][j-1]
+>>>>>>> parent of 77eba46 (test pion)
 							.isWhite())
 =======
 			if (!OperationSurUneMatrice.getVoidSpace(plateau)
@@ -107,8 +121,13 @@ public class Pion extends Pieces
 
 			// gauche case diagonal
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (i - 1 >= 0 && j + 1 <=7 && !OperationSurUneMatrice.getVoidSpace(plateau )
 					.contains(new Point(i + 1, j - 1)) && i + 1 <= 7&& plateau[i - 1][j+1]
+=======
+			if (!OperationSurUneMatrice.getVoidSpace(plateau )
+					.contains(new Point(i + 1, j - 1)) && i + 1 <= 7&& plateau[this.getEmplacement().x][j]
+>>>>>>> parent of 77eba46 (test pion)
 							.isWhite())
 =======
 			if (!OperationSurUneMatrice.getVoidSpace(plateau)
