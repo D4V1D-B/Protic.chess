@@ -47,17 +47,27 @@ public class Pion extends Pieces
 			}
 
 			// droite case diagonal
+<<<<<<< HEAD
 			if (i+1<=7 &&j-1<=0 &&!OperationSurUneMatrice.getVoidSpace(plateau)
 					.contains(new Point(i - 1, j + 1)) && i - 1 >= 0 && !plateau[i+1][j-1]
 							.isWhite())
+=======
+			if (!OperationSurUneMatrice.getVoidSpace(plateau)
+					.contains(new Point(i - 1, j + 1)) && i - 1 >= 0)
+>>>>>>> parent of 0c19781 (updapte pion mangeur de pion)
 			{
 				this.getMouvementPossible().add(new Point(i - 1, j + 1));
 			}
 
 			// gauche case diagonal
+<<<<<<< HEAD
 			if (i+1<=7 &&j+1<=7 && !OperationSurUneMatrice.getVoidSpace(plateau)
 					.contains(new Point(i + 1, j + 1)) && i + 1 <= 7 && !plateau[i+1][j+1]
 							.isWhite())
+=======
+			if (!OperationSurUneMatrice.getVoidSpace(plateau)
+					.contains(new Point(i + 1, j + 1)) && i + 1 <= 7)
+>>>>>>> parent of 0c19781 (updapte pion mangeur de pion)
 			{
 				this.getMouvementPossible().add(new Point(i + 1, j + 1));
 			}
@@ -83,17 +93,27 @@ public class Pion extends Pieces
 			}
 
 			// droite case diagonal
+<<<<<<< HEAD
 			if (i - 1 >= 0 && j - 1 >=0 && !OperationSurUneMatrice.getVoidSpace(plateau)
 					.contains(new Point(i - 1, j - 1)) && plateau[i - 1][j-1]
 							.isWhite())
+=======
+			if (!OperationSurUneMatrice.getVoidSpace(plateau)
+					.contains(new Point(i - 1, j - 1)) && i - 1 >= 0)
+>>>>>>> parent of 0c19781 (updapte pion mangeur de pion)
 			{
 				this.getMouvementPossible().add(new Point(i - 1, j - 1));
 			}
 
 			// gauche case diagonal
+<<<<<<< HEAD
 			if (i - 1 >= 0 && j + 1 <=7 && !OperationSurUneMatrice.getVoidSpace(plateau )
 					.contains(new Point(i + 1, j - 1)) && i + 1 <= 7&& plateau[i - 1][j+1]
 							.isWhite())
+=======
+			if (!OperationSurUneMatrice.getVoidSpace(plateau)
+					.contains(new Point(i + 1, j - 1)) && i + 1 <= 7)
+>>>>>>> parent of 0c19781 (updapte pion mangeur de pion)
 			{
 				this.getMouvementPossible().add(new Point(i + 1, j - 1));
 			}
