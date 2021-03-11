@@ -56,7 +56,7 @@ public class Pion extends Pieces
 
 			// gauche case diagonal
 			if (!OperationSurUneMatrice.getVoidSpace(plateau)
-					.contains(new Point(i + 1, j + 1)) && i + 1 <= 7 && !plateau[this.getEmplacement().x][j]
+					.contains(new Point(i + 1, j + 1)) && i + 1 <= 7 && !plateau[i+1][j+1]
 							.isWhite())
 			{
 				this.getMouvementPossible().add(new Point(i + 1, j + 1));
@@ -66,7 +66,7 @@ public class Pion extends Pieces
 		else
 		{
 			// Premier mouvement 2 case
-			if (this.getEmplacement().getY()==7
+			if (this.getEmplacement().getY()==6
 					&& OperationSurUneMatrice.getVoidSpace(plateau)
 							.contains(new Point(i, j - 1))
 					&& OperationSurUneMatrice.getVoidSpace(plateau)
@@ -84,7 +84,7 @@ public class Pion extends Pieces
 
 			// droite case diagonal
 			if (!OperationSurUneMatrice.getVoidSpace(plateau)
-					.contains(new Point(i - 1, j - 1)) && i - 1 >= 0&& plateau[this.getEmplacement().x][j]
+					.contains(new Point(i - 1, j - 1)) && i - 1 >= 0&& plateau[i - 1][j-1]
 							.isWhite())
 			{
 				this.getMouvementPossible().add(new Point(i - 1, j - 1));
