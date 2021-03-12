@@ -181,7 +181,7 @@ public class Plateau
 
 		public void actualiserMouvementPossible()
 		{
-
+			mouvementPossible.clear();
 			for (Pieces p : listePiece)
 			{
 				switch (p.getClass().toString())
@@ -248,38 +248,3 @@ public class Plateau
 
 	}
 }
-
-//
-// public ArrayList<Point> getVoidSpace()
-// {
-// ArrayList<Point> positionVide = new ArrayList<Point>();
-//
-// for (int i = 0; i < plateau.length; i++)
-// {
-// for (int j = 0; j < plateau[i].length; j++)
-// {
-// if (plateau[i][j] == null)
-// {
-// positionVide.add(new Point(i, j));
-// }
-// }
-// }
-// return positionVide;
-// }
-//
-// public ArrayList<Point> getFillSpace()
-// {
-// ArrayList<Point> positionPlein = new ArrayList<Point>();
-//
-// for (int i = 0; i < plateau.length; i++)
-// {
-// for (int j = 0; j < plateau[i].length; j++)
-// {
-// if (plateau[i][j] != null)
-// {
-// positionPlein.add(new Point(i, j));
-// }
-// }
-// }
-// return positionPlein;
-// }
