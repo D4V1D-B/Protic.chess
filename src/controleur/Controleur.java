@@ -32,7 +32,8 @@ public class Controleur implements Initializable
 	private String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	private Pieces pieceSelect;
 	private Pane paneSelect;
-	private String couleur; 
+	private String couleur;
+	private ArrayList<Mouvement> listMouvements;
 
 	@FXML
 	private Pane a8;
@@ -249,14 +250,36 @@ public class Controleur implements Initializable
 	@FXML
 	void recommencerPartie(MouseEvent event)
 	{
-		placerPiecesString(placementDepart);
+		Pane[] allPanes = new Pane[64];
+
+		for (int nb = 0; nb < 64; nb++)
+		{
+			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
+		}
 		
+		for(int i =0; i<64;i++)
+		{
+			ImageView n = (ImageView) allPanes[i].getChildren().get(0);
+			n.setImage(null);
+		}
+		
+		
+		placerPiecesString(placementDepart);
+		resetTotal();
+
 	}
 
 	@FXML
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
+	{
+
+		resetTotal();
+
+	}
+
+	private void resetTotal()
 	{
 		Tour R1 = new Tour("R", true, new Point(0, 0));
 		Cavalier N1 = new Cavalier("N", true, new Point(1, 0));
@@ -336,22 +359,7 @@ public class Controleur implements Initializable
 		placementDepart.replace('R', '1');
 
 		placerPiecesString(placementDepart);
-
-		System.out.println(k.getEmplacement().toString());
-		System.out.println(p3.getEmplacement().toString());
-		System.out.println(N1.getEmplacement().toString());
-		System.out.println(N2.getEmplacement().toString());
-		System.out.println();
-		System.out.println();
-
-		System.out.println(k.getMouvementPossible().toString());
-		System.out.println(p3.getMouvementPossible().toString());
-		System.out.println(N1.getMouvementPossible().toString());
-		System.out.println(N2.getMouvementPossible().toString());
-
 	}
-
-	
 
 	public void placerPiecesString(String placement)
 	{
@@ -397,6 +405,7 @@ public class Controleur implements Initializable
 						int caseVide = z - 48;
 						emplacementSurLeBoard = emplacementSurLeBoard
 								+ caseVide;
+						
 
 					}
 					else
@@ -457,7 +466,6 @@ public class Controleur implements Initializable
 		}
 
 	}
-
 
 	private boolean deplacer(Pieces p, Pane positionFinale)
 
@@ -550,4 +558,48 @@ public class Controleur implements Initializable
 	// p.setLocation(positionCherche, nbSlash);
 	// return p;
 	// }
+	
+	public class Mouvement
+	{
+		private String pieceBouge;
+		private String nouvelleEmplacement;
+		private boolean isWhite;
+		private String messageComplet;
+		
+		public String getPieceBouge()
+		{
+			return pieceBouge;
+		}
+		public void setPieceBouge(String pieceBouge)
+		{
+			this.pieceBouge = pieceBouge;
+		}
+		public String getNouvelleEmplacement()
+		{
+			return nouvelleEmplacement;
+		}
+		public void setNouvelleEmplacement(String nouvelleEmplacement)
+		{
+			this.nouvelleEmplacement = nouvelleEmplacement;
+		}
+		public boolean isWhite()
+		{
+			return isWhite;
+		}
+		public void setWhite(boolean isWhite)
+		{
+			this.isWhite = isWhite;
+
+		}
+		public String getMessageComplet()
+		{
+			return messageComplet;
+		}
+		public void setMessageComplet(String messageComplet)
+		{
+			this.messageComplet = messageComplet;
+		}
+		
+		
+	}
 }
