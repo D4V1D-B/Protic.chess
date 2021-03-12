@@ -61,24 +61,24 @@ public class Plateau
 		blanc.actualiserMouvementPossible();
 		noir.actualiserMouvementPossible();
 
-		if (piecesDeplacer.isWhite())
-		{
-			mouvementValide = !blanc.vérifierÉchec(noir.getMouvementPossible());
-		}
-		else
-		{
-			mouvementValide = !noir.vérifierÉchec(blanc.getMouvementPossible());
-		}
-
-		if (!mouvementValide)
-		{
-			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-					.getEmplacement().y] = temp;
-			piecesDeplacer.setEmplacement(anciennePosition);
-			deplacerPieces(piecesDeplacer);
-			blanc.actualiserMouvementPossible();
-			noir.actualiserMouvementPossible();
-		}
+//		if (piecesDeplacer.isWhite())
+//		{
+//			mouvementValide = !blanc.vérifierÉchec(noir.getMouvementPossible());
+//		}
+//		else
+//		{
+//			mouvementValide = !noir.vérifierÉchec(blanc.getMouvementPossible());
+//		}
+//
+//		if (!mouvementValide)
+//		{
+//			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+//					.getEmplacement().y] = temp;
+//			piecesDeplacer.setEmplacement(anciennePosition);
+//			deplacerPieces(piecesDeplacer);
+//			blanc.actualiserMouvementPossible();
+//			noir.actualiserMouvementPossible();
+//		}
 
 		return mouvementValide;
 	}
