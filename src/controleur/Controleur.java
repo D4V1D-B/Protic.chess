@@ -448,7 +448,6 @@ public class Controleur implements Initializable
 			{
 				paneSelect.setStyle(
 						"-fx-background-color:deeppink; -fx-border-color: black");
-				System.out.println(pieceSelect.getMouvementPossible());
 				ArrayList<Point> tableau = pieceSelect.getMouvementPossible();
 				Pane tableauPane[] =
 				{ a1, a2, a3, a4, a5, a6, a7, a8, b8, b7, b6, b5, b4, b3, b2,
