@@ -462,7 +462,6 @@ public class Controleur implements Initializable
 					{
 						if(tableauPane[j].getId().equals(recherchePane(tableau.get(i)))) {
 							tableauPane[j].setStyle("-fx-background-color:pink; -fx-border-color: black");
-							System.out.println(tableauPane[j]);
 						}
 					}
 				}
