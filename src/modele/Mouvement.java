@@ -1,13 +1,16 @@
 package modele;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Mouvement
 {
-	private String pieceBouge;
-	private String nouvelleEmplacement;
+	private SimpleStringProperty pieceBouge;
+	private SimpleStringProperty nouvelleEmplacement;
 	private boolean isWhite;
 
-	public Mouvement(String pieceBouge, String nouvelleEmplacement,
-			boolean isWhite)
+	public Mouvement(SimpleStringProperty pieceBouge,
+			SimpleStringProperty nouvelleEmplacement, boolean isWhite)
 	{
 		super();
 		this.pieceBouge = pieceBouge;
@@ -15,22 +18,22 @@ public class Mouvement
 		this.isWhite = isWhite;
 	}
 
-	public String getPieceBouge()
+	public StringProperty getPieceBouge()
 	{
 		return pieceBouge;
 	}
 
-	public void setPieceBouge(String pieceBouge)
+	public void setPieceBouge(SimpleStringProperty pieceBouge)
 	{
 		this.pieceBouge = pieceBouge;
 	}
 
-	public String getNouvelleEmplacement()
+	public StringProperty getNouvelleEmplacement()
 	{
 		return nouvelleEmplacement;
 	}
 
-	public void setNouvelleEmplacement(String nouvelleEmplacement)
+	public void setNouvelleEmplacement(SimpleStringProperty nouvelleEmplacement)
 	{
 		this.nouvelleEmplacement = nouvelleEmplacement;
 	}
@@ -43,12 +46,19 @@ public class Mouvement
 	public void setWhite(boolean isWhite)
 	{
 		this.isWhite = isWhite;
-
 	}
 
 	@Override
 	public String toString()
 	{
-		return getPieceBouge() + " - " + getNouvelleEmplacement();
+		String c = "N";
+		if(isWhite)
+		{
+			 c = "B";
+		}
+		
+			
+		
+		return c + getPieceBouge().get() + " - " + getNouvelleEmplacement().get();
 	}
 }
