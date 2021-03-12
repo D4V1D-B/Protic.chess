@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import modele.Cavalier;
 import modele.Fou;
+import modele.Mouvement;
 import modele.Pieces;
 import modele.Pion;
 import modele.Reine;
@@ -256,14 +257,13 @@ public class Controleur implements Initializable
 		{
 			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
 		}
-		
-		for(int i =0; i<64;i++)
+
+		for (int i = 0; i < 64; i++)
 		{
 			ImageView n = (ImageView) allPanes[i].getChildren().get(0);
 			n.setImage(null);
 		}
-		
-		
+
 		placerPiecesString(placementDepart);
 		resetTotal();
 
@@ -405,7 +405,6 @@ public class Controleur implements Initializable
 						int caseVide = z - 48;
 						emplacementSurLeBoard = emplacementSurLeBoard
 								+ caseVide;
-						
 
 					}
 					else
@@ -475,6 +474,8 @@ public class Controleur implements Initializable
 		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
 		boolean mouvementValide = plateau.refreshDeplacement(lastEmplacement,
 				pieceSelect);
+
+		ajouterTableView(p, positionFinale.getId());
 
 		return mouvementValide;
 	}
@@ -558,48 +559,11 @@ public class Controleur implements Initializable
 	// p.setLocation(positionCherche, nbSlash);
 	// return p;
 	// }
-	
-	public class Mouvement
-	{
-		private String pieceBouge;
-		private String nouvelleEmplacement;
-		private boolean isWhite;
-		private String messageComplet;
-		
-		public String getPieceBouge()
-		{
-			return pieceBouge;
-		}
-		public void setPieceBouge(String pieceBouge)
-		{
-			this.pieceBouge = pieceBouge;
-		}
-		public String getNouvelleEmplacement()
-		{
-			return nouvelleEmplacement;
-		}
-		public void setNouvelleEmplacement(String nouvelleEmplacement)
-		{
-			this.nouvelleEmplacement = nouvelleEmplacement;
-		}
-		public boolean isWhite()
-		{
-			return isWhite;
-		}
-		public void setWhite(boolean isWhite)
-		{
-			this.isWhite = isWhite;
 
-		}
-		public String getMessageComplet()
-		{
-			return messageComplet;
-		}
-		public void setMessageComplet(String messageComplet)
-		{
-			this.messageComplet = messageComplet;
-		}
-		
-		
+	private void ajouterTableView(Pieces p, String positionFinale)
+	{
+		Mouvement m = new Mouvement(p.getNom(), positionFinale, p.isWhite());
+
 	}
+
 }
