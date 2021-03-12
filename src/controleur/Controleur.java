@@ -3,17 +3,27 @@ package controleur;
 import java.awt.Point;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -36,7 +46,6 @@ public class Controleur implements Initializable
 	private String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	private Pieces pieceSelect;
 	private Pane paneSelect;
-	private ArrayList<Mouvement> listMouvements;
 
 	@FXML
 	private Pane a8;
@@ -239,13 +248,7 @@ public class Controleur implements Initializable
 	@FXML
 	private RadioMenuItem Claire;
 	@FXML
-	private TableView<Mouvement> tableDeMouvementFx;
-
-	@FXML
-	private TableColumn<Mouvement, String> tableauBlanc;
-
-	@FXML
-	private TableColumn<Mouvement, String> TableauNoir;
+	private ListView<String> listDeMouvement;
 
 	@FXML
 	private Button recommencerPartie;
@@ -271,14 +274,18 @@ public class Controleur implements Initializable
 
 	}
 
+	@FXML
+	private List<String> list;
 
 	@FXML
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		listMouvements = new ArrayList<Mouvement>();
-		//tableDeMouvementFx.setItems((ObservableList<Mouvement>) listMouvements);
+		list = FXCollections.observableArrayList();
+		listDeMouvement = new ListView<>();
+		listDeMouvement.getItems().setAll(list);
+
 		resetTotal();
 
 	}
@@ -592,25 +599,12 @@ public class Controleur implements Initializable
 	private void ajouterTableView(Pieces p, String positionFinale)
 	{
 
-		// Mouvement m = new Mouvement(p.getNom(), positionFinale, p.isWhite());
-
 		Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
 				new SimpleStringProperty(positionFinale), p.isWhite());
 
 		System.out.println(m.toString());
-		listMouvements.add(m);
-
-		if (m.isWhite())
-		{
-			// ajouter a la colonne blance
-
-		}
-		else
-		{
-			// ajouter a la colonne noir
-
-		}
-
+		list.add(m.toString());
+		System.out.println(list);
 	}
 
 }
