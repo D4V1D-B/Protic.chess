@@ -52,13 +52,12 @@ public class Mouvement
 	public String toString()
 	{
 		String c = "N";
-		if(isWhite)
+		if (isWhite)
 		{
-			 c = "B";
+			c = "B";
 		}
-		
-			
-		
-		return c + getPieceBouge().get() + " - " + getNouvelleEmplacement().get();
+
+		return c + getPieceBouge().get() + " - "
+				+ getNouvelleEmplacement().get();
 	}
 }

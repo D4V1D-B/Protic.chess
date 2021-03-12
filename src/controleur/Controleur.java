@@ -275,7 +275,7 @@ public class Controleur implements Initializable
 	}
 
 	@FXML
-	private List<String> list;
+	private ObservableList<String> list;
 
 	@FXML
 
@@ -283,9 +283,7 @@ public class Controleur implements Initializable
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		list = FXCollections.observableArrayList();
-		listDeMouvement = new ListView<>();
-		listDeMouvement.getItems().setAll(list);
-
+		listDeMouvement.setItems(list);
 		resetTotal();
 
 	}
@@ -553,58 +551,14 @@ public class Controleur implements Initializable
 
 	}
 
-	// private Point chercherCoordonnee(char pieceCherche) // x= range y=colonne
-	// {
-	//
-	// Point p = new Point();
-	//
-	// int x = placementDepart.indexOf(pieceCherche);
-	// String subString = placementDepart.substring(0, x + 1);
-	//
-	// int nbSlash = 0;
-	// int positionDuSlash = 0;
-	// int positionActuelle = 0;
-	// for (char c : subString.toCharArray())
-	// {
-	// if (c == '/')
-	// {
-	// nbSlash++;
-	// positionDuSlash = positionActuelle;
-	//
-	// }
-	// positionActuelle++;
-	// }
-	//
-	// // TODO ne focntionne pas coordonne x
-	// String subSubString = subString.substring(positionDuSlash + 1,
-	// subString.length());
-	//
-	// int positionCherche = 0;
-	// int positionActuelle2 = 0;
-	// for (char h : subSubString.toCharArray())
-	// {
-	// if (h == pieceCherche)
-	// {
-	// positionCherche = positionActuelle2;
-	// }
-	// positionActuelle2++;
-	// }
-	//
-	// placementDepart.replaceFirst(Character.toString(pieceCherche), "1");
-	// System.out.println(placementDepart);
-	// p.setLocation(positionCherche, nbSlash);
-	// return p;
-	// }
-
 	private void ajouterTableView(Pieces p, String positionFinale)
 	{
 
 		Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
 				new SimpleStringProperty(positionFinale), p.isWhite());
 
-		System.out.println(m.toString());
 		list.add(m.toString());
-		System.out.println(list);
+
 	}
 
 }
