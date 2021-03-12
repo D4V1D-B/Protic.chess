@@ -28,15 +28,11 @@ public class Controleur implements Initializable
 {
 	private HashMap<String, Image> association = new HashMap<String, Image>();
 	private Plateau plateau;
-	private Plateau plateauTest;
 	private String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	private Pieces pieceSelect;
 	private Pane paneSelect;
-<<<<<<< HEAD
-=======
 	private String couleur;
 	private ArrayList<Mouvement> listMouvements;
->>>>>>> f8e80eef3938abae5d2c026a890ab674f7212d1f
 
 	@FXML
 	private Pane a8;
@@ -253,27 +249,22 @@ public class Controleur implements Initializable
 	@FXML
 	void recommencerPartie(MouseEvent event)
 	{
-<<<<<<< HEAD
 		placerPiecesString(placementDepart);
-=======
 		Pane[] allPanes = new Pane[64];
 
 		for (int nb = 0; nb < 64; nb++)
 		{
 			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
 		}
-		
-		for(int i =0; i<64;i++)
+
+		for (int i = 0; i < 64; i++)
 		{
 			ImageView n = (ImageView) allPanes[i].getChildren().get(0);
 			n.setImage(null);
 		}
-		
-		
+
 		placerPiecesString(placementDepart);
 		resetTotal();
->>>>>>> f8e80eef3938abae5d2c026a890ab674f7212d1f
-
 	}
 
 	@FXML
@@ -412,7 +403,6 @@ public class Controleur implements Initializable
 						int caseVide = z - 48;
 						emplacementSurLeBoard = emplacementSurLeBoard
 								+ caseVide;
-						
 
 					}
 					else
@@ -476,7 +466,6 @@ public class Controleur implements Initializable
 
 	}
 
-<<<<<<< HEAD
 	private void resetCouleur()
 	{
 		a8.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
@@ -553,10 +542,7 @@ public class Controleur implements Initializable
 
 	}
 
-=======
->>>>>>> f8e80eef3938abae5d2c026a890ab674f7212d1f
 	private boolean deplacer(Pieces p, Pane positionFinale)
-
 	{
 		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
 		// deplacement dans la prog
@@ -601,93 +587,57 @@ public class Controleur implements Initializable
 		coordonnee.setLocation(Character.getNumericValue(premiereLettre),
 				Character.getNumericValue(position.charAt(1)) - 1);
 		return coordonnee;
-
 	}
 
-	// private Point chercherCoordonnee(char pieceCherche) // x= range y=colonne
-	// {
-	//
-	// Point p = new Point();
-	//
-	// int x = placementDepart.indexOf(pieceCherche);
-	// String subString = placementDepart.substring(0, x + 1);
-	//
-	// int nbSlash = 0;
-	// int positionDuSlash = 0;
-	// int positionActuelle = 0;
-	// for (char c : subString.toCharArray())
-	// {
-	// if (c == '/')
-	// {
-	// nbSlash++;
-	// positionDuSlash = positionActuelle;
-	//
-	// }
-	// positionActuelle++;
-	// }
-	//
-	// // TODO ne focntionne pas coordonne x
-	// String subSubString = subString.substring(positionDuSlash + 1,
-	// subString.length());
-	//
-	// int positionCherche = 0;
-	// int positionActuelle2 = 0;
-	// for (char h : subSubString.toCharArray())
-	// {
-	// if (h == pieceCherche)
-	// {
-	// positionCherche = positionActuelle2;
-	// }
-	// positionActuelle2++;
-	// }
-	//
-	// placementDepart.replaceFirst(Character.toString(pieceCherche), "1");
-	// System.out.println(placementDepart);
-	// p.setLocation(positionCherche, nbSlash);
-	// return p;
-	// }
-	
+
+
 	public class Mouvement
 	{
 		private String pieceBouge;
 		private String nouvelleEmplacement;
 		private boolean isWhite;
 		private String messageComplet;
-		
+
 		public String getPieceBouge()
 		{
 			return pieceBouge;
 		}
+
 		public void setPieceBouge(String pieceBouge)
 		{
 			this.pieceBouge = pieceBouge;
 		}
+
 		public String getNouvelleEmplacement()
 		{
 			return nouvelleEmplacement;
 		}
+
 		public void setNouvelleEmplacement(String nouvelleEmplacement)
 		{
 			this.nouvelleEmplacement = nouvelleEmplacement;
 		}
+
 		public boolean isWhite()
 		{
 			return isWhite;
 		}
+
 		public void setWhite(boolean isWhite)
 		{
 			this.isWhite = isWhite;
 
 		}
+
 		public String getMessageComplet()
 		{
 			return messageComplet;
 		}
+
 		public void setMessageComplet(String messageComplet)
 		{
 			this.messageComplet = messageComplet;
 		}
-		
-		
+
 	}
 }
