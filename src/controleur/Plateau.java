@@ -61,24 +61,24 @@ public class Plateau
 		blanc.actualiserMouvementPossible();
 		noir.actualiserMouvementPossible();
 
-//		if (piecesDeplacer.isWhite())
-//		{
-//			mouvementValide = !blanc.vérifierÉchec(noir.getMouvementPossible());
-//		}
-//		else
-//		{
-//			mouvementValide = !noir.vérifierÉchec(blanc.getMouvementPossible());
-//		}
-//
-//		if (!mouvementValide)
-//		{
-//			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-//					.getEmplacement().y] = temp;
-//			piecesDeplacer.setEmplacement(anciennePosition);
-//			deplacerPieces(piecesDeplacer);
-//			blanc.actualiserMouvementPossible();
-//			noir.actualiserMouvementPossible();
-//		}
+		if (piecesDeplacer.isWhite())
+		{
+			mouvementValide = !blanc.vérifierÉchec(noir.getMouvementPossible());
+		}
+		else
+		{
+			mouvementValide = !noir.vérifierÉchec(blanc.getMouvementPossible());
+		}
+
+		if (!mouvementValide)
+		{
+			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+					.getEmplacement().y] = temp;
+			piecesDeplacer.setEmplacement(anciennePosition);
+			deplacerPieces(piecesDeplacer);
+			blanc.actualiserMouvementPossible();
+			noir.actualiserMouvementPossible();
+		}
 
 		return mouvementValide;
 	}
@@ -139,14 +139,14 @@ public class Plateau
 
 	public class Equipe
 	{
-		private ArrayList<Point> mouvementPossible;
+		private Set<Point> mouvementPossible;
 		private ArrayList<Pieces> listePiece;
 
 		public Equipe(ArrayList<Pieces> pieces)
 		{
 			listePiece = pieces;
 			getPositionRoi();
-			mouvementPossible = new ArrayList<Point>();
+			mouvementPossible = new HashSet<Point>();
 			actualiserMouvementPossible();
 		}
 
@@ -183,7 +183,7 @@ public class Plateau
 
 		public void actualiserMouvementPossible()
 		{
-
+			mouvementPossible.clear();
 			for (Pieces p : listePiece)
 			{
 				switch (p.getClass().toString())
@@ -216,20 +216,21 @@ public class Plateau
 			}
 		}
 
-		public ArrayList<Point> getMouvementPossible()
+		public Set<Point> getMouvementPossible()
 		{
 			return mouvementPossible;
 		}
 
-		public boolean vérifierÉchec(ArrayList<Point> mouvementPossibleEnemy)
+		public boolean vérifierÉchec(Set<Point> mouvementPossibleEnemy)
 		{
 			boolean roiEchec = false;
+			Point positionROi = this.getPositionRoi();
 
 			for (Point p : mouvementPossibleEnemy)
 			{
 				if (roiEchec != true)
 				{
-					roiEchec = this.getPositionRoi().equals(p);
+					roiEchec = positionROi.equals(p);
 				}
 			}
 
@@ -250,38 +251,3 @@ public class Plateau
 
 	}
 }
-
-//
-// public ArrayList<Point> getVoidSpace()
-// {
-// ArrayList<Point> positionVide = new ArrayList<Point>();
-//
-// for (int i = 0; i < plateau.length; i++)
-// {
-// for (int j = 0; j < plateau[i].length; j++)
-// {
-// if (plateau[i][j] == null)
-// {
-// positionVide.add(new Point(i, j));
-// }
-// }
-// }
-// return positionVide;
-// }
-//
-// public ArrayList<Point> getFillSpace()
-// {
-// ArrayList<Point> positionPlein = new ArrayList<Point>();
-//
-// for (int i = 0; i < plateau.length; i++)
-// {
-// for (int j = 0; j < plateau[i].length; j++)
-// {
-// if (plateau[i][j] != null)
-// {
-// positionPlein.add(new Point(i, j));
-// }
-// }
-// }
-// return positionPlein;
-// }
