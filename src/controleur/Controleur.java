@@ -29,6 +29,7 @@ public class Controleur implements Initializable
 	private String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	private Pieces pieceSelect;
 	private Pane paneSelect;
+	private String couleur;
 
 	@FXML
 	private Pane a8;
@@ -388,20 +389,28 @@ public class Controleur implements Initializable
 	@FXML
 	void mouseClick(MouseEvent event)
 	{
-
-		Pane p = (Pane) event.getSource(); 
-
+		//À chaque fois qu'il clique il passe ici
+		Pane p = (Pane) event.getSource();
+		
+		
+		
 		if (pieceSelect == null)
 		{
+			//S'il n'as pas de pièces selectionner
+			couleur = p.getStyle();
 			pieceSelect = plateau.trouverPieces(rechercheCoordonnee(p.getId()));
 			paneSelect = p;
+			paneSelect.setStyle("-fx-background-color:gold");
+			
 		}
 		else
 		{
-
+			
+			//S'il a une pièces de selectionnée
 			if (pieceSelect.getMouvementPossible()
 					.contains(rechercheCoordonnee(p.getId())))
 			{
+				paneSelect.setStyle(couleur);
 				deplacer(pieceSelect, p);
 				ImageView n = (ImageView) paneSelect.getChildren().get(0);
 				n.setImage(null);
@@ -411,20 +420,23 @@ public class Controleur implements Initializable
 			}
 			else
 			{
+				//S'il a un piéces de selectionné mais mouvement no valide
+				paneSelect.setStyle(couleur);
 				pieceSelect = (null);
 			}
 		}
 
 	}
-	
-//	private boolean mouvementPossible(Pieces p, Pane positionFinale) TODO vérifier les échec
-//	{
-//		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
-//		// deplacement dans la prog
-//		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
-//		plateau.refreshPlateauDeplacement(lastEmplacement, pieceSelect);
-//		return true;
-//	}
+
+	// private boolean mouvementPossible(Pieces p, Pane positionFinale) TODO
+	// vérifier les échec
+	// {
+	// p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
+	// // deplacement dans la prog
+	// Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
+	// plateau.refreshPlateauDeplacement(lastEmplacement, pieceSelect);
+	// return true;
+	// }
 
 	private void deplacer(Pieces p, Pane positionFinale)
 	{
