@@ -272,14 +272,14 @@ public class Controleur implements Initializable
 
 	}
 
-	@SuppressWarnings("unchecked")
+
 	@FXML
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		listMouvements = new ArrayList<Mouvement>();
-		tableDeMouvementFx.setItems((ObservableList<Mouvement>) listMouvements);
+		//tableDeMouvementFx.setItems((ObservableList<Mouvement>) listMouvements);
 		resetTotal();
 
 	}
