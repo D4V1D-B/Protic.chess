@@ -205,12 +205,17 @@ public class Plateau
 						((Roi) p).setMouvementPossible(plateau);
 						break;
 				}
-
 			}
-
 			for (Pieces p : listePiece)
 			{
-				mouvementPossible.addAll(p.getMouvementPossible());
+				if (p.getClass().toString()!="class modele.Pion")
+				{
+					mouvementPossible.addAll(p.getMouvementPossible());
+				}
+				else
+				{
+					mouvementPossible.addAll(((Pion)p).getMouvementDangereux(plateau));
+				}
 			}
 		}
 
