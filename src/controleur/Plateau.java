@@ -76,6 +76,8 @@ public class Plateau
 					.getEmplacement().y] = temp;
 			piecesDeplacer.setEmplacement(anciennePosition);
 			deplacerPieces(piecesDeplacer);
+			blanc.actualiserMouvementPossible();
+			noir.actualiserMouvementPossible();
 		}
 
 		return mouvementValide;
