@@ -471,82 +471,24 @@ public class Controleur implements Initializable
 	private void resetCouleur()
 	{
 		Pane tableau[] =
-		{ a8, a7, a6, a5, a4, a3, a2, a1, b8, b7, b6, b5, b4, b3, b2, b1, c8,
-				c7, c6, c5, c4, c3, c2, c1, d8, d7, d6, d5, d4, d3, d2, d1, e8,
-				e7, e6, e5, e4, e3, e2, e1, f8, f7, f6, f5, f4, f3, f2, f1, g8,
-				g7, g6, g5, g4, g3, g2, g1, h8, h7, h6, h5, h4, h3, h2, h1 };
-		a8.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		a7.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		a6.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		a5.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		a4.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		a3.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		a2.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		a1.setStyle("-fx-background-color:brown; -fx-border-color: black");
+		{ a1, a2, a3, a4, a5, a6, a7, a8, b8, b7, b6, b5, b4, b3, b2, b1, c1,
+				c2, c3, c4, c5, c6, c7, c8, d8, d7, d6, d5, d4, d3, d2, d1, e1,
+				e2, e3, e5, e5, e6, e7, e8, f8, f7, f6, f5, f4, f3, f2, f1, g1,
+				g2, g3, g4, g5, g6, g7, g8, h8, h7, h6, h5, h4, h3, h2, h1 };
 
-		b8.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		b7.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		b6.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		b5.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		b4.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		b3.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		b2.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		b1.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-
-		c8.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		c7.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		c6.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		c5.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		c4.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		c3.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		c2.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		c1.setStyle("-fx-background-color:brown; -fx-border-color: black");
-
-		d8.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		d7.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		d6.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		d5.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		d4.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		d3.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		d2.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		d1.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-
-		e8.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		e7.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		e6.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		e5.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		e4.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		e3.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		e2.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		e1.setStyle("-fx-background-color:brown; -fx-border-color: black");
-
-		f8.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		f7.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		f6.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		f5.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		f4.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		f3.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		f2.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		f1.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-
-		g8.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		g7.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		g6.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		g5.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		g4.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		g3.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		g2.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		g1.setStyle("-fx-background-color:brown; -fx-border-color: black");
-
-		h8.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		h7.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		h6.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		h5.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		h4.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		h3.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-		h2.setStyle("-fx-background-color:brown; -fx-border-color: black");
-		h1.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
-
+		for (int i = 0; i < tableau.length; i++)
+		{
+			if (i % 2 == 0)
+			{
+				tableau[i].setStyle(
+						"-fx-background-color:brown; -fx-border-color: black");
+			}
+			else
+			{
+				tableau[i].setStyle(
+						"-fx-background-color:cornsilk; -fx-border-color: black");
+			}
+		}
 	}
 
 	private boolean deplacer(Pieces p, Pane positionFinale)
@@ -645,7 +587,7 @@ public class Controleur implements Initializable
 
 	private void ajouterTableView(Pieces p, String positionFinale)
 	{
-	//	Mouvement m = new Mouvement(p.getNom(), positionFinale, p.isWhite());
+		// Mouvement m = new Mouvement(p.getNom(), positionFinale, p.isWhite());
 
 	}
 
