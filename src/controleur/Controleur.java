@@ -445,8 +445,30 @@ public class Controleur implements Initializable
 			pieceSelect = plateau.trouverPieces(rechercheCoordonnee(p.getId()));
 			paneSelect = p;
 			if (pieceSelect != null)
+			{
 				paneSelect.setStyle(
 						"-fx-background-color:deeppink; -fx-border-color: black");
+				System.out.println(pieceSelect.getMouvementPossible());
+				ArrayList<Point> tableau = pieceSelect.getMouvementPossible();
+				Pane tableauPane[] =
+				{ a1, a2, a3, a4, a5, a6, a7, a8, b8, b7, b6, b5, b4, b3, b2,
+						b1, c1, c2, c3, c4, c5, c6, c7, c8, d8, d7, d6, d5, d4,
+						d3, d2, d1, e1, e2, e3, e4, e5, e6, e7, e8, f8, f7, f6,
+						f5, f4, f3, f2, f1, g1, g2, g3, g4, g5, g6, g7, g8, h8,
+						h7, h6, h5, h4, h3, h2, h1 };
+				String pane;
+				for (int i = 0; i < tableau.size(); i++)
+				{
+					for (int j = 0; j < tableauPane.length; j++)
+					{
+						if(tableauPane[j].getId().equals(recherchePane(tableau.get(i)))) {
+							tableauPane[j].setStyle("-fx-background-color:pink; -fx-border-color: black");
+							System.out.println(tableauPane[j]);
+						}
+					}
+				}
+
+			}
 		}
 		else
 		{
@@ -476,7 +498,42 @@ public class Controleur implements Initializable
 		}
 
 	}
+	private String recherchePane(Point point)
+	{
+		String coordonnee = new String();
+		int premier = point.x;
+		switch (premier)
+		{
+			case 0:
+				coordonnee = "a";
+				break;
+			case 1:
+				coordonnee = "b";
+				break;
+			case 2:
+				coordonnee = "c";
+				break;
+			case 3:
+				coordonnee = "d";
+				break;
+			case 4:
+				coordonnee = "e";
+				break;
+			case 5:
+				coordonnee = "f";
+				break;
+			case 6:
+				coordonnee = "g";
+				break;
+			case 7:
+				coordonnee = "h";
+				break;
+		}
+		coordonnee = coordonnee + (point.getY() + 1);
+		return coordonnee.replaceAll("()\\.0+$|(\\..+?)0+$", "$2");
 
+	}
+	
 	private void resetCouleur()
 	{
 		Pane tableau[] =
