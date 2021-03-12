@@ -32,6 +32,7 @@ public class Controleur implements Initializable
 	private String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	private Pieces pieceSelect;
 	private Pane paneSelect;
+	private String couleur; 
 
 	@FXML
 	private Pane a8;
@@ -423,8 +424,10 @@ public class Controleur implements Initializable
 
 		if (pieceSelect == null)
 		{
+			couleur = p.getStyle();
 			pieceSelect = plateau.trouverPieces(rechercheCoordonnee(p.getId()));
 			paneSelect = p;
+			paneSelect.setStyle("-fx-background-color:gold");
 		}
 		else
 		{
@@ -436,6 +439,7 @@ public class Controleur implements Initializable
 
 				if (mouvementValide)
 				{
+					paneSelect.setStyle(couleur);
 					ImageView n = (ImageView) p.getChildren().get(0);
 					n.setImage(association.get(pieceSelect.getNom()));
 					ImageView m = (ImageView) paneSelect.getChildren().get(0);
@@ -447,6 +451,7 @@ public class Controleur implements Initializable
 			}
 			else
 			{
+				paneSelect.setStyle(couleur);
 				pieceSelect = (null);
 			}
 		}
