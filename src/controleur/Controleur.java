@@ -36,7 +36,6 @@ public class Controleur implements Initializable
 	private String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	private Pieces pieceSelect;
 	private Pane paneSelect;
-	private String couleur;
 	private ArrayList<Mouvement> listMouvements;
 
 	@FXML
@@ -592,9 +591,9 @@ public class Controleur implements Initializable
 
 	private void ajouterTableView(Pieces p, String positionFinale)
 	{
-<<<<<<< HEAD
+
 		// Mouvement m = new Mouvement(p.getNom(), positionFinale, p.isWhite());
-=======
+
 		Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
 				new SimpleStringProperty(positionFinale), p.isWhite());
 
@@ -611,7 +610,6 @@ public class Controleur implements Initializable
 			// ajouter a la colonne noir
 
 		}
->>>>>>> e2bdd4139490649840c4581548d69075704379dc
 
 	}
 
