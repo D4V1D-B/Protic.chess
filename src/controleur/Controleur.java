@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -237,13 +240,13 @@ public class Controleur implements Initializable
 	@FXML
 	private RadioMenuItem Claire;
 	@FXML
-	private TableView<?> tableDeMouvementFx;
+	private TableView<Mouvement> tableDeMouvementFx;
 
 	@FXML
-	private TableColumn<?, ?> tableauBlanc;
+	private TableColumn<Mouvement, String> tableauBlanc;
 
 	@FXML
-	private TableColumn<?, ?> TableauNoir;
+	private TableColumn<Mouvement, String> TableauNoir;
 
 	@FXML
 	private Button recommencerPartie;
@@ -269,12 +272,14 @@ public class Controleur implements Initializable
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@FXML
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-
+		listMouvements = new ArrayList<Mouvement>();
+		tableDeMouvementFx.setItems((ObservableList<Mouvement>) listMouvements);
 		resetTotal();
 
 	}
@@ -645,7 +650,22 @@ public class Controleur implements Initializable
 
 	private void ajouterTableView(Pieces p, String positionFinale)
 	{
-	//	Mouvement m = new Mouvement(p.getNom(), positionFinale, p.isWhite());
+		Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
+				new SimpleStringProperty(positionFinale), p.isWhite());
+
+		System.out.println(m.toString());
+		listMouvements.add(m);
+
+		if (m.isWhite())
+		{
+			// ajouter a la colonne blance
+
+		}
+		else
+		{
+			// ajouter a la colonne noir
+
+		}
 
 	}
 
