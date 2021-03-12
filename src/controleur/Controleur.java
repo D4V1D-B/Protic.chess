@@ -453,21 +453,9 @@ public class Controleur implements Initializable
 
 	}
 
-<<<<<<< Updated upstream
-	// private boolean mouvementPossible(Pieces p, Pane positionFinale) TODO
-	// vérifier les échec
-	// {
-	// p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
-	// // deplacement dans la prog
-	// Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
-	// plateau.refreshPlateauDeplacement(lastEmplacement, pieceSelect);
-	// return true;
-	// }
 
-	private void deplacer(Pieces p, Pane positionFinale)
-=======
 	private boolean deplacer(Pieces p, Pane positionFinale)
->>>>>>> Stashed changes
+
 	{
 		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
 		// deplacement dans la prog
