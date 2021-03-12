@@ -105,4 +105,58 @@ public class Pion extends Pieces
 		}
 
 	}
+	
+	public ArrayList<Point> getMouvementDangereux(Pieces[][] plateau)
+	{
+		ArrayList<Point> mouvementDangereux = new ArrayList<Point>();
+
+		int i = this.getEmplacement().x;
+		int j = this.getEmplacement().y;
+
+		if (this.isWhite())
+		{
+
+			// droite case diagonal
+			if (i + 1 <= 7 && j + 1 <= 7
+					&& !OperationSurUneMatrice.getVoidSpace(plateau)
+							.contains(new Point(i + 1, j + 1))
+					&& !plateau[i + 1][j + 1].isWhite())
+			{
+				mouvementDangereux.add(new Point(i + 1, j + 1));
+			}
+
+			// gauche case diagonal
+			if (i - 1 >= 0 && j + 1 <= 7
+					&& !OperationSurUneMatrice.getVoidSpace(plateau)
+							.contains(new Point(i - 1, j + 1))
+					&& !plateau[i - 1][j + 1].isWhite())
+			{
+				mouvementDangereux.add(new Point(i - 1, j + 1));
+			}
+
+		}
+		else
+		{
+			// droite case diagonal
+
+			if (i + 1 <= 7 && j - 1 >= 0
+					&& !OperationSurUneMatrice.getVoidSpace(plateau)
+							.contains(new Point(i + 1, j - 1))
+					&& plateau[i + 1][j - 1].isWhite())
+			{
+				mouvementDangereux.add(new Point(i + 1, j - 1));
+			}
+
+			// gauche case diagonal
+			if (i - 1 >= 0 && j - 1 >= 0
+					&& !OperationSurUneMatrice.getVoidSpace(plateau)
+							.contains(new Point(i - 1, j - 1))
+					&& plateau[i-1][j-1].isWhite())
+			{
+				mouvementDangereux.add(new Point(i - 1, j - 1));
+			}
+		}
+		return mouvementDangereux;
+
+	}
 }
