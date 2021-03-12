@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -230,6 +233,24 @@ public class Controleur implements Initializable
 
 	@FXML
 	private RadioMenuItem Claire;
+	@FXML
+	private TableView<?> tableDeMouvementFx;
+
+	@FXML
+	private TableColumn<?, ?> tableauBlanc;
+
+	@FXML
+	private TableColumn<?, ?> TableauNoir;
+
+	@FXML
+	private Button recommencerPartie;
+
+	@FXML
+	void recommencerPartie(MouseEvent event)
+	{
+		placerPiecesString(placementDepart);
+		
+	}
 
 	@FXML
 
@@ -322,6 +343,8 @@ public class Controleur implements Initializable
 
 	}
 
+	
+
 	public void placerPiecesString(String placement)
 	{
 
@@ -389,7 +412,7 @@ public class Controleur implements Initializable
 	void mouseClick(MouseEvent event)
 	{
 
-		Pane p = (Pane) event.getSource(); 
+		Pane p = (Pane) event.getSource();
 
 		if (pieceSelect == null)
 		{
@@ -416,15 +439,16 @@ public class Controleur implements Initializable
 		}
 
 	}
-	
-//	private boolean mouvementPossible(Pieces p, Pane positionFinale) TODO vérifier les échec
-//	{
-//		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
-//		// deplacement dans la prog
-//		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
-//		plateau.refreshPlateauDeplacement(lastEmplacement, pieceSelect);
-//		return true;
-//	}
+
+	// private boolean mouvementPossible(Pieces p, Pane positionFinale) TODO
+	// vérifier les échec
+	// {
+	// p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
+	// // deplacement dans la prog
+	// Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
+	// plateau.refreshPlateauDeplacement(lastEmplacement, pieceSelect);
+	// return true;
+	// }
 
 	private void deplacer(Pieces p, Pane positionFinale)
 	{
