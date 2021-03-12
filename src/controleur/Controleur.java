@@ -32,11 +32,8 @@ public class Controleur implements Initializable
 	private String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	private Pieces pieceSelect;
 	private Pane paneSelect;
-<<<<<<< HEAD
-=======
-	private String couleur;
 	private ArrayList<Mouvement> listMouvements;
->>>>>>> f8e80eef3938abae5d2c026a890ab674f7212d1f
+
 
 	@FXML
 	private Pane a8;
@@ -253,9 +250,8 @@ public class Controleur implements Initializable
 	@FXML
 	void recommencerPartie(MouseEvent event)
 	{
-<<<<<<< HEAD
+
 		placerPiecesString(placementDepart);
-=======
 		Pane[] allPanes = new Pane[64];
 
 		for (int nb = 0; nb < 64; nb++)
@@ -272,7 +268,6 @@ public class Controleur implements Initializable
 		
 		placerPiecesString(placementDepart);
 		resetTotal();
->>>>>>> f8e80eef3938abae5d2c026a890ab674f7212d1f
 
 	}
 
@@ -476,7 +471,6 @@ public class Controleur implements Initializable
 
 	}
 
-<<<<<<< HEAD
 	private void resetCouleur()
 	{
 		a8.setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
@@ -553,10 +547,7 @@ public class Controleur implements Initializable
 
 	}
 
-=======
->>>>>>> f8e80eef3938abae5d2c026a890ab674f7212d1f
 	private boolean deplacer(Pieces p, Pane positionFinale)
-
 	{
 		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
 		// deplacement dans la prog
