@@ -336,10 +336,17 @@ public class Controleur implements Initializable
 
 		placerPiecesString(placementDepart);
 
-		// System.out.println(k.getEmplacement().toString());
-		// System.out.println(p3.getEmplacement().toString());
-		// System.out.println(N1.getEmplacement().toString());
-		// System.out.println(N2.getEmplacement().toString());
+		System.out.println(k.getEmplacement().toString());
+		System.out.println(p3.getEmplacement().toString());
+		System.out.println(N1.getEmplacement().toString());
+		System.out.println(N2.getEmplacement().toString());
+		System.out.println();
+		System.out.println();
+
+		System.out.println(k.getMouvementPossible().toString());
+		System.out.println(p3.getMouvementPossible().toString());
+		System.out.println(N1.getMouvementPossible().toString());
+		System.out.println(N2.getMouvementPossible().toString());
 
 	}
 
@@ -425,9 +432,15 @@ public class Controleur implements Initializable
 			if (pieceSelect.getMouvementPossible()
 					.contains(rechercheCoordonnee(p.getId())))
 			{
-				deplacer(pieceSelect, p);
-				ImageView n = (ImageView) paneSelect.getChildren().get(0);
-				n.setImage(null);
+				boolean mouvementValide = deplacer(pieceSelect, p);
+
+				if (mouvementValide)
+				{
+					ImageView n = (ImageView) p.getChildren().get(0);
+					n.setImage(association.get(pieceSelect.getNom()));
+					ImageView m = (ImageView) paneSelect.getChildren().get(0);
+					m.setImage(null);
+				}
 
 				paneSelect = null;
 				pieceSelect = null;
@@ -440,6 +453,7 @@ public class Controleur implements Initializable
 
 	}
 
+<<<<<<< Updated upstream
 	// private boolean mouvementPossible(Pieces p, Pane positionFinale) TODO
 	// vérifier les échec
 	// {
@@ -451,14 +465,17 @@ public class Controleur implements Initializable
 	// }
 
 	private void deplacer(Pieces p, Pane positionFinale)
+=======
+	private boolean deplacer(Pieces p, Pane positionFinale)
+>>>>>>> Stashed changes
 	{
 		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
 		// deplacement dans la prog
 		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
-		plateau.refreshDeplacement(lastEmplacement, pieceSelect);
-		ImageView n = (ImageView) positionFinale.getChildren().get(0);
-		n.setImage(association.get(p.getNom()));
+		boolean mouvementValide = plateau.refreshDeplacement(lastEmplacement,
+				pieceSelect);
 
+		return mouvementValide;
 	}
 
 	private Point rechercheCoordonnee(String position)

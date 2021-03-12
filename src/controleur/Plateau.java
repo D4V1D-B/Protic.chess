@@ -50,14 +50,45 @@ public class Plateau
 		return plateau;
 	}
 
-	public Pieces[][] refreshDeplacement(Point anciennePosition,
+	public boolean refreshDeplacement(Point anciennePosition,
 			Pieces piecesDeplacer)
 	{
+		boolean mouvementValide = true;
 		plateau[anciennePosition.x][anciennePosition.y] = null;
 
+		Pieces temp = deplacerPieces(piecesDeplacer);
+
+		blanc.actualiserMouvementPossible();
+		noir.actualiserMouvementPossible();
+
+		if (piecesDeplacer.isWhite())
+		{
+			mouvementValide = !blanc.vérifierÉchec(noir.getMouvementPossible());
+		}
+		else
+		{
+			mouvementValide = !noir.vérifierÉchec(blanc.getMouvementPossible());
+		}
+
+		if (!mouvementValide)
+		{
+			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+					.getEmplacement().y] = temp;
+			piecesDeplacer.setEmplacement(anciennePosition);
+			deplacerPieces(piecesDeplacer);
+		}
+
+		return mouvementValide;
+	}
+
+	public Pieces deplacerPieces(Pieces piecesDeplacer)
+	{
+		Pieces temp = null;
 		if (plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
 				.getEmplacement().y] != null)
 		{
+			temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+					.getEmplacement().y];
 			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
 					.getEmplacement().y] = piecesDeplacer;
 			actualiserTeam();
@@ -67,10 +98,7 @@ public class Plateau
 			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
 					.getEmplacement().y] = piecesDeplacer;
 		}
-
-		blanc.actualiserMouvementPossible();
-		noir.actualiserMouvementPossible();
-		return plateau;
+		return temp;
 	}
 
 	public void actualiserTeam()
@@ -109,14 +137,14 @@ public class Plateau
 
 	public class Equipe
 	{
-		private Set<Point> mouvementPossible;
+		private ArrayList<Point> mouvementPossible;
 		private ArrayList<Pieces> listePiece;
 
 		public Equipe(ArrayList<Pieces> pieces)
 		{
 			listePiece = pieces;
 			getPositionRoi();
-			mouvementPossible = new HashSet<Point>();
+			mouvementPossible = new ArrayList<Point>();
 			actualiserMouvementPossible();
 		}
 
@@ -186,7 +214,7 @@ public class Plateau
 			}
 		}
 
-		public Set<Point> getMouvementPossible()
+		public ArrayList<Point> getMouvementPossible()
 		{
 			return mouvementPossible;
 		}
