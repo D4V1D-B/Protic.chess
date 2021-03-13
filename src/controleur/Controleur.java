@@ -282,14 +282,17 @@ public class Controleur implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		list = FXCollections.observableArrayList();
-		listDeMouvement.setItems(list);
+		
+		
 		resetTotal();
 
 	}
 
 	private void resetTotal()
 	{
+		
+		list = FXCollections.observableArrayList();
+		listDeMouvement.setItems(list);
 		Tour R1 = new Tour("R", true, new Point(0, 0));
 		Cavalier N1 = new Cavalier("N", true, new Point(1, 0));
 		Fou B1 = new Fou("B", true, new Point(2, 0));
