@@ -3,8 +3,6 @@ package modele;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import controleur.Plateau;
-
 public class Pion extends Pieces
 {
 

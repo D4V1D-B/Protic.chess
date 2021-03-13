@@ -1,7 +1,6 @@
 package modele;
 
 import java.awt.Point;
-import controleur.Plateau;
 
 public class Reine extends Pieces
 {

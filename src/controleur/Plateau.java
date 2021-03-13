@@ -2,8 +2,6 @@ package controleur;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import modele.Pieces;
 import modele.Tour;
 import modele.Fou;

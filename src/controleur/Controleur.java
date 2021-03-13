@@ -3,27 +3,17 @@ package controleur;
 import java.awt.Point;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.ResourceBundle;
 
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -42,7 +32,6 @@ public class Controleur implements Initializable
 {
 	private HashMap<String, Image> association = new HashMap<String, Image>();
 	private Plateau plateau;
-	private Plateau plateauTest;
 	private String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	private Pieces pieceSelect;
 	private Pane paneSelect;
@@ -458,7 +447,7 @@ public class Controleur implements Initializable
 						d3, d2, d1, e1, e2, e3, e4, e5, e6, e7, e8, f8, f7, f6,
 						f5, f4, f3, f2, f1, g1, g2, g3, g4, g5, g6, g7, g8, h8,
 						h7, h6, h5, h4, h3, h2, h1 };
-				String pane;
+				
 				for (int i = 0; i < tableau.size(); i++)
 				{
 					for (int j = 0; j < tableauPane.length; j++)
