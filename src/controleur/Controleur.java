@@ -362,6 +362,7 @@ public class Controleur implements Initializable
 		placementDepart.replace('R', '1');
 
 		placerPiecesString(placementDepart);
+		resetCouleur();
 	}
 
 	public void placerPiecesString(String placement)
