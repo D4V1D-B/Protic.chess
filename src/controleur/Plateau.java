@@ -32,6 +32,8 @@ public class Plateau
 		refreshPlateau(pieceBlanc, pieceNoir);
 		blanc = new Equipe(pieceBlanc);
 		noir = new Equipe(pieceNoir);
+		blanc.actualiserMouvementPossible();
+		noir.actualiserMouvementPossible();
 	}
 
 	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc,
@@ -59,7 +61,8 @@ public class Plateau
 		Pieces temp = deplacerPieces(piecesDeplacer);
 
 		// on actualise les mouvement possible
-		actualiserToutLesMouvementPossible();
+		blanc.actualiserMouvementPossible();
+		noir.actualiserMouvementPossible();
 
 		// On regarde les échecs
 		if (piecesDeplacer.isWhite())
@@ -78,19 +81,25 @@ public class Plateau
 			piecesDeplacer.setEmplacement(anciennePosition);
 			deplacerPieces(piecesDeplacer);
 			actualiserTeam();
-			actualiserToutLesMouvementPossible();
+			blanc.actualiserMouvementPossible();
+			noir.actualiserMouvementPossible();
 		}
-		
+		else
+		{
+			actualiserToutLesMouvementJouable();
+		}
+
 		// On regarde les échecs valide
-		if (piecesDeplacer.isWhite()&& noir.vérifierÉchec(blanc.getMouvementPossible()))
+		if (piecesDeplacer.isWhite()
+				&& noir.vérifierÉchec(blanc.getMouvementPossible()))
 		{
 			noir.getRoi().setaBouger();
 		}
-		else if(blanc.vérifierÉchec(noir.getMouvementPossible()))
-		{
-			blanc.getRoi().setaBouger();
-		}
-		
+		else
+			if (blanc.vérifierÉchec(noir.getMouvementPossible()))
+			{
+				blanc.getRoi().setaBouger();
+			}
 
 		return mouvementValide;
 	}
@@ -157,19 +166,279 @@ public class Plateau
 					{
 						rockEstValide = null;
 					}
-		
-		if(rockEstValide!=null)
+
+		if (rockEstValide != null)
 		{
-			actualiserToutLesMouvementPossible();
+			blanc.actualiserMouvementPossible();
+			noir.actualiserMouvementPossible();
 		}
 
 		return rockEstValide;
 	}
-	
-	public void actualiserToutLesMouvementPossible()
+
+	public boolean validationDeplacement(Pieces pieces, Point posibiliter)
+	{
+		Point anciennePosition = pieces.getEmplacement();
+		// Création d'une variable qui indique si le mouvement est valide
+		boolean mouvementValide = true;
+		// On enleve la pieces de son ancien deplacement
+		plateau[pieces.getEmplacement().x][pieces.getEmplacement().y] = null;
+		pieces.setEmplacement(posibiliter);
+		// On déplace la pieces et on store ce qui a été bouffer
+		Pieces temp = deplacerPieces(pieces);
+
+		// on actualise les mouvement possible
+		blanc.actualiserMouvementPossible();
+		noir.actualiserMouvementPossible();
+
+		// On regarde les échecs
+		if (pieces.isWhite())
+		{
+			mouvementValide = !blanc.vérifierÉchec(noir.getMouvementPossible());
+		}
+		else
+		{
+			mouvementValide = !noir.vérifierÉchec(blanc.getMouvementPossible());
+		}
+
+		plateau[pieces.getEmplacement().x][pieces.getEmplacement().y] = temp;
+		pieces.setEmplacement(anciennePosition);
+		deplacerPieces(pieces);
+		actualiserTeam();
+		blanc.actualiserMouvementPossible();
+		noir.actualiserMouvementPossible();
+
+		return mouvementValide;
+	}
+
+	public void actualiserToutLesMouvementJouable()
 	{
 		blanc.actualiserMouvementPossible();
 		noir.actualiserMouvementPossible();
+		blanc.mouvementJouable.clear();
+		noir.mouvementJouable.clear();
+		
+		ArrayList<Point> pudebugcool = new ArrayList<Point>();
+		ArrayList<Pieces> pudebugcool2 = new ArrayList<Pieces>();
+		
+		for (Pieces p : blanc.listePiece)
+		{
+			pudebugcool2.add(p);
+		}
+		
+		for (Pieces p : pudebugcool2)
+		{
+			p.getMouvementJouable().clear();
+			switch (p.getClass().toString())
+			{
+				case "class modele.Tour":
+					pudebugcool.clear();
+					for (Point posibiliter : ((Tour) p).getMouvementPossible())
+					{
+						pudebugcool.add(posibiliter);
+					}
+
+					for (Point posibiliter : pudebugcool)
+					{
+						if (validationDeplacement(p, posibiliter))
+						{
+							p.addMouvementJouable(posibiliter);
+						}
+					}
+					break;
+
+				case "class modele.Cavalier":
+					pudebugcool.clear();
+					for (Point posibiliter : ((Cavalier) p).getMouvementPossible())
+					{
+						pudebugcool.add(posibiliter);
+					}
+
+					for (Point posibiliter : pudebugcool)
+					{
+						if (validationDeplacement(p, posibiliter))
+						{
+							p.addMouvementJouable(posibiliter);
+						}
+					}
+					break;
+
+				case "class modele.Fou":
+					pudebugcool.clear();
+					for (Point posibiliter : ((Fou) p).getMouvementPossible())
+					{
+						pudebugcool.add(posibiliter);
+					}
+
+					for (Point posibiliter : pudebugcool)
+					{
+						if (validationDeplacement(p, posibiliter))
+						{
+							p.addMouvementJouable(posibiliter);
+						}
+					}
+					break;
+
+				case "class modele.Reine":
+					pudebugcool.clear();
+					for (Point posibiliter : ((Reine) p).getMouvementPossible())
+					{
+						pudebugcool.add(posibiliter);
+					}
+
+					for (Point posibiliter : pudebugcool)
+					{
+						if (validationDeplacement(p, posibiliter))
+						{
+							p.addMouvementJouable(posibiliter);
+						}
+					}
+					break;
+
+				case "class modele.Pion":
+					pudebugcool.clear();
+					for (Point posibiliter : ((Pion) p).getMouvementPossible())
+					{
+						pudebugcool.add(posibiliter);
+					}
+
+					for (Point posibiliter : pudebugcool)
+					{
+						if (validationDeplacement(p, posibiliter))
+						{
+							p.addMouvementJouable(posibiliter);
+						}
+					}
+					break;
+
+				case "class modele.Roi":
+					pudebugcool.clear();
+					for (Point posibiliter : ((Roi) p).getMouvementPossible())
+					{
+						pudebugcool.add(posibiliter);
+					}
+
+					for (Point posibiliter : pudebugcool)
+					{
+						if (validationDeplacement(p, posibiliter))
+						{
+							p.addMouvementJouable(posibiliter);
+						}
+					}
+					break;
+			}
+			blanc.getMouvementJouable().addAll(p.getMouvementJouable());
+		}
+
+		pudebugcool2.clear();
+		for (Pieces p : noir.listePiece)
+		{
+			pudebugcool2.add(p);
+		}
+		
+		for (Pieces p : pudebugcool2)
+		{
+			p.getMouvementJouable().clear();
+			switch (p.getClass().toString())
+			{
+				case "class modele.Tour":
+					pudebugcool.clear();
+					for (Point posibiliter : ((Tour) p).getMouvementPossible())
+					{
+						pudebugcool.add(posibiliter);
+					}
+
+					for (Point posibiliter : pudebugcool)
+					{
+						if (validationDeplacement(p, posibiliter))
+						{
+							p.addMouvementJouable(posibiliter);
+						}
+					}
+					break;
+
+				case "class modele.Cavalier":
+					pudebugcool.clear();
+					for (Point posibiliter : ((Cavalier) p).getMouvementPossible())
+					{
+						pudebugcool.add(posibiliter);
+					}
+
+					for (Point posibiliter : pudebugcool)
+					{
+						if (validationDeplacement(p, posibiliter))
+						{
+							p.addMouvementJouable(posibiliter);
+						}
+					}
+					break;
+
+				case "class modele.Fou":
+					pudebugcool.clear();
+					for (Point posibiliter : ((Fou) p).getMouvementPossible())
+					{
+						pudebugcool.add(posibiliter);
+					}
+
+					for (Point posibiliter : pudebugcool)
+					{
+						if (validationDeplacement(p, posibiliter))
+						{
+							p.addMouvementJouable(posibiliter);
+						}
+					}
+					break;
+
+				case "class modele.Reine":
+					pudebugcool.clear();
+					for (Point posibiliter : ((Reine) p).getMouvementPossible())
+					{
+						pudebugcool.add(posibiliter);
+					}
+
+					for (Point posibiliter : pudebugcool)
+					{
+						if (validationDeplacement(p, posibiliter))
+						{
+							p.addMouvementJouable(posibiliter);
+						}
+					}
+					break;
+
+				case "class modele.Pion":
+					pudebugcool.clear();
+					for (Point posibiliter : ((Pion) p).getMouvementPossible())
+					{
+						pudebugcool.add(posibiliter);
+					}
+
+					for (Point posibiliter : pudebugcool)
+					{
+						if (validationDeplacement(p, posibiliter))
+						{
+							p.addMouvementJouable(posibiliter);
+						}
+					}
+					break;
+
+				case "class modele.Roi":
+					pudebugcool.clear();
+					for (Point posibiliter : ((Roi) p).getMouvementPossible())
+					{
+						pudebugcool.add(posibiliter);
+					}
+
+					for (Point posibiliter : pudebugcool)
+					{
+						if (validationDeplacement(p, posibiliter))
+						{
+							p.addMouvementJouable(posibiliter);
+						}
+					}
+					break;
+			}
+			noir.getMouvementJouable().addAll(p.getMouvementJouable());
+		}
 	}
 
 	public void actualiserTeam()
@@ -209,6 +478,7 @@ public class Plateau
 	public class Equipe
 	{
 		private ArrayList<Point> mouvementPossible;
+		private ArrayList<Point> mouvementJouable;
 		private ArrayList<Pieces> listePiece;
 
 		public Equipe(ArrayList<Pieces> pieces)
@@ -216,7 +486,7 @@ public class Plateau
 			listePiece = pieces;
 			getPositionRoi();
 			mouvementPossible = new ArrayList<Point>();
-			actualiserMouvementPossible();
+			mouvementJouable = new ArrayList<Point>();
 		}
 
 		public int indexOfKing()
@@ -238,12 +508,12 @@ public class Plateau
 		{
 			return listePiece.get(indexOfKing()).getEmplacement();
 		}
-		
+
 		public Roi getRoi()
 		{
-			return (Roi)listePiece.get(indexOfKing());
+			return (Roi) listePiece.get(indexOfKing());
 		}
-		
+
 		public void add(Pieces piece)
 		{
 			listePiece.add(piece);
@@ -298,6 +568,11 @@ public class Plateau
 		public ArrayList<Point> getMouvementPossible()
 		{
 			return mouvementPossible;
+		}
+
+		public ArrayList<Point> getMouvementJouable()
+		{
+			return mouvementJouable;
 		}
 
 		public boolean vérifierÉchec(ArrayList<Point> mouvementPossibleEnemy)

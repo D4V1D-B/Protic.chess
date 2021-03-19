@@ -12,6 +12,7 @@ public abstract class Pieces
 	private Point emplacement;
 	
 	private ArrayList<Point> mouvementPossible;
+	private ArrayList<Point> mouvementJouable;
 
 	public Pieces(String nom, boolean couleur, Point position)
 	{
@@ -19,6 +20,7 @@ public abstract class Pieces
 		setCouleur(couleur);
 		setEmplacement(position);
 		mouvementPossible = new ArrayList<Point>();
+		mouvementJouable = new ArrayList<Point>();
 	}
 
 	public Point getEmplacement()
@@ -65,5 +67,21 @@ public abstract class Pieces
 	{
 		return mouvementPossible;
 	}
+	
+	public ArrayList<Point> getMouvementJouable()
+	{
+		return mouvementJouable;
+	}
+	
+	public void addMouvementJouable(Point mouvementJouable)
+	{
+		this.mouvementJouable.add(mouvementJouable);
+	}
+	
+	public void setMouvementJouable(ArrayList<Point> mouvementJouables)
+	{
+		this.mouvementJouable=mouvementJouables;
+	}
+
 
 }
