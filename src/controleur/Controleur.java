@@ -289,6 +289,18 @@ public class Controleur implements Initializable
 
 	}
 
+	public void setLabelTourCouleur(Label labelTourCouleur)
+	{
+		if (this.tourJoueur)
+		{
+			this.labelTourCouleur.setText("Blanc");
+		}
+		else
+		{
+			this.labelTourCouleur.setText("Noir");
+		}
+	}
+
 	private void resetTotal()
 	{
 
@@ -374,6 +386,7 @@ public class Controleur implements Initializable
 		placerPiecesString(placementDepart);
 		resetCouleur();
 		tourJoueur = true;
+		setLabelTourCouleur(labelTourCouleur);
 	}
 
 	public void placerPiecesString(String placement)
@@ -530,7 +543,7 @@ public class Controleur implements Initializable
 				pieceSelect = (null);
 			}
 		}
-
+		setLabelTourCouleur(labelTourCouleur);
 	}
 
 	private boolean deplacer(Pieces pieces, Pane positionFinale)
