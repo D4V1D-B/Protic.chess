@@ -98,6 +98,50 @@ public class Plateau
 		}
 		return temp;
 	}
+	
+	public boolean refreshDeplacementRock(Roi roiDeplacer)
+	{
+		boolean rockEstValide = true;
+		
+		if (roiDeplacer.getEmplacement().equals(new Point(2, 0)))
+		{
+			plateau[4][0] = null;
+			plateau[2][0] = roiDeplacer;
+			plateau[0][0].setEmplacement(new Point(3,0));
+			plateau[3][0]=plateau[0][0];
+			plateau[0][0]=null;
+		}
+		else if (roiDeplacer.getEmplacement().equals(new Point(6, 0)))
+		{
+			plateau[4][0] = null;
+			plateau[6][0] = roiDeplacer;
+			plateau[7][0].setEmplacement(new Point(5,0));
+			plateau[5][0]=plateau[7][0];
+			plateau[7][0]=null;
+		}
+		if (roiDeplacer.getEmplacement().equals(new Point(2, 7)))
+		{
+			plateau[4][7] = null;
+			plateau[2][7] = roiDeplacer;
+			plateau[0][7].setEmplacement(new Point(3,7));
+			plateau[3][7]=plateau[0][7];
+			plateau[0][7]=null;
+		}
+		else if (roiDeplacer.getEmplacement().equals(new Point(6, 7)))
+		{
+			plateau[4][7] = null;
+			plateau[6][7] = roiDeplacer;
+			plateau[7][7].setEmplacement(new Point(5,7));
+			plateau[5][7]=plateau[7][7];
+			plateau[7][7]=null;
+		}
+		else
+		{
+			rockEstValide = false;
+		}
+
+		return rockEstValide;
+	}
 
 	public void actualiserTeam()
 	{

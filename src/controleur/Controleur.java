@@ -38,6 +38,15 @@ public class Controleur implements Initializable
 	private Pieces pieceSelect;
 	private Pane paneSelect;
 	private ArrayList<Circle> listeCercle = new ArrayList<Circle>();
+	private ArrayList<Point> listPointRock = new ArrayList<Point>()
+	{
+		{
+			add(new Point(6, 0));
+			add(new Point(2, 0));
+			add(new Point(2, 7));
+			add(new Point(2, 7));
+		}
+	};
 
 	@FXML
 	private Pane a8;
@@ -469,18 +478,37 @@ public class Controleur implements Initializable
 			if (pieceSelect.getMouvementPossible()
 					.contains(rechercheCoordonnee(p.getId())))
 			{
-
-				boolean mouvementValide = deplacer(pieceSelect, p);
-
-				if (mouvementValide)
+				if (pieceSelect.getClass().toString().contains("Roi")
+						&& !((Roi) pieceSelect).isaBouger() && listPointRock
+								.contains(rechercheCoordonnee(p.getId())))
 				{
+<<<<<<< Updated upstream
 					resetCouleur();
 					ImageView n = (ImageView) p.getChildren().get(0);
 					n.setImage(association.get(pieceSelect.getNom()));
 					ImageView m = (ImageView) paneSelect.getChildren().get(0);
 					m.setImage(null);
 					paneSelect.setStyle("-fx-background-color:pink; -fx-border-color: black");
+=======
+					pieceSelect.setEmplacement(rechercheCoordonnee(p.getId()));
+					boolean rockValide = plateau
+							.refreshDeplacementRock(((Roi) pieceSelect));
+>>>>>>> Stashed changes
 				}
+				else
+				{
+					boolean mouvementValide = deplacer(pieceSelect, p);
+					if (mouvementValide)
+					{
+						resetCouleur();
+						ImageView n = (ImageView) p.getChildren().get(0);
+						n.setImage(association.get(pieceSelect.getNom()));
+						ImageView m = (ImageView) paneSelect.getChildren()
+								.get(0);
+						m.setImage(null);
+					}
+				}
+				
 				paneSelect = null;
 				pieceSelect = null;
 			}
@@ -567,7 +595,6 @@ public class Controleur implements Initializable
 	}
 
 	private boolean deplacer(Pieces p, Pane positionFinale)
-
 	{
 		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
 		// deplacement dans la prog
