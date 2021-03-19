@@ -243,7 +243,7 @@ public class Controleur implements Initializable
 	private Pane h1;
 
 	@FXML
-	private Label tourCouleur;
+	private Label labelTourCouleur;
 
 	@FXML
 	private AnchorPane anchor;
