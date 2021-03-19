@@ -38,7 +38,7 @@ public class Controleur implements Initializable
 	private Pieces pieceSelect;
 	private Pane paneSelect;
 	private ArrayList<Circle> listeCercle = new ArrayList<Circle>();
-	private ArrayList<Point> listPointRock = new ArrayList<Point>()
+	private final ArrayList<Point> LISTPOINTROCK = new ArrayList<Point>()
 	{
 		{
 			add(new Point(6, 0));
@@ -443,13 +443,15 @@ public class Controleur implements Initializable
 
 		Pane tableauPane[] = AllPane();
 
-		Pane p = (Pane) event.getSource();
+		Pane paneClick = (Pane) event.getSource();
 
 		if (pieceSelect == null)
 		{
-			p.setStyle("-fx-background-color:gold; -fx-border-color: black");
-			pieceSelect = plateau.trouverPieces(rechercheCoordonnee(p.getId()));
-			paneSelect = p;
+			paneClick.setStyle(
+					"-fx-background-color:gold; -fx-border-color: black");
+			pieceSelect = plateau
+					.trouverPieces(rechercheCoordonnee(paneClick.getId()));
+			paneSelect = paneClick;
 			if (pieceSelect != null)
 			{
 				paneSelect.setStyle(
@@ -476,31 +478,40 @@ public class Controleur implements Initializable
 		{
 
 			if (pieceSelect.getMouvementPossible()
-					.contains(rechercheCoordonnee(p.getId())))
+					.contains(rechercheCoordonnee(paneClick.getId())))
 			{
+				pieceSelect
+						.setEmplacement(rechercheCoordonnee(paneClick.getId()));
+
 				if (pieceSelect.getClass().toString().contains("Roi")
-						&& !((Roi) pieceSelect).isaBouger() && listPointRock
-								.contains(rechercheCoordonnee(p.getId())))
+						&& !((Roi) pieceSelect).isaBouger()
+						&& LISTPOINTROCK.contains(
+								rechercheCoordonnee(paneClick.getId())))
 				{
-
-					resetCouleur();
-
-					deplacerImage(p, paneSelect, pieceSelect);
-					paneSelect.setStyle(
-							"-fx-background-color:pink; -fx-border-color: black");
-
-					pieceSelect.setEmplacement(rechercheCoordonnee(p.getId()));
-					boolean rockValide = plateau
+					Point rockValide = plateau
 							.refreshDeplacementRock(((Roi) pieceSelect));
-
+					if (rockValide != null)
+					{
+						deplacerImage(paneClick, paneSelect, pieceSelect);
+						ajouterTableView(pieceSelect, "Rock");
+						deplacerTour(rockValide);
+					}
 				}
 				else
 				{
-					boolean mouvementValide = deplacer(pieceSelect, p);
+					boolean mouvementValide = deplacer(pieceSelect, paneClick);
 					if (mouvementValide)
 					{
-						resetCouleur();
-						deplacerImage(p, paneSelect, pieceSelect);
+						deplacerImage(paneClick, paneSelect, pieceSelect);
+						ajouterTableView(pieceSelect, paneClick.getId());
+						if(pieceSelect.getClass().toString().contains("Roi"))
+						{
+							((Roi)pieceSelect).setaBouger();
+						}
+						else if (pieceSelect.getClass().toString().contains("Tour"))
+						{
+							((Tour)pieceSelect).setaBouger();
+						}
 					}
 				}
 
@@ -516,13 +527,50 @@ public class Controleur implements Initializable
 
 	}
 
+	private boolean deplacer(Pieces pieces, Pane positionFinale)
+	{
+		pieces.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
+		// deplacement dans la prog
+		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
+		boolean mouvementValide = plateau.refreshDeplacement(lastEmplacement,
+				pieceSelect);
+
+		return mouvementValide;
+	}
+
+	private void deplacerTour(Point emplacement)
+	{
+		if (emplacement.equals(new Point(3,0)))
+		{
+			deplacerImage(d1, a1, new Tour("R",true, new Point(3,0)));
+		}
+		else
+			if (emplacement.equals(new Point(5,0)))
+			{
+				deplacerImage(f1, h1, new Tour("R",true, new Point(3,0)));
+			}
+			else
+				if (emplacement.equals(new Point(3,7)))
+				{
+					deplacerImage(d8, a8, new Tour("R",false, new Point(3,0)));
+				}
+				else
+					if (emplacement.equals(new Point(5,7)))
+					{
+						deplacerImage(f8, h8, new Tour("R",false, new Point(3,0)));
+					}
+
+	}
+	
 	private void deplacerImage(Pane pane1, Pane pane2, Pieces pieceADeplacer)
 	{
-
+		resetCouleur();
 		ImageView emplacementFin = (ImageView) pane1.getChildren().get(0);
 		emplacementFin.setImage(association.get(pieceADeplacer.getNom()));
 		ImageView emplacementDepart = (ImageView) pane2.getChildren().get(0);
 		emplacementDepart.setImage(null);
+		paneSelect
+				.setStyle("-fx-background-color:pink; -fx-border-color: black");
 
 	}
 
@@ -597,19 +645,6 @@ public class Controleur implements Initializable
 				g2, g3, g4, g5, g6, g7, g8, h8, h7, h6, h5, h4, h3, h2, h1 };
 		return tableauAllPane;
 
-	}
-
-	private boolean deplacer(Pieces p, Pane positionFinale)
-	{
-		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
-		// deplacement dans la prog
-		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
-		boolean mouvementValide = plateau.refreshDeplacement(lastEmplacement,
-				pieceSelect);
-
-		ajouterTableView(p, positionFinale.getId());
-
-		return mouvementValide;
 	}
 
 	private Point rechercheCoordonnee(String position)

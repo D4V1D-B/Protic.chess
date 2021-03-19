@@ -58,7 +58,7 @@ public class Plateau
 		// On déplace la pieces et on store ce qui a été bouffer
 		Pieces temp = deplacerPieces(piecesDeplacer);
 
-		//on actualise les mouvement possible
+		// on actualise les mouvement possible
 		blanc.actualiserMouvementPossible();
 		noir.actualiserMouvementPossible();
 
@@ -82,6 +82,17 @@ public class Plateau
 			blanc.actualiserMouvementPossible();
 			noir.actualiserMouvementPossible();
 		}
+		
+		// On regarde les échecs valide
+		if (piecesDeplacer.isWhite()&& noir.vérifierÉchec(blanc.getMouvementPossible()))
+		{
+			noir.getRoi().setaBouger();
+		}
+		else if(blanc.vérifierÉchec(noir.getMouvementPossible()))
+		{
+			blanc.getRoi().setaBouger();
+		}
+		
 
 		return mouvementValide;
 	}
@@ -104,13 +115,14 @@ public class Plateau
 	public Point refreshDeplacementRock(Roi roiDeplacer)
 	{
 		Point rockEstValide;
-		
+
 		if (roiDeplacer.getEmplacement().equals(new Point(2, 0)))
 		{
 			plateau[4][0] = null;
 			plateau[2][0] = roiDeplacer;
 			plateau[0][0].setEmplacement(new Point(3, 0));
 			plateau[3][0] = plateau[0][0];
+			plateau[3][7].setEmplacement(new Point(3,0));
 			plateau[0][0] = null;
 			rockEstValide = new Point(3, 0);
 		}
@@ -121,32 +133,36 @@ public class Plateau
 				plateau[6][0] = roiDeplacer;
 				plateau[7][0].setEmplacement(new Point(5, 0));
 				plateau[5][0] = plateau[7][0];
+				plateau[3][7].setEmplacement(new Point(5,0));
 				plateau[7][0] = null;
 				rockEstValide = new Point(5, 0);
 			}
-		if (roiDeplacer.getEmplacement().equals(new Point(2, 7)))
-		{
-			plateau[4][7] = null;
-			plateau[2][7] = roiDeplacer;
-			plateau[0][7].setEmplacement(new Point(3, 7));
-			plateau[3][7] = plateau[0][7];
-			plateau[0][7] = null;
-			rockEstValide = new Point(3, 7);
-		}
-		else
-			if (roiDeplacer.getEmplacement().equals(new Point(6, 7)))
-			{
-				plateau[4][7] = null;
-				plateau[6][7] = roiDeplacer;
-				plateau[7][7].setEmplacement(new Point(5, 7));
-				plateau[5][7] = plateau[7][7];
-				plateau[7][7] = null;
-				rockEstValide = new Point(5, 7);
-			}
 			else
-			{
-				rockEstValide = null;
-			}
+				if (roiDeplacer.getEmplacement().equals(new Point(2, 7)))
+				{
+					plateau[4][7] = null;
+					plateau[2][7] = roiDeplacer;
+					plateau[0][7].setEmplacement(new Point(3, 7));
+					plateau[3][7] = plateau[0][7];
+					plateau[3][7].setEmplacement(new Point(3,7));
+					plateau[0][7] = null;
+					rockEstValide = new Point(3, 7);
+				}
+				else
+					if (roiDeplacer.getEmplacement().equals(new Point(6, 7)))
+					{
+						plateau[4][7] = null;
+						plateau[6][7] = roiDeplacer;
+						plateau[7][7].setEmplacement(new Point(5, 7));
+						plateau[5][7] = plateau[7][7];
+						plateau[3][7].setEmplacement(new Point(5,7));
+						plateau[7][7] = null;
+						rockEstValide = new Point(5, 7);
+					}
+					else
+					{
+						rockEstValide = null;
+					}
 
 		return rockEstValide;
 	}
@@ -216,9 +232,13 @@ public class Plateau
 		public Point getPositionRoi()
 		{
 			return listePiece.get(indexOfKing()).getEmplacement();
-
 		}
-
+		
+		public Roi getRoi()
+		{
+			return (Roi)listePiece.get(indexOfKing());
+		}
+		
 		public void add(Pieces piece)
 		{
 			listePiece.add(piece);

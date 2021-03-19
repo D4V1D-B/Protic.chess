@@ -25,7 +25,7 @@ public class Roi extends Pieces
 		return aBouger;
 	}
 
-	public void setaBouger(boolean aBouger)
+	public void setaBouger()
 	{
 		this.aBouger = true;
 	}
@@ -70,6 +70,8 @@ public class Roi extends Pieces
 
 		// ROCK petit et grand
 		if (isWhite() && !isaBouger()
+				&& !OperationSurUneMatrice.getVoidSpace(plateau)
+				.contains(new Point(0, 0))
 				&& plateau[0][0].getClass().toString().contains("Tour")
 				&& !((Tour) plateau[0][0]).isaBouger()
 				&& OperationSurUneMatrice.getVoidSpace(plateau)
@@ -83,6 +85,8 @@ public class Roi extends Pieces
 		}
 
 		if (isWhite() && !isaBouger()
+				&& !OperationSurUneMatrice.getVoidSpace(plateau)
+				.contains(new Point(7, 0))
 				&& plateau[7][0].getClass().toString().contains("Tour")
 				&& !((Tour) plateau[7][0]).isaBouger()
 				&& OperationSurUneMatrice.getVoidSpace(plateau)
@@ -95,6 +99,8 @@ public class Roi extends Pieces
 
 		// ROCK petit et grand
 		if (!isWhite() && !isaBouger()
+				&& !OperationSurUneMatrice.getVoidSpace(plateau)
+				.contains(new Point(0, 7))
 				&& plateau[0][7].getClass().toString().contains("Tour")
 				&& !((Tour) plateau[0][7]).isaBouger()
 				&& OperationSurUneMatrice.getVoidSpace(plateau)
@@ -108,6 +114,8 @@ public class Roi extends Pieces
 		}
 
 		if (!isWhite() && !isaBouger()
+				&& !OperationSurUneMatrice.getVoidSpace(plateau)
+				.contains(new Point(7, 7))
 				&& plateau[7][7].getClass().toString().contains("Tour")
 				&& !((Tour) plateau[7][7]).isaBouger()
 				&& OperationSurUneMatrice.getVoidSpace(plateau)

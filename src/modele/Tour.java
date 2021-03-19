@@ -25,9 +25,9 @@ public class Tour extends Pieces
 		return aBouger;
 	}
 
-	public void setaBouger(boolean aBouger)
+	public void setaBouger()
 	{
-		this.aBouger = aBouger;
+		this.aBouger = true;
 	}
 
 	public void setMouvementPossible(Pieces[][] plateau)
