@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.image.Image;
@@ -242,7 +243,7 @@ public class Controleur implements Initializable
 	private Pane h1;
 
 	@FXML
-	private ImageView a8Image;
+	private Label tourCouleur;
 
 	@FXML
 	private AnchorPane anchor;
@@ -693,20 +694,20 @@ public class Controleur implements Initializable
 
 	private void ajouterTableView(Pieces p, String positionFinale)
 	{
-if(positionFinale.equals("Castle"))
-{
-	Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
-			new SimpleStringProperty(positionFinale), p.isWhite());
+		if (positionFinale.equals("Castle"))
+		{
+			Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
+					new SimpleStringProperty(positionFinale), p.isWhite());
 
-	list.add(m.toString2());
-}
-else
-{
-		Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
-				new SimpleStringProperty(positionFinale), p.isWhite());
+			list.add(m.toString2());
+		}
+		else
+		{
+			Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
+					new SimpleStringProperty(positionFinale), p.isWhite());
 
-		list.add(m.toString());
-}
+			list.add(m.toString());
+		}
 
 	}
 
