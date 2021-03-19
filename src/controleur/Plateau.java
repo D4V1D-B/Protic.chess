@@ -59,8 +59,7 @@ public class Plateau
 		Pieces temp = deplacerPieces(piecesDeplacer);
 
 		// on actualise les mouvement possible
-		blanc.actualiserMouvementPossible();
-		noir.actualiserMouvementPossible();
+		actualiserToutLesMouvementPossible();
 
 		// On regarde les échecs
 		if (piecesDeplacer.isWhite())
@@ -79,8 +78,7 @@ public class Plateau
 			piecesDeplacer.setEmplacement(anciennePosition);
 			deplacerPieces(piecesDeplacer);
 			actualiserTeam();
-			blanc.actualiserMouvementPossible();
-			noir.actualiserMouvementPossible();
+			actualiserToutLesMouvementPossible();
 		}
 		
 		// On regarde les échecs valide
@@ -122,7 +120,6 @@ public class Plateau
 			plateau[2][0] = roiDeplacer;
 			plateau[0][0].setEmplacement(new Point(3, 0));
 			plateau[3][0] = plateau[0][0];
-			plateau[3][7].setEmplacement(new Point(3,0));
 			plateau[0][0] = null;
 			rockEstValide = new Point(3, 0);
 		}
@@ -133,7 +130,6 @@ public class Plateau
 				plateau[6][0] = roiDeplacer;
 				plateau[7][0].setEmplacement(new Point(5, 0));
 				plateau[5][0] = plateau[7][0];
-				plateau[3][7].setEmplacement(new Point(5,0));
 				plateau[7][0] = null;
 				rockEstValide = new Point(5, 0);
 			}
@@ -144,7 +140,6 @@ public class Plateau
 					plateau[2][7] = roiDeplacer;
 					plateau[0][7].setEmplacement(new Point(3, 7));
 					plateau[3][7] = plateau[0][7];
-					plateau[3][7].setEmplacement(new Point(3,7));
 					plateau[0][7] = null;
 					rockEstValide = new Point(3, 7);
 				}
@@ -155,7 +150,6 @@ public class Plateau
 						plateau[6][7] = roiDeplacer;
 						plateau[7][7].setEmplacement(new Point(5, 7));
 						plateau[5][7] = plateau[7][7];
-						plateau[3][7].setEmplacement(new Point(5,7));
 						plateau[7][7] = null;
 						rockEstValide = new Point(5, 7);
 					}
@@ -163,8 +157,19 @@ public class Plateau
 					{
 						rockEstValide = null;
 					}
+		
+		if(rockEstValide!=null)
+		{
+			actualiserToutLesMouvementPossible();
+		}
 
 		return rockEstValide;
+	}
+	
+	public void actualiserToutLesMouvementPossible()
+	{
+		blanc.actualiserMouvementPossible();
+		noir.actualiserMouvementPossible();
 	}
 
 	public void actualiserTeam()
