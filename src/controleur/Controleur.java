@@ -391,7 +391,6 @@ public class Controleur implements Initializable
 		resetCouleur();
 		tourJoueur = true;
 		setLabelTourCouleur(labelTourCouleur);
-		afficherFinDePartie();
 	}
 
 	public void placerPiecesString(String placement)
