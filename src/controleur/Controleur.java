@@ -482,18 +482,17 @@ public class Controleur implements Initializable
 						&& !((Roi) pieceSelect).isaBouger() && listPointRock
 								.contains(rechercheCoordonnee(p.getId())))
 				{
-<<<<<<< Updated upstream
+
 					resetCouleur();
-					ImageView n = (ImageView) p.getChildren().get(0);
-					n.setImage(association.get(pieceSelect.getNom()));
-					ImageView m = (ImageView) paneSelect.getChildren().get(0);
-					m.setImage(null);
-					paneSelect.setStyle("-fx-background-color:pink; -fx-border-color: black");
-=======
+
+					deplacerImage(p, paneSelect, pieceSelect);
+					paneSelect.setStyle(
+							"-fx-background-color:pink; -fx-border-color: black");
+
 					pieceSelect.setEmplacement(rechercheCoordonnee(p.getId()));
 					boolean rockValide = plateau
 							.refreshDeplacementRock(((Roi) pieceSelect));
->>>>>>> Stashed changes
+
 				}
 				else
 				{
@@ -501,14 +500,10 @@ public class Controleur implements Initializable
 					if (mouvementValide)
 					{
 						resetCouleur();
-						ImageView n = (ImageView) p.getChildren().get(0);
-						n.setImage(association.get(pieceSelect.getNom()));
-						ImageView m = (ImageView) paneSelect.getChildren()
-								.get(0);
-						m.setImage(null);
+						deplacerImage(p, paneSelect, pieceSelect);
 					}
 				}
-				
+
 				paneSelect = null;
 				pieceSelect = null;
 			}
@@ -518,6 +513,16 @@ public class Controleur implements Initializable
 				pieceSelect = (null);
 			}
 		}
+
+	}
+
+	private void deplacerImage(Pane pane1, Pane pane2, Pieces pieceADeplacer)
+	{
+
+		ImageView emplacementFin = (ImageView) pane1.getChildren().get(0);
+		emplacementFin.setImage(association.get(pieceADeplacer.getNom()));
+		ImageView emplacementDepart = (ImageView) pane2.getChildren().get(0);
+		emplacementDepart.setImage(null);
 
 	}
 
