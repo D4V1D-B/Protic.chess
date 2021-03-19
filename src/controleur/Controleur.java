@@ -38,6 +38,7 @@ public class Controleur implements Initializable
 	private Pieces pieceSelect;
 	private Pane paneSelect;
 	private ArrayList<Circle> listeCercle = new ArrayList<Circle>();
+	private boolean tourJoueur = true;
 	private final ArrayList<Point> LISTPOINTROCK = new ArrayList<Point>()
 	{
 		{
@@ -283,7 +284,6 @@ public class Controleur implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-
 		resetTotal();
 
 	}
@@ -372,6 +372,7 @@ public class Controleur implements Initializable
 
 		placerPiecesString(placementDepart);
 		resetCouleur();
+		tourJoueur = true;
 	}
 
 	public void placerPiecesString(String placement)
@@ -440,7 +441,7 @@ public class Controleur implements Initializable
 	@FXML
 	void mouseClick(MouseEvent event)
 	{
-
+		boolean dernierTour = false;
 		Pane tableauPane[] = AllPane();
 
 		Pane paneClick = (Pane) event.getSource();
@@ -452,8 +453,9 @@ public class Controleur implements Initializable
 			pieceSelect = plateau
 					.trouverPieces(rechercheCoordonnee(paneClick.getId()));
 			paneSelect = paneClick;
-			if (pieceSelect != null)
+			if (pieceSelect != null && pieceSelect.isWhite() == tourJoueur)
 			{
+				dernierTour = tourJoueur;
 				paneSelect.setStyle(
 						"-fx-background-color:deeppink; -fx-border-color: black");
 				ArrayList<Point> tableau = pieceSelect.getMouvementPossible();
@@ -478,7 +480,8 @@ public class Controleur implements Initializable
 		{
 
 			if (pieceSelect.getMouvementPossible()
-					.contains(rechercheCoordonnee(paneClick.getId())))
+					.contains(rechercheCoordonnee(paneClick.getId()))
+					&& pieceSelect.isWhite() == tourJoueur)
 			{
 				pieceSelect
 						.setEmplacement(rechercheCoordonnee(paneClick.getId()));
@@ -504,17 +507,19 @@ public class Controleur implements Initializable
 					{
 						deplacerImage(paneClick, paneSelect, pieceSelect);
 						ajouterTableView(pieceSelect, paneClick.getId());
-						if(pieceSelect.getClass().toString().contains("Roi"))
+						if (pieceSelect.getClass().toString().contains("Roi"))
 						{
-							((Roi)pieceSelect).setaBouger();
+							((Roi) pieceSelect).setaBouger();
 						}
-						else if (pieceSelect.getClass().toString().contains("Tour"))
-						{
-							((Tour)pieceSelect).setaBouger();
-						}
+						else
+							if (pieceSelect.getClass().toString()
+									.contains("Tour"))
+							{
+								((Tour) pieceSelect).setaBouger();
+							}
 					}
 				}
-
+				tourJoueur = !tourJoueur;
 				paneSelect = null;
 				pieceSelect = null;
 			}
@@ -540,28 +545,30 @@ public class Controleur implements Initializable
 
 	private void deplacerTour(Point emplacement)
 	{
-		if (emplacement.equals(new Point(3,0)))
+		if (emplacement.equals(new Point(3, 0)))
 		{
-			deplacerImage(d1, a1, new Tour("R",true, new Point(3,0)));
+			deplacerImage(d1, a1, new Tour("R", true, new Point(3, 0)));
 		}
 		else
-			if (emplacement.equals(new Point(5,0)))
+			if (emplacement.equals(new Point(5, 0)))
 			{
-				deplacerImage(f1, h1, new Tour("R",true, new Point(3,0)));
+				deplacerImage(f1, h1, new Tour("R", true, new Point(3, 0)));
 			}
 			else
-				if (emplacement.equals(new Point(3,7)))
+				if (emplacement.equals(new Point(3, 7)))
 				{
-					deplacerImage(d8, a8, new Tour("r",false, new Point(3,0)));
+					deplacerImage(d8, a8,
+							new Tour("r", false, new Point(3, 0)));
 				}
 				else
-					if (emplacement.equals(new Point(5,7)))
+					if (emplacement.equals(new Point(5, 7)))
 					{
-						deplacerImage(f8, h8, new Tour("r",false, new Point(3,0)));
+						deplacerImage(f8, h8,
+								new Tour("r", false, new Point(3, 0)));
 					}
 
 	}
-	
+
 	private void deplacerImage(Pane pane1, Pane pane2, Pieces pieceADeplacer)
 	{
 		resetCouleur();
