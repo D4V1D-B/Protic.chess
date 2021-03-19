@@ -478,6 +478,7 @@ public class Controleur implements Initializable
 					n.setImage(association.get(pieceSelect.getNom()));
 					ImageView m = (ImageView) paneSelect.getChildren().get(0);
 					m.setImage(null);
+					paneSelect.setStyle("-fx-background-color:pink; -fx-border-color: black");
 				}
 				paneSelect = null;
 				pieceSelect = null;
