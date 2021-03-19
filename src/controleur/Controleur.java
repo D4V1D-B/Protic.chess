@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -11,7 +12,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioMenuItem;
@@ -387,6 +391,7 @@ public class Controleur implements Initializable
 		resetCouleur();
 		tourJoueur = true;
 		setLabelTourCouleur(labelTourCouleur);
+		afficherFinDePartie();
 	}
 
 	public void placerPiecesString(String placement)
@@ -455,7 +460,6 @@ public class Controleur implements Initializable
 	@FXML
 	void mouseClick(MouseEvent event)
 	{
-		boolean dernierTour = false;
 		Pane tableauPane[] = AllPane();
 
 		Pane paneClick = (Pane) event.getSource();
@@ -469,7 +473,6 @@ public class Controleur implements Initializable
 			paneSelect = paneClick;
 			if (pieceSelect != null && pieceSelect.isWhite() == tourJoueur)
 			{
-				dernierTour = tourJoueur;
 				paneSelect.setStyle(
 						"-fx-background-color:deeppink; -fx-border-color: black");
 				ArrayList<Point> tableau = pieceSelect.getMouvementPossible();
@@ -724,4 +727,19 @@ public class Controleur implements Initializable
 
 	}
 
+	private void afficherFinDePartie()
+	{
+		Alert alert = new Alert(AlertType.NONE);
+		alert.setTitle("Fin de Partie !");
+		alert.setHeaderText(
+				"Les " + labelTourCouleur.getText() + "s ont gagnés la partie !");
+		alert.setContentText(null);
+		ButtonType analyse = new ButtonType("Analyse");
+		alert.getButtonTypes().setAll(analyse, ButtonType.OK);
+		Optional<ButtonType> choice = alert.showAndWait();
+		
+		if(choice.get() == analyse) {
+			//ouvrir analyse
+		}
+	}
 }
