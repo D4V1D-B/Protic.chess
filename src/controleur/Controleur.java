@@ -693,11 +693,20 @@ public class Controleur implements Initializable
 
 	private void ajouterTableView(Pieces p, String positionFinale)
 	{
+if(positionFinale.equals("Rock"))
+{
+	Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
+			new SimpleStringProperty(positionFinale), p.isWhite());
 
+	list.add(m.toString2());
+}
+else
+{
 		Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
 				new SimpleStringProperty(positionFinale), p.isWhite());
 
 		list.add(m.toString());
+}
 
 	}
 
