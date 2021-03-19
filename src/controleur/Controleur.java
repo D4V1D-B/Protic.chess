@@ -543,10 +543,15 @@ public class Controleur implements Initializable
 				pieceSelect = (null);
 			}
 		}
-		if (plateau.getEchecMath())
+		if (plateau.getEchecMath()&&plateau.getEchec())
 		{
 			afficherFinDePartie();
 		}
+		else if(plateau.getEchecMath())
+		{
+			System.out.println("nulle");
+		}
+		
 		setLabelTourCouleur(labelTourCouleur);
 	}
 
