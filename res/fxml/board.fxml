@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur">
+<BorderPane maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -45,7 +45,7 @@
                <children>
                   <Pane fx:id="a8" layoutX="38.0" layoutY="41.0" onMouseClicked="#mouseClick" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
-                        <ImageView fx:id="a8Image" fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>
                   <Pane fx:id="b8" layoutX="112.0" layoutY="41.0" onMouseClicked="#mouseClick" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
@@ -390,7 +390,7 @@
                               <VBox prefHeight="61.0" prefWidth="283.0">
                                  <children>
                                     <Label alignment="CENTER" prefHeight="17.0" prefWidth="284.0" text="Au tour de :" textAlignment="CENTER" />
-                                    <Label alignment="CENTER" prefHeight="45.0" prefWidth="283.0" text="Blanc" />
+                                    <Label fx:id="labelTourCouleur" alignment="CENTER" prefHeight="45.0" prefWidth="283.0" text="Blanc" />
                                  </children>
                                  <VBox.margin>
                                     <Insets bottom="10.0" top="10.0" />
