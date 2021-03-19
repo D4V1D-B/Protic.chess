@@ -32,8 +32,12 @@ public class Plateau
 		refreshPlateau(pieceBlanc, pieceNoir);
 		blanc = new Equipe(pieceBlanc);
 		noir = new Equipe(pieceNoir);
-		blanc.actualiserMouvementPossible();
-		noir.actualiserMouvementPossible();
+		actualiserToutLesMouvementJouable();
+	}
+	
+	public boolean getEchecMath()
+	{
+		return noir.getMouvementJouable().size()==0 || blanc.getMouvementJouable().size()==0;
 	}
 
 	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc,
@@ -50,58 +54,16 @@ public class Plateau
 		return plateau;
 	}
 
-	public boolean refreshDeplacement(Point anciennePosition,
+	public void deplacementProg(Point anciennePosition,
 			Pieces piecesDeplacer)
 	{
-		// Création d'une variable qui indique si le mouvement est valide
-		boolean mouvementValide = true;
 		// On enleve la pieces de son ancien deplacement
 		plateau[anciennePosition.x][anciennePosition.y] = null;
+		
 		// On déplace la pieces et on store ce qui a été bouffer
-		Pieces temp = deplacerPieces(piecesDeplacer);
+		deplacerPieces(piecesDeplacer);
 
-		// on actualise les mouvement possible
-		blanc.actualiserMouvementPossible();
-		noir.actualiserMouvementPossible();
-
-		// On regarde les échecs
-		if (piecesDeplacer.isWhite())
-		{
-			mouvementValide = !blanc.vérifierÉchec(noir.getMouvementPossible());
-		}
-		else
-		{
-			mouvementValide = !noir.vérifierÉchec(blanc.getMouvementPossible());
-		}
-
-		if (!mouvementValide)
-		{
-			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-					.getEmplacement().y] = temp;
-			piecesDeplacer.setEmplacement(anciennePosition);
-			deplacerPieces(piecesDeplacer);
-			actualiserTeam();
-			blanc.actualiserMouvementPossible();
-			noir.actualiserMouvementPossible();
-		}
-		else
-		{
-			actualiserToutLesMouvementJouable();
-		}
-
-		// On regarde les échecs valide
-		if (piecesDeplacer.isWhite()
-				&& noir.vérifierÉchec(blanc.getMouvementPossible()))
-		{
-			noir.getRoi().setaBouger();
-		}
-		else
-			if (blanc.vérifierÉchec(noir.getMouvementPossible()))
-			{
-				blanc.getRoi().setaBouger();
-			}
-
-		return mouvementValide;
+		actualiserToutLesMouvementJouable();
 	}
 
 	public Pieces deplacerPieces(Pieces piecesDeplacer)
@@ -121,7 +83,7 @@ public class Plateau
 
 	public Point refreshDeplacementRock(Roi roiDeplacer)
 	{
-		Point rockEstValide;
+		Point rockEstValide=null;
 
 		if (roiDeplacer.getEmplacement().equals(new Point(2, 0)))
 		{
@@ -162,16 +124,8 @@ public class Plateau
 						plateau[7][7] = null;
 						rockEstValide = new Point(5, 7);
 					}
-					else
-					{
-						rockEstValide = null;
-					}
-
-		if (rockEstValide != null)
-		{
-			blanc.actualiserMouvementPossible();
-			noir.actualiserMouvementPossible();
-		}
+		
+		actualiserToutLesMouvementJouable();
 
 		return rockEstValide;
 	}

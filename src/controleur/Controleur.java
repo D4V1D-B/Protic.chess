@@ -470,11 +470,12 @@ public class Controleur implements Initializable
 			pieceSelect = plateau
 					.trouverPieces(rechercheCoordonnee(paneClick.getId()));
 			paneSelect = paneClick;
+
 			if (pieceSelect != null && pieceSelect.isWhite() == tourJoueur)
 			{
 				paneSelect.setStyle(
 						"-fx-background-color:deeppink; -fx-border-color: black");
-				ArrayList<Point> tableau = pieceSelect.getMouvementPossible();
+				ArrayList<Point> tableau = pieceSelect.getMouvementJouable();
 
 				for (int i = 0; i < tableau.size(); i++)
 				{
@@ -495,7 +496,7 @@ public class Controleur implements Initializable
 		else
 		{
 
-			if (pieceSelect.getMouvementPossible()
+			if (pieceSelect.getMouvementJouable()
 					.contains(rechercheCoordonnee(paneClick.getId()))
 					&& pieceSelect.isWhite() == tourJoueur)
 			{
@@ -518,22 +519,19 @@ public class Controleur implements Initializable
 				}
 				else
 				{
-					boolean mouvementValide = deplacer(pieceSelect, paneClick);
-					if (mouvementValide)
+					deplacer(pieceSelect, paneClick);
+					deplacerImage(paneClick, paneSelect, pieceSelect);
+					ajouterTableView(pieceSelect, paneClick.getId());
+					if (pieceSelect.getClass().toString().contains("Roi"))
 					{
-						deplacerImage(paneClick, paneSelect, pieceSelect);
-						ajouterTableView(pieceSelect, paneClick.getId());
-						if (pieceSelect.getClass().toString().contains("Roi"))
-						{
-							((Roi) pieceSelect).setaBouger();
-						}
-						else
-							if (pieceSelect.getClass().toString()
-									.contains("Tour"))
-							{
-								((Tour) pieceSelect).setaBouger();
-							}
+						((Roi) pieceSelect).setaBouger();
 					}
+					else
+						if (pieceSelect.getClass().toString().contains("Tour"))
+						{
+							((Tour) pieceSelect).setaBouger();
+						}
+
 				}
 				tourJoueur = !tourJoueur;
 				paneSelect = null;
@@ -545,18 +543,18 @@ public class Controleur implements Initializable
 				pieceSelect = (null);
 			}
 		}
+		if (plateau.getEchecMath())
+		{
+			afficherFinDePartie();
+		}
 		setLabelTourCouleur(labelTourCouleur);
 	}
 
-	private boolean deplacer(Pieces pieces, Pane positionFinale)
+	private void deplacer(Pieces pieces, Pane positionFinale)
 	{
-		pieces.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
 		// deplacement dans la prog
 		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
-		boolean mouvementValide = plateau.refreshDeplacement(lastEmplacement,
-				pieceSelect);
-
-		return mouvementValide;
+		plateau.deplacementProg(lastEmplacement, pieceSelect);
 	}
 
 	private void deplacerTour(Point emplacement)
@@ -730,15 +728,16 @@ public class Controleur implements Initializable
 	{
 		Alert alert = new Alert(AlertType.NONE);
 		alert.setTitle("Fin de Partie !");
-		alert.setHeaderText(
-				"Les " + labelTourCouleur.getText() + "s ont gagnés la partie !");
+		alert.setHeaderText("Les " + labelTourCouleur.getText()
+				+ "s ont gagnés la partie !");
 		alert.setContentText(null);
 		ButtonType analyse = new ButtonType("Analyse");
 		alert.getButtonTypes().setAll(analyse, ButtonType.OK);
 		Optional<ButtonType> choice = alert.showAndWait();
-		
-		if(choice.get() == analyse) {
-			//ouvrir analyse
+
+		if (choice.get() == analyse)
+		{
+			// ouvrir analyse
 		}
 	}
 }
