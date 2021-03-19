@@ -44,7 +44,7 @@ public class Controleur implements Initializable
 			add(new Point(6, 0));
 			add(new Point(2, 0));
 			add(new Point(2, 7));
-			add(new Point(2, 7));
+			add(new Point(6, 7));
 		}
 	};
 
