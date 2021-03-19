@@ -487,7 +487,6 @@ public class Controleur implements Initializable
 					n.setImage(association.get(pieceSelect.getNom()));
 					ImageView m = (ImageView) paneSelect.getChildren().get(0);
 					m.setImage(null);
-					paneSelect.setStyle("-fx-background-color:pink; -fx-border-color: black");
 					pieceSelect.setEmplacement(rechercheCoordonnee(p.getId()));
 					boolean rockValide = plateau
 							.refreshDeplacementRock(((Roi) pieceSelect));
@@ -503,6 +502,7 @@ public class Controleur implements Initializable
 						ImageView m = (ImageView) paneSelect.getChildren()
 								.get(0);
 						m.setImage(null);
+						paneSelect.setStyle("-fx-background-color:pink; -fx-border-color: black");
 					}
 				}
 				
