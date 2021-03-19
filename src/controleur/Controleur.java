@@ -493,7 +493,7 @@ public class Controleur implements Initializable
 					if (rockValide != null)
 					{
 						deplacerImage(paneClick, paneSelect, pieceSelect);
-						ajouterTableView(pieceSelect, "Rock");
+						ajouterTableView(pieceSelect, "Castle");
 						deplacerTour(rockValide);
 					}
 				}
@@ -686,7 +686,7 @@ public class Controleur implements Initializable
 
 	private void ajouterTableView(Pieces p, String positionFinale)
 	{
-if(positionFinale.equals("Rock"))
+if(positionFinale.equals("Castle"))
 {
 	Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
 			new SimpleStringProperty(positionFinale), p.isWhite());
