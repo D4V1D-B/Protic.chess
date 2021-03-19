@@ -552,12 +552,12 @@ public class Controleur implements Initializable
 			else
 				if (emplacement.equals(new Point(3,7)))
 				{
-					deplacerImage(d8, a8, new Tour("R",false, new Point(3,0)));
+					deplacerImage(d8, a8, new Tour("r",false, new Point(3,0)));
 				}
 				else
 					if (emplacement.equals(new Point(5,7)))
 					{
-						deplacerImage(f8, h8, new Tour("R",false, new Point(3,0)));
+						deplacerImage(f8, h8, new Tour("r",false, new Point(3,0)));
 					}
 
 	}
@@ -686,11 +686,20 @@ public class Controleur implements Initializable
 
 	private void ajouterTableView(Pieces p, String positionFinale)
 	{
+if(positionFinale.equals("Rock"))
+{
+	Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
+			new SimpleStringProperty(positionFinale), p.isWhite());
 
+	list.add(m.toString2());
+}
+else
+{
 		Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
 				new SimpleStringProperty(positionFinale), p.isWhite());
 
 		list.add(m.toString());
+}
 
 	}
 

@@ -51,13 +51,23 @@ public class Mouvement
 	@Override
 	public String toString()
 	{
-		String c = "N";
+		String c = "B";
 		if (isWhite)
 		{
-			c = "B";
+			c = "W";
 		}
 
 		return c + getPieceBouge().get() + " - "
 				+ getNouvelleEmplacement().get();
+	}
+	public String toString2()
+	{
+		String c = "B";
+		if (isWhite)
+		{
+			c = "W";
+		}
+		return c + " " + getNouvelleEmplacement().get();
+		
 	}
 }
