@@ -51,14 +51,18 @@ public class Plateau
 	public boolean refreshDeplacement(Point anciennePosition,
 			Pieces piecesDeplacer)
 	{
+		// Création d'une variable qui indique si le mouvement est valide
 		boolean mouvementValide = true;
+		// On enleve la pieces de son ancien deplacement
 		plateau[anciennePosition.x][anciennePosition.y] = null;
-
+		// On déplace la pieces et on store ce qui a été bouffer
 		Pieces temp = deplacerPieces(piecesDeplacer);
 
+		//on actualise les mouvement possible
 		blanc.actualiserMouvementPossible();
 		noir.actualiserMouvementPossible();
 
+		// On regarde les échecs
 		if (piecesDeplacer.isWhite())
 		{
 			mouvementValide = !blanc.vérifierÉchec(noir.getMouvementPossible());
@@ -74,6 +78,9 @@ public class Plateau
 					.getEmplacement().y] = temp;
 			piecesDeplacer.setEmplacement(anciennePosition);
 			deplacerPieces(piecesDeplacer);
+			actualiserTeam();
+			blanc.actualiserMouvementPossible();
+			noir.actualiserMouvementPossible();
 		}
 
 		return mouvementValide;
@@ -81,64 +88,65 @@ public class Plateau
 
 	public Pieces deplacerPieces(Pieces piecesDeplacer)
 	{
-		Pieces temp = null;
-		if (plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-				.getEmplacement().y] != null)
+		Pieces temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+				.getEmplacement().y];
+		plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+				.getEmplacement().y] = piecesDeplacer;
+
+		if (temp != null)
 		{
-			temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-					.getEmplacement().y];
-			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-					.getEmplacement().y] = piecesDeplacer;
 			actualiserTeam();
 		}
-		else
-		{
-			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-					.getEmplacement().y] = piecesDeplacer;
-		}
+
 		return temp;
 	}
-	
-	public boolean refreshDeplacementRock(Roi roiDeplacer)
+
+	public Point refreshDeplacementRock(Roi roiDeplacer)
 	{
-		boolean rockEstValide = true;
+		Point rockEstValide;
 		
 		if (roiDeplacer.getEmplacement().equals(new Point(2, 0)))
 		{
 			plateau[4][0] = null;
 			plateau[2][0] = roiDeplacer;
-			plateau[0][0].setEmplacement(new Point(3,0));
-			plateau[3][0]=plateau[0][0];
-			plateau[0][0]=null;
+			plateau[0][0].setEmplacement(new Point(3, 0));
+			plateau[3][0] = plateau[0][0];
+			plateau[0][0] = null;
+			rockEstValide = new Point(3, 0);
 		}
-		else if (roiDeplacer.getEmplacement().equals(new Point(6, 0)))
-		{
-			plateau[4][0] = null;
-			plateau[6][0] = roiDeplacer;
-			plateau[7][0].setEmplacement(new Point(5,0));
-			plateau[5][0]=plateau[7][0];
-			plateau[7][0]=null;
-		}
+		else
+			if (roiDeplacer.getEmplacement().equals(new Point(6, 0)))
+			{
+				plateau[4][0] = null;
+				plateau[6][0] = roiDeplacer;
+				plateau[7][0].setEmplacement(new Point(5, 0));
+				plateau[5][0] = plateau[7][0];
+				plateau[7][0] = null;
+				rockEstValide = new Point(5, 0);
+			}
 		if (roiDeplacer.getEmplacement().equals(new Point(2, 7)))
 		{
 			plateau[4][7] = null;
 			plateau[2][7] = roiDeplacer;
-			plateau[0][7].setEmplacement(new Point(3,7));
-			plateau[3][7]=plateau[0][7];
-			plateau[0][7]=null;
-		}
-		else if (roiDeplacer.getEmplacement().equals(new Point(6, 7)))
-		{
-			plateau[4][7] = null;
-			plateau[6][7] = roiDeplacer;
-			plateau[7][7].setEmplacement(new Point(5,7));
-			plateau[5][7]=plateau[7][7];
-			plateau[7][7]=null;
+			plateau[0][7].setEmplacement(new Point(3, 7));
+			plateau[3][7] = plateau[0][7];
+			plateau[0][7] = null;
+			rockEstValide = new Point(3, 7);
 		}
 		else
-		{
-			rockEstValide = false;
-		}
+			if (roiDeplacer.getEmplacement().equals(new Point(6, 7)))
+			{
+				plateau[4][7] = null;
+				plateau[6][7] = roiDeplacer;
+				plateau[7][7].setEmplacement(new Point(5, 7));
+				plateau[5][7] = plateau[7][7];
+				plateau[7][7] = null;
+				rockEstValide = new Point(5, 7);
+			}
+			else
+			{
+				rockEstValide = null;
+			}
 
 		return rockEstValide;
 	}
@@ -250,13 +258,14 @@ public class Plateau
 			}
 			for (Pieces p : listePiece)
 			{
-				if (p.getClass().toString()!="class modele.Pion")
+				if (p.getClass().toString() != "class modele.Pion")
 				{
 					mouvementPossible.addAll(p.getMouvementPossible());
 				}
 				else
 				{
-					mouvementPossible.addAll(((Pion)p).getMouvementDangereux(plateau));
+					mouvementPossible
+							.addAll(((Pion) p).getMouvementDangereux(plateau));
 				}
 			}
 		}

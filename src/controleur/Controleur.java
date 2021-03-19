@@ -488,8 +488,12 @@ public class Controleur implements Initializable
 					ImageView m = (ImageView) paneSelect.getChildren().get(0);
 					m.setImage(null);
 					pieceSelect.setEmplacement(rechercheCoordonnee(p.getId()));
-					boolean rockValide = plateau
+					Point rockValide = plateau
 							.refreshDeplacementRock(((Roi) pieceSelect));
+					if(rockValide!=null)
+					{
+						
+					}
 				}
 				else
 				{
@@ -517,17 +521,19 @@ public class Controleur implements Initializable
 		}
 
 	}
+
+//	ajouterTableView(p, positionFinale.getId());
 	
-	private boolean deplacer(Pieces p, Pane positionFinale)
+	private boolean deplacer(Pieces pieces, Pane paneFinale)
 	{
-		p.setEmplacement(rechercheCoordonnee(positionFinale.getId()));
-		// deplacement dans la prog
+		//Changer l'emplacement de la pieces pour l'emplacement ou elle s'en va
+		pieces.setEmplacement(rechercheCoordonnee(paneFinale.getId()));
+		//Trouver l'emplacement ou est la pieces avant le déplacement 
 		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
+		//Déplacer la pieces
 		boolean mouvementValide = plateau.refreshDeplacement(lastEmplacement,
 				pieceSelect);
-
-		ajouterTableView(p, positionFinale.getId());
-
+		
 		return mouvementValide;
 	}
 
