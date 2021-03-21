@@ -34,15 +34,17 @@ public class Plateau
 		noir = new Equipe(pieceNoir);
 		actualiserToutLesMouvementJouable();
 	}
-	
+
 	public boolean getEchecMath()
 	{
-		return noir.getMouvementJouable().size()==0 || blanc.getMouvementJouable().size()==0;
+		return noir.getMouvementJouable().size() == 0
+				|| blanc.getMouvementJouable().size() == 0;
 	}
-	
+
 	public boolean getEchec()
 	{
-		return noir.vérifierÉchec(blanc.mouvementPossible) || blanc.vérifierÉchec(noir.mouvementPossible);
+		return noir.vérifierÉchec(blanc.mouvementPossible)
+				|| blanc.vérifierÉchec(noir.mouvementPossible);
 	}
 
 	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc,
@@ -59,16 +61,91 @@ public class Plateau
 		return plateau;
 	}
 
-	public void deplacementProg(Point anciennePosition,
-			Pieces piecesDeplacer)
+	public void deplacementProg(Point anciennePosition, Pieces piecesDeplacer)
 	{
 		// On enleve la pieces de son ancien deplacement
 		plateau[anciennePosition.x][anciennePosition.y] = null;
-		
+
 		// On déplace la pieces et on store ce qui a été bouffer
 		deplacerPieces(piecesDeplacer);
 
 		actualiserToutLesMouvementJouable();
+
+		if (piecesDeplacer.isWhite()
+				&& piecesDeplacer.getClass().toString().contains("Pion")
+				&& piecesDeplacer.getEmplacement().y == 3
+				&& anciennePosition.y == 1)
+		{
+			if (piecesDeplacer.getEmplacement().x - 1 >= 0
+					&& plateau[piecesDeplacer.getEmplacement().x
+							- 1][piecesDeplacer.getEmplacement().y] != null
+					&& plateau[piecesDeplacer.getEmplacement().x
+							- 1][piecesDeplacer.getEmplacement().y].getClass()
+									.toString().contains("Pion")
+					&& !plateau[piecesDeplacer.getEmplacement().x
+							- 1][piecesDeplacer.getEmplacement().y].isWhite())
+			{
+				plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer
+						.getEmplacement().y].addMouvementJouable(
+								new Point(anciennePosition.x,
+										anciennePosition.y + 1));
+			}
+
+			if (piecesDeplacer.getEmplacement().x + 1 <= 7
+					&& plateau[piecesDeplacer.getEmplacement().x
+							+ 1][piecesDeplacer.getEmplacement().y] != null
+					&& plateau[piecesDeplacer.getEmplacement().x
+							+ 1][piecesDeplacer.getEmplacement().y].getClass()
+									.toString().contains("Pion")
+					&& !plateau[piecesDeplacer.getEmplacement().x
+							+ 1][piecesDeplacer.getEmplacement().y].isWhite())
+			{
+				plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer
+						.getEmplacement().y].addMouvementJouable(
+								new Point(anciennePosition.x,
+										anciennePosition.y + 1));
+			}
+		}
+		else
+			if (!piecesDeplacer.isWhite()
+					&& piecesDeplacer.getClass().toString().contains("Pion")
+					&& piecesDeplacer.getEmplacement().y == 4
+					&& anciennePosition.y == 6)
+			{
+				if (piecesDeplacer.getEmplacement().x - 1 >= 0
+						&& plateau[piecesDeplacer.getEmplacement().x
+								- 1][piecesDeplacer.getEmplacement().y] != null
+						&& plateau[piecesDeplacer.getEmplacement().x
+								- 1][piecesDeplacer.getEmplacement().y]
+										.getClass().toString().contains("Pion")
+						&& !plateau[piecesDeplacer.getEmplacement().x
+								- 1][piecesDeplacer.getEmplacement().y]
+										.isWhite())
+				{
+					plateau[piecesDeplacer.getEmplacement().x
+							- 1][piecesDeplacer.getEmplacement().y]
+									.addMouvementJouable(
+											new Point(anciennePosition.x,
+													anciennePosition.y - 1));
+				}
+				if (piecesDeplacer.getEmplacement().x + 1 <= 7
+						&& plateau[piecesDeplacer.getEmplacement().x
+								+ 1][piecesDeplacer.getEmplacement().y] != null
+						&& plateau[piecesDeplacer.getEmplacement().x
+								+ 1][piecesDeplacer.getEmplacement().y]
+										.getClass().toString().contains("Pion")
+						&& !plateau[piecesDeplacer.getEmplacement().x
+								+ 1][piecesDeplacer.getEmplacement().y]
+										.isWhite())
+				{
+					plateau[piecesDeplacer.getEmplacement().x
+							+ 1][piecesDeplacer.getEmplacement().y]
+									.addMouvementJouable(
+											new Point(anciennePosition.x,
+													anciennePosition.y - 1));
+				}
+
+			}
 	}
 
 	public Pieces deplacerPieces(Pieces piecesDeplacer)
@@ -88,7 +165,7 @@ public class Plateau
 
 	public Point refreshDeplacementRock(Roi roiDeplacer)
 	{
-		Point rockEstValide=null;
+		Point rockEstValide = null;
 
 		if (roiDeplacer.getEmplacement().equals(new Point(2, 0)))
 		{
@@ -129,7 +206,7 @@ public class Plateau
 						plateau[7][7] = null;
 						rockEstValide = new Point(5, 7);
 					}
-		
+
 		actualiserToutLesMouvementJouable();
 
 		return rockEstValide;
@@ -176,15 +253,15 @@ public class Plateau
 		noir.actualiserMouvementPossible();
 		blanc.mouvementJouable.clear();
 		noir.mouvementJouable.clear();
-		
+
 		ArrayList<Point> pudebugcool = new ArrayList<Point>();
 		ArrayList<Pieces> pudebugcool2 = new ArrayList<Pieces>();
-		
+
 		for (Pieces p : blanc.listePiece)
 		{
 			pudebugcool2.add(p);
 		}
-		
+
 		for (Pieces p : pudebugcool2)
 		{
 			p.getMouvementJouable().clear();
@@ -208,7 +285,8 @@ public class Plateau
 
 				case "class modele.Cavalier":
 					pudebugcool.clear();
-					for (Point posibiliter : ((Cavalier) p).getMouvementPossible())
+					for (Point posibiliter : ((Cavalier) p)
+							.getMouvementPossible())
 					{
 						pudebugcool.add(posibiliter);
 					}
@@ -294,7 +372,7 @@ public class Plateau
 		{
 			pudebugcool2.add(p);
 		}
-		
+
 		for (Pieces p : pudebugcool2)
 		{
 			p.getMouvementJouable().clear();
@@ -318,7 +396,8 @@ public class Plateau
 
 				case "class modele.Cavalier":
 					pudebugcool.clear();
-					for (Point posibiliter : ((Cavalier) p).getMouvementPossible())
+					for (Point posibiliter : ((Cavalier) p)
+							.getMouvementPossible())
 					{
 						pudebugcool.add(posibiliter);
 					}
