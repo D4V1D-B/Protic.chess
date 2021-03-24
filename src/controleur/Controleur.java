@@ -518,28 +518,48 @@ public class Controleur implements Initializable
 					}
 				}
 				else
-				{
-					deplacer(pieceSelect, paneClick);
-					deplacerImage(paneClick, paneSelect, pieceSelect);
-					ajouterTableView(pieceSelect, paneClick.getId());
-					
-					
-					if (pieceSelect.getClass().toString().contains("Roi"))
+					if (pieceSelect.getClass().toString().contains("Pion")
+							&& pieceSelect
+									.getEmplacement().x != rechercheCoordonnee(
+											paneSelect.getId()).x
+							&& plateau.trouverPieces(
+									pieceSelect.getEmplacement()) == null)
 					{
-						((Roi) pieceSelect).setaBouger();
+
+						deplacer(pieceSelect, paneClick);
+						deplacerImage(paneClick, paneSelect, pieceSelect);
+						if (pieceSelect.isWhite())
+						{
+							SupprimerImage(new Point(
+									pieceSelect.getEmplacement().x,
+									pieceSelect.getEmplacement().y - 1));
+						}
+						else
+						{
+							SupprimerImage(new Point(
+									pieceSelect.getEmplacement().x,
+									pieceSelect.getEmplacement().y + 1));
+						}
+						ajouterTableView(pieceSelect, paneClick.getId());
 					}
 					else
-						if (pieceSelect.getClass().toString().contains("Tour"))
-						{
-							((Tour) pieceSelect).setaBouger();
-						}
+					{
+						deplacer(pieceSelect, paneClick);
+						deplacerImage(paneClick, paneSelect, pieceSelect);
+						ajouterTableView(pieceSelect, paneClick.getId());
 
-				}
-				
-				//TODO FAIRE FENÊTRE CHOIX PION
-				
-				//TODO TROUVE UN MOYEN DE GÉRER EN PASSANT
-				
+						if (pieceSelect.getClass().toString().contains("Roi"))
+						{
+							((Roi) pieceSelect).setaBouger();
+						}
+						else
+							if (pieceSelect.getClass().toString()
+									.contains("Tour"))
+							{
+								((Tour) pieceSelect).setaBouger();
+							}
+					}
+
 				tourJoueur = !tourJoueur;
 				paneSelect = null;
 				pieceSelect = null;
@@ -553,13 +573,15 @@ public class Controleur implements Initializable
 		if (plateau.getEchecMath())
 		{
 			afficherFinDePartie("Les " + labelTourCouleur.getText()
-			+ "s ont gagnés la partie !");
+					+ "s ont gagnés la partie !");
 		}
-		else if(plateau.getEchecMath())
-		{
-			afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
-		}
-		
+		else
+			if (plateau.getEchecMath())
+			{
+				afficherFinDePartie(
+						"Partie nulle, meilleur chance la prochaine fois!");
+			}
+
 		setLabelTourCouleur(labelTourCouleur);
 	}
 
@@ -605,7 +627,21 @@ public class Controleur implements Initializable
 		emplacementDepart.setImage(null);
 		paneSelect
 				.setStyle("-fx-background-color:pink; -fx-border-color: black");
+	}
 
+	private void SupprimerImage(Point emplacementASupprimer)
+	{
+		Pane tableauPane[] = AllPane();
+		for (int j = 0; j < tableauPane.length; j++)
+		{
+			if (tableauPane[j].getId()
+					.equals(recherchePane(emplacementASupprimer)))
+			{
+				ImageView emplacementDepart = (ImageView) tableauPane[j]
+						.getChildren().get(0);
+				emplacementDepart.setImage(null);
+			}
+		}
 	}
 
 	private String recherchePane(Point point)
