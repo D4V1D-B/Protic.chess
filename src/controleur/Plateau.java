@@ -17,16 +17,6 @@ public class Plateau
 	private Equipe blanc;
 	private Equipe noir;
 
-	/**
-	 * Pour des tests
-	 * 
-	 * @param plateau pour des test. (Surtout vide)
-	 */
-	public Plateau(Pieces[][] newPlateau)
-	{
-		this.plateau = newPlateau;
-	}
-
 	public Plateau(ArrayList<Pieces> pieceBlanc, ArrayList<Pieces> pieceNoir)
 	{
 		refreshPlateau(pieceBlanc, pieceNoir);
@@ -43,8 +33,8 @@ public class Plateau
 
 	public boolean getEchec()
 	{
-		return noir.vérifierÉchec(blanc.mouvementPossible)
-				|| blanc.vérifierÉchec(noir.mouvementPossible);
+		return noir.verifierEchec(blanc.mouvementPossible)
+				|| blanc.verifierEchec(noir.mouvementPossible);
 	}
 
 	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc,
@@ -261,11 +251,11 @@ public class Plateau
 		// On regarde les échecs
 		if (pieces.isWhite())
 		{
-			mouvementValide = !blanc.vérifierÉchec(noir.getMouvementPossible());
+			mouvementValide = !blanc.verifierEchec(noir.getMouvementPossible());
 		}
 		else
 		{
-			mouvementValide = !noir.vérifierÉchec(blanc.getMouvementPossible());
+			mouvementValide = !noir.verifierEchec(blanc.getMouvementPossible());
 		}
 
 		plateau[pieces.getEmplacement().x][pieces.getEmplacement().y] = temp;
@@ -527,8 +517,8 @@ public class Plateau
 
 	public void actualiserTeam()
 	{
-		blanc.clear();
-		noir.clear();
+		blanc.listePiece.clear();
+		noir.listePiece.clear();
 
 		for (Pieces[] row : plateau)
 		{
@@ -538,11 +528,11 @@ public class Plateau
 				{
 					if (p.isWhite())
 					{
-						blanc.add(p);
+						blanc.listePiece.add(p);
 					}
 					else
 					{
-						noir.add(p);
+						noir.listePiece.add(p);
 					}
 				}
 			}
@@ -598,15 +588,6 @@ public class Plateau
 			return (Roi) listePiece.get(indexOfKing());
 		}
 
-		public void add(Pieces piece)
-		{
-			listePiece.add(piece);
-		}
-
-		public void clear()
-		{
-			listePiece.clear();
-		}
 
 		public void actualiserMouvementPossible()
 		{
@@ -659,7 +640,7 @@ public class Plateau
 			return mouvementJouable;
 		}
 
-		public boolean vérifierÉchec(ArrayList<Point> mouvementPossibleEnemy)
+		public boolean verifierEchec(ArrayList<Point> mouvementPossibleEnemy)
 		{
 			boolean roiEchec = false;
 
