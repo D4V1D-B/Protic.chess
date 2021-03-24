@@ -618,12 +618,12 @@ public class Controleur implements Initializable
 
 	}
 
-	private void deplacerImage(Pane pane1, Pane pane2, Pieces pieceADeplacer)
+	private void deplacerImage(Pane paneArriver, Pane paneDepart, Pieces pieceADeplacer)
 	{
 		resetCouleur();
-		ImageView emplacementFin = (ImageView) pane1.getChildren().get(0);
+		ImageView emplacementFin = (ImageView) paneArriver.getChildren().get(0);
 		emplacementFin.setImage(association.get(pieceADeplacer.getNom()));
-		ImageView emplacementDepart = (ImageView) pane2.getChildren().get(0);
+		ImageView emplacementDepart = (ImageView) paneDepart.getChildren().get(0);
 		emplacementDepart.setImage(null);
 		paneSelect
 				.setStyle("-fx-background-color:pink; -fx-border-color: black");

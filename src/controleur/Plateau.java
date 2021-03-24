@@ -548,6 +548,11 @@ public class Plateau
 	{
 		return plateau[position.x][position.y];
 	}
+	
+	public void remplacerPion(Pieces changement)
+	{
+		plateau[changement.getEmplacement().x][changement.getEmplacement().y]=changement;
+	}
 
 	public class Equipe
 	{
