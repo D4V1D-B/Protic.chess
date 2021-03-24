@@ -76,7 +76,7 @@ public class Plateau
 		 || anciennePosition.y
 		 - piecesDeplacer.getEmplacement().y == -2))
 		 {
-		 ajouterEnPassant(anciennePosition, piecesDeplacer);
+			 ajouterEnPassant(anciennePosition, piecesDeplacer);
 		 }
 	}
 

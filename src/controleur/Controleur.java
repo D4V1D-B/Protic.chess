@@ -725,7 +725,7 @@ public class Controleur implements Initializable
 			Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
 					new SimpleStringProperty(positionFinale), p.isWhite());
 
-			list.add(m.toString2());
+			list.add(m.toStringCastle());
 		}
 		else
 		{

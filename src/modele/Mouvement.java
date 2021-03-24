@@ -60,7 +60,7 @@ public class Mouvement
 		return c + getPieceBouge().get() + " - "
 				+ getNouvelleEmplacement().get();
 	}
-	public String toString2()
+	public String toStringCastle()
 	{
 		String c = "B";
 		if (isWhite)
