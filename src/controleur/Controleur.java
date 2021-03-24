@@ -266,6 +266,9 @@ public class Controleur implements Initializable
 	private Button recommencerPartie;
 
 	@FXML
+	private ObservableList<String> list;
+	
+	@FXML
 	void recommencerPartie(MouseEvent event)
 	{
 		Pane[] allPanes = new Pane[64];
@@ -285,11 +288,6 @@ public class Controleur implements Initializable
 		resetTotal();
 
 	}
-
-	@FXML
-	private ObservableList<String> list;
-
-	@FXML
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
