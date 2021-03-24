@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -23,9 +24,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import modele.Cavalier;
 import modele.Fou;
 import modele.Mouvement;
@@ -559,7 +563,16 @@ public class Controleur implements Initializable
 								((Tour) pieceSelect).setaBouger();
 							}
 					}
-
+				
+				if ((pieceSelect.getNom().equals("P")
+						&& rechercheCoordonnee(paneClick.getId()).y == 7)
+						|| (pieceSelect.getNom().equals("p")
+								&& rechercheCoordonnee(
+										paneClick.getId()).y == 0))
+				{
+					afficherPionUgrade(pieceSelect.isWhite(), paneClick);
+				}
+				
 				tourJoueur = !tourJoueur;
 				paneSelect = null;
 				pieceSelect = null;
@@ -584,6 +597,7 @@ public class Controleur implements Initializable
 
 		setLabelTourCouleur(labelTourCouleur);
 	}
+
 
 	private void deplacer(Pieces pieces, Pane positionFinale)
 	{
@@ -771,6 +785,67 @@ public class Controleur implements Initializable
 			list.add(m.toString());
 		}
 
+	}
+	
+	private void afficherPionUgrade(boolean equipe, Pane paneClick)
+	{
+		
+		Stage upgrade = new Stage();
+		upgrade.setTitle("Pion upgrade !");
+		VBox root = new VBox();
+		HBox images = new HBox();
+		HBox boutons = new HBox();
+		upgrade.setScene(new Scene(root));
+
+		Button reine = new Button("Reine");
+		Button fou = new Button("Fou");
+		Button chevalier = new Button("Chevalier");
+		Button tour = new Button("Tour");
+		ImageView reineImage = new ImageView();
+		ImageView fouImage = new ImageView();
+		ImageView chevalierImage = new ImageView();
+		ImageView tourImage = new ImageView();
+		if (equipe)
+		{
+			reineImage.setImage(association.get("Q"));
+			fouImage.setImage(association.get("B"));
+			chevalierImage.setImage(association.get("N"));
+			tourImage.setImage(association.get("R"));
+		}
+		else
+		{
+			reineImage.setImage(association.get("q"));
+			fouImage.setImage(association.get("b"));
+			chevalierImage.setImage(association.get("n"));
+			tourImage.setImage(association.get("r"));
+		}
+
+		images.getChildren().addAll(reineImage, tourImage, chevalierImage,
+				fouImage);
+		boutons.getChildren().addAll(reine, tour, chevalier, fou);
+		root.getChildren().addAll(images, boutons);
+		upgrade.show();
+		ImageView imageNouvelle = (ImageView) paneSelect.getChildren().get(0);
+		reine.setOnAction((a) -> {
+			// reine sur le pane selectionne
+			imageNouvelle.setImage(association.get("Q"));
+			plateau.remplacerPion(
+					new Reine("Reine", equipe, pieceSelect.getEmplacement()));
+			upgrade.close();
+		});
+
+		fou.setOnAction((a) -> {
+
+			upgrade.close();
+		});
+		tour.setOnAction((a) -> {
+
+			upgrade.close();
+		});
+		chevalier.setOnAction((a) -> {
+
+			upgrade.close();
+		});
 	}
 
 	private void afficherFinDePartie(String finParti)
