@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -792,6 +793,12 @@ public class Controleur implements Initializable
 		
 		Stage upgrade = new Stage();
 		upgrade.setTitle("Pion upgrade !");
+		upgrade.setMaxHeight(135);
+		upgrade.setMinHeight(135);
+		
+		upgrade.setMaxWidth(275);
+		upgrade.setMinWidth(275);
+		
 		VBox root = new VBox();
 		HBox images = new HBox();
 		HBox boutons = new HBox();
@@ -799,51 +806,60 @@ public class Controleur implements Initializable
 
 		Button reine = new Button("Reine");
 		Button fou = new Button("Fou");
-		Button chevalier = new Button("Chevalier");
+		Button cavalier = new Button("Chevalier");
 		Button tour = new Button("Tour");
 		ImageView reineImage = new ImageView();
 		ImageView fouImage = new ImageView();
-		ImageView chevalierImage = new ImageView();
+		ImageView cavalierImage = new ImageView();
 		ImageView tourImage = new ImageView();
 		if (equipe)
 		{
 			reineImage.setImage(association.get("Q"));
 			fouImage.setImage(association.get("B"));
-			chevalierImage.setImage(association.get("N"));
+			cavalierImage.setImage(association.get("N"));
 			tourImage.setImage(association.get("R"));
 		}
 		else
 		{
 			reineImage.setImage(association.get("q"));
 			fouImage.setImage(association.get("b"));
-			chevalierImage.setImage(association.get("n"));
+			cavalierImage.setImage(association.get("n"));
 			tourImage.setImage(association.get("r"));
 		}
 
-		images.getChildren().addAll(reineImage, tourImage, chevalierImage,
+		images.getChildren().addAll(reineImage, tourImage, cavalierImage,
 				fouImage);
-		boutons.getChildren().addAll(reine, tour, chevalier, fou);
+		boutons.getChildren().addAll(reine, tour, cavalier, fou);
+		boutons.setPadding(new Insets(7));
+		images.setSpacing(5);
+		boutons.setSpacing(15);
+		
 		root.getChildren().addAll(images, boutons);
 		upgrade.show();
 		ImageView imageNouvelle = (ImageView) paneClick.getChildren().get(0);
 		reine.setOnAction((a) -> {
-			// reine sur le pane selectionne
-			imageNouvelle.setImage(association.get("Q"));
+			imageNouvelle.setImage(reineImage.getImage());
 			plateau.remplacerPion(
-					new Reine("Reine", equipe, pieceSelect.getEmplacement()));
+					new Reine("Q", equipe, rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 
 		fou.setOnAction((a) -> {
-
+			imageNouvelle.setImage(fouImage.getImage());
+			plateau.remplacerPion(
+					new Fou("B", equipe, rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 		tour.setOnAction((a) -> {
-
+			imageNouvelle.setImage(tourImage.getImage());
+			plateau.remplacerPion(
+					new Tour("R", equipe, rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
-		chevalier.setOnAction((a) -> {
-
+		cavalier.setOnAction((a) -> {
+			imageNouvelle.setImage(cavalierImage.getImage());
+			plateau.remplacerPion(
+					new Cavalier("N", equipe, rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 	}
