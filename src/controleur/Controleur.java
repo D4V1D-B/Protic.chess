@@ -545,11 +545,12 @@ public class Controleur implements Initializable
 		}
 		if (plateau.getEchecMath()&&plateau.getEchec())
 		{
-			afficherFinDePartie();
+			afficherFinDePartie("Les " + labelTourCouleur.getText()
+			+ "s ont gagnés la partie !");
 		}
 		else if(plateau.getEchecMath())
 		{
-			System.out.println("nulle");
+			afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
 		}
 		
 		setLabelTourCouleur(labelTourCouleur);
@@ -729,12 +730,11 @@ public class Controleur implements Initializable
 
 	}
 
-	private void afficherFinDePartie()
+	private void afficherFinDePartie(String finParti)
 	{
 		Alert alert = new Alert(AlertType.NONE);
 		alert.setTitle("Fin de Partie !");
-		alert.setHeaderText("Les " + labelTourCouleur.getText()
-				+ "s ont gagnés la partie !");
+		alert.setHeaderText(finParti);
 		alert.setContentText(null);
 		ButtonType analyse = new ButtonType("Analyse");
 		alert.getButtonTypes().setAll(analyse, ButtonType.OK);
