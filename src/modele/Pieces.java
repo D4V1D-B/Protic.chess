@@ -72,16 +72,6 @@ public abstract class Pieces
 	{
 		return mouvementJouable;
 	}
-	
-	public void addMouvementJouable(Point mouvementJouable)
-	{
-		this.mouvementJouable.add(mouvementJouable);
-	}
-	
-	public void setMouvementJouable(ArrayList<Point> mouvementJouables)
-	{
-		this.mouvementJouable=mouvementJouables;
-	}
 
 
 }

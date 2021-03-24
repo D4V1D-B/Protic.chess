@@ -94,7 +94,7 @@ public class Plateau
 							- 1][piecesDeplacer.getEmplacement().y].isWhite())
 			{
 				plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer
-						.getEmplacement().y].addMouvementJouable(
+						.getEmplacement().y].getMouvementJouable().add(
 								new Point(anciennePosition.x,
 										anciennePosition.y + 1));
 			}
@@ -109,7 +109,7 @@ public class Plateau
 							+ 1][piecesDeplacer.getEmplacement().y].isWhite())
 			{
 				plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer
-						.getEmplacement().y].addMouvementJouable(
+						.getEmplacement().y].getMouvementJouable().add(
 								new Point(anciennePosition.x,
 										anciennePosition.y + 1));
 			}
@@ -129,7 +129,7 @@ public class Plateau
 				{
 					plateau[piecesDeplacer.getEmplacement().x
 							- 1][piecesDeplacer.getEmplacement().y]
-									.addMouvementJouable(
+									.getMouvementJouable().add(
 											new Point(anciennePosition.x,
 													anciennePosition.y - 1));
 				}
@@ -145,7 +145,7 @@ public class Plateau
 				{
 					plateau[piecesDeplacer.getEmplacement().x
 							+ 1][piecesDeplacer.getEmplacement().y]
-									.addMouvementJouable(
+									.getMouvementJouable().add(
 											new Point(anciennePosition.x,
 													anciennePosition.y - 1));
 				}
@@ -324,7 +324,7 @@ public class Plateau
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
-							p.addMouvementJouable(posibiliter);
+							p.getMouvementJouable().add(posibiliter);
 						}
 					}
 					break;
@@ -341,7 +341,7 @@ public class Plateau
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
-							p.addMouvementJouable(posibiliter);
+							p.getMouvementJouable().add(posibiliter);
 						}
 					}
 					break;
@@ -357,7 +357,7 @@ public class Plateau
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
-							p.addMouvementJouable(posibiliter);
+							p.getMouvementJouable().add(posibiliter);
 						}
 					}
 					break;
@@ -373,7 +373,7 @@ public class Plateau
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
-							p.addMouvementJouable(posibiliter);
+							p.getMouvementJouable().add(posibiliter);
 						}
 					}
 					break;
@@ -389,7 +389,7 @@ public class Plateau
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
-							p.addMouvementJouable(posibiliter);
+							p.getMouvementJouable().add(posibiliter);
 						}
 					}
 					break;
@@ -405,7 +405,7 @@ public class Plateau
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
-							p.addMouvementJouable(posibiliter);
+							p.getMouvementJouable().add(posibiliter);
 						}
 					}
 					break;
@@ -435,7 +435,7 @@ public class Plateau
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
-							p.addMouvementJouable(posibiliter);
+							p.getMouvementJouable().add(posibiliter);
 						}
 					}
 					break;
@@ -452,7 +452,7 @@ public class Plateau
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
-							p.addMouvementJouable(posibiliter);
+							p.getMouvementJouable().add(posibiliter);
 						}
 					}
 					break;
@@ -468,7 +468,7 @@ public class Plateau
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
-							p.addMouvementJouable(posibiliter);
+							p.getMouvementJouable().add(posibiliter);
 						}
 					}
 					break;
@@ -484,7 +484,7 @@ public class Plateau
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
-							p.addMouvementJouable(posibiliter);
+							p.getMouvementJouable().add(posibiliter);
 						}
 					}
 					break;
@@ -500,7 +500,7 @@ public class Plateau
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
-							p.addMouvementJouable(posibiliter);
+							p.getMouvementJouable().add(posibiliter);
 						}
 					}
 					break;
@@ -516,7 +516,7 @@ public class Plateau
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
-							p.addMouvementJouable(posibiliter);
+							p.getMouvementJouable().add(posibiliter);
 						}
 					}
 					break;
