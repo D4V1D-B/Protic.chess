@@ -40,12 +40,15 @@ public class Plateau
 		return noir.getMouvementJouable().size() == 0
 				|| blanc.getMouvementJouable().size() == 0;
 	}
+<<<<<<< HEAD
 
 	public boolean getEchec()
 	{
 		return noir.vérifierÉchec(blanc.mouvementPossible)
 				|| blanc.vérifierÉchec(noir.mouvementPossible);
 	}
+=======
+>>>>>>> parent of 5e30381 (partie nulle)
 
 	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc,
 			ArrayList<Pieces> pieceNoir)
