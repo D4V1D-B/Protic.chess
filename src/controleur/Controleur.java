@@ -825,7 +825,7 @@ public class Controleur implements Initializable
 		boutons.getChildren().addAll(reine, tour, chevalier, fou);
 		root.getChildren().addAll(images, boutons);
 		upgrade.show();
-		ImageView imageNouvelle = (ImageView) paneSelect.getChildren().get(0);
+		ImageView imageNouvelle = (ImageView) paneClick.getChildren().get(0);
 		reine.setOnAction((a) -> {
 			// reine sur le pane selectionne
 			imageNouvelle.setImage(association.get("Q"));
