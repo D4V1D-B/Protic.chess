@@ -71,13 +71,13 @@ public class Plateau
 
 		actualiserToutLesMouvementJouable();
 
-		// if (piecesDeplacer.getClass().toString().contains("Pion")
-		// && (anciennePosition.y - piecesDeplacer.getEmplacement().y == 2
-		// || anciennePosition.y
-		// - piecesDeplacer.getEmplacement().y == -2))
-		// {
-		// ajouterEnPassant(anciennePosition, piecesDeplacer);
-		// }
+		 if (piecesDeplacer.getClass().toString().contains("Pion")
+		 && (anciennePosition.y - piecesDeplacer.getEmplacement().y == 2
+		 || anciennePosition.y
+		 - piecesDeplacer.getEmplacement().y == -2))
+		 {
+		 ajouterEnPassant(anciennePosition, piecesDeplacer);
+		 }
 	}
 
 	public void ajouterEnPassant(Point anciennePosition, Pieces piecesDeplacer)
@@ -149,7 +149,6 @@ public class Plateau
 											new Point(anciennePosition.x,
 													anciennePosition.y - 1));
 				}
-
 			}
 	}
 

@@ -391,7 +391,6 @@ public class Controleur implements Initializable
 		resetCouleur();
 		tourJoueur = true;
 		setLabelTourCouleur(labelTourCouleur);
-		afficherFinDePartie();
 	}
 
 	public void placerPiecesString(String placement)
@@ -523,6 +522,8 @@ public class Controleur implements Initializable
 					deplacer(pieceSelect, paneClick);
 					deplacerImage(paneClick, paneSelect, pieceSelect);
 					ajouterTableView(pieceSelect, paneClick.getId());
+					
+					
 					if (pieceSelect.getClass().toString().contains("Roi"))
 					{
 						((Roi) pieceSelect).setaBouger();
@@ -534,6 +535,11 @@ public class Controleur implements Initializable
 						}
 
 				}
+				
+				//TODO FAIRE FENÊTRE CHOIX PION
+				
+				//TODO TROUVE UN MOYEN DE GÉRER EN PASSANT
+				
 				tourJoueur = !tourJoueur;
 				paneSelect = null;
 				pieceSelect = null;
