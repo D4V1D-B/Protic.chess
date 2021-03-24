@@ -793,6 +793,7 @@ public class Controleur implements Initializable
 		
 		Stage upgrade = new Stage();
 		upgrade.setTitle("Pion upgrade !");
+		
 		upgrade.setMaxHeight(135);
 		upgrade.setMinHeight(135);
 		
