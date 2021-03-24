@@ -551,12 +551,11 @@ public class Plateau
 
 	public void remplacerPion(Pieces changement)
 	{
-<<<<<<< Updated upstream
-		plateau[changement.getEmplacement().x][changement.getEmplacement().y] = changement;
-=======
 		plateau[changement.getEmplacement().x][changement
 				.getEmplacement().y] = changement;
->>>>>>> Stashed changes
+		actualiserTeam();
+		actualiserToutLesMouvementJouable();
+		
 	}
 
 	public class Equipe
