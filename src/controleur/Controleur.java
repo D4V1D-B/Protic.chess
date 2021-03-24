@@ -548,14 +548,11 @@ public class Controleur implements Initializable
 			afficherFinDePartie("Les " + labelTourCouleur.getText()
 			+ "s ont gagnés la partie !");
 		}
-<<<<<<< HEAD
 		else if(plateau.getEchecMath())
 		{
 			afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
 		}
 		
-=======
->>>>>>> parent of 5e30381 (partie nulle)
 		setLabelTourCouleur(labelTourCouleur);
 	}
 

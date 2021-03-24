@@ -40,15 +40,12 @@ public class Plateau
 		return noir.getMouvementJouable().size() == 0
 				|| blanc.getMouvementJouable().size() == 0;
 	}
-<<<<<<< HEAD
 
 	public boolean getEchec()
 	{
 		return noir.vérifierÉchec(blanc.mouvementPossible)
 				|| blanc.vérifierÉchec(noir.mouvementPossible);
 	}
-=======
->>>>>>> parent of 5e30381 (partie nulle)
 
 	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc,
 			ArrayList<Pieces> pieceNoir)
@@ -74,13 +71,13 @@ public class Plateau
 
 		actualiserToutLesMouvementJouable();
 
-//		if (piecesDeplacer.getClass().toString().contains("Pion")
-//				&& (anciennePosition.y - piecesDeplacer.getEmplacement().y == 2
-//						|| anciennePosition.y
-//								- piecesDeplacer.getEmplacement().y == -2))
-//		{
-//			ajouterEnPassant(anciennePosition, piecesDeplacer);
-//		}
+		// if (piecesDeplacer.getClass().toString().contains("Pion")
+		// && (anciennePosition.y - piecesDeplacer.getEmplacement().y == 2
+		// || anciennePosition.y
+		// - piecesDeplacer.getEmplacement().y == -2))
+		// {
+		// ajouterEnPassant(anciennePosition, piecesDeplacer);
+		// }
 	}
 
 	public void ajouterEnPassant(Point anciennePosition, Pieces piecesDeplacer)
@@ -272,15 +269,29 @@ public class Plateau
 			mouvementValide = !noir.vérifierÉchec(blanc.getMouvementPossible());
 		}
 
-	
 		plateau[pieces.getEmplacement().x][pieces.getEmplacement().y] = temp;
 		pieces.setEmplacement(anciennePosition);
-		deplacerPieces(pieces);
+		replacerPieces(pieces);
 		actualiserTeam();
 		blanc.actualiserMouvementPossible();
 		noir.actualiserMouvementPossible();
 
 		return mouvementValide;
+	}
+	
+	public Pieces replacerPieces(Pieces piecesDeplacer)
+	{
+		Pieces temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+				.getEmplacement().y];
+		plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+				.getEmplacement().y] = piecesDeplacer;
+
+		if (temp != null)
+		{
+			actualiserTeam();
+		}
+
+		return temp;
 	}
 
 	public void actualiserToutLesMouvementJouable()
