@@ -71,10 +71,18 @@ public class Plateau
 
 		actualiserToutLesMouvementJouable();
 
-		if (piecesDeplacer.isWhite()
-				&& piecesDeplacer.getClass().toString().contains("Pion")
-				&& piecesDeplacer.getEmplacement().y == 3
-				&& anciennePosition.y == 1)
+		if (piecesDeplacer.getClass().toString().contains("Pion")
+				&& (anciennePosition.y - piecesDeplacer.getEmplacement().y == 2
+						|| anciennePosition.y
+								- piecesDeplacer.getEmplacement().y == -2))
+		{
+			ajouterEnPassant(anciennePosition, piecesDeplacer);
+		}
+	}
+
+	public void ajouterEnPassant(Point anciennePosition, Pieces piecesDeplacer)
+	{
+		if (piecesDeplacer.isWhite())
 		{
 			if (piecesDeplacer.getEmplacement().x - 1 >= 0
 					&& plateau[piecesDeplacer.getEmplacement().x
@@ -107,10 +115,7 @@ public class Plateau
 			}
 		}
 		else
-			if (!piecesDeplacer.isWhite()
-					&& piecesDeplacer.getClass().toString().contains("Pion")
-					&& piecesDeplacer.getEmplacement().y == 4
-					&& anciennePosition.y == 6)
+			if (!piecesDeplacer.isWhite())
 			{
 				if (piecesDeplacer.getEmplacement().x - 1 >= 0
 						&& plateau[piecesDeplacer.getEmplacement().x
@@ -118,7 +123,7 @@ public class Plateau
 						&& plateau[piecesDeplacer.getEmplacement().x
 								- 1][piecesDeplacer.getEmplacement().y]
 										.getClass().toString().contains("Pion")
-						&& !plateau[piecesDeplacer.getEmplacement().x
+						&& plateau[piecesDeplacer.getEmplacement().x
 								- 1][piecesDeplacer.getEmplacement().y]
 										.isWhite())
 				{
@@ -134,7 +139,7 @@ public class Plateau
 						&& plateau[piecesDeplacer.getEmplacement().x
 								+ 1][piecesDeplacer.getEmplacement().y]
 										.getClass().toString().contains("Pion")
-						&& !plateau[piecesDeplacer.getEmplacement().x
+						&& plateau[piecesDeplacer.getEmplacement().x
 								+ 1][piecesDeplacer.getEmplacement().y]
 										.isWhite())
 				{
@@ -150,10 +155,37 @@ public class Plateau
 
 	public Pieces deplacerPieces(Pieces piecesDeplacer)
 	{
-		Pieces temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-				.getEmplacement().y];
-		plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-				.getEmplacement().y] = piecesDeplacer;
+		Pieces temp = null;
+		if (plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+				.getEmplacement().y] == null
+				&& piecesDeplacer.getClass().toString().contains("Pion"))
+		{
+			if (piecesDeplacer.isWhite())
+			{
+				temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+						.getEmplacement().y - 1];
+				plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+						.getEmplacement().y - 1] = null;
+				plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+						.getEmplacement().y] = piecesDeplacer;
+			}
+			else
+			{
+				temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+						.getEmplacement().y + 1];
+				plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+						.getEmplacement().y + 1] = null;
+				plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+						.getEmplacement().y] = piecesDeplacer;
+			}
+		}
+		else
+		{
+			temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+					.getEmplacement().y];
+			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+					.getEmplacement().y] = piecesDeplacer;
+		}
 
 		if (temp != null)
 		{
@@ -237,6 +269,7 @@ public class Plateau
 			mouvementValide = !noir.vérifierÉchec(blanc.getMouvementPossible());
 		}
 
+	
 		plateau[pieces.getEmplacement().x][pieces.getEmplacement().y] = temp;
 		pieces.setEmplacement(anciennePosition);
 		deplacerPieces(pieces);
