@@ -24,6 +24,16 @@ public class Plateau
 		noir = new Equipe(pieceNoir);
 		actualiserToutLesMouvementJouable();
 	}
+	
+	public Equipe getNoir()
+	{
+		return noir;
+	}
+	
+	public Equipe getBlanc()
+	{
+		return blanc;
+	}
 
 	public boolean getEchecMath()
 	{
@@ -570,6 +580,11 @@ public class Plateau
 			getPositionRoi();
 			mouvementPossible = new ArrayList<Point>();
 			mouvementJouable = new ArrayList<Point>();
+		}
+		
+		public ArrayList<Pieces> getListePieces()
+		{
+			return listePiece;
 		}
 
 		public int indexOfKing()
