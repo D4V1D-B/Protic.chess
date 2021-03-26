@@ -1,4 +1,2 @@
 rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
-rnbqkbnr/pppppppp/8/8/1P6/8/P1PPPPPP/RNBQKBNR
-rnbqkbnr/pppppp1p/8/6p1/1P6/8/P1PPPPPP/RNBQKBNR
-rnbqkbnr/p1pppppp/8/1P6/8/8/PP1PPPPP/RNBQKBNR
+rnbqkb1r/pp1pp1pp/2p2p1n/8/P2P1P2/8/1PP1P1PP/RNBQKBNR

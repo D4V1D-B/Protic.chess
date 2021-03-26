@@ -1,7 +1,10 @@
 package controleur;
 
 import java.awt.Point;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
@@ -38,6 +41,7 @@ import javafx.stage.Stage;
 import modele.Cavalier;
 import modele.Fou;
 import modele.Mouvement;
+import modele.PartiesSauvegarder;
 import modele.Pieces;
 import modele.Pion;
 import modele.Reine;
@@ -63,8 +67,6 @@ public class Controleur implements Initializable
 			add(new Point(6, 7));
 		}
 	};
-	// pour des testes
-	private String fen;
 
 	@FXML
 	private Pane a8;
@@ -266,19 +268,26 @@ public class Controleur implements Initializable
 
 	@FXML
 	private RadioMenuItem Claire;
-	@FXML
-	private ListView<String> listDeMouvement;
 
 	@FXML
 	private Button recommencerPartie;
 
 	@FXML
+	private ListView<String> listDeMouvement;
+
+	@FXML
 	private ObservableList<String> list;
+
+	@FXML
+	private ListView<String> listViewAnciennesParties;
+
+	@FXML
+	private ObservableList<String> ListAnciennesParties;
 
 	@FXML
 	void chargerPartie(ActionEvent event)
 	{
-		System.out.println("allo");
+
 		chargerUnePartie();
 	}
 
@@ -486,7 +495,7 @@ public class Controleur implements Initializable
 		if (tourJoueur == false)
 		{
 			System.out.println("yo");
-//jouerBot();
+			// jouerBot();
 		}
 		tourJoueur = !tourJoueur;
 	}
@@ -921,7 +930,7 @@ public class Controleur implements Initializable
 		{
 			tousLesMouvements += m + ", ";
 		}
-		//System.out.println(tousLesMouvements);
+		// System.out.println(tousLesMouvements);
 
 		Pane[] tableauPane = new Pane[64];
 
@@ -961,18 +970,19 @@ public class Controleur implements Initializable
 						.getNom();
 			}
 			entre0et7++;
-			
+
 		}
-		//System.out.println(plateauFen);
-		//fen = plateauFen;
-		
-		//ecrire plateauFen et tousLesMouvements dans un fichier.
+		// System.out.println(plateauFen);
+		// fen = plateauFen;
+
+		// ecrire plateauFen et tousLesMouvements dans un fichier.
 		try
 		{
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-			
+			BufferedWriter writer = new BufferedWriter(
+					new FileWriter(file, true));
+
 			writer.append(plateauFen + "\n");
-		
+
 			writer.close();
 		}
 		catch (IOException e)
@@ -980,7 +990,7 @@ public class Controleur implements Initializable
 			System.out.println("Erreur dans la sauvegarde!");
 			e.printStackTrace();
 		}
-		
+
 		return false;
 
 	}
@@ -989,7 +999,50 @@ public class Controleur implements Initializable
 	// cela ne fonctionne pas.
 	private void chargerUnePartie()
 	{
-		System.out.println(fen);
-		placerPiecesString(fen);
+
+		Stage lesAnciennesParties = new Stage();
+		lesAnciennesParties.setTitle("Sauvegardes");
+
+		lesAnciennesParties.setMaxHeight(600);
+		lesAnciennesParties.setMinHeight(600);
+		lesAnciennesParties.setMaxWidth(500);
+		lesAnciennesParties.setMinWidth(500);
+
+		ListAnciennesParties = FXCollections.observableArrayList();
+		listViewAnciennesParties = new ListView<String>();
+
+		listViewAnciennesParties.setItems(ListAnciennesParties);
+
+		lesAnciennesParties.setScene(new Scene(listViewAnciennesParties));
+		lesAnciennesParties.show();
+		String s;
+
+		try
+		{
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+
+			do
+			{
+				s= reader.readLine();
+				System.out.println(s);
+				ListAnciennesParties.add(s);
+				
+			}
+			while (s != null);
+
+			reader.close();
+		}
+		catch (FileNotFoundException e)
+		{
+			System.out.println("erreur dans la lecture, file not found");
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			System.out.println("erreur dans la lecture");
+			e.printStackTrace();
+		}
+		
+
 	}
 }
