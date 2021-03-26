@@ -1,6 +1,9 @@
 package controleur;
 
 import java.awt.Point;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,6 +53,7 @@ public class Controleur implements Initializable
 	private Pane paneSelect;
 	private ArrayList<Circle> listeCercle = new ArrayList<Circle>();
 	private boolean tourJoueur = true;
+	private String file = "sauvegard.txt";
 	private final ArrayList<Point> LISTPOINTROCK = new ArrayList<Point>()
 	{
 		{
@@ -59,10 +63,8 @@ public class Controleur implements Initializable
 			add(new Point(6, 7));
 		}
 	};
-	//pour des testes
+	// pour des testes
 	private String fen;
-	
-	
 
 	@FXML
 	private Pane a8;
@@ -283,7 +285,7 @@ public class Controleur implements Initializable
 	@FXML
 	void saveGame(ActionEvent event)
 	{
-		
+
 		saveGame();
 	}
 
@@ -723,31 +725,29 @@ public class Controleur implements Initializable
 		}
 		listeCercle.clear();
 
-		
-
-			for (int i = 0; i < tableauPane.length; i++)
-	{
-		if (i % 2 == 0)
+		for (int i = 0; i < tableauPane.length; i++)
 		{
-			tableauPane[i].setStyle(
-					"-fx-background-color:brown; -fx-border-color: black");
+			if (i % 2 == 0)
+			{
+				tableauPane[i].setStyle(
+						"-fx-background-color:brown; -fx-border-color: black");
+			}
+			else
+			{
+				tableauPane[i].setStyle(
+						"-fx-background-color:cornsilk; -fx-border-color: black");
+			}
 		}
-		else
-		{
-			tableauPane[i].setStyle(
-					"-fx-background-color:cornsilk; -fx-border-color: black");
-		}
-	}
 	}
 
 	private Pane[] allPane()
 	{
 		Pane tableauAllPane[] =
-			{ a1, a2, a3, a4, a5, a6, a7, a8, b8, b7, b6, b5, b4, b3, b2, b1, c1,
-					c2, c3, c4, c5, c6, c7, c8, d8, d7, d6, d5, d4, d3, d2, d1, e1,
-					e2, e3, e4, e5, e6, e7, e8, f8, f7, f6, f5, f4, f3, f2, f1, g1,
-					g2, g3, g4, g5, g6, g7, g8, h8, h7, h6, h5, h4, h3, h2, h1 };
-			return tableauAllPane;
+		{ a1, a2, a3, a4, a5, a6, a7, a8, b8, b7, b6, b5, b4, b3, b2, b1, c1,
+				c2, c3, c4, c5, c6, c7, c8, d8, d7, d6, d5, d4, d3, d2, d1, e1,
+				e2, e3, e4, e5, e6, e7, e8, f8, f7, f6, f5, f4, f3, f2, f1, g1,
+				g2, g3, g4, g5, g6, g7, g8, h8, h7, h6, h5, h4, h3, h2, h1 };
+		return tableauAllPane;
 
 	}
 
@@ -910,7 +910,7 @@ public class Controleur implements Initializable
 		{
 			tousLesMouvements += m + ", ";
 		}
-		System.out.println(tousLesMouvements);
+		//System.out.println(tousLesMouvements);
 
 		Pane[] tableauPane = new Pane[64];
 
@@ -950,14 +950,32 @@ public class Controleur implements Initializable
 						.getNom();
 			}
 			entre0et7++;
-			// System.out.println(pane.toString());
+			
 		}
-		System.out.println(plateauFen);
-		fen = plateauFen;
+		//System.out.println(plateauFen);
+		//fen = plateauFen;
+		
+		//ecrire plateauFen et tousLesMouvements dans un fichier.
+		try
+		{
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+			
+			writer.append(plateauFen + "\n");
+			System.out.println(plateauFen);
+			writer.close();
+		}
+		catch (IOException e)
+		{
+			System.out.println("Erreur dans la sauvegarde!");
+			e.printStackTrace();
+		}
+		
 		return false;
 
 	}
 
+	// ne fonctionne pas puisque seulement les images sont bien placer et meme
+	// cela ne fonctionne pas.
 	private void chargerUnePartie()
 	{
 		System.out.println(fen);
