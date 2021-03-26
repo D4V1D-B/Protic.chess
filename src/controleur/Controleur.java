@@ -819,6 +819,7 @@ public class Controleur implements Initializable
 		ImageView fouImage = new ImageView();
 		ImageView cavalierImage = new ImageView();
 		ImageView tourImage = new ImageView();
+		
 		if (equipe)
 		{
 			reineImage.setImage(association.get("Q"));

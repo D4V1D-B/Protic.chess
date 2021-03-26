@@ -1,17 +1,10 @@
 package test.modele;
 
 import static org.junit.Assert.*;
-
 import java.awt.Point;
-import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import controleur.Plateau;
-import controleur.Plateau.Equipe;
 import modele.Cavalier;
-import modele.Pieces;
 
 public class CavalierTest
 {
