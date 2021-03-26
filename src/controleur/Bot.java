@@ -19,27 +19,33 @@ public class Bot
 		this.plateau=plateau;
 		String bestMovement="";
 		int bestMovementPoint=0;
+
 		
-		for (Pieces p : plateau.getNoir().getListePieces())
+		ArrayList<Point> faireLeTourDesMov = new ArrayList<Point>();
+		ArrayList<Pieces> faireLeTourDesPieces = (ArrayList<Pieces>) plateau.getNoir().getListePieces().clone();
+
+		for (Pieces p : faireLeTourDesPieces)
 		{
 			Point anciennePosition = p.getEmplacement();
 			
-			for (Point mov : p.getMouvementJouable())
+			faireLeTourDesMov.clear();
+			faireLeTourDesMov=(ArrayList<Point>) p.getMouvementJouable().clone();
+			
+			for (Point mov : faireLeTourDesMov)
 			{
-				ArrayList<Point> test=p.getMouvementJouable();
+				int oldMov=p.getMouvementJouable().size();
 				p.setEmplacement(mov);
 				Pieces manger = deplacementTest(anciennePosition,p);
-				if(evalMouvement(manger,p,test)>bestMovementPoint)
+				if(evalMouvement(manger,p,oldMov)>bestMovementPoint)
 				{
 					bestMovement= p.getNom()+mov.x+mov.y;
 				}
 				
-				plateau.getPlateau()[p.getEmplacement().x][p.getEmplacement().y] = manger;
+				this.plateau.getPlateau()[p.getEmplacement().x][p.getEmplacement().y] = manger;
 				p.setEmplacement(anciennePosition);
-				plateau.replacerPieces(p);
-				plateau.actualiserTeam();
-				plateau.getBlanc().actualiserMouvementPossible();
-				plateau.getNoir().actualiserMouvementPossible();
+				this.plateau.replacerPieces(p);
+				this.plateau.actualiserTeam();
+				this.plateau.actualiserToutLesMouvementJouable();
 			}
 		}
 
@@ -67,9 +73,23 @@ public class Bot
 		return manger;
 	}
 	
-	public int evalMouvement(Pieces manger, Pieces piecesActuel, ArrayList<Point> oldMov)
+	public int evalMouvement(Pieces manger, Pieces piecesActuel, int oldMov)
 	{
-		return manger.getValeur() + piecesActuel.getMouvementJouable().size()-oldMov.size();
+		int nbrDePoint=0;
+		if(manger!=null)
+		{
+			nbrDePoint+=manger.getValeur();
+		}
+		if(piecesActuel.getMouvementJouable()!=null)
+		{
+			nbrDePoint+=piecesActuel.getMouvementJouable().size();
+		}
+		if(manger!=null)
+		{
+			nbrDePoint-=oldMov;
+		}
+		
+		return nbrDePoint;
 	}
 	
 }

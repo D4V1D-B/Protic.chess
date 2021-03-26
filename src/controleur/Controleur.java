@@ -53,7 +53,11 @@ public class Controleur implements Initializable
 	private Pane paneSelect;
 	private ArrayList<Circle> listeCercle = new ArrayList<Circle>();
 	private boolean tourJoueur = true;
+<<<<<<< Updated upstream
 	private String file = "sauvegard.txt";
+=======
+	private Bot bot= new Bot();
+>>>>>>> Stashed changes
 	private final ArrayList<Point> LISTPOINTROCK = new ArrayList<Point>()
 	{
 		{
@@ -419,7 +423,6 @@ public class Controleur implements Initializable
 
 	public void placerPiecesString(String placement)
 	{
-
 		association.put("r", new Image("images/TourNoir.png"));
 		association.put("n", new Image("images/CavalierNoir.png"));
 		association.put("b", new Image("images/FouNoir.png"));
@@ -483,12 +486,8 @@ public class Controleur implements Initializable
 	@FXML
 	void clickBoutonAI(ActionEvent event)
 	{
-		if (tourJoueur == false)
-		{
-			System.out.println("yo");
-//jouerBot();
-		}
-		tourJoueur = !tourJoueur;
+		System.out.println(bot.jouerBot(this.plateau));
+		System.out.println("Fuck");
 	}
 
 	@FXML

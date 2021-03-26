@@ -72,9 +72,7 @@ public class Plateau
 		actualiserToutLesMouvementJouable();
 
 		if (piecesDeplacer.getClass().toString().contains("Pion")
-				&& (anciennePosition.y - piecesDeplacer.getEmplacement().y == 2
-						|| anciennePosition.y
-								- piecesDeplacer.getEmplacement().y == -2))
+				&& Math.abs(anciennePosition.y - piecesDeplacer.getEmplacement().y)==2)
 		{
 			ajouterEnPassant(anciennePosition, piecesDeplacer);
 		}
@@ -300,27 +298,27 @@ public class Plateau
 		blanc.mouvementJouable.clear();
 		noir.mouvementJouable.clear();
 
-		ArrayList<Point> pudebugcool = new ArrayList<Point>();
-		ArrayList<Pieces> pudebugcool2 = new ArrayList<Pieces>();
+		ArrayList<Point> faireLeTourDesMov = new ArrayList<Point>();
+		ArrayList<Pieces> faireLeTourDesPieces = new ArrayList<Pieces>();
 
 		for (Pieces p : blanc.listePiece)
 		{
-			pudebugcool2.add(p);
+			faireLeTourDesPieces.add(p);
 		}
 
-		for (Pieces p : pudebugcool2)
+		for (Pieces p : faireLeTourDesPieces)
 		{
 			p.getMouvementJouable().clear();
 			switch (p.getClass().toString())
 			{
 				case "class modele.Tour":
-					pudebugcool.clear();
+					faireLeTourDesMov.clear();
 					for (Point posibiliter : ((Tour) p).getMouvementPossible())
 					{
-						pudebugcool.add(posibiliter);
+						faireLeTourDesMov.add(posibiliter);
 					}
 
-					for (Point posibiliter : pudebugcool)
+					for (Point posibiliter : faireLeTourDesMov)
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
@@ -330,14 +328,14 @@ public class Plateau
 					break;
 
 				case "class modele.Cavalier":
-					pudebugcool.clear();
+					faireLeTourDesMov.clear();
 					for (Point posibiliter : ((Cavalier) p)
 							.getMouvementPossible())
 					{
-						pudebugcool.add(posibiliter);
+						faireLeTourDesMov.add(posibiliter);
 					}
 
-					for (Point posibiliter : pudebugcool)
+					for (Point posibiliter : faireLeTourDesMov)
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
@@ -347,13 +345,13 @@ public class Plateau
 					break;
 
 				case "class modele.Fou":
-					pudebugcool.clear();
+					faireLeTourDesMov.clear();
 					for (Point posibiliter : ((Fou) p).getMouvementPossible())
 					{
-						pudebugcool.add(posibiliter);
+						faireLeTourDesMov.add(posibiliter);
 					}
 
-					for (Point posibiliter : pudebugcool)
+					for (Point posibiliter : faireLeTourDesMov)
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
@@ -363,13 +361,13 @@ public class Plateau
 					break;
 
 				case "class modele.Reine":
-					pudebugcool.clear();
+					faireLeTourDesMov.clear();
 					for (Point posibiliter : ((Reine) p).getMouvementPossible())
 					{
-						pudebugcool.add(posibiliter);
+						faireLeTourDesMov.add(posibiliter);
 					}
 
-					for (Point posibiliter : pudebugcool)
+					for (Point posibiliter : faireLeTourDesMov)
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
@@ -379,13 +377,13 @@ public class Plateau
 					break;
 
 				case "class modele.Pion":
-					pudebugcool.clear();
+					faireLeTourDesMov.clear();
 					for (Point posibiliter : ((Pion) p).getMouvementPossible())
 					{
-						pudebugcool.add(posibiliter);
+						faireLeTourDesMov.add(posibiliter);
 					}
 
-					for (Point posibiliter : pudebugcool)
+					for (Point posibiliter : faireLeTourDesMov)
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
@@ -395,13 +393,13 @@ public class Plateau
 					break;
 
 				case "class modele.Roi":
-					pudebugcool.clear();
+					faireLeTourDesMov.clear();
 					for (Point posibiliter : ((Roi) p).getMouvementPossible())
 					{
-						pudebugcool.add(posibiliter);
+						faireLeTourDesMov.add(posibiliter);
 					}
 
-					for (Point posibiliter : pudebugcool)
+					for (Point posibiliter : faireLeTourDesMov)
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
@@ -413,25 +411,25 @@ public class Plateau
 			blanc.getMouvementJouable().addAll(p.getMouvementJouable());
 		}
 
-		pudebugcool2.clear();
+		faireLeTourDesPieces.clear();
 		for (Pieces p : noir.listePiece)
 		{
-			pudebugcool2.add(p);
+			faireLeTourDesPieces.add(p);
 		}
 
-		for (Pieces p : pudebugcool2)
+		for (Pieces p : faireLeTourDesPieces)
 		{
 			p.getMouvementJouable().clear();
 			switch (p.getClass().toString())
 			{
 				case "class modele.Tour":
-					pudebugcool.clear();
+					faireLeTourDesMov.clear();
 					for (Point posibiliter : ((Tour) p).getMouvementPossible())
 					{
-						pudebugcool.add(posibiliter);
+						faireLeTourDesMov.add(posibiliter);
 					}
 
-					for (Point posibiliter : pudebugcool)
+					for (Point posibiliter : faireLeTourDesMov)
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
@@ -441,14 +439,14 @@ public class Plateau
 					break;
 
 				case "class modele.Cavalier":
-					pudebugcool.clear();
+					faireLeTourDesMov.clear();
 					for (Point posibiliter : ((Cavalier) p)
 							.getMouvementPossible())
 					{
-						pudebugcool.add(posibiliter);
+						faireLeTourDesMov.add(posibiliter);
 					}
 
-					for (Point posibiliter : pudebugcool)
+					for (Point posibiliter : faireLeTourDesMov)
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
@@ -458,13 +456,13 @@ public class Plateau
 					break;
 
 				case "class modele.Fou":
-					pudebugcool.clear();
+					faireLeTourDesMov.clear();
 					for (Point posibiliter : ((Fou) p).getMouvementPossible())
 					{
-						pudebugcool.add(posibiliter);
+						faireLeTourDesMov.add(posibiliter);
 					}
 
-					for (Point posibiliter : pudebugcool)
+					for (Point posibiliter : faireLeTourDesMov)
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
@@ -474,13 +472,13 @@ public class Plateau
 					break;
 
 				case "class modele.Reine":
-					pudebugcool.clear();
+					faireLeTourDesMov.clear();
 					for (Point posibiliter : ((Reine) p).getMouvementPossible())
 					{
-						pudebugcool.add(posibiliter);
+						faireLeTourDesMov.add(posibiliter);
 					}
 
-					for (Point posibiliter : pudebugcool)
+					for (Point posibiliter : faireLeTourDesMov)
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
@@ -490,13 +488,13 @@ public class Plateau
 					break;
 
 				case "class modele.Pion":
-					pudebugcool.clear();
+					faireLeTourDesMov.clear();
 					for (Point posibiliter : ((Pion) p).getMouvementPossible())
 					{
-						pudebugcool.add(posibiliter);
+						faireLeTourDesMov.add(posibiliter);
 					}
 
-					for (Point posibiliter : pudebugcool)
+					for (Point posibiliter : faireLeTourDesMov)
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
@@ -506,13 +504,13 @@ public class Plateau
 					break;
 
 				case "class modele.Roi":
-					pudebugcool.clear();
+					faireLeTourDesMov.clear();
 					for (Point posibiliter : ((Roi) p).getMouvementPossible())
 					{
-						pudebugcool.add(posibiliter);
+						faireLeTourDesMov.add(posibiliter);
 					}
 
-					for (Point posibiliter : pudebugcool)
+					for (Point posibiliter : faireLeTourDesMov)
 					{
 						if (validationDeplacement(p, posibiliter))
 						{
@@ -567,6 +565,7 @@ public class Plateau
 		actualiserToutLesMouvementJouable();
 
 	}
+<<<<<<< Updated upstream
 
 	public boolean saveGame()
 	{
@@ -574,6 +573,8 @@ public class Plateau
 		return false;
 
 	}
+=======
+>>>>>>> Stashed changes
 
 	public class Equipe
 	{
@@ -698,5 +699,8 @@ public class Plateau
 		}
 
 	}
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 }
