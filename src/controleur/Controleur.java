@@ -711,35 +711,31 @@ public class Controleur implements Initializable
 		}
 		listeCercle.clear();
 
-		for (int i = 0; i < tableauPane.length; i++)
-		{
-			if (i <= 0)
-			{
-				if (i % 2 == 0)
-				{
-					tableauPane[i].setStyle(
-							"-fx-background-color:brown; -fx-border-color: black");
-				}
-				else
-				{
-					tableauPane[i].setStyle(
-							"-fx-background-color:cornsilk; -fx-border-color: black");
-				}
-			}
-			
+		
 
+			for (int i = 0; i < tableauPane.length; i++)
+	{
+		if (i % 2 == 0)
+		{
+			tableauPane[i].setStyle(
+					"-fx-background-color:brown; -fx-border-color: black");
 		}
+		else
+		{
+			tableauPane[i].setStyle(
+					"-fx-background-color:cornsilk; -fx-border-color: black");
+		}
+	}
 	}
 
 	private Pane[] allPane()
 	{
-		Pane[] tableauAllPanes = new Pane[64];
-
-		for (int nb = 0; nb < 64; nb++)
-		{
-			tableauAllPanes[nb] = (Pane) anchor.getChildren().get(nb);
-		}
-		return tableauAllPanes;
+		Pane tableauAllPane[] =
+			{ a1, a2, a3, a4, a5, a6, a7, a8, b8, b7, b6, b5, b4, b3, b2, b1, c1,
+					c2, c3, c4, c5, c6, c7, c8, d8, d7, d6, d5, d4, d3, d2, d1, e1,
+					e2, e3, e4, e5, e6, e7, e8, f8, f7, f6, f5, f4, f3, f2, f1, g1,
+					g2, g3, g4, g5, g6, g7, g8, h8, h7, h6, h5, h4, h3, h2, h1 };
+			return tableauAllPane;
 
 	}
 
@@ -824,7 +820,6 @@ public class Controleur implements Initializable
 		ImageView fouImage = new ImageView();
 		ImageView cavalierImage = new ImageView();
 		ImageView tourImage = new ImageView();
-		
 		if (equipe)
 		{
 			reineImage.setImage(association.get("Q"));
