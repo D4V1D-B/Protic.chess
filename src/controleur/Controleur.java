@@ -59,6 +59,10 @@ public class Controleur implements Initializable
 			add(new Point(6, 7));
 		}
 	};
+	//pour des testes
+	private String fen;
+	
+	
 
 	@FXML
 	private Pane a8;
@@ -268,11 +272,19 @@ public class Controleur implements Initializable
 
 	@FXML
 	private ObservableList<String> list;
-	
+
+	@FXML
+	void chargerPartie(ActionEvent event)
+	{
+		System.out.println("allo");
+		chargerUnePartie();
+	}
+
 	@FXML
 	void saveGame(ActionEvent event)
 	{
-
+		
+		saveGame();
 	}
 
 	@FXML
@@ -569,7 +581,7 @@ public class Controleur implements Initializable
 								((Tour) pieceSelect).setaBouger();
 							}
 					}
-				
+
 				if ((pieceSelect.getNom().equals("P")
 						&& rechercheCoordonnee(paneClick.getId()).y == 7)
 						|| (pieceSelect.getNom().equals("p")
@@ -578,7 +590,7 @@ public class Controleur implements Initializable
 				{
 					afficherPionUgrade(pieceSelect.isWhite(), paneClick);
 				}
-				
+
 				tourJoueur = !tourJoueur;
 				paneSelect = null;
 				pieceSelect = null;
@@ -603,7 +615,6 @@ public class Controleur implements Initializable
 
 		setLabelTourCouleur(labelTourCouleur);
 	}
-
 
 	private void deplacer(Pieces pieces, Pane positionFinale)
 	{
@@ -638,12 +649,14 @@ public class Controleur implements Initializable
 
 	}
 
-	private void deplacerImage(Pane paneArriver, Pane paneDepart, Pieces pieceADeplacer)
+	private void deplacerImage(Pane paneArriver, Pane paneDepart,
+			Pieces pieceADeplacer)
 	{
 		resetCouleur();
 		ImageView emplacementFin = (ImageView) paneArriver.getChildren().get(0);
 		emplacementFin.setImage(association.get(pieceADeplacer.getNom()));
-		ImageView emplacementDepart = (ImageView) paneDepart.getChildren().get(0);
+		ImageView emplacementDepart = (ImageView) paneDepart.getChildren()
+				.get(0);
 		emplacementDepart.setImage(null);
 		paneSelect
 				.setStyle("-fx-background-color:pink; -fx-border-color: black");
@@ -792,19 +805,19 @@ public class Controleur implements Initializable
 		}
 
 	}
-	
+
 	private void afficherPionUgrade(boolean equipe, Pane paneClick)
 	{
-		
+
 		Stage upgrade = new Stage();
 		upgrade.setTitle("Pion upgrade !");
-		
+
 		upgrade.setMaxHeight(135);
 		upgrade.setMinHeight(135);
-		
+
 		upgrade.setMaxWidth(275);
 		upgrade.setMinWidth(275);
-		
+
 		VBox root = new VBox();
 		HBox images = new HBox();
 		HBox boutons = new HBox();
@@ -839,33 +852,33 @@ public class Controleur implements Initializable
 		boutons.setPadding(new Insets(7));
 		images.setSpacing(5);
 		boutons.setSpacing(15);
-		
+
 		root.getChildren().addAll(images, boutons);
 		upgrade.show();
 		ImageView imageNouvelle = (ImageView) paneClick.getChildren().get(0);
 		reine.setOnAction((a) -> {
 			imageNouvelle.setImage(reineImage.getImage());
-			plateau.remplacerPion(
-					new Reine("Q", equipe, rechercheCoordonnee(paneClick.getId())));
+			plateau.remplacerPion(new Reine("Q", equipe,
+					rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 
 		fou.setOnAction((a) -> {
 			imageNouvelle.setImage(fouImage.getImage());
-			plateau.remplacerPion(
-					new Fou("B", equipe, rechercheCoordonnee(paneClick.getId())));
+			plateau.remplacerPion(new Fou("B", equipe,
+					rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 		tour.setOnAction((a) -> {
 			imageNouvelle.setImage(tourImage.getImage());
-			plateau.remplacerPion(
-					new Tour("R", equipe, rechercheCoordonnee(paneClick.getId())));
+			plateau.remplacerPion(new Tour("R", equipe,
+					rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 		cavalier.setOnAction((a) -> {
 			imageNouvelle.setImage(cavalierImage.getImage());
-			plateau.remplacerPion(
-					new Cavalier("N", equipe, rechercheCoordonnee(paneClick.getId())));
+			plateau.remplacerPion(new Cavalier("N", equipe,
+					rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 	}
@@ -884,5 +897,69 @@ public class Controleur implements Initializable
 		{
 			System.out.println("allo");
 		}
+	}
+
+	public boolean saveGame()
+	{
+		String tousLesMouvements = "";
+		String plateauFen = "";
+		int entre0et7 = 0;
+		int nombreDEspace = 0;
+		for (String m : list)
+		{
+			tousLesMouvements += m + ", ";
+		}
+		System.out.println(tousLesMouvements);
+
+		Pane[] tableauPane = new Pane[64];
+
+		for (int nb = 0; nb < 64; nb++)
+		{
+			tableauPane[nb] = (Pane) anchor.getChildren().get(nb);
+		}
+		for (Pane pane : tableauPane)
+		{
+			ImageView ImageDansLePane = (ImageView) pane.getChildren().get(0);
+			if (entre0et7 >= 8)
+			{
+				plateauFen += "/";
+				entre0et7 = 0;
+			}
+			if (ImageDansLePane.getImage() == null)
+			{
+				if (Character
+						.isDigit(plateauFen.charAt(plateauFen.length() - 1)))
+				{
+					nombreDEspace = Character.getNumericValue(
+							plateauFen.charAt(plateauFen.length() - 1)) + 1;
+					plateauFen = plateauFen.substring(0,
+							plateauFen.length() - 1);
+					plateauFen += nombreDEspace;
+
+				}
+				else
+				{
+					plateauFen += "1";
+				}
+			}
+			else
+			{
+				plateauFen += ((Plateau) plateau)
+						.trouverPieces(rechercheCoordonnee(pane.getId()))
+						.getNom();
+			}
+			entre0et7++;
+			// System.out.println(pane.toString());
+		}
+		System.out.println(plateauFen);
+		fen = plateauFen;
+		return false;
+
+	}
+
+	private void chargerUnePartie()
+	{
+		System.out.println(fen);
+		placerPiecesString(fen);
 	}
 }

@@ -38,7 +38,7 @@
             <Menu mnemonicParsing="false" text="Sauvegard">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#saveGame" text="Sauvegarder la partie" />
-                  <MenuItem mnemonicParsing="false" text="Charcher une partie" />
+                  <MenuItem mnemonicParsing="false" onAction="#chargerPartie" text="Charcher une partie" />
               </items>
             </Menu>
         </menus>

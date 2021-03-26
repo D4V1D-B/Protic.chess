@@ -557,6 +557,12 @@ public class Plateau
 		actualiserToutLesMouvementJouable();
 		
 	}
+	public boolean saveGame()
+	{
+		System.out.println();
+		return false;
+		
+	}
 
 	public class Equipe
 	{
@@ -676,4 +682,6 @@ public class Plateau
 		}
 
 	}
+	
+	
 }
