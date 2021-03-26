@@ -565,7 +565,6 @@ public class Plateau
 		actualiserToutLesMouvementJouable();
 
 	}
-<<<<<<< Updated upstream
 
 	public boolean saveGame()
 	{
@@ -573,8 +572,6 @@ public class Plateau
 		return false;
 
 	}
-=======
->>>>>>> Stashed changes
 
 	public class Equipe
 	{
@@ -699,8 +696,4 @@ public class Plateau
 		}
 
 	}
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 }

@@ -53,11 +53,8 @@ public class Controleur implements Initializable
 	private Pane paneSelect;
 	private ArrayList<Circle> listeCercle = new ArrayList<Circle>();
 	private boolean tourJoueur = true;
-<<<<<<< Updated upstream
 	private String file = "sauvegard.txt";
-=======
 	private Bot bot= new Bot();
->>>>>>> Stashed changes
 	private final ArrayList<Point> LISTPOINTROCK = new ArrayList<Point>()
 	{
 		{
