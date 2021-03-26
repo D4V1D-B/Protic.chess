@@ -1,7 +1,10 @@
 package controleur;
 
 import java.awt.Point;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
@@ -64,8 +67,9 @@ public class Controleur implements Initializable
 			add(new Point(6, 7));
 		}
 	};
-	// pour des testes
-	private String fen;
+
+	private ListView<String> listViewAnciennesParties;
+	private ObservableList<String> ListAnciennesParties;
 
 	@FXML
 	private Pane a8;
