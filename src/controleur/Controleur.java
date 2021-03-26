@@ -481,6 +481,17 @@ public class Controleur implements Initializable
 	}
 
 	@FXML
+	void clickBoutonAI(ActionEvent event)
+	{
+		if (tourJoueur == false)
+		{
+			System.out.println("yo");
+//jouerBot();
+		}
+		tourJoueur = !tourJoueur;
+	}
+
+	@FXML
 	void mouseClick(MouseEvent event)
 	{
 		Pane tableauPane[] = allPane();
