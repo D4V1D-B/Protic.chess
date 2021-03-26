@@ -29,6 +29,7 @@ public class Plateau
 	{
 		return noir;
 	}
+
 	
 	public Equipe getBlanc()
 	{
