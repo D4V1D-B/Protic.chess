@@ -13,20 +13,65 @@ import modele.Tour;
 
 public class Bot
 {
-	public ArrayList<String> jouerBot(Plateau plateau)
+	public Plateau plateau;
+	public String jouerBot(Plateau plateau)
 	{
-		String bestMovement;
+		this.plateau=plateau;
+		String bestMovement="";
+		int bestMovementPoint=0;
 		
 		for (Pieces p : plateau.getNoir().getListePieces())
 		{
+			Point anciennePosition = p.getEmplacement();
+			
 			for (Point mov : p.getMouvementJouable())
 			{
+				ArrayList<Point> test=p.getMouvementJouable();
+				p.setEmplacement(mov);
+				Pieces manger = deplacementTest(anciennePosition,p);
+				if(evalMouvement(manger,p,test)>bestMovementPoint)
+				{
+					bestMovement= p.getNom()+mov.x+mov.y;
+				}
 				
+				plateau.getPlateau()[p.getEmplacement().x][p.getEmplacement().y] = manger;
+				p.setEmplacement(anciennePosition);
+				plateau.replacerPieces(p);
+				plateau.actualiserTeam();
+				plateau.getBlanc().actualiserMouvementPossible();
+				plateau.getNoir().actualiserMouvementPossible();
 			}
 		}
 
-		return null;
+		return bestMovement;
 	}
+	
+	public Pieces deplacementTest(Point anciennePosition, Pieces piecesDeplacer)
+	{
+		// On enleve la pieces de son ancien deplacement
+		plateau.getPlateau()[anciennePosition.x][anciennePosition.y] = null;
+
+		// On déplace la pieces et on store ce qui a été bouffer
+		Pieces manger = plateau.deplacerPieces(piecesDeplacer);
+
+		plateau.actualiserToutLesMouvementJouable();
+
+		if (piecesDeplacer.getClass().toString().contains("Pion")
+				&& (anciennePosition.y - piecesDeplacer.getEmplacement().y == 2
+						|| anciennePosition.y
+								- piecesDeplacer.getEmplacement().y == -2))
+		{
+			plateau.ajouterEnPassant(anciennePosition, piecesDeplacer);
+		}
+			
+		return manger;
+	}
+	
+	public int evalMouvement(Pieces manger, Pieces piecesActuel, ArrayList<Point> oldMov)
+	{
+		return manger.getValeur() + piecesActuel.getMouvementJouable().size()-oldMov.size();
+	}
+	
 }
 
 
