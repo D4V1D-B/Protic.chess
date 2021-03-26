@@ -483,8 +483,10 @@ public class Controleur implements Initializable
 	{
 		if (tourJoueur == false)
 		{
-jouerBot();
+			System.out.println("yo");
+//jouerBot();
 		}
+		tourJoueur = !tourJoueur;
 	}
 
 	@FXML
