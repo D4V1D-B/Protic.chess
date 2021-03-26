@@ -19,10 +19,10 @@ public abstract class Pieces
 		setNom(nom);
 		setCouleur(couleur);
 		setEmplacement(position);
+		valeur = setValeur();
 		mouvementPossible = new ArrayList<Point>();
 		mouvementJouable = new ArrayList<Point>();
 	}
-	
 	public abstract int setValeur();
 
 	public Point getEmplacement()
@@ -50,10 +50,6 @@ public abstract class Pieces
 		return valeur;
 	}
 
-	public void setValeur(int valeur)
-	{
-		this.valeur = valeur;
-	}
 
 	public boolean isWhite()
 	{
