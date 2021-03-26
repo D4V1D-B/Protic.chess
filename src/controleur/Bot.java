@@ -73,33 +73,3 @@ public class Bot
 	}
 	
 }
-
-
-
-
-//switch (p.getClass().toString())
-//{
-//	case "class modele.Tour":
-//		
-//		break;
-//
-//	case "class modele.Cavalier":
-//		
-//		break;
-//
-//	case "class modele.Fou":
-//		
-//		break;
-//
-//	case "class modele.Reine":
-//		
-//		break;
-//
-//	case "class modele.Pion":
-//	
-//		break;
-//
-//	case "class modele.Roi":
-//		
-//		break;
-//}
