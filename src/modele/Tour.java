@@ -119,4 +119,5 @@ public class Tour extends Pieces
 		return 50;
 	}
 
+
 }
