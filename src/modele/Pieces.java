@@ -22,6 +22,8 @@ public abstract class Pieces
 		mouvementPossible = new ArrayList<Point>();
 		mouvementJouable = new ArrayList<Point>();
 	}
+	
+	public abstract int setValeur();
 
 	public Point getEmplacement()
 	{
