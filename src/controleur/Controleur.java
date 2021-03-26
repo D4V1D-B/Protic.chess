@@ -54,7 +54,7 @@ public class Controleur implements Initializable
 	private ArrayList<Circle> listeCercle = new ArrayList<Circle>();
 	private boolean tourJoueur = true;
 	private String file = "sauvegard.txt";
-	private Bot bot= new Bot();
+	private Bot bot = new Bot();
 	private final ArrayList<Point> LISTPOINTROCK = new ArrayList<Point>()
 	{
 		{
@@ -483,17 +483,17 @@ public class Controleur implements Initializable
 	@FXML
 	void clickBoutonAI(ActionEvent event)
 	{
-<<<<<<< HEAD
+
 		System.out.println(bot.jouerBot(this.plateau));
 		System.out.println("Fuck");
-=======
+
 		if (tourJoueur == false)
 		{
 			System.out.println("yo");
-//jouerBot();
+			// jouerBot();
 		}
 		tourJoueur = !tourJoueur;
->>>>>>> parent of 1c7a820 (chargement de partie et sauvegarde)
+
 	}
 
 	@FXML
@@ -926,7 +926,7 @@ public class Controleur implements Initializable
 		{
 			tousLesMouvements += m + ", ";
 		}
-		//System.out.println(tousLesMouvements);
+		// System.out.println(tousLesMouvements);
 
 		Pane[] tableauPane = new Pane[64];
 
@@ -966,22 +966,19 @@ public class Controleur implements Initializable
 						.getNom();
 			}
 			entre0et7++;
-			
+
 		}
-		//System.out.println(plateauFen);
-		//fen = plateauFen;
-		
-		//ecrire plateauFen et tousLesMouvements dans un fichier.
+		// System.out.println(plateauFen);
+		// fen = plateauFen;
+
+		// ecrire plateauFen et tousLesMouvements dans un fichier.
 		try
 		{
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-			
+			BufferedWriter writer = new BufferedWriter(
+					new FileWriter(file, true));
+
 			writer.append(plateauFen + "\n");
-<<<<<<< HEAD
-			System.out.println(plateauFen);
-=======
-		
->>>>>>> parent of 1c7a820 (chargement de partie et sauvegarde)
+
 			writer.close();
 		}
 		catch (IOException e)
@@ -989,7 +986,7 @@ public class Controleur implements Initializable
 			System.out.println("Erreur dans la sauvegarde!");
 			e.printStackTrace();
 		}
-		
+
 		return false;
 
 	}
@@ -998,7 +995,48 @@ public class Controleur implements Initializable
 	// cela ne fonctionne pas.
 	private void chargerUnePartie()
 	{
-		System.out.println(fen);
-		placerPiecesString(fen);
+
+		Stage lesAnciennesParties = new Stage();
+		lesAnciennesParties.setTitle("Sauvegardes");
+
+		lesAnciennesParties.setMaxHeight(600);
+		lesAnciennesParties.setMinHeight(600);
+		lesAnciennesParties.setMaxWidth(500);
+		lesAnciennesParties.setMinWidth(500);
+
+		ListAnciennesParties = FXCollections.observableArrayList();
+		listViewAnciennesParties = new ListView<String>();
+
+		listViewAnciennesParties.setItems(ListAnciennesParties);
+
+		lesAnciennesParties.setScene(new Scene(listViewAnciennesParties));
+		lesAnciennesParties.show();
+		String s;
+
+		try
+		{
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+
+			do
+			{
+				s = reader.readLine();
+				System.out.println(s);
+				ListAnciennesParties.add(s);
+
+			}
+			while (s != null);
+
+			reader.close();
+		}
+		catch (FileNotFoundException e)
+		{
+			System.out.println("erreur dans la lecture, file not found");
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			System.out.println("erreur dans la lecture");
+			e.printStackTrace();
+		}
 	}
 }
