@@ -972,7 +972,7 @@ public class Controleur implements Initializable
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 			
 			writer.append(plateauFen + "\n");
-			System.out.println(plateauFen);
+		
 			writer.close();
 		}
 		catch (IOException e)
