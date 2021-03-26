@@ -157,4 +157,11 @@ public class Pion extends Pieces
 		return mouvementDangereux;
 
 	}
+
+	@Override
+	public int setValeur()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

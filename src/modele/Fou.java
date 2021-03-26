@@ -89,4 +89,11 @@ public class Fou extends Pieces
 
 	}
 
+	@Override
+	public int setValeur()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
