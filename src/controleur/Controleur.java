@@ -59,6 +59,10 @@ public class Controleur implements Initializable
 			add(new Point(6, 7));
 		}
 	};
+	//pour des testes
+	private String fen;
+	
+	
 
 	@FXML
 	private Pane a8;
@@ -270,9 +274,17 @@ public class Controleur implements Initializable
 	private ObservableList<String> list;
 
 	@FXML
+	void chargerPartie(ActionEvent event)
+	{
+		System.out.println("allo");
+		chargerUnePartie();
+	}
+
+	@FXML
 	void saveGame(ActionEvent event)
 	{
-
+		
+		saveGame();
 	}
 
 	@FXML
@@ -893,5 +905,69 @@ jouerBot();
 		{
 			System.out.println("allo");
 		}
+	}
+
+	public boolean saveGame()
+	{
+		String tousLesMouvements = "";
+		String plateauFen = "";
+		int entre0et7 = 0;
+		int nombreDEspace = 0;
+		for (String m : list)
+		{
+			tousLesMouvements += m + ", ";
+		}
+		System.out.println(tousLesMouvements);
+
+		Pane[] tableauPane = new Pane[64];
+
+		for (int nb = 0; nb < 64; nb++)
+		{
+			tableauPane[nb] = (Pane) anchor.getChildren().get(nb);
+		}
+		for (Pane pane : tableauPane)
+		{
+			ImageView ImageDansLePane = (ImageView) pane.getChildren().get(0);
+			if (entre0et7 >= 8)
+			{
+				plateauFen += "/";
+				entre0et7 = 0;
+			}
+			if (ImageDansLePane.getImage() == null)
+			{
+				if (Character
+						.isDigit(plateauFen.charAt(plateauFen.length() - 1)))
+				{
+					nombreDEspace = Character.getNumericValue(
+							plateauFen.charAt(plateauFen.length() - 1)) + 1;
+					plateauFen = plateauFen.substring(0,
+							plateauFen.length() - 1);
+					plateauFen += nombreDEspace;
+
+				}
+				else
+				{
+					plateauFen += "1";
+				}
+			}
+			else
+			{
+				plateauFen += ((Plateau) plateau)
+						.trouverPieces(rechercheCoordonnee(pane.getId()))
+						.getNom();
+			}
+			entre0et7++;
+			// System.out.println(pane.toString());
+		}
+		System.out.println(plateauFen);
+		fen = plateauFen;
+		return false;
+
+	}
+
+	private void chargerUnePartie()
+	{
+		System.out.println(fen);
+		placerPiecesString(fen);
 	}
 }
