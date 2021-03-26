@@ -483,8 +483,17 @@ public class Controleur implements Initializable
 	@FXML
 	void clickBoutonAI(ActionEvent event)
 	{
+<<<<<<< HEAD
 		System.out.println(bot.jouerBot(this.plateau));
 		System.out.println("Fuck");
+=======
+		if (tourJoueur == false)
+		{
+			System.out.println("yo");
+//jouerBot();
+		}
+		tourJoueur = !tourJoueur;
+>>>>>>> parent of 1c7a820 (chargement de partie et sauvegarde)
 	}
 
 	@FXML
@@ -968,7 +977,11 @@ public class Controleur implements Initializable
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 			
 			writer.append(plateauFen + "\n");
+<<<<<<< HEAD
 			System.out.println(plateauFen);
+=======
+		
+>>>>>>> parent of 1c7a820 (chargement de partie et sauvegarde)
 			writer.close();
 		}
 		catch (IOException e)
