@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -268,6 +269,12 @@ public class Controleur implements Initializable
 	@FXML
 	private ObservableList<String> list;
 	
+	@FXML
+	void saveGame(ActionEvent event)
+	{
+
+	}
+
 	@FXML
 	void recommencerPartie(MouseEvent event)
 	{
@@ -876,7 +883,7 @@ public class Controleur implements Initializable
 
 		if (choice.get() == analyse)
 		{
-			// ouvrir analyse
+			System.out.println("allo");
 		}
 	}
 }
