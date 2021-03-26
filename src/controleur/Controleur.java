@@ -267,7 +267,7 @@ public class Controleur implements Initializable
 
 	@FXML
 	private ObservableList<String> list;
-	
+
 	@FXML
 	void recommencerPartie(MouseEvent event)
 	{
@@ -562,7 +562,7 @@ public class Controleur implements Initializable
 								((Tour) pieceSelect).setaBouger();
 							}
 					}
-				
+
 				if ((pieceSelect.getNom().equals("P")
 						&& rechercheCoordonnee(paneClick.getId()).y == 7)
 						|| (pieceSelect.getNom().equals("p")
@@ -571,7 +571,7 @@ public class Controleur implements Initializable
 				{
 					afficherPionUgrade(pieceSelect.isWhite(), paneClick);
 				}
-				
+
 				tourJoueur = !tourJoueur;
 				paneSelect = null;
 				pieceSelect = null;
@@ -596,7 +596,6 @@ public class Controleur implements Initializable
 
 		setLabelTourCouleur(labelTourCouleur);
 	}
-
 
 	private void deplacer(Pieces pieces, Pane positionFinale)
 	{
@@ -631,12 +630,14 @@ public class Controleur implements Initializable
 
 	}
 
-	private void deplacerImage(Pane paneArriver, Pane paneDepart, Pieces pieceADeplacer)
+	private void deplacerImage(Pane paneArriver, Pane paneDepart,
+			Pieces pieceADeplacer)
 	{
 		resetCouleur();
 		ImageView emplacementFin = (ImageView) paneArriver.getChildren().get(0);
 		emplacementFin.setImage(association.get(pieceADeplacer.getNom()));
-		ImageView emplacementDepart = (ImageView) paneDepart.getChildren().get(0);
+		ImageView emplacementDepart = (ImageView) paneDepart.getChildren()
+				.get(0);
 		emplacementDepart.setImage(null);
 		paneSelect
 				.setStyle("-fx-background-color:pink; -fx-border-color: black");
@@ -785,19 +786,19 @@ public class Controleur implements Initializable
 		}
 
 	}
-	
+
 	private void afficherPionUgrade(boolean equipe, Pane paneClick)
 	{
-		
+
 		Stage upgrade = new Stage();
 		upgrade.setTitle("Pion upgrade !");
-		
+
 		upgrade.setMaxHeight(135);
 		upgrade.setMinHeight(135);
-		
+
 		upgrade.setMaxWidth(275);
 		upgrade.setMinWidth(275);
-		
+
 		VBox root = new VBox();
 		HBox images = new HBox();
 		HBox boutons = new HBox();
@@ -832,33 +833,33 @@ public class Controleur implements Initializable
 		boutons.setPadding(new Insets(7));
 		images.setSpacing(5);
 		boutons.setSpacing(15);
-		
+
 		root.getChildren().addAll(images, boutons);
 		upgrade.show();
 		ImageView imageNouvelle = (ImageView) paneClick.getChildren().get(0);
 		reine.setOnAction((a) -> {
 			imageNouvelle.setImage(reineImage.getImage());
-			plateau.remplacerPion(
-					new Reine("Q", equipe, rechercheCoordonnee(paneClick.getId())));
+			plateau.remplacerPion(new Reine(equipe ? "Q" : "q", equipe,
+					rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 
 		fou.setOnAction((a) -> {
 			imageNouvelle.setImage(fouImage.getImage());
-			plateau.remplacerPion(
-					new Fou("B", equipe, rechercheCoordonnee(paneClick.getId())));
+			plateau.remplacerPion(new Fou(equipe ? "B" : "b", equipe,
+					rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 		tour.setOnAction((a) -> {
 			imageNouvelle.setImage(tourImage.getImage());
-			plateau.remplacerPion(
-					new Tour("R", equipe, rechercheCoordonnee(paneClick.getId())));
+			plateau.remplacerPion(new Tour(equipe ? "R" : "r", equipe,
+					rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 		cavalier.setOnAction((a) -> {
 			imageNouvelle.setImage(cavalierImage.getImage());
-			plateau.remplacerPion(
-					new Cavalier("N", equipe, rechercheCoordonnee(paneClick.getId())));
+			plateau.remplacerPion(new Cavalier(equipe ? "N" : "n", equipe,
+					rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 	}
