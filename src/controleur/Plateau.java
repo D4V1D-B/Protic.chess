@@ -24,13 +24,12 @@ public class Plateau
 		noir = new Equipe(pieceNoir);
 		actualiserToutLesMouvementJouable();
 	}
-	
+
 	public Equipe getNoir()
 	{
 		return noir;
 	}
 
-	
 	public Equipe getBlanc()
 	{
 		return blanc;
@@ -566,13 +565,14 @@ public class Plateau
 				.getEmplacement().y] = changement;
 		actualiserTeam();
 		actualiserToutLesMouvementJouable();
-		
+
 	}
+
 	public boolean saveGame()
 	{
 		System.out.println();
 		return false;
-		
+
 	}
 
 	public class Equipe
@@ -588,7 +588,7 @@ public class Plateau
 			mouvementPossible = new ArrayList<Point>();
 			mouvementJouable = new ArrayList<Point>();
 		}
-		
+
 		public ArrayList<Pieces> getListePieces()
 		{
 			return listePiece;
@@ -698,6 +698,5 @@ public class Plateau
 		}
 
 	}
-	
-	
+
 }
