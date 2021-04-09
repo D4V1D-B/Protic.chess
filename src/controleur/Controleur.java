@@ -539,10 +539,7 @@ public class Controleur implements Initializable
 		}
 		else
 		{
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 			if (pieceSelect.getMouvementJouable()
 					.contains(rechercheCoordonnee(paneClick.getId()))
 					&& pieceSelect.isWhite() == tourJoueur)
@@ -573,7 +570,6 @@ public class Controleur implements Initializable
 			setLabelTourCouleur(labelTourCouleur);
 		}
 
-<<<<<<< Updated upstream
 	}
 
 	private void deplacer(Pieces pieceSelect, Pane paneClick)
@@ -638,8 +634,6 @@ public class Controleur implements Initializable
 		{
 			afficherPionUgrade(pieceSelect.isWhite(), paneClick);
 		}
-=======
->>>>>>> Stashed changes
 	}
 
 	private void deplacerProg(Pieces pieces, Pane positionFinale)
