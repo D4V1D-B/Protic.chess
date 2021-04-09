@@ -326,7 +326,7 @@ public class Controleur implements Initializable
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		resetTotal();
-
+		
 	}
 
 	public void setLabelTourCouleur(Label labelTourCouleur)
@@ -338,6 +338,16 @@ public class Controleur implements Initializable
 		else
 		{
 			this.labelTourCouleur.setText("Noir");
+			try
+			{
+				Thread.sleep(2000);
+			}
+			catch (InterruptedException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			testJouerContreAI();
 		}
 	}
 
@@ -540,6 +550,45 @@ public class Controleur implements Initializable
 //		paneSelect = null;
 //		pieceSelect = null;
 
+	}
+	
+	private void testJouerContreAI() {
+		if (CheckAI.isSelected())
+		{
+			Pane[] allPanes = allPane();
+
+			if (tourJoueur == false)
+			{
+				String position = bot.jouerBot(this.plateau);
+				Point pointFinale = new Point((position.charAt(4) - 48),
+						(position.charAt(5) - 48));
+				Point pointInitiale = new Point((position.charAt(0) - 48),
+						(position.charAt(2) - 48));
+				Pane paneFinale = null;
+				for (int i = 0; i < allPanes.length; i++)
+				{
+					if (allPanes[i].getId().equals(recherchePane(pointFinale)))
+					{
+						paneFinale = allPanes[i];
+					}
+				}
+				paneSelect = paneFinale;
+				pieceSelect = plateau.trouverPieces(pointInitiale);
+				deplacer(pieceSelect, paneSelect);
+				Pane paneInitiale = null;
+				for (int i = 0; i < allPanes.length; i++)
+				{
+					if (allPanes[i].getId().equals(recherchePane(pointInitiale)))
+					{
+						paneInitiale = allPanes[i];
+					}
+				}
+				deplacerImage(paneSelect, paneInitiale, pieceSelect);
+				tourJoueur = !tourJoueur;
+			}
+			paneSelect = null;
+			pieceSelect = null;
+		}
 	}
 
 	@FXML
