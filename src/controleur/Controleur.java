@@ -483,7 +483,6 @@ public class Controleur implements Initializable
 		}
 
 	}
-//	TODO
 	@FXML
 	void clickBoutonAI(ActionEvent event)
 	{
@@ -496,21 +495,32 @@ public class Controleur implements Initializable
 		}
 		if (tourJoueur == false)
 		{
-			System.out.println(bot.jouerBot(this.plateau));
 			String position = bot.jouerBot(this.plateau);
-			Point point = new Point((position.charAt(4)-48),(position.charAt(5)-48));
-			System.out.println((recherchePane(point)));
-			Pane p = null;
+			Point pointFinale = new Point((position.charAt(4)-48),(position.charAt(5)-48));
+			Point pointInitiale = new Point((position.charAt(0)-48),(position.charAt(2)-48));
+			Pane paneFinale = null;
 			for (int i = 0; i < allPanes.length; i++)
 			{
-				if (recherchePane(point)==null )
+				if (allPanes[i].getId().equals(recherchePane(pointFinale)))
 				{
-					p = allPanes[i];
+					paneFinale = allPanes[i];
 				}
 			}
-			deplacer(pieceSelect, p);
+			paneSelect = paneFinale;
+			pieceSelect = plateau.trouverPieces(pointInitiale);
+			deplacer(pieceSelect, paneSelect);
+			Pane paneInitiale = null;
+			for (int i = 0; i < allPanes.length; i++)
+			{
+				if (allPanes[i].getId().equals(recherchePane(pointInitiale)))
+				{
+					paneInitiale = allPanes[i];
+				}
+			}
+			deplacerImage(paneSelect, paneInitiale, pieceSelect);
+			tourJoueur = !tourJoueur;
 		}
-		tourJoueur = !tourJoueur;
+		
 
 	}
 
