@@ -1007,10 +1007,14 @@ public class Controleur implements Initializable
 
 		ListAnciennesParties = FXCollections.observableArrayList();
 		listViewAnciennesParties = new ListView<String>();
-
+		
+		Button charger = new Button("Charger");
+		VBox vBox = new VBox(listViewAnciennesParties, charger);
 		listViewAnciennesParties.setItems(ListAnciennesParties);
 
-		lesAnciennesParties.setScene(new Scene(listViewAnciennesParties));
+		
+		
+		lesAnciennesParties.setScene(new Scene(vBox));
 		lesAnciennesParties.show();
 		String s;
 
@@ -1039,5 +1043,20 @@ public class Controleur implements Initializable
 			System.out.println("erreur dans la lecture");
 			e.printStackTrace();
 		}
+		
+		final Optional<String> partieSelectionner;
+		
+		charger.setOnAction((a) -> {
+			 
+			
+			
+			
+			
+			
+			
+			
+			
+		});
+		
 	}
 }
