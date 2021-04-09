@@ -488,22 +488,28 @@ public class Controleur implements Initializable
 	void clickBoutonAI(ActionEvent event)
 	{
 
-		Pane tableauPane[] = allPane();
+		Pane[] allPanes = new Pane[64];
 
+		for (int nb = 0; nb < 64; nb++)
+		{
+			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
+		}
 		if (tourJoueur == false)
 		{
 			System.out.println(bot.jouerBot(this.plateau));
+			String position = bot.jouerBot(this.plateau);
 			Point point = new Point();
-			point.setLocation(bot.jouerBot(this.plateau).charAt(4),
-					bot.jouerBot(this.plateau).charAt(5));
+			point.setLocation(position.charAt(4),
+					position.charAt(5));
 			recherchePane(point);
-			System.out.println(rechercheCoordonnee(recherchePane(point)));
+
+			System.out.println((recherchePane(point)));
 			Pane p = null;
-			for (int i = 0; i < tableauPane.length; i++)
+			for (int i = 0; i < allPanes.length; i++)
 			{
-				if (recherchePane(point) == null)
+				if (recherchePane(point)==null )
 				{
-					p = tableauPane[i];
+					p = allPanes[i];
 				}
 			}
 			deplacer(pieceSelect, p);
