@@ -347,82 +347,81 @@ public class Controleur implements Initializable
 
 		list = FXCollections.observableArrayList();
 		listDeMouvement.setItems(list);
-		Tour R1 = new Tour("R", true, new Point(0, 0));
-		Cavalier N1 = new Cavalier("N", true, new Point(1, 0));
-		Fou B1 = new Fou("B", true, new Point(2, 0));
-		Reine Q = new Reine("Q", true, new Point(3, 0));
-		Roi K = new Roi("K", true, new Point(4, 0));
-		Fou B2 = new Fou("B", true, new Point(5, 0));
-		Cavalier N2 = new Cavalier("N", true, new Point(6, 0));
-		Tour R2 = new Tour("R", true, new Point(7, 0));
+		// Tour R1 = new Tour("R", true, new Point(0, 0));
+		// Cavalier N1 = new Cavalier("N", true, new Point(1, 0));
+		// Fou B1 = new Fou("B", true, new Point(2, 0));
+		// Reine Q = new Reine("Q", true, new Point(3, 0));
+		// Roi K = new Roi("K", true, new Point(4, 0));
+		// Fou B2 = new Fou("B", true, new Point(5, 0));
+		// Cavalier N2 = new Cavalier("N", true, new Point(6, 0));
+		// Tour R2 = new Tour("R", true, new Point(7, 0));
+		//
+		// Pion P1 = new Pion("P", true, new Point(0, 1));
+		// Pion P2 = new Pion("P", true, new Point(1, 1));
+		// Pion P3 = new Pion("P", true, new Point(2, 1));
+		// Pion P4 = new Pion("P", true, new Point(3, 1));
+		// Pion P5 = new Pion("P", true, new Point(4, 1));
+		// Pion P6 = new Pion("P", true, new Point(5, 1));
+		// Pion P7 = new Pion("P", true, new Point(6, 1));
+		// Pion P8 = new Pion("P", true, new Point(7, 1));
+		//
+		// Tour r1 = new Tour("r", false, new Point(0, 7));
+		// Cavalier n1 = new Cavalier("n", false, new Point(1, 7));
+		// Fou b1 = new Fou("b", false, new Point(2, 7));
+		// Reine q = new Reine("q", false, new Point(3, 7));
+		// Roi k = new Roi("k", false, new Point(4, 7));
+		// Fou b2 = new Fou("b", false, new Point(5, 7));
+		// Cavalier n2 = new Cavalier("n", false, new Point(6, 7));
+		// Tour r2 = new Tour("r", false, new Point(7, 7));
+		//
+		// Pion p1 = new Pion("p", false, new Point(0, 6));
+		// Pion p2 = new Pion("p", false, new Point(1, 6));
+		// Pion p3 = new Pion("p", false, new Point(2, 6));
+		// Pion p4 = new Pion("p", false, new Point(3, 6));
+		// Pion p5 = new Pion("p", false, new Point(4, 6));
+		// Pion p6 = new Pion("p", false, new Point(5, 6));
+		// Pion p7 = new Pion("p", false, new Point(6, 6));
+		// Pion p8 = new Pion("p", false, new Point(7, 6));
 
-		Pion P1 = new Pion("P", true, new Point(0, 1));
-		Pion P2 = new Pion("P", true, new Point(1, 1));
-		Pion P3 = new Pion("P", true, new Point(2, 1));
-		Pion P4 = new Pion("P", true, new Point(3, 1));
-		Pion P5 = new Pion("P", true, new Point(4, 1));
-		Pion P6 = new Pion("P", true, new Point(5, 1));
-		Pion P7 = new Pion("P", true, new Point(6, 1));
-		Pion P8 = new Pion("P", true, new Point(7, 1));
+		// ArrayList<Pieces> blanc = new ArrayList<Pieces>();
+		// blanc.add(R1);
+		// blanc.add(N1);
+		// blanc.add(B1);
+		// blanc.add(Q);
+		// blanc.add(K);
+		// blanc.add(B2);
+		// blanc.add(N2);
+		// blanc.add(R2);
+		// blanc.add(P1);
+		// blanc.add(P2);
+		// blanc.add(P3);
+		// blanc.add(P4);
+		// blanc.add(P5);
+		// blanc.add(P6);
+		// blanc.add(P7);
+		// blanc.add(P8);
+		//
+		// ArrayList<Pieces> noir = new ArrayList<Pieces>();
+		// noir.add(r1);
+		// noir.add(n1);
+		// noir.add(b1);
+		// noir.add(q);
+		// noir.add(k);
+		// noir.add(b2);
+		// noir.add(n2);
+		// noir.add(r2);
+		// noir.add(p1);
+		// noir.add(p2);
+		// noir.add(p3);
+		// noir.add(p4);
+		// noir.add(p5);
+		// noir.add(p6);
+		// noir.add(p7);
+		// noir.add(p8);
 
-		Tour r1 = new Tour("r", false, new Point(0, 7));
-		Cavalier n1 = new Cavalier("n", false, new Point(1, 7));
-		Fou b1 = new Fou("b", false, new Point(2, 7));
-		Reine q = new Reine("q", false, new Point(3, 7));
-		Roi k = new Roi("k", false, new Point(4, 7));
-		Fou b2 = new Fou("b", false, new Point(5, 7));
-		Cavalier n2 = new Cavalier("n", false, new Point(6, 7));
-		Tour r2 = new Tour("r", false, new Point(7, 7));
+		// plateau = new Plateau(blanc, noir);
 
-		Pion p1 = new Pion("p", false, new Point(0, 6));
-		Pion p2 = new Pion("p", false, new Point(1, 6));
-		Pion p3 = new Pion("p", false, new Point(2, 6));
-		Pion p4 = new Pion("p", false, new Point(3, 6));
-		Pion p5 = new Pion("p", false, new Point(4, 6));
-		Pion p6 = new Pion("p", false, new Point(5, 6));
-		Pion p7 = new Pion("p", false, new Point(6, 6));
-		Pion p8 = new Pion("p", false, new Point(7, 6));
-
-		ArrayList<Pieces> blanc = new ArrayList<Pieces>();
-		blanc.add(R1);
-		blanc.add(N1);
-		blanc.add(B1);
-		blanc.add(Q);
-		blanc.add(K);
-		blanc.add(B2);
-		blanc.add(N2);
-		blanc.add(R2);
-		blanc.add(P1);
-		blanc.add(P2);
-		blanc.add(P3);
-		blanc.add(P4);
-		blanc.add(P5);
-		blanc.add(P6);
-		blanc.add(P7);
-		blanc.add(P8);
-
-		ArrayList<Pieces> noir = new ArrayList<Pieces>();
-		noir.add(r1);
-		noir.add(n1);
-		noir.add(b1);
-		noir.add(q);
-		noir.add(k);
-		noir.add(b2);
-		noir.add(n2);
-		noir.add(r2);
-		noir.add(p1);
-		noir.add(p2);
-		noir.add(p3);
-		noir.add(p4);
-		noir.add(p5);
-		noir.add(p6);
-		noir.add(p7);
-		noir.add(p8);
-
-		plateau = new Plateau(blanc, noir);
-
-		placementDepart.indexOf('R');
-		placementDepart.replace('R', '1');
+		// placementDepart.indexOf('R');
 
 		placerPiecesString(placementDepart);
 		resetCouleur();
@@ -444,6 +443,9 @@ public class Controleur implements Initializable
 		association.put("Q", new Image("images/ReineBlanc.png"));
 		association.put("K", new Image("images/RoiBlanc.png"));
 		association.put("P", new Image("images/PionBlanc.png"));
+
+		ArrayList<Pieces> blanc = new ArrayList<Pieces>();
+		ArrayList<Pieces> noir = new ArrayList<Pieces>();
 
 		Pane[] allPanes = new Pane[64];
 
@@ -472,11 +474,12 @@ public class Controleur implements Initializable
 
 				for (int y = 0; y < row.length(); y++)
 				{
-					char z = row.charAt(y); // Cycle les char de la row
+					char charDeLaPiece = row.charAt(y); // Cycle les char de la
+														// row
 
-					if (Character.isDigit(z))
+					if (Character.isDigit(charDeLaPiece))
 					{
-						int caseVide = z - 48;
+						int caseVide = charDeLaPiece - 48;
 						emplacementSurLeBoard = emplacementSurLeBoard
 								+ caseVide;
 
@@ -485,10 +488,344 @@ public class Controleur implements Initializable
 					{
 						ImageView paneActuel = (ImageView) allPanes[emplacementSurLeBoard]
 								.getChildren().get(0);
-						paneActuel.setImage(association.get(String.valueOf(z)));
+						paneActuel.setImage(
+								association.get(String.valueOf(charDeLaPiece)));
 
-						System.out.println(pointSelonEmplacementDansLeTableau(
-								emplacementSurLeBoard + 1));
+						int nbr = 0;
+						int nbn = 0;
+						int nbb = 0;
+						int nbp = 0;
+						int nbR = 0;
+						int nbN = 0;
+						int nbB = 0;
+						int nbP = 0;
+						Tour R1 = null;
+						Cavalier N1 = null;
+						Fou B1 = null;
+						Reine Q = null;
+						Roi K = null;
+						Fou B2 = null;
+						Cavalier N2 = null;
+						Tour R2 = null;
+
+						Pion P1 = null;
+						Pion P2 = null;
+						Pion P3 = null;
+						Pion P4 = null;
+						Pion P5 = null;
+						Pion P6 = null;
+						Pion P7 = null;
+						Pion P8 = null;
+
+						Tour r1 = null;
+						Cavalier n1 = null;
+						Fou b1 = null;
+						Reine q = null;
+						Roi k = null;
+						Fou b2 = null;
+						Cavalier n2 = null;
+						Tour r2 = null;
+
+						Pion p1 = null;
+						Pion p2 = null;
+						Pion p3 = null;
+						Pion p4 = null;
+						Pion p5 = null;
+						Pion p6 = null;
+						Pion p7 = null;
+						Pion p8 = null;
+						switch (charDeLaPiece)
+						{
+							case 'r':
+								if (nbr == 0)
+								{
+									r1 = new Tour("r", false,
+											pointSelonEmplacementDansLeTableau(
+													emplacementSurLeBoard));
+									noir.add(r1);
+									nbr++;
+								}
+								else
+								{
+									r2 = new Tour("r", false,
+											pointSelonEmplacementDansLeTableau(
+													emplacementSurLeBoard));
+									noir.add(r2);
+								}
+
+								break;
+							case 'n':
+								if (nbn == 0)
+								{
+									n1 = new Cavalier("n", false,
+											pointSelonEmplacementDansLeTableau(
+													emplacementSurLeBoard));
+									noir.add(n1);
+									nbn++;
+								}
+								else
+								{
+									n2 = new Cavalier("n", false,
+											pointSelonEmplacementDansLeTableau(
+													emplacementSurLeBoard));
+									noir.add(n2);
+								}
+
+								break;
+							case 'b':
+								if (nbb == 0)
+								{
+									b1 = new Fou("b", false,
+											pointSelonEmplacementDansLeTableau(
+													emplacementSurLeBoard));
+									noir.add(b1);
+									nbn++;
+								}
+								else
+								{
+									b2 = new Fou("b", false,
+											pointSelonEmplacementDansLeTableau(
+													emplacementSurLeBoard));
+									noir.add(b2);
+								}
+								break;
+							case 'k':
+								k = new Roi("k", false,
+										pointSelonEmplacementDansLeTableau(
+												emplacementSurLeBoard));
+								noir.add(k);
+								break;
+							case 'q':
+								q = new Reine("q", false,
+										pointSelonEmplacementDansLeTableau(
+												emplacementSurLeBoard));
+								noir.add(q);
+								break;
+							case 'p':
+								switch (nbp)
+								{
+									case 0:
+										p1 = new Pion("p", false,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										noir.add(p1);
+										nbp++;
+										break;
+
+									case 1:
+										p2 = new Pion("p", false,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										noir.add(p2);
+										nbp++;
+										break;
+									case 2:
+										p3 = new Pion("p", false,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										noir.add(p3);
+										nbp++;
+										break;
+									case 3:
+										p4 = new Pion("p", false,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										noir.add(p4);
+										nbp++;
+										break;
+									case 4:
+										p5 = new Pion("p", false,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										noir.add(p5);
+										nbp++;
+										break;
+									case 5:
+										p6 = new Pion("p", false,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										noir.add(p6);
+										nbp++;
+										break;
+									case 6:
+										p7 = new Pion("p", false,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										noir.add(p7);
+										nbp++;
+										break;
+									case 7:
+										p8 = new Pion("p", false,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										noir.add(p8);
+										nbp++;
+										break;
+								}
+
+								break;
+							case 'R':
+								if (nbR == 0)
+								{
+									R1 = new Tour("R", true,
+											pointSelonEmplacementDansLeTableau(
+													emplacementSurLeBoard));
+									blanc.add(R1);
+									nbR++;
+								}
+								else
+								{
+									R2 = new Tour("R", true,
+											pointSelonEmplacementDansLeTableau(
+													emplacementSurLeBoard));
+									blanc.add(R2);
+								}
+								break;
+							case 'N':
+								if (nbN == 0)
+								{
+									N1 = new Cavalier("N", true,
+											pointSelonEmplacementDansLeTableau(
+													emplacementSurLeBoard));
+									blanc.add(N1);
+									nbN++;
+								}
+								else
+								{
+									N2 = new Cavalier("N", true,
+											pointSelonEmplacementDansLeTableau(
+													emplacementSurLeBoard));
+									blanc.add(N2);
+
+								}
+
+								break;
+							case 'B':
+								if (nbB == 0)
+								{
+									B1 = new Fou("B", true,
+											pointSelonEmplacementDansLeTableau(
+													emplacementSurLeBoard));
+									blanc.add(B1);
+									nbB++;
+								}
+								else
+								{
+									B2 = new Fou("B", true,
+											pointSelonEmplacementDansLeTableau(
+													emplacementSurLeBoard));
+									blanc.add(B2);
+								}
+								break;
+							case 'K':
+								K = new Roi("K", true,
+										pointSelonEmplacementDansLeTableau(
+												emplacementSurLeBoard));
+								blanc.add(K);
+								break;
+							case 'Q':
+								Q = new Reine("Q", true,
+										pointSelonEmplacementDansLeTableau(
+												emplacementSurLeBoard));
+								blanc.add(Q);
+								break;
+							case 'P':
+								switch (nbP)
+								{
+									case 0:
+										P1 = new Pion("P", true,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										blanc.add(P1);
+										nbP++;
+										System.out.println(emplacementSurLeBoard
+												+ pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard)
+																.toString());
+										break;
+
+									case 1:
+										P2 = new Pion("P", true,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										blanc.add(P2);
+										nbP++;
+										System.out.println(emplacementSurLeBoard
+												+ pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard)
+																.toString());
+										break;
+									case 2:
+										P3 = new Pion("P", true,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										blanc.add(P3);
+										nbP++;
+										System.out.println(emplacementSurLeBoard
+												+ pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard)
+																.toString());
+										break;
+									case 3:
+										P4 = new Pion("P", true,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										blanc.add(P4);
+										nbP++;
+										System.out.println(emplacementSurLeBoard
+												+ pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard)
+																.toString());
+										break;
+									case 4:
+										P5 = new Pion("P", true,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										blanc.add(P5);
+										nbP++;
+										System.out.println(emplacementSurLeBoard
+												+ pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard)
+																.toString());
+										break;
+									case 5:
+										P6 = new Pion("P", true,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										blanc.add(P6);
+										nbP++;
+										System.out.println(emplacementSurLeBoard
+												+ pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard)
+																.toString());
+										break;
+									case 6:
+										P7 = new Pion("P", true,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										blanc.add(P7);
+										nbP++;
+										System.out.println(emplacementSurLeBoard
+												+ pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard)
+																.toString());
+										break;
+									case 7:
+										P8 = new Pion("P", true,
+												pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard));
+										blanc.add(P8);
+										nbP++;
+										System.out.println(emplacementSurLeBoard
+												+ pointSelonEmplacementDansLeTableau(
+														emplacementSurLeBoard)
+																.toString());
+										break;
+
+								}
+								break;
+
+						}
 
 						emplacementSurLeBoard++;
 					}
@@ -500,16 +837,49 @@ public class Controleur implements Initializable
 			}
 
 		}
-
+		// for (Pieces p : blanc)
+		// {
+		// System.out.println(p.getNom() + " " + p.getEmplacement());
+		//
+		// }
+		// for (Pieces p : noir)
+		// {
+		// System.out.println(p.getNom() + " " + p.getEmplacement());
+		//
+		// }
+		plateau = new Plateau(blanc, noir);
 	}
+<<<<<<< Updated upstream
+=======
+
+	@FXML
+	void clickBoutonAI(ActionEvent event)
+	{
+
+		Pane[] allPanes = new Pane[64];
+>>>>>>> Stashed changes
 
 	
 	private void jouerContreAI() {
 		if (CheckAI.isSelected())
 		{
+<<<<<<< Updated upstream
 			Pane[] allPanes = allPane();
 
 			if (tourJoueur == false)
+=======
+			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
+		}
+		if (tourJoueur == false)
+		{
+			String position = bot.jouerBot(this.plateau);
+			Point pointFinale = new Point((position.charAt(4) - 48),
+					(position.charAt(5) - 48));
+			Point pointInitiale = new Point((position.charAt(0) - 48),
+					(position.charAt(2) - 48));
+			Pane paneFinale = null;
+			for (int i = 0; i < allPanes.length; i++)
+>>>>>>> Stashed changes
 			{
 				String position = bot.jouerBot(this.plateau);
 				Point pointFinale = new Point((position.charAt(4) - 48),
@@ -541,6 +911,10 @@ public class Controleur implements Initializable
 			paneSelect = null;
 			pieceSelect = null;
 		}
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 	}
 
 	@FXML
@@ -1117,9 +1491,20 @@ public class Controleur implements Initializable
 		{
 			x = (a % 8) - 1;
 		}
+		if (a % 8 == 0)
+		{
+			// 8, 16, 24, 32, 40, 48, 56, 64
+			// 7, 6, 5, 4, 3, 2, 1, 0
+			y = 7 - (a / 8);
 
-		y = (int) (8 - Math.ceil((double) a / 8));
+		}
+		else
+		{
+			y = (int) (8 - Math.ceil((double) a / 8));
+		}
 
+		if (y == 8)
+			y--;
 		return new Point(x, y);
 
 	}
