@@ -634,6 +634,10 @@ public class Controleur implements Initializable
 		{
 			afficherPionUgrade(pieceSelect.isWhite(), paneClick);
 		}
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 	}
 
 	private void deplacerProg(Pieces pieces, Pane positionFinale)
@@ -1024,7 +1028,7 @@ public class Controleur implements Initializable
 			do
 			{
 				s = reader.readLine();
-				System.out.println(s);
+
 				ListAnciennesParties.add(s);
 
 			}
@@ -1045,13 +1049,27 @@ public class Controleur implements Initializable
 
 		charger.setOnAction((a) -> {
 
-			Optional<String> partieSelectionner = Optional.ofNullable(listViewAnciennesParties.getSelectionModel()
+			Optional<String> partieSelectionner = Optional
+					.ofNullable(listViewAnciennesParties.getSelectionModel()
 							.getSelectedItem());
-			
-			
-			
-			
-			
+
+			if (partieSelectionner.isPresent())
+			{
+				Pane[] allPanes = new Pane[64];
+
+				for (int nb = 0; nb < 64; nb++)
+				{
+					allPanes[nb] = (Pane) anchor.getChildren().get(nb);
+				}
+
+				for (int i = 0; i < 64; i++)
+				{
+					ImageView n = (ImageView) allPanes[i].getChildren().get(0);
+					n.setImage(null);
+				}
+				placerPiecesString(partieSelectionner.get()+"/");
+
+			}
 
 		});
 
