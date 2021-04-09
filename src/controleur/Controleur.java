@@ -444,6 +444,12 @@ public class Controleur implements Initializable
 			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
 		}
 
+		for (int i = 0; i < 64; i++)
+		{
+			ImageView n = (ImageView) allPanes[i].getChildren().get(0);
+			n.setImage(null);
+		}
+
 		int emplacementSurLeBoard = 0; // entre 0 et 63
 
 		for (char a : placement.toCharArray())
@@ -472,8 +478,13 @@ public class Controleur implements Initializable
 						ImageView paneActuel = (ImageView) allPanes[emplacementSurLeBoard]
 								.getChildren().get(0);
 						paneActuel.setImage(association.get(String.valueOf(z)));
+
+						System.out.println(pointSelonEmplacementDansLeTableau(
+								emplacementSurLeBoard + 1));
+
 						emplacementSurLeBoard++;
 					}
+
 				}
 
 				placement = placement.substring(i + 1);
@@ -658,6 +669,10 @@ public class Controleur implements Initializable
 		{
 			afficherPionUgrade(pieceSelect.isWhite(), paneClick);
 		}
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 	}
 
 	private void deplacerProg(Pieces pieces, Pane positionFinale)
@@ -1073,7 +1088,37 @@ public class Controleur implements Initializable
 					.ofNullable(listViewAnciennesParties.getSelectionModel()
 							.getSelectedItem());
 
+<<<<<<< Updated upstream
+=======
+			if (partieSelectionner.isPresent())
+			{
+
+				placerPiecesString(partieSelectionner.get() + "/");
+
+			}
+
+>>>>>>> Stashed changes
 		});
+
+	}
+
+	private Point pointSelonEmplacementDansLeTableau(int a)
+	{
+		int y = 7;
+		int x = 0;
+
+		if (a % 8 == 0)
+		{
+			x = 7;
+		}
+		else
+		{
+			x = (a % 8) - 1;
+		}
+
+		y = (int) (8 - Math.ceil((double) a / 8));
+
+		return new Point(x, y);
 
 	}
 }
