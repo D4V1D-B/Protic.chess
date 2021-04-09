@@ -634,10 +634,6 @@ public class Controleur implements Initializable
 		{
 			afficherPionUgrade(pieceSelect.isWhite(), paneClick);
 		}
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 	}
 
 	private void deplacerProg(Pieces pieces, Pane positionFinale)
