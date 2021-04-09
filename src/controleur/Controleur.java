@@ -539,6 +539,10 @@ public class Controleur implements Initializable
 		}
 		else
 		{
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 			if (pieceSelect.getMouvementJouable()
 					.contains(rechercheCoordonnee(paneClick.getId()))
 					&& pieceSelect.isWhite() == tourJoueur)
@@ -569,6 +573,7 @@ public class Controleur implements Initializable
 			setLabelTourCouleur(labelTourCouleur);
 		}
 
+<<<<<<< Updated upstream
 	}
 
 	private void deplacer(Pieces pieceSelect, Pane paneClick)
@@ -633,6 +638,8 @@ public class Controleur implements Initializable
 		{
 			afficherPionUgrade(pieceSelect.isWhite(), paneClick);
 		}
+=======
+>>>>>>> Stashed changes
 	}
 
 	private void deplacerProg(Pieces pieces, Pane positionFinale)
@@ -1007,13 +1014,11 @@ public class Controleur implements Initializable
 
 		ListAnciennesParties = FXCollections.observableArrayList();
 		listViewAnciennesParties = new ListView<String>();
-		
+
 		Button charger = new Button("Charger");
 		VBox vBox = new VBox(listViewAnciennesParties, charger);
 		listViewAnciennesParties.setItems(ListAnciennesParties);
 
-		
-		
 		lesAnciennesParties.setScene(new Scene(vBox));
 		lesAnciennesParties.show();
 		String s;
@@ -1043,20 +1048,18 @@ public class Controleur implements Initializable
 			System.out.println("erreur dans la lecture");
 			e.printStackTrace();
 		}
-		
-		final Optional<String> partieSelectionner;
-		
+
 		charger.setOnAction((a) -> {
-			 
+
+			Optional<String> partieSelectionner = Optional.ofNullable(listViewAnciennesParties.getSelectionModel()
+							.getSelectedItem());
 			
 			
 			
 			
 			
-			
-			
-			
+
 		});
-		
+
 	}
 }
