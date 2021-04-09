@@ -25,7 +25,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioMenuItem;
@@ -71,12 +70,6 @@ public class Controleur implements Initializable
 
 	private ListView<String> listViewAnciennesParties;
 	private ObservableList<String> ListAnciennesParties;
-
-	@FXML
-	private CheckMenuItem CheckAI;
-
-	@FXML
-	private CheckMenuItem CheckJoueur;
 
 	@FXML
 	private Pane a8;
@@ -326,7 +319,7 @@ public class Controleur implements Initializable
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		resetTotal();
-		
+
 	}
 
 	public void setLabelTourCouleur(Label labelTourCouleur)
@@ -338,7 +331,6 @@ public class Controleur implements Initializable
 		else
 		{
 			this.labelTourCouleur.setText("Noir");
-			jouerContreAI();
 		}
 	}
 
@@ -849,25 +841,15 @@ public class Controleur implements Initializable
 		// }
 		plateau = new Plateau(blanc, noir);
 	}
-<<<<<<< Updated upstream
-=======
 
 	@FXML
 	void clickBoutonAI(ActionEvent event)
 	{
 
 		Pane[] allPanes = new Pane[64];
->>>>>>> Stashed changes
 
-	
-	private void jouerContreAI() {
-		if (CheckAI.isSelected())
+		for (int nb = 0; nb < 64; nb++)
 		{
-<<<<<<< Updated upstream
-			Pane[] allPanes = allPane();
-
-			if (tourJoueur == false)
-=======
 			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
 		}
 		if (tourJoueur == false)
@@ -879,42 +861,27 @@ public class Controleur implements Initializable
 					(position.charAt(2) - 48));
 			Pane paneFinale = null;
 			for (int i = 0; i < allPanes.length; i++)
->>>>>>> Stashed changes
 			{
-				String position = bot.jouerBot(this.plateau);
-				Point pointFinale = new Point((position.charAt(4) - 48),
-						(position.charAt(5) - 48));
-				Point pointInitiale = new Point((position.charAt(0) - 48),
-						(position.charAt(2) - 48));
-				Pane paneFinale = null;
-				for (int i = 0; i < allPanes.length; i++)
+				if (allPanes[i].getId().equals(recherchePane(pointFinale)))
 				{
-					if (allPanes[i].getId().equals(recherchePane(pointFinale)))
-					{
-						paneFinale = allPanes[i];
-					}
+					paneFinale = allPanes[i];
 				}
-				paneSelect = paneFinale;
-				pieceSelect = plateau.trouverPieces(pointInitiale);
-				deplacer(pieceSelect, paneSelect);
-				Pane paneInitiale = null;
-				for (int i = 0; i < allPanes.length; i++)
-				{
-					if (allPanes[i].getId().equals(recherchePane(pointInitiale)))
-					{
-						paneInitiale = allPanes[i];
-					}
-				}
-				deplacerImage(paneSelect, paneInitiale, pieceSelect);
-				tourJoueur = !tourJoueur;
 			}
-			paneSelect = null;
-			pieceSelect = null;
+			paneSelect = paneFinale;
+			pieceSelect = plateau.trouverPieces(pointInitiale);
+			deplacer(pieceSelect, paneSelect);
+			Pane paneInitiale = null;
+			for (int i = 0; i < allPanes.length; i++)
+			{
+				if (allPanes[i].getId().equals(recherchePane(pointInitiale)))
+				{
+					paneInitiale = allPanes[i];
+				}
+			}
+			deplacerImage(paneSelect, paneInitiale, pieceSelect);
+			tourJoueur = !tourJoueur;
 		}
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 	}
 
 	@FXML
