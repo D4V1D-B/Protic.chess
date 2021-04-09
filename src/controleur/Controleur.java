@@ -1093,7 +1093,6 @@ public class Controleur implements Initializable
 
 			}
 
-
 		});
 
 	}
