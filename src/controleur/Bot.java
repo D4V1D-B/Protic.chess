@@ -39,7 +39,7 @@ public class Bot
 				if(evalMouvement(manger,p,oldMov)>bestMovementPoint)
 				{
 					bestMovementPoint = evalMouvement(manger,p,oldMov);
-					bestMovement= anciennePosition.x + anciennePosition.y + p.getNom()+mov.x+mov.y;
+					bestMovement= anciennePosition.x +" " +  anciennePosition.y + p.getNom()+mov.x+mov.y;
 				}
 				
 				this.plateau.getPlateau()[p.getEmplacement().x][p.getEmplacement().y] = manger;

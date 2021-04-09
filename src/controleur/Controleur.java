@@ -488,13 +488,25 @@ public class Controleur implements Initializable
 	void clickBoutonAI(ActionEvent event)
 	{
 
-		System.out.println(bot.jouerBot(this.plateau));
-		System.out.println("Fuck");
+		Pane tableauPane[] = allPane();
 
 		if (tourJoueur == false)
 		{
-			System.out.println("yo");
-			// jouerBot();
+			System.out.println(bot.jouerBot(this.plateau));
+			Point point = new Point();
+			point.setLocation(bot.jouerBot(this.plateau).charAt(4),
+					bot.jouerBot(this.plateau).charAt(5));
+			recherchePane(point);
+			System.out.println(rechercheCoordonnee(recherchePane(point)));
+			Pane p = null;
+			for (int i = 0; i < tableauPane.length; i++)
+			{
+				if (recherchePane(point) == null)
+				{
+					p = tableauPane[i];
+				}
+			}
+			deplacer(pieceSelect, p);
 		}
 		tourJoueur = !tourJoueur;
 
@@ -1045,13 +1057,9 @@ public class Controleur implements Initializable
 
 		charger.setOnAction((a) -> {
 
-			Optional<String> partieSelectionner = Optional.ofNullable(listViewAnciennesParties.getSelectionModel()
+			Optional<String> partieSelectionner = Optional
+					.ofNullable(listViewAnciennesParties.getSelectionModel()
 							.getSelectedItem());
-			
-			
-			
-			
-			
 
 		});
 
