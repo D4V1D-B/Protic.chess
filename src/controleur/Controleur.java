@@ -539,79 +539,11 @@ public class Controleur implements Initializable
 		}
 		else
 		{
-			
 			if (pieceSelect.getMouvementJouable()
 					.contains(rechercheCoordonnee(paneClick.getId()))
 					&& pieceSelect.isWhite() == tourJoueur)
 			{
-				pieceSelect
-						.setEmplacement(rechercheCoordonnee(paneClick.getId()));
-
-				if (pieceSelect.getClass().toString().contains("Roi")
-						&& !((Roi) pieceSelect).isaBouger()
-						&& LISTPOINTROCK.contains(
-								rechercheCoordonnee(paneClick.getId())))
-				{
-					Point rockValide = plateau
-							.refreshDeplacementRock(((Roi) pieceSelect));
-					if (rockValide != null)
-					{
-						deplacerImage(paneClick, paneSelect, pieceSelect);
-						ajouterTableView(pieceSelect, "Castle");
-						deplacerTour(rockValide);
-					}
-				}
-				else
-					if (pieceSelect.getClass().toString().contains("Pion")
-							&& pieceSelect
-									.getEmplacement().x != rechercheCoordonnee(
-											paneSelect.getId()).x
-							&& plateau.trouverPieces(
-									pieceSelect.getEmplacement()) == null)
-					{
-						deplacer(pieceSelect, paneClick);
-						deplacerImage(paneClick, paneSelect, pieceSelect);
-						if (pieceSelect.isWhite())
-						{
-							SupprimerImage(new Point(
-									pieceSelect.getEmplacement().x,
-									pieceSelect.getEmplacement().y - 1));
-						}
-						else
-						{
-							SupprimerImage(new Point(
-									pieceSelect.getEmplacement().x,
-									pieceSelect.getEmplacement().y + 1));
-						}
-						ajouterTableView(pieceSelect, paneClick.getId());
-					}
-					else
-					{
-						deplacer(pieceSelect, paneClick);
-						deplacerImage(paneClick, paneSelect, pieceSelect);
-						ajouterTableView(pieceSelect, paneClick.getId());
-
-						if (pieceSelect.getClass().toString().contains("Roi"))
-						{
-							((Roi) pieceSelect).setaBouger();
-						}
-						else
-							if (pieceSelect.getClass().toString()
-									.contains("Tour"))
-							{
-								((Tour) pieceSelect).setaBouger();
-							}
-					}
-
-				if ((pieceSelect.getNom().equals("P")
-						&& rechercheCoordonnee(paneClick.getId()).y == 7)
-						|| (pieceSelect.getNom().equals("p")
-								&& rechercheCoordonnee(
-										paneClick.getId()).y == 0))
-				{
-					afficherPionUgrade(pieceSelect.isWhite(), paneClick);
-				}
-
+				deplacer(pieceSelect, paneClick);
 				tourJoueur = !tourJoueur;
 				paneSelect = null;
 				pieceSelect = null;
@@ -621,7 +553,7 @@ public class Controleur implements Initializable
 				resetCouleur();
 				pieceSelect = (null);
 			}
-			
+
 			if (plateau.getEchecMath())
 			{
 				afficherFinDePartie("Les " + labelTourCouleur.getText()
@@ -636,10 +568,74 @@ public class Controleur implements Initializable
 
 			setLabelTourCouleur(labelTourCouleur);
 		}
-	
+
 	}
 
-	private void deplacer(Pieces pieces, Pane positionFinale)
+	private void deplacer(Pieces pieceSelect, Pane paneClick)
+	{
+		pieceSelect.setEmplacement(rechercheCoordonnee(paneClick.getId()));
+
+		if (pieceSelect.getClass().toString().contains("Roi")
+				&& !((Roi) pieceSelect).isaBouger() && LISTPOINTROCK
+						.contains(rechercheCoordonnee(paneClick.getId())))
+		{
+			Point rockValide = plateau
+					.refreshDeplacementRock(((Roi) pieceSelect));
+			if (rockValide != null)
+			{
+				deplacerImage(paneClick, paneSelect, pieceSelect);
+				ajouterTableView(pieceSelect, "Castle");
+				deplacerTour(rockValide);
+			}
+		}
+		else
+			if (pieceSelect.getClass().toString().contains("Pion")
+					&& pieceSelect.getEmplacement().x != rechercheCoordonnee(
+							paneSelect.getId()).x
+					&& plateau.trouverPieces(
+							pieceSelect.getEmplacement()) == null)
+			{
+				deplacerProg(pieceSelect, paneClick);
+				deplacerImage(paneClick, paneSelect, pieceSelect);
+				if (pieceSelect.isWhite())
+				{
+					SupprimerImage(new Point(pieceSelect.getEmplacement().x,
+							pieceSelect.getEmplacement().y - 1));
+				}
+				else
+				{
+					SupprimerImage(new Point(pieceSelect.getEmplacement().x,
+							pieceSelect.getEmplacement().y + 1));
+				}
+				ajouterTableView(pieceSelect, paneClick.getId());
+			}
+			else
+			{
+				deplacerProg(pieceSelect, paneClick);
+				deplacerImage(paneClick, paneSelect, pieceSelect);
+				ajouterTableView(pieceSelect, paneClick.getId());
+
+				if (pieceSelect.getClass().toString().contains("Roi"))
+				{
+					((Roi) pieceSelect).setaBouger();
+				}
+				else
+					if (pieceSelect.getClass().toString().contains("Tour"))
+					{
+						((Tour) pieceSelect).setaBouger();
+					}
+			}
+
+		if ((pieceSelect.getNom().equals("P")
+				&& rechercheCoordonnee(paneClick.getId()).y == 7)
+				|| (pieceSelect.getNom().equals("p")
+						&& rechercheCoordonnee(paneClick.getId()).y == 0))
+		{
+			afficherPionUgrade(pieceSelect.isWhite(), paneClick);
+		}
+	}
+
+	private void deplacerProg(Pieces pieces, Pane positionFinale)
 	{
 		// deplacement dans la prog
 		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
