@@ -29,7 +29,8 @@
                         <RadioMenuItem mnemonicParsing="false" text="Sombre" />
                     </items>
                   </Menu>
-                  <CheckMenuItem mnemonicParsing="false" text="Jouer contre AI" />
+                  <CheckMenuItem fx:id="CheckAI" mnemonicParsing="false" onAction="#jouerContreAI" text="Jouer contre AI" />
+                  <CheckMenuItem fx:id="CheckJoueur" mnemonicParsing="false" text="Joueur contre Joueur" />
                </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

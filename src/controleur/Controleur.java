@@ -25,6 +25,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioMenuItem;
@@ -70,6 +71,12 @@ public class Controleur implements Initializable
 
 	private ListView<String> listViewAnciennesParties;
 	private ObservableList<String> ListAnciennesParties;
+
+	@FXML
+	private CheckMenuItem CheckAI;
+
+	@FXML
+	private CheckMenuItem CheckJoueur;
 
 	@FXML
 	private Pane a8;
@@ -494,45 +501,86 @@ public class Controleur implements Initializable
 		}
 
 	}
+
 	@FXML
 	void clickBoutonAI(ActionEvent event)
 	{
 
-		Pane[] allPanes = new Pane[64];
+//		Pane[] allPanes = allPane();
+//
+//		if (tourJoueur == false)
+//		{
+//			String position = bot.jouerBot(this.plateau);
+//			Point pointFinale = new Point((position.charAt(4) - 48),
+//					(position.charAt(5) - 48));
+//			Point pointInitiale = new Point((position.charAt(0) - 48),
+//					(position.charAt(2) - 48));
+//			Pane paneFinale = null;
+//			for (int i = 0; i < allPanes.length; i++)
+//			{
+//				if (allPanes[i].getId().equals(recherchePane(pointFinale)))
+//				{
+//					paneFinale = allPanes[i];
+//				}
+//			}
+//			paneSelect = paneFinale;
+//			pieceSelect = plateau.trouverPieces(pointInitiale);
+//			deplacer(pieceSelect, paneSelect);
+//			Pane paneInitiale = null;
+//			for (int i = 0; i < allPanes.length; i++)
+//			{
+//				if (allPanes[i].getId().equals(recherchePane(pointInitiale)))
+//				{
+//					paneInitiale = allPanes[i];
+//				}
+//			}
+//			deplacerImage(paneSelect, paneInitiale, pieceSelect);
+//			tourJoueur = !tourJoueur;
+//		}
+//		paneSelect = null;
+//		pieceSelect = null;
 
-		for (int nb = 0; nb < 64; nb++)
-		{
-			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
-		}
-		if (tourJoueur == false)
-		{
-			String position = bot.jouerBot(this.plateau);
-			Point pointFinale = new Point((position.charAt(4)-48),(position.charAt(5)-48));
-			Point pointInitiale = new Point((position.charAt(0)-48),(position.charAt(2)-48));
-			Pane paneFinale = null;
-			for (int i = 0; i < allPanes.length; i++)
-			{
-				if (allPanes[i].getId().equals(recherchePane(pointFinale)))
-				{
-					paneFinale = allPanes[i];
-				}
-			}
-			paneSelect = paneFinale;
-			pieceSelect = plateau.trouverPieces(pointInitiale);
-			deplacer(pieceSelect, paneSelect);
-			Pane paneInitiale = null;
-			for (int i = 0; i < allPanes.length; i++)
-			{
-				if (allPanes[i].getId().equals(recherchePane(pointInitiale)))
-				{
-					paneInitiale = allPanes[i];
-				}
-			}
-			deplacerImage(paneSelect, paneInitiale, pieceSelect);
-			tourJoueur = !tourJoueur;
-		}
-		
+	}
 
+	@FXML
+	void jouerContreAI(ActionEvent event)
+	{
+		if (CheckAI.isSelected())
+		{
+			Pane[] allPanes = allPane();
+
+			if (tourJoueur == false)
+			{
+				String position = bot.jouerBot(this.plateau);
+				Point pointFinale = new Point((position.charAt(4) - 48),
+						(position.charAt(5) - 48));
+				Point pointInitiale = new Point((position.charAt(0) - 48),
+						(position.charAt(2) - 48));
+				Pane paneFinale = null;
+				for (int i = 0; i < allPanes.length; i++)
+				{
+					if (allPanes[i].getId().equals(recherchePane(pointFinale)))
+					{
+						paneFinale = allPanes[i];
+					}
+				}
+				paneSelect = paneFinale;
+				pieceSelect = plateau.trouverPieces(pointInitiale);
+				deplacer(pieceSelect, paneSelect);
+				Pane paneInitiale = null;
+				for (int i = 0; i < allPanes.length; i++)
+				{
+					if (allPanes[i].getId().equals(recherchePane(pointInitiale)))
+					{
+						paneInitiale = allPanes[i];
+					}
+				}
+				deplacerImage(paneSelect, paneInitiale, pieceSelect);
+				tourJoueur = !tourJoueur;
+			}
+			paneSelect = null;
+			pieceSelect = null;
+		}
 	}
 
 	@FXML
@@ -1084,7 +1132,6 @@ public class Controleur implements Initializable
 			Optional<String> partieSelectionner = Optional
 					.ofNullable(listViewAnciennesParties.getSelectionModel()
 							.getSelectedItem());
-
 
 			if (partieSelectionner.isPresent())
 			{
