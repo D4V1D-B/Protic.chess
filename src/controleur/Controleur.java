@@ -483,7 +483,7 @@ public class Controleur implements Initializable
 		}
 
 	}
-
+//	TODO
 	@FXML
 	void clickBoutonAI(ActionEvent event)
 	{
@@ -498,11 +498,7 @@ public class Controleur implements Initializable
 		{
 			System.out.println(bot.jouerBot(this.plateau));
 			String position = bot.jouerBot(this.plateau);
-			Point point = new Point();
-			point.setLocation(position.charAt(4),
-					position.charAt(5));
-			recherchePane(point);
-
+			Point point = new Point((position.charAt(4)-48),(position.charAt(5)-48));
 			System.out.println((recherchePane(point)));
 			Pane p = null;
 			for (int i = 0; i < allPanes.length; i++)
