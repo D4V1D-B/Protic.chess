@@ -526,7 +526,7 @@ public class Controleur implements Initializable
 		}
 		else
 		{
-
+			
 			if (pieceSelect.getMouvementJouable()
 					.contains(rechercheCoordonnee(paneClick.getId()))
 					&& pieceSelect.isWhite() == tourJoueur)
@@ -556,7 +556,6 @@ public class Controleur implements Initializable
 							&& plateau.trouverPieces(
 									pieceSelect.getEmplacement()) == null)
 					{
-
 						deplacer(pieceSelect, paneClick);
 						deplacerImage(paneClick, paneSelect, pieceSelect);
 						if (pieceSelect.isWhite())
@@ -609,20 +608,22 @@ public class Controleur implements Initializable
 				resetCouleur();
 				pieceSelect = (null);
 			}
-		}
-		if (plateau.getEchecMath())
-		{
-			afficherFinDePartie("Les " + labelTourCouleur.getText()
-					+ "s ont gagnés la partie !");
-		}
-		else
+			
 			if (plateau.getEchecMath())
 			{
-				afficherFinDePartie(
-						"Partie nulle, meilleur chance la prochaine fois!");
+				afficherFinDePartie("Les " + labelTourCouleur.getText()
+						+ "s ont gagnés la partie !");
 			}
+			else
+				if (plateau.getEchecMath())
+				{
+					afficherFinDePartie(
+							"Partie nulle, meilleur chance la prochaine fois!");
+				}
 
-		setLabelTourCouleur(labelTourCouleur);
+			setLabelTourCouleur(labelTourCouleur);
+		}
+	
 	}
 
 	private void deplacer(Pieces pieces, Pane positionFinale)

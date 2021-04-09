@@ -38,7 +38,8 @@ public class Bot
 				Pieces manger = deplacementTest(anciennePosition,p);
 				if(evalMouvement(manger,p,oldMov)>bestMovementPoint)
 				{
-					bestMovement= p.getNom()+mov.x+mov.y;
+					bestMovementPoint = evalMouvement(manger,p,oldMov);
+					bestMovement= anciennePosition.x + anciennePosition.y + p.getNom()+mov.x+mov.y;
 				}
 				
 				this.plateau.getPlateau()[p.getEmplacement().x][p.getEmplacement().y] = manger;
