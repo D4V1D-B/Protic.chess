@@ -337,7 +337,7 @@ public class Controleur implements Initializable
 			this.labelTourCouleur.setText("Noir");
 			if(CheckAI.isSelected())
 			{
-				jouerAI();
+				JouerAI();
 			}
 		}
 	}
