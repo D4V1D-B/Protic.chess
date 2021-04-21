@@ -1,39 +1,34 @@
-#bouton3 {
-	-fx-background-color: red;
-	-fx-underline: false; 
-	-fx-background-image: url("/formatif4/soleil.png"); 
-	-fx-background-size: stretch;
+.borderPane{
+	fx-background-color: white;
 }
 
-.button {
-	-fx-underline: true;
-/* 	-fx-background-color: inherit; */
+
+.button{
+	fx-background-color: lightgrey;
+	fx-border-color: black;
+	fx-font-size: 24 px;
 }
 
-.buttonCustom {
-	-fx-border-width: 2px;
-	-fx-border-color: blue;
+.menuBar{
+	fx-background-color: lightgrey;
+	fx-border-color: grey;
+	fx-font-size: 24 px;
 }
 
-.hbox {
-	-fx-spacing: 20px;
-	-fx-font-family: "Herculanum";
-	-fx-background-color: red;
+.vBox{
+	fx-background-color: lightgrey;
+	fx-border-color: green;
 }
 
-#bouton4:hover {
-	-fx-background-color: green;
+.pane{
+	fx-background-color: black;
+	fx-border-color: green;
 }
 
-#bouton4:armed, .button:armed {
-	-fx-background-color: #ff9200;
+.caseClaire{
+	fx-background-color: #f2e8ce;
 }
 
-.hbox>.hbox>.button {
-	-fx-font-size: 24px;
+.caseSombre{
+	fx-background-color: brown;
 }
-
-#bouton1, #bouton2, #bouton3 {
-	-fx-cursor: text;
-}
-
