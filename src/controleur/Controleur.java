@@ -1503,13 +1503,13 @@ public class Controleur implements Initializable
 		int y = 7;
 		int x = 0;
 
-		if (a % 8 == 0)
+		if (a % 7 == 0)
 		{
 			x = 7;
 		}
 		else
 		{
-			x = (a % 8) - 1;
+			x = (a % 7);
 		}
 		if (a % 8 == 0)
 		{
