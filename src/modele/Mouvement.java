@@ -11,12 +11,14 @@ public class Mouvement
 	private SimpleStringProperty fen;
 
 	public Mouvement(SimpleStringProperty pieceBouge,
-			SimpleStringProperty nouvelleEmplacement, boolean isWhite)
+			SimpleStringProperty nouvelleEmplacement, SimpleStringProperty fen, boolean isWhite)
 	{
 		super();
 		this.pieceBouge = pieceBouge;
 		this.nouvelleEmplacement = nouvelleEmplacement;
 		this.isWhite = isWhite;
+		this.fen = fen;
+		
 	}
 
 	public StringProperty getPieceBouge()

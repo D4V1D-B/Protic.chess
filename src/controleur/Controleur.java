@@ -72,9 +72,9 @@ public class Controleur implements Initializable
 	private ListView<String> listViewAnciennesParties;
 	private ObservableList<String> ListAnciennesParties;
 
-    @FXML
-    private CheckMenuItem CheckAI;
-	
+	@FXML
+	private CheckMenuItem CheckAI;
+
 	@FXML
 	private Pane a8;
 
@@ -285,6 +285,18 @@ public class Controleur implements Initializable
 	private ObservableList<String> list;
 
 	@FXML
+	void revenirAuJeu(MouseEvent event)
+	{
+
+	}
+
+	@FXML
+	void chargerMouvement(MouseEvent event)
+	{
+
+	}
+
+	@FXML
 	void chargerPartie(ActionEvent event)
 	{
 		System.out.println("allo");
@@ -335,7 +347,7 @@ public class Controleur implements Initializable
 		else
 		{
 			this.labelTourCouleur.setText("Noir");
-			if(CheckAI.isSelected())
+			if (CheckAI.isSelected())
 			{
 				JouerAI();
 			}
@@ -739,10 +751,7 @@ public class Controleur implements Initializable
 														emplacementSurLeBoard));
 										blanc.add(P1);
 										nbP++;
-										System.out.println(emplacementSurLeBoard
-												+ pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard)
-																.toString());
+
 										break;
 
 									case 1:
@@ -751,10 +760,7 @@ public class Controleur implements Initializable
 														emplacementSurLeBoard));
 										blanc.add(P2);
 										nbP++;
-										System.out.println(emplacementSurLeBoard
-												+ pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard)
-																.toString());
+
 										break;
 									case 2:
 										P3 = new Pion("P", true,
@@ -762,10 +768,7 @@ public class Controleur implements Initializable
 														emplacementSurLeBoard));
 										blanc.add(P3);
 										nbP++;
-										System.out.println(emplacementSurLeBoard
-												+ pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard)
-																.toString());
+
 										break;
 									case 3:
 										P4 = new Pion("P", true,
@@ -773,10 +776,7 @@ public class Controleur implements Initializable
 														emplacementSurLeBoard));
 										blanc.add(P4);
 										nbP++;
-										System.out.println(emplacementSurLeBoard
-												+ pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard)
-																.toString());
+
 										break;
 									case 4:
 										P5 = new Pion("P", true,
@@ -784,10 +784,7 @@ public class Controleur implements Initializable
 														emplacementSurLeBoard));
 										blanc.add(P5);
 										nbP++;
-										System.out.println(emplacementSurLeBoard
-												+ pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard)
-																.toString());
+
 										break;
 									case 5:
 										P6 = new Pion("P", true,
@@ -795,10 +792,7 @@ public class Controleur implements Initializable
 														emplacementSurLeBoard));
 										blanc.add(P6);
 										nbP++;
-										System.out.println(emplacementSurLeBoard
-												+ pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard)
-																.toString());
+
 										break;
 									case 6:
 										P7 = new Pion("P", true,
@@ -806,10 +800,7 @@ public class Controleur implements Initializable
 														emplacementSurLeBoard));
 										blanc.add(P7);
 										nbP++;
-										System.out.println(emplacementSurLeBoard
-												+ pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard)
-																.toString());
+
 										break;
 									case 7:
 										P8 = new Pion("P", true,
@@ -817,10 +808,7 @@ public class Controleur implements Initializable
 														emplacementSurLeBoard));
 										blanc.add(P8);
 										nbP++;
-										System.out.println(emplacementSurLeBoard
-												+ pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard)
-																.toString());
+
 										break;
 
 								}
@@ -1203,14 +1191,16 @@ public class Controleur implements Initializable
 		if (positionFinale.equals("Castle"))
 		{
 			Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
-					new SimpleStringProperty(positionFinale), p.isWhite());
+					new SimpleStringProperty(positionFinale),
+					new SimpleStringProperty(creerFen()), p.isWhite());
 
 			list.add(m.toStringCastle());
 		}
 		else
 		{
 			Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
-					new SimpleStringProperty(positionFinale), p.isWhite());
+					new SimpleStringProperty(positionFinale),
+					new SimpleStringProperty(creerFen()), p.isWhite());
 
 			list.add(m.toString());
 		}
@@ -1312,6 +1302,28 @@ public class Controleur implements Initializable
 
 	public boolean saveGame()
 	{
+
+		try
+		{
+			BufferedWriter writer = new BufferedWriter(
+					new FileWriter(file, true));
+
+			writer.append(creerFen() + "\n");
+
+			writer.close();
+		}
+		catch (IOException e)
+		{
+			System.out.println("Erreur dans la sauvegarde!");
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+
+	private String creerFen()
+	{
 		String tousLesMouvements = "";
 		String plateauFen = "";
 		int entre0et7 = 0;
@@ -1320,7 +1332,6 @@ public class Controleur implements Initializable
 		{
 			tousLesMouvements += m + ", ";
 		}
-
 		Pane[] tableauPane = new Pane[64];
 
 		for (int nb = 0; nb < 64; nb++)
@@ -1361,31 +1372,9 @@ public class Controleur implements Initializable
 			entre0et7++;
 
 		}
-
-		// fen = plateauFen;
-
-		// ecrire plateauFen et tousLesMouvements dans un fichier.
-		try
-		{
-			BufferedWriter writer = new BufferedWriter(
-					new FileWriter(file, true));
-
-			writer.append(plateauFen + "\n");
-
-			writer.close();
-		}
-		catch (IOException e)
-		{
-			System.out.println("Erreur dans la sauvegarde!");
-			e.printStackTrace();
-		}
-
-		return false;
-
+		return plateauFen;
 	}
 
-	// ne fonctionne pas puisque seulement les images sont bien placer et meme
-	// cela ne fonctionne pas.
 	private void chargerUnePartie()
 	{
 
@@ -1469,4 +1458,5 @@ public class Controleur implements Initializable
 		return new Point(x, y);
 
 	}
+
 }
