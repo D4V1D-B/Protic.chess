@@ -1450,28 +1450,17 @@ public class Controleur implements Initializable
 		int y = 7;
 		int x = 0;
 
-		if (a % 7 == 0)
+		if ((a % 8)+1 == 8)
 		{
 			x = 7;
 		}
 		else
 		{
-			x = (a % 7);
+			x = (a % 8);
 		}
-		if (a % 8 == 0)
-		{
-			// 8, 16, 24, 32, 40, 48, 56, 64
-			// 7, 6, 5, 4, 3, 2, 1, 0
-			y = 7 - (a / 8);
+		
+		y= 7-(a/8);
 
-		}
-		else
-		{
-			y = (int) (8 - Math.ceil((double) a / 8));
-		}
-
-		if (y == 8)
-			y--;
 		return new Point(x, y);
 
 	}
