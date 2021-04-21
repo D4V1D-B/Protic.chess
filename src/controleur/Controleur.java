@@ -529,6 +529,7 @@ public class Controleur implements Initializable
 						switch (charDeLaPiece)
 						{
 							case 'r':
+								
 								if (nbr == 0)
 								{
 									r1 = new Tour("r", false,
@@ -544,6 +545,7 @@ public class Controleur implements Initializable
 													emplacementSurLeBoard));
 									noir.add(r2);
 								}
+								
 
 								break;
 							case 'n':
@@ -1299,7 +1301,7 @@ public class Controleur implements Initializable
 
 		if (choice.get() == analyse)
 		{
-			System.out.println("allo");
+			
 		}
 	}
 
@@ -1313,7 +1315,7 @@ public class Controleur implements Initializable
 		{
 			tousLesMouvements += m + ", ";
 		}
-		// System.out.println(tousLesMouvements);
+		
 
 		Pane[] tableauPane = new Pane[64];
 
@@ -1355,7 +1357,7 @@ public class Controleur implements Initializable
 			entre0et7++;
 
 		}
-		// System.out.println(plateauFen);
+	
 		// fen = plateauFen;
 
 		// ecrire plateauFen et tousLesMouvements dans un fichier.
@@ -1409,7 +1411,7 @@ public class Controleur implements Initializable
 			do
 			{
 				s = reader.readLine();
-				System.out.println(s);
+				
 				ListAnciennesParties.add(s);
 
 			}
@@ -1450,28 +1452,16 @@ public class Controleur implements Initializable
 		int y = 7;
 		int x = 0;
 
-		if (a % 7 == 0)
+		if ((a % 8)+1 == 8)
 		{
 			x = 7;
 		}
 		else
 		{
-			x = (a % 7);
+			x = (a % 8);
 		}
-		if (a % 8 == 0)
-		{
-			// 8, 16, 24, 32, 40, 48, 56, 64
-			// 7, 6, 5, 4, 3, 2, 1, 0
-			y = 7 - (a / 8);
-
-		}
-		else
-		{
-			y = (int) (8 - Math.ceil((double) a / 8));
-		}
-
-		if (y == 8)
-			y--;
+		
+		y =7-(a/8);
 		return new Point(x, y);
 
 	}
