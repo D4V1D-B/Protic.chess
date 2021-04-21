@@ -1,7 +1,39 @@
-.caseClaire {
+#bouton3 {
+	-fx-background-color: red;
+	-fx-underline: false; 
+	-fx-background-image: url("/formatif4/soleil.png"); 
+	-fx-background-size: stretch;
+}
+
+.button {
+	-fx-underline: true;
+/* 	-fx-background-color: inherit; */
+}
+
+.buttonCustom {
+	-fx-border-width: 2px;
+	-fx-border-color: blue;
+}
+
+.hbox {
+	-fx-spacing: 20px;
+	-fx-font-family: "Herculanum";
 	-fx-background-color: red;
 }
 
-#testClaire {
-	-fx-background-color: red;
+#bouton4:hover {
+	-fx-background-color: green;
 }
+
+#bouton4:armed, .button:armed {
+	-fx-background-color: #ff9200;
+}
+
+.hbox>.hbox>.button {
+	-fx-font-size: 24px;
+}
+
+#bouton1, #bouton2, #bouton3 {
+	-fx-cursor: text;
+}
+
