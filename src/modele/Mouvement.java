@@ -8,6 +8,7 @@ public class Mouvement
 	private SimpleStringProperty pieceBouge;
 	private SimpleStringProperty nouvelleEmplacement;
 	private boolean isWhite;
+	private SimpleStringProperty fen;
 
 	public Mouvement(SimpleStringProperty pieceBouge,
 			SimpleStringProperty nouvelleEmplacement, boolean isWhite)
@@ -46,6 +47,16 @@ public class Mouvement
 	public void setWhite(boolean isWhite)
 	{
 		this.isWhite = isWhite;
+	}
+
+	public SimpleStringProperty getFen()
+	{
+		return fen;
+	}
+
+	public void setFen(SimpleStringProperty fen)
+	{
+		this.fen = fen;
 	}
 
 	@Override
