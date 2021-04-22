@@ -23,17 +23,15 @@ public class ChessApp extends Application
 
 		BorderPane root = loader.load();
 		Scene scene = new Scene(root);
-		
-//		scene.getStylesheets()
-//				.add(this.getClass().getResource("/css/claire.css").toString());
+
+		scene.getStylesheets().setAll(this.getClass()
+				.getResource("/css/claire.css").toString());
 
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Échec");
 		primaryStage.setMinHeight(740);
 		primaryStage.setMinWidth(1100);
 		primaryStage.show();
-		
-		
 
 	}
 
