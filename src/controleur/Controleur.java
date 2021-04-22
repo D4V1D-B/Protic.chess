@@ -51,6 +51,9 @@ import modele.Tour;
 public class Controleur implements Initializable
 {
 	private HashMap<String, Image> association = new HashMap<String, Image>();
+	private String placementActuel = null;
+	private ArrayList<Mouvement> arrayMouvement = new ArrayList<Mouvement>();
+	private boolean tuPeuxBoujerLesPieces = true;
 	private Plateau plateau;
 	private String placementDepart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/";
 	private Pieces pieceSelect;
@@ -282,18 +285,36 @@ public class Controleur implements Initializable
 	private Button recommencerPartie;
 
 	@FXML
+	private Button boutonChargerMouvements;
+
+	@FXML
+	private Button boutonRevenirAuJeu;
+
+	@FXML
 	private ObservableList<String> list;
 
 	@FXML
 	void revenirAuJeu(MouseEvent event)
 	{
-
+		placerPiecesString(placementActuel);
+		tuPeuxBoujerLesPieces = true;
+		boutonRevenirAuJeu.setDisable(true);
 	}
 
 	@FXML
 	void chargerMouvement(MouseEvent event)
 	{
+		int indiceDuMouvement = listDeMouvement.getSelectionModel()
+				.getSelectedIndex();
+		if (indiceDuMouvement != -1)
+		{
+			tuPeuxBoujerLesPieces = false;
+			placementActuel = creerFen();
 
+			Mouvement mouvementSelect = arrayMouvement.get(indiceDuMouvement);
+			placerPiecesString(mouvementSelect.getFen().get());
+			boutonRevenirAuJeu.setDisable(false);
+		}
 	}
 
 	@FXML
@@ -335,6 +356,7 @@ public class Controleur implements Initializable
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		resetTotal();
+		boutonRevenirAuJeu.setDisable(true);
 
 	}
 
@@ -356,7 +378,10 @@ public class Controleur implements Initializable
 
 	private void resetTotal()
 	{
-
+		if (!arrayMouvement.isEmpty())
+		{
+			arrayMouvement.clear();
+		}
 		list = FXCollections.observableArrayList();
 		listDeMouvement.setItems(list);
 		// Tour R1 = new Tour("R", true, new Point(0, 0));
@@ -878,77 +903,79 @@ public class Controleur implements Initializable
 		}
 	}
 
-
 	@FXML
 	void mouseClick(MouseEvent event)
 	{
-		Pane tableauPane[] = allPane();
-
-		Pane paneClick = (Pane) event.getSource();
-
-		if (pieceSelect == null)
+		if (tuPeuxBoujerLesPieces)
 		{
-			paneClick.setStyle(
-					"-fx-background-color:gold; -fx-border-color: black");
-			pieceSelect = plateau
-					.trouverPieces(rechercheCoordonnee(paneClick.getId()));
-			paneSelect = paneClick;
+			Pane tableauPane[] = allPane();
 
-			if (pieceSelect != null && pieceSelect.isWhite() == tourJoueur)
+			Pane paneClick = (Pane) event.getSource();
+
+			if (pieceSelect == null)
 			{
-				paneSelect.setStyle(
-						"-fx-background-color:deeppink; -fx-border-color: black");
-				ArrayList<Point> tableau = pieceSelect.getMouvementJouable();
+				paneClick.setStyle(
+						"-fx-background-color:gold; -fx-border-color: black");
+				pieceSelect = plateau
+						.trouverPieces(rechercheCoordonnee(paneClick.getId()));
+				paneSelect = paneClick;
 
-				for (int i = 0; i < tableau.size(); i++)
+				if (pieceSelect != null && pieceSelect.isWhite() == tourJoueur)
 				{
-					listeCercle.add(new Circle(37, 37, 10, Color.GREY));
-					for (int j = 0; j < tableauPane.length; j++)
+					paneSelect.setStyle(
+							"-fx-background-color:deeppink; -fx-border-color: black");
+					ArrayList<Point> tableau = pieceSelect
+							.getMouvementJouable();
+
+					for (int i = 0; i < tableau.size(); i++)
 					{
-						if (tableauPane[j].getId()
-								.equals(recherchePane(tableau.get(i))))
+						listeCercle.add(new Circle(37, 37, 10, Color.GREY));
+						for (int j = 0; j < tableauPane.length; j++)
 						{
-							tableauPane[j].getChildren()
-									.add(listeCercle.get(i));
+							if (tableauPane[j].getId()
+									.equals(recherchePane(tableau.get(i))))
+							{
+								tableauPane[j].getChildren()
+										.add(listeCercle.get(i));
+							}
 						}
 					}
+
+				}
+			}
+			else
+			{
+
+				if (pieceSelect.getMouvementJouable()
+						.contains(rechercheCoordonnee(paneClick.getId()))
+						&& pieceSelect.isWhite() == tourJoueur)
+				{
+					deplacer(pieceSelect, paneClick);
+					tourJoueur = !tourJoueur;
+					paneSelect = null;
+					pieceSelect = null;
+				}
+				else
+				{
+					resetCouleur();
+					pieceSelect = (null);
 				}
 
-			}
-		}
-		else
-		{
-
-			if (pieceSelect.getMouvementJouable()
-					.contains(rechercheCoordonnee(paneClick.getId()))
-					&& pieceSelect.isWhite() == tourJoueur)
-			{
-				deplacer(pieceSelect, paneClick);
-				tourJoueur = !tourJoueur;
-				paneSelect = null;
-				pieceSelect = null;
-			}
-			else
-			{
-				resetCouleur();
-				pieceSelect = (null);
-			}
-
-			if (plateau.getEchecMath())
-			{
-				afficherFinDePartie("Les " + labelTourCouleur.getText()
-						+ "s ont gagnés la partie !");
-			}
-			else
 				if (plateau.getEchecMath())
 				{
-					afficherFinDePartie(
-							"Partie nulle, meilleur chance la prochaine fois!");
+					afficherFinDePartie("Les " + labelTourCouleur.getText()
+							+ "s ont gagnés la partie !");
 				}
+				else
+					if (plateau.getEchecMath())
+					{
+						afficherFinDePartie(
+								"Partie nulle, meilleur chance la prochaine fois!");
+					}
 
-			setLabelTourCouleur(labelTourCouleur);
+				setLabelTourCouleur(labelTourCouleur);
+			}
 		}
-
 	}
 
 	private void deplacer(Pieces pieceSelect, Pane paneClick)
@@ -1195,6 +1222,7 @@ public class Controleur implements Initializable
 					new SimpleStringProperty(creerFen()), p.isWhite());
 
 			list.add(m.toStringCastle());
+			arrayMouvement.add(m);
 		}
 		else
 		{
@@ -1203,6 +1231,7 @@ public class Controleur implements Initializable
 					new SimpleStringProperty(creerFen()), p.isWhite());
 
 			list.add(m.toString());
+			arrayMouvement.add(m);
 		}
 
 	}
@@ -1372,7 +1401,7 @@ public class Controleur implements Initializable
 			entre0et7++;
 
 		}
-		return plateauFen;
+		return plateauFen + "/";
 	}
 
 	private void chargerUnePartie()

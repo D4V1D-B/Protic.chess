@@ -416,12 +416,12 @@
                               </Button>
                               <HBox prefHeight="111.0" prefWidth="253.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onMouseClicked="#chargerMouvement" prefHeight="40.0" prefWidth="130.0" text="Charger un mouvement" textAlignment="CENTER">
+                                    <Button fx:id="boutonChargerMouvements" mnemonicParsing="false" onMouseClicked="#chargerMouvement" prefHeight="40.0" prefWidth="130.0" text="Charger un mouvement" textAlignment="CENTER">
                                        <HBox.margin>
                                           <Insets right="20.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" onMouseClicked="#revenirAuJeu" prefHeight="40.0" prefWidth="130.0" text="Revenir au jeu">
+                                    <Button fx:id="boutonRevenirAuJeu" mnemonicParsing="false" onMouseClicked="#revenirAuJeu" prefHeight="40.0" prefWidth="130.0" text="Revenir au jeu">
                                        <HBox.margin>
                                           <Insets left="20.0" />
                                        </HBox.margin>
