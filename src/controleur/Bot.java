@@ -19,7 +19,6 @@ public class Bot
 		this.plateau=plateau;
 		String bestMovement="";
 		int bestMovementPoint=0;
-
 		
 		ArrayList<Point> faireLeTourDesMov = new ArrayList<Point>();
 		ArrayList<Pieces> faireLeTourDesPieces = (ArrayList<Pieces>) plateau.getNoir().getListePieces().clone();
