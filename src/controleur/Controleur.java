@@ -62,6 +62,7 @@ public class Controleur implements Initializable
 	private boolean tourJoueur = true;
 	private String file = "sauvegard.txt";
 	private Bot bot = new Bot();
+	int indiceDuMouvement = 0;
 	private final ArrayList<Point> LISTPOINTROCK = new ArrayList<Point>()
 	{
 		{
@@ -294,22 +295,62 @@ public class Controleur implements Initializable
 	private ObservableList<String> list;
 
 	@FXML
+	private Button boutonMouvementArriere;
+
+	@FXML
+	private Button boutonMouvementAvant;
+
+	@FXML
 	void revenirAuJeu(MouseEvent event)
 	{
 		placerPiecesString(placementActuel);
 		tuPeuxBoujerLesPieces = true;
 		boutonRevenirAuJeu.setDisable(true);
+		boutonMouvementArriere.setDisable(true);
+		boutonMouvementAvant.setDisable(true);
 	}
 
 	@FXML
 	void chargerMouvement(MouseEvent event)
 	{
-		int indiceDuMouvement = listDeMouvement.getSelectionModel()
+		indiceDuMouvement = listDeMouvement.getSelectionModel()
 				.getSelectedIndex();
 		if (indiceDuMouvement != -1)
 		{
 			tuPeuxBoujerLesPieces = false;
 			placementActuel = creerFen();
+
+			Mouvement mouvementSelect = arrayMouvement.get(indiceDuMouvement);
+			placerPiecesString(mouvementSelect.getFen().get());
+			boutonRevenirAuJeu.setDisable(false);
+			boutonMouvementArriere.setDisable(false);
+			boutonMouvementAvant.setDisable(false);
+		}
+	}
+
+	@FXML
+	void mouvementArriere(MouseEvent event)
+	{
+
+		if (indiceDuMouvement >= 1)
+		{
+			indiceDuMouvement--;
+			tuPeuxBoujerLesPieces = false;
+
+			Mouvement mouvementSelect = arrayMouvement.get(indiceDuMouvement);
+			placerPiecesString(mouvementSelect.getFen().get());
+			boutonRevenirAuJeu.setDisable(false);
+		}
+	}
+
+	@FXML
+	void mouvementAvant(MouseEvent event)
+	{
+
+		if (indiceDuMouvement < arrayMouvement.size() - 1)
+		{
+			indiceDuMouvement++;
+			tuPeuxBoujerLesPieces = false;
 
 			Mouvement mouvementSelect = arrayMouvement.get(indiceDuMouvement);
 			placerPiecesString(mouvementSelect.getFen().get());
@@ -357,6 +398,8 @@ public class Controleur implements Initializable
 	{
 		resetTotal();
 		boutonRevenirAuJeu.setDisable(true);
+		boutonMouvementArriere.setDisable(true);
+		boutonMouvementAvant.setDisable(true);
 
 	}
 
