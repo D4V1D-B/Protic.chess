@@ -10,6 +10,8 @@ public class Mouvement
 	private boolean isWhite;
 	private SimpleStringProperty fen;
 	private String nomCompletDeLaPiece;
+	String c;
+	String determinant;
 
 	public Mouvement(SimpleStringProperty pieceBouge,
 			SimpleStringProperty nouvelleEmplacement, SimpleStringProperty fen,
@@ -46,7 +48,16 @@ public class Mouvement
 		}
 
 		this.nomCompletDeLaPiece = nom;
-
+		determinant = getNomCompletDeLaPiece() == "reine "
+				|| getNomCompletDeLaPiece() == "tour " ? "La " : "Le ";
+		c = getNomCompletDeLaPiece() == "reine "
+				|| getNomCompletDeLaPiece() == "tour " ? "noire " : "noir ";
+		if (isWhite)
+		{
+			c = getNomCompletDeLaPiece() == "reine "
+					|| getNomCompletDeLaPiece() == "tour " ? "blanche "
+							: "blanc ";
+		}
 	}
 
 	public String getNomCompletDeLaPiece()
@@ -97,13 +108,6 @@ public class Mouvement
 	@Override
 	public String toString()
 	{
-		String determinant = getNomCompletDeLaPiece() == "reine " ? "La "
-				: "Le ";
-		String c = getNomCompletDeLaPiece() == "reine " ? "noire " : "noir ";
-		if (isWhite)
-		{
-			c = getNomCompletDeLaPiece() == "reine " ? "blanche " : "blanc ";
-		}
 
 		return determinant + getNomCompletDeLaPiece() + c + "se déplace sur "
 				+ getNouvelleEmplacement().get() + ".";
@@ -111,13 +115,7 @@ public class Mouvement
 
 	public String toStringCastle()
 	{
-		String determinant = getNomCompletDeLaPiece() == "reine " ? "La "
-				: "Le ";
-		String c = getNomCompletDeLaPiece() == "reine " ? "noire " : "noir ";
-		if (isWhite)
-		{
-			c = getNomCompletDeLaPiece() == "reine " ? "blanche " : "blanc ";
-		}
+
 		return determinant + getNomCompletDeLaPiece() + c + "castle.";
 
 	}
