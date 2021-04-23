@@ -15,10 +15,9 @@ public class Cavalier extends Pieces
 			Pieces[][] plateau)
 	{
 		super(nom, couleur, position);
-		setMouvementPossible(plateau);
 	}
 
-	public void setMouvementPossible(Pieces[][] plateau)
+	public triplets setMouvementPossible(Pieces[][] plateau, Point positionRoiEnemy)
 	{
 		ArrayList<Point> variationMouvement = new ArrayList<Point>();
 		variationMouvement.add(new Point(-1, -2));
@@ -57,7 +56,14 @@ public class Cavalier extends Pieces
 			}
 
 		}
-
+		
+		triplets temp =null;
+		for(Point p : this.getMouvementPossible())
+		{
+			if(p.equals(positionRoiEnemy))
+				temp=new triplets(0,this,plateau[positionRoiEnemy.x][positionRoiEnemy.y]);
+		}
+		return temp;
 	}
 
 	@Override

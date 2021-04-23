@@ -17,8 +17,7 @@ public class Tour extends Pieces
 	{
 		super(nom, couleur, position);
 		aBouger = false;
-		setMouvementPossible(plateau);
-	}
+	} 
 
 	public boolean isaBouger()
 	{
@@ -30,87 +29,197 @@ public class Tour extends Pieces
 		this.aBouger = true;
 	}
 
-	public void setMouvementPossible(Pieces[][] plateau)
+	public triplets setMouvementPossible(Pieces[][] plateau, Point positionRoiEnemy)
 	{
 		this.getMouvementPossible().clear();
-		// ajouter sur la ligne de la tour à gauche
+		int situationRoiEnememy = 0;
+		Pieces piecesPin = null;
+		Pieces pinPiecePossible = null;
+		if (this.getEmplacement().y == positionRoiEnemy.y)
+		{
+			if (this.getEmplacement().x > positionRoiEnemy.x)
+			{
+				situationRoiEnememy = 1;
+			}
+			else
+			{
+				situationRoiEnememy = 2;
+			}
+		}
+		else
+			if (this.getEmplacement().x == positionRoiEnemy.x)
+			{
+				if (this.getEmplacement().y > positionRoiEnemy.y)
+				{
+					situationRoiEnememy = 3;
+				}
+				else
+				{
+					situationRoiEnememy = 4;
+				}
+			}
+
+		boolean finMouvementPossible = false;
+		// ajouter sur la ligne de la tour en bas
 		for (int j = this.getEmplacement().y - 1; j >= 0; j--)
 		{
-			if (OperationSurUneMatrice.getVoidSpace(plateau)
-					.contains(new Point(this.getEmplacement().x, j)))
+			if (OperationSurUneMatrice.getVoidSpace(plateau).contains(new Point(this.getEmplacement().x, j)))
 			{
-				this.getMouvementPossible()
-						.add(new Point(this.getEmplacement().x, j));
+				if (!finMouvementPossible)
+					this.getMouvementPossible().add(new Point(this.getEmplacement().x, j));
 			}
 			else
 			{
-				if (this.isWhite() != plateau[this.getEmplacement().x][j]
-						.isWhite())
-					getMouvementPossible()
-							.add(new Point(this.getEmplacement().x, j));
+				if (this.isWhite() != plateau[this.getEmplacement().x][j].isWhite())
+				{
+					if (!finMouvementPossible)
+					{
+						getMouvementPossible().add(new Point(this.getEmplacement().x, j));
+						pinPiecePossible = plateau[this.getEmplacement().x][j];
+					}
 
-				j = -30;
+					if (situationRoiEnememy != 3 || finMouvementPossible
+							|| (this.getEmplacement().x == positionRoiEnemy.x && j == positionRoiEnemy.y))
+					{
+						if (this.getEmplacement().x == positionRoiEnemy.x && j == positionRoiEnemy.y)
+						{
+							piecesPin = pinPiecePossible;
+						}
+						j = -30;
+					}
+					finMouvementPossible = true;
+				}
+				else
+				{
+					j = -30; // si la pièce est blanche stop
+				}
 			}
 		}
+		finMouvementPossible = false;
+		pinPiecePossible = null;
 
-		// ajouter sur la ligne de la tour à droite
+		// ajouter sur la ligne de la tour en haut
 		for (int j = this.getEmplacement().y + 1; j <= 7; j++)
 		{
-			if (OperationSurUneMatrice.getVoidSpace(plateau)
-					.contains(new Point(this.getEmplacement().x, j)))
+			if (OperationSurUneMatrice.getVoidSpace(plateau).contains(new Point(this.getEmplacement().x, j)))
 			{
-				this.getMouvementPossible()
-						.add(new Point(this.getEmplacement().x, j));
+				if (!finMouvementPossible)
+					this.getMouvementPossible().add(new Point(this.getEmplacement().x, j));
 			}
 			else
 			{
-				if (this.isWhite() != plateau[this.getEmplacement().x][j]
-						.isWhite())
-					getMouvementPossible()
-							.add(new Point(this.getEmplacement().x, j));
+				if (this.isWhite() != plateau[this.getEmplacement().x][j].isWhite())
+				{
+					if (!finMouvementPossible)
+					{
+						getMouvementPossible().add(new Point(this.getEmplacement().x, j));
+						pinPiecePossible = plateau[this.getEmplacement().x][j];
+					}
 
-				j = 30;
+					if (situationRoiEnememy != 4 || finMouvementPossible
+							|| (this.getEmplacement().x == positionRoiEnemy.x && j == positionRoiEnemy.y))
+					{
+						if (this.getEmplacement().x == positionRoiEnemy.x && j == positionRoiEnemy.y)
+						{
+							piecesPin = pinPiecePossible;
+						}
+						j = 30;
+					}
+					finMouvementPossible = true;
+				}
+				else
+				{
+					j = 30; // si la pièce est blanche stop
+				}
 			}
 		}
+		finMouvementPossible = false;
+		pinPiecePossible = null;
 
-		// ajouter pour la ligne du bas
+		// ajouter sur la ligne de la tour à droite
 		for (int i = this.getEmplacement().x + 1; i <= 7; i++)
 		{
-			if (OperationSurUneMatrice.getVoidSpace(plateau)
-					.contains(new Point(i, this.getEmplacement().y)))
+			if (OperationSurUneMatrice.getVoidSpace(plateau).contains(new Point(i, this.getEmplacement().y)))
 			{
-				this.getMouvementPossible()
-						.add(new Point(i, this.getEmplacement().y));
+				if (!finMouvementPossible)
+					this.getMouvementPossible().add(new Point(i, this.getEmplacement().y));
 			}
 			else
 			{
-				if (this.isWhite() != plateau[i][this.getEmplacement().y]
-						.isWhite())
-					getMouvementPossible()
-							.add(new Point(i, this.getEmplacement().y));
-				i = 30;
+				if (this.isWhite() != plateau[i][this.getEmplacement().y].isWhite())
+				{
+					if (!finMouvementPossible)
+					{
+						this.getMouvementPossible().add(new Point(i, this.getEmplacement().y));
+						pinPiecePossible = plateau[i][this.getEmplacement().y];
+					}
+
+					if (situationRoiEnememy != 2 || finMouvementPossible
+							|| (i == positionRoiEnemy.x && this.getEmplacement().y == positionRoiEnemy.y))
+					{
+						if (i == positionRoiEnemy.x && this.getEmplacement().y == positionRoiEnemy.y)
+						{
+							piecesPin = pinPiecePossible;
+						}
+						i = 30;
+					}
+					finMouvementPossible = true;
+				}
+				else
+				{
+					i = 30; // si la pièce est blanche stop
+				}
 			}
 		}
+		finMouvementPossible = false;
+		pinPiecePossible = null;
 
-		// ajouter la ligne du haut
-
+		// ajouter sur la ligne de la tour à droite
 		for (int i = this.getEmplacement().x - 1; i >= 0; i--)
 		{
-			if (OperationSurUneMatrice.getVoidSpace(plateau)
-					.contains(new Point(i, this.getEmplacement().y)))
+			if (OperationSurUneMatrice.getVoidSpace(plateau).contains(new Point(i, this.getEmplacement().y)))
 			{
-				this.getMouvementPossible()
-						.add(new Point(i, this.getEmplacement().y));
+				if (!finMouvementPossible)
+					this.getMouvementPossible().add(new Point(i, this.getEmplacement().y));
 			}
 			else
 			{
-				if (this.isWhite() != plateau[i][this.getEmplacement().y]
-						.isWhite())
-					getMouvementPossible()
-							.add(new Point(i, this.getEmplacement().y));
-				i = -30;
+				if (this.isWhite() != plateau[i][this.getEmplacement().y].isWhite())
+				{
+					if (!finMouvementPossible)
+					{
+						this.getMouvementPossible().add(new Point(i, this.getEmplacement().y));
+						pinPiecePossible = plateau[i][this.getEmplacement().y];
+					}
+
+					if (situationRoiEnememy != 1 || finMouvementPossible
+							|| (i == positionRoiEnemy.x && this.getEmplacement().y == positionRoiEnemy.y))
+					{
+						if (i == positionRoiEnemy.x && this.getEmplacement().y == positionRoiEnemy.y)
+						{
+							piecesPin = pinPiecePossible;
+						}
+						i = -30;
+					}
+					finMouvementPossible = true;
+				}
+				else
+				{
+					i = -30; // si la pièce est blanche stop
+				}
 			}
 		}
+		finMouvementPossible = false;
+		pinPiecePossible = null;
+
+
+		triplets temp=null;
+		if(piecesPin!=null)
+		{
+			temp =new triplets(situationRoiEnememy,this,piecesPin);
+		}
+		
+		return temp;
 	}
 
 	@Override
@@ -118,6 +227,5 @@ public class Tour extends Pieces
 	{
 		return 50;
 	}
-
 
 }

@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import modele.Pieces;
 import modele.Tour;
+import modele.triplets;
 import modele.Fou;
 import modele.Roi;
 import modele.Pion;
@@ -35,20 +36,19 @@ public class Plateau
 		return blanc;
 	}
 
+	// TODO À refaire probablement
 	public boolean getEchecMath()
 	{
-		return noir.getMouvementJouable().size() == 0
-				|| blanc.getMouvementJouable().size() == 0;
+		return noir.getMouvementJouable().size() == 0 || blanc.getMouvementJouable().size() == 0;
 	}
 
+	// TODO À refaire probablement
 	public boolean getEchec()
 	{
-		return noir.verifierEchec(blanc.mouvementPossible)
-				|| blanc.verifierEchec(noir.mouvementPossible);
+		return noir.verifierEchec(blanc.attaquePossible) || blanc.verifierEchec(noir.attaquePossible);
 	}
 
-	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc,
-			ArrayList<Pieces> pieceNoir)
+	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc, ArrayList<Pieces> pieceNoir)
 	{
 		ArrayList<Pieces> allPieces = new ArrayList<Pieces>();
 		allPieces.addAll(pieceBlanc);
@@ -61,6 +61,7 @@ public class Plateau
 		return plateau;
 	}
 
+	// TODO À refaire probablement
 	public void deplacementProg(Point anciennePosition, Pieces piecesDeplacer)
 	{
 		// On enleve la pieces de son ancien deplacement
@@ -71,117 +72,81 @@ public class Plateau
 
 		actualiserToutLesMouvementJouable();
 
-		if (piecesDeplacer.getClass().toString().contains("Pion")
-				&& Math.abs(anciennePosition.y - piecesDeplacer.getEmplacement().y)==2)
+		if (piecesDeplacer.getClass().toString().contains("Pion") && Math.abs(anciennePosition.y - piecesDeplacer.getEmplacement().y) == 2)
 		{
 			ajouterEnPassant(anciennePosition, piecesDeplacer);
 		}
 	}
 
+	// TODO À refaire probablement
 	public void ajouterEnPassant(Point anciennePosition, Pieces piecesDeplacer)
 	{
 		if (piecesDeplacer.isWhite())
 		{
 			if (piecesDeplacer.getEmplacement().x - 1 >= 0
-					&& plateau[piecesDeplacer.getEmplacement().x
-							- 1][piecesDeplacer.getEmplacement().y] != null
-					&& plateau[piecesDeplacer.getEmplacement().x
-							- 1][piecesDeplacer.getEmplacement().y].getClass()
-									.toString().contains("Pion")
-					&& !plateau[piecesDeplacer.getEmplacement().x
-							- 1][piecesDeplacer.getEmplacement().y].isWhite())
+					&& plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y] != null
+					&& plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].getClass().toString().contains("Pion")
+					&& !plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].isWhite())
 			{
-				plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer
-						.getEmplacement().y].getMouvementJouable()
-								.add(new Point(anciennePosition.x,
-										anciennePosition.y + 1));
+				plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].getMouvementJouable()
+						.add(new Point(anciennePosition.x, anciennePosition.y + 1));
 			}
 
 			if (piecesDeplacer.getEmplacement().x + 1 <= 7
-					&& plateau[piecesDeplacer.getEmplacement().x
-							+ 1][piecesDeplacer.getEmplacement().y] != null
-					&& plateau[piecesDeplacer.getEmplacement().x
-							+ 1][piecesDeplacer.getEmplacement().y].getClass()
-									.toString().contains("Pion")
-					&& !plateau[piecesDeplacer.getEmplacement().x
-							+ 1][piecesDeplacer.getEmplacement().y].isWhite())
+					&& plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y] != null
+					&& plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].getClass().toString().contains("Pion")
+					&& !plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].isWhite())
 			{
-				plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer
-						.getEmplacement().y].getMouvementJouable()
-								.add(new Point(anciennePosition.x,
-										anciennePosition.y + 1));
+				plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].getMouvementJouable()
+						.add(new Point(anciennePosition.x, anciennePosition.y + 1));
 			}
 		}
 		else
 			if (!piecesDeplacer.isWhite())
 			{
 				if (piecesDeplacer.getEmplacement().x - 1 >= 0
-						&& plateau[piecesDeplacer.getEmplacement().x
-								- 1][piecesDeplacer.getEmplacement().y] != null
-						&& plateau[piecesDeplacer.getEmplacement().x
-								- 1][piecesDeplacer.getEmplacement().y]
-										.getClass().toString().contains("Pion")
-						&& plateau[piecesDeplacer.getEmplacement().x
-								- 1][piecesDeplacer.getEmplacement().y]
-										.isWhite())
+						&& plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y] != null
+						&& plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].getClass().toString().contains("Pion")
+						&& plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].isWhite())
 				{
-					plateau[piecesDeplacer.getEmplacement().x
-							- 1][piecesDeplacer.getEmplacement().y]
-									.getMouvementJouable()
-									.add(new Point(anciennePosition.x,
-											anciennePosition.y - 1));
+					plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].getMouvementJouable()
+							.add(new Point(anciennePosition.x, anciennePosition.y - 1));
 				}
 				if (piecesDeplacer.getEmplacement().x + 1 <= 7
-						&& plateau[piecesDeplacer.getEmplacement().x
-								+ 1][piecesDeplacer.getEmplacement().y] != null
-						&& plateau[piecesDeplacer.getEmplacement().x
-								+ 1][piecesDeplacer.getEmplacement().y]
-										.getClass().toString().contains("Pion")
-						&& plateau[piecesDeplacer.getEmplacement().x
-								+ 1][piecesDeplacer.getEmplacement().y]
-										.isWhite())
+						&& plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y] != null
+						&& plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].getClass().toString().contains("Pion")
+						&& plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].isWhite())
 				{
-					plateau[piecesDeplacer.getEmplacement().x
-							+ 1][piecesDeplacer.getEmplacement().y]
-									.getMouvementJouable()
-									.add(new Point(anciennePosition.x,
-											anciennePosition.y - 1));
+					plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].getMouvementJouable()
+							.add(new Point(anciennePosition.x, anciennePosition.y - 1));
 				}
 			}
 	}
 
+	// TODO À refaire probablement
 	public Pieces deplacerPieces(Pieces piecesDeplacer)
 	{
 		Pieces temp = null;
-		if (plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-				.getEmplacement().y] == null
+		if (plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer.getEmplacement().y] == null
 				&& piecesDeplacer.getClass().toString().contains("Pion"))
 		{
 			if (piecesDeplacer.isWhite())
 			{
-				temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-						.getEmplacement().y - 1];
-				plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-						.getEmplacement().y - 1] = null;
-				plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-						.getEmplacement().y] = piecesDeplacer;
+				temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer.getEmplacement().y - 1];
+				plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer.getEmplacement().y - 1] = null;
+				plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer.getEmplacement().y] = piecesDeplacer;
 			}
 			else
 			{
-				temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-						.getEmplacement().y + 1];
-				plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-						.getEmplacement().y + 1] = null;
-				plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-						.getEmplacement().y] = piecesDeplacer;
+				temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer.getEmplacement().y + 1];
+				plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer.getEmplacement().y + 1] = null;
+				plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer.getEmplacement().y] = piecesDeplacer;
 			}
 		}
 		else
 		{
-			temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-					.getEmplacement().y];
-			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-					.getEmplacement().y] = piecesDeplacer;
+			temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer.getEmplacement().y];
+			plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer.getEmplacement().y] = piecesDeplacer;
 		}
 
 		if (temp != null)
@@ -192,6 +157,7 @@ public class Plateau
 		return temp;
 	}
 
+	// TODO À refaire probablement
 	public Point refreshDeplacementRock(Roi roiDeplacer)
 	{
 		Point rockEstValide = null;
@@ -241,47 +207,10 @@ public class Plateau
 		return rockEstValide;
 	}
 
-	public boolean validationDeplacement(Pieces pieces, Point posibiliter)
-	{
-		Point anciennePosition = pieces.getEmplacement();
-		// Création d'une variable qui indique si le mouvement est valide
-		boolean mouvementValide = true;
-		// On enleve la pieces de son ancien deplacement
-		plateau[pieces.getEmplacement().x][pieces.getEmplacement().y] = null;
-		pieces.setEmplacement(posibiliter);
-		// On déplace la pieces et on store ce qui a été bouffer
-		Pieces temp = deplacerPieces(pieces);
-
-		// on actualise les mouvement possible
-		blanc.actualiserMouvementPossible();
-		noir.actualiserMouvementPossible();
-
-		// On regarde les échecs
-		if (pieces.isWhite())
-		{
-			mouvementValide = !blanc.verifierEchec(noir.getMouvementPossible());
-		}
-		else
-		{
-			mouvementValide = !noir.verifierEchec(blanc.getMouvementPossible());
-		}
-
-		plateau[pieces.getEmplacement().x][pieces.getEmplacement().y] = temp;
-		pieces.setEmplacement(anciennePosition);
-		replacerPieces(pieces);
-		actualiserTeam();
-		blanc.actualiserMouvementPossible();
-		noir.actualiserMouvementPossible();
-
-		return mouvementValide;
-	}
-
 	public Pieces replacerPieces(Pieces piecesDeplacer)
 	{
-		Pieces temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-				.getEmplacement().y];
-		plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
-				.getEmplacement().y] = piecesDeplacer;
+		Pieces temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer.getEmplacement().y];
+		plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer.getEmplacement().y] = piecesDeplacer;
 
 		if (temp != null)
 		{
@@ -293,233 +222,493 @@ public class Plateau
 
 	public void actualiserToutLesMouvementJouable()
 	{
-		blanc.actualiserMouvementPossible();
-		noir.actualiserMouvementPossible();
-		blanc.mouvementJouable.clear();
-		noir.mouvementJouable.clear();
-
-		ArrayList<Point> faireLeTourDesMov = new ArrayList<Point>();
-		ArrayList<Pieces> faireLeTourDesPieces = new ArrayList<Pieces>();
+		ArrayList<triplets> piecesNoirPin = new ArrayList<triplets>();
+		ArrayList<triplets> piecesBlanchePin = new ArrayList<triplets>();
+		triplets temp = null;
+		blanc.attaquePossible.clear();
+		noir.attaquePossible.clear();
+		blanc.clearMouvementJouable();
+		noir.clearMouvementJouable();
+		Point positionRoiNoir = noir.getPositionRoi();
 
 		for (Pieces p : blanc.listePiece)
 		{
-			faireLeTourDesPieces.add(p);
-		}
-
-		for (Pieces p : faireLeTourDesPieces)
-		{
-			p.getMouvementJouable().clear();
 			switch (p.getClass().toString())
 			{
 				case "class modele.Tour":
-					faireLeTourDesMov.clear();
-					for (Point posibiliter : ((Tour) p).getMouvementPossible())
+					temp = ((Tour) p).setMouvementPossible(plateau, positionRoiNoir);
+					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (temp != null)
 					{
-						faireLeTourDesMov.add(posibiliter);
-					}
-
-					for (Point posibiliter : faireLeTourDesMov)
-					{
-						if (validationDeplacement(p, posibiliter))
-						{
-							p.getMouvementJouable().add(posibiliter);
-						}
+						piecesNoirPin.add(temp);
+						temp = null;
 					}
 					break;
-
 				case "class modele.Cavalier":
-					faireLeTourDesMov.clear();
-					for (Point posibiliter : ((Cavalier) p)
-							.getMouvementPossible())
+					temp = ((Cavalier) p).setMouvementPossible(plateau, positionRoiNoir);
+					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (temp != null)
 					{
-						faireLeTourDesMov.add(posibiliter);
-					}
-
-					for (Point posibiliter : faireLeTourDesMov)
-					{
-						if (validationDeplacement(p, posibiliter))
-						{
-							p.getMouvementJouable().add(posibiliter);
-						}
+						piecesNoirPin.add(temp);
+						temp = null;
 					}
 					break;
-
 				case "class modele.Fou":
-					faireLeTourDesMov.clear();
-					for (Point posibiliter : ((Fou) p).getMouvementPossible())
+					temp = ((Fou) p).setMouvementPossible(plateau, positionRoiNoir);
+					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (temp != null)
 					{
-						faireLeTourDesMov.add(posibiliter);
-					}
-
-					for (Point posibiliter : faireLeTourDesMov)
-					{
-						if (validationDeplacement(p, posibiliter))
-						{
-							p.getMouvementJouable().add(posibiliter);
-						}
+						piecesNoirPin.add(temp);
+						temp = null;
 					}
 					break;
-
 				case "class modele.Reine":
-					faireLeTourDesMov.clear();
-					for (Point posibiliter : ((Reine) p).getMouvementPossible())
+					temp = ((Reine) p).setMouvementPossible(plateau, positionRoiNoir);
+					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (temp != null)
 					{
-						faireLeTourDesMov.add(posibiliter);
-					}
-
-					for (Point posibiliter : faireLeTourDesMov)
-					{
-						if (validationDeplacement(p, posibiliter))
-						{
-							p.getMouvementJouable().add(posibiliter);
-						}
+						piecesNoirPin.add(temp);
+						temp = null;
 					}
 					break;
-
 				case "class modele.Pion":
-					faireLeTourDesMov.clear();
-					for (Point posibiliter : ((Pion) p).getMouvementPossible())
+					temp = ((Pion) p).setMouvementPossible(plateau, positionRoiNoir);
+					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (temp != null)
 					{
-						faireLeTourDesMov.add(posibiliter);
-					}
-
-					for (Point posibiliter : faireLeTourDesMov)
-					{
-						if (validationDeplacement(p, posibiliter))
-						{
-							p.getMouvementJouable().add(posibiliter);
-						}
+						piecesNoirPin.add(temp);
+						temp = null;
 					}
 					break;
-
 				case "class modele.Roi":
-					faireLeTourDesMov.clear();
-					for (Point posibiliter : ((Roi) p).getMouvementPossible())
-					{
-						faireLeTourDesMov.add(posibiliter);
-					}
-
-					for (Point posibiliter : faireLeTourDesMov)
-					{
-						if (validationDeplacement(p, posibiliter))
-						{
-							p.getMouvementJouable().add(posibiliter);
-						}
-					}
+					((Roi) p).setMouvementPossible(plateau);
 					break;
 			}
-			blanc.getMouvementJouable().addAll(p.getMouvementJouable());
 		}
+		blanc.actualiserAttaquePossible();
 
-		faireLeTourDesPieces.clear();
+		Point positionRoiBlanc = blanc.getPositionRoi();
+
 		for (Pieces p : noir.listePiece)
 		{
-			faireLeTourDesPieces.add(p);
-		}
-
-		for (Pieces p : faireLeTourDesPieces)
-		{
-			p.getMouvementJouable().clear();
 			switch (p.getClass().toString())
 			{
 				case "class modele.Tour":
-					faireLeTourDesMov.clear();
-					for (Point posibiliter : ((Tour) p).getMouvementPossible())
+					temp = ((Tour) p).setMouvementPossible(plateau, positionRoiBlanc);
+					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (temp != null)
 					{
-						faireLeTourDesMov.add(posibiliter);
-					}
-
-					for (Point posibiliter : faireLeTourDesMov)
-					{
-						if (validationDeplacement(p, posibiliter))
-						{
-							p.getMouvementJouable().add(posibiliter);
-						}
+						piecesNoirPin.add(temp);
+						temp = null;
 					}
 					break;
-
 				case "class modele.Cavalier":
-					faireLeTourDesMov.clear();
-					for (Point posibiliter : ((Cavalier) p)
-							.getMouvementPossible())
+					temp = ((Cavalier) p).setMouvementPossible(plateau, positionRoiBlanc);
+					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (temp != null)
 					{
-						faireLeTourDesMov.add(posibiliter);
-					}
-
-					for (Point posibiliter : faireLeTourDesMov)
-					{
-						if (validationDeplacement(p, posibiliter))
-						{
-							p.getMouvementJouable().add(posibiliter);
-						}
+						piecesNoirPin.add(temp);
+						temp = null;
 					}
 					break;
-
 				case "class modele.Fou":
-					faireLeTourDesMov.clear();
-					for (Point posibiliter : ((Fou) p).getMouvementPossible())
+					temp = ((Fou) p).setMouvementPossible(plateau, positionRoiBlanc);
+					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (temp != null)
 					{
-						faireLeTourDesMov.add(posibiliter);
-					}
-
-					for (Point posibiliter : faireLeTourDesMov)
-					{
-						if (validationDeplacement(p, posibiliter))
-						{
-							p.getMouvementJouable().add(posibiliter);
-						}
+						piecesNoirPin.add(temp);
+						temp = null;
 					}
 					break;
-
 				case "class modele.Reine":
-					faireLeTourDesMov.clear();
-					for (Point posibiliter : ((Reine) p).getMouvementPossible())
+					temp = ((Reine) p).setMouvementPossible(plateau, positionRoiBlanc);
+					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (temp != null)
 					{
-						faireLeTourDesMov.add(posibiliter);
-					}
-
-					for (Point posibiliter : faireLeTourDesMov)
-					{
-						if (validationDeplacement(p, posibiliter))
-						{
-							p.getMouvementJouable().add(posibiliter);
-						}
+						piecesNoirPin.add(temp);
+						temp = null;
 					}
 					break;
-
 				case "class modele.Pion":
-					faireLeTourDesMov.clear();
-					for (Point posibiliter : ((Pion) p).getMouvementPossible())
+					temp = ((Pion) p).setMouvementPossible(plateau, positionRoiBlanc);
+					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (temp != null)
 					{
-						faireLeTourDesMov.add(posibiliter);
-					}
-
-					for (Point posibiliter : faireLeTourDesMov)
-					{
-						if (validationDeplacement(p, posibiliter))
-						{
-							p.getMouvementJouable().add(posibiliter);
-						}
+						piecesNoirPin.add(temp);
+						temp = null;
 					}
 					break;
-
 				case "class modele.Roi":
-					faireLeTourDesMov.clear();
-					for (Point posibiliter : ((Roi) p).getMouvementPossible())
-					{
-						faireLeTourDesMov.add(posibiliter);
-					}
-
-					for (Point posibiliter : faireLeTourDesMov)
-					{
-						if (validationDeplacement(p, posibiliter))
-						{
-							p.getMouvementJouable().add(posibiliter);
-						}
-					}
+					((Roi) p).setMouvementPossible(plateau);
+					p.getMouvementJouable().addAll(p.getMouvementPossible());
 					break;
 			}
-			noir.getMouvementJouable().addAll(p.getMouvementJouable());
+		}
+		noir.actualiserAttaquePossible();
+
+		filtrerCoup(piecesNoirPin, positionRoiNoir, false);
+		filtrerCoup(piecesNoirPin, positionRoiNoir, true);
+		blanc.actualiserMouvementJouable();
+		noir.actualiserMouvementJouable();
+	}
+
+	public void filtrerCoup(ArrayList<triplets> piecesPin, Point positionRoi, boolean equipe)
+	{
+		ArrayList<triplets> echec = new ArrayList<triplets>();
+
+		for (triplets p : piecesPin)
+		{
+			if (p.getDefendant().getEmplacement() != positionRoi)
+			{
+				switch (p.getState())
+				{
+					case 1:
+					case 2:
+						p.getDefendant().getMouvementJouable().clear();
+						for (Point test : p.getDefendant().getMouvementPossible())
+						{
+							if (test.getY() == p.getAttaquant().getEmplacement().y)
+							{
+								p.getDefendant().getMouvementJouable().add(test);
+							}
+						}
+						break;
+					case 3:
+					case 4:
+						p.getDefendant().getMouvementJouable().clear();
+						for (Point test : p.getDefendant().getMouvementPossible())
+						{
+							if (test.getX() == p.getAttaquant().getEmplacement().x)
+							{
+								p.getDefendant().getMouvementJouable().add(test);
+							}
+						}
+						break;
+					case 5:
+					case 8:
+						p.getDefendant().getMouvementJouable().clear();
+						for (Point test : p.getDefendant().getMouvementPossible())
+						{
+							if (test.getX() - p.getAttaquant().getEmplacement().x == test.getY() - p.getAttaquant().getEmplacement().y)
+							{
+								p.getDefendant().getMouvementJouable().add(test);
+							}
+						}
+						break;
+					case 6:
+					case 7:
+						p.getDefendant().getMouvementJouable().clear();
+						for (Point test : p.getDefendant().getMouvementPossible())
+						{
+							if (-(test.getX() - p.getAttaquant().getEmplacement().x) == test.getY() - p.getAttaquant().getEmplacement().y)
+							{
+								p.getDefendant().getMouvementJouable().add(test);
+							}
+						}
+						break;
+				}
+			}
+			else
+			{
+				echec.add(p);
+			}
+		}
+
+		if (echec.size() == 1)
+		{
+			if (equipe)
+			{
+				blanc.clearMouvementJouable();
+				ArrayList<Point> testage;
+				switch (echec.get(0).getState())
+				{
+					case 1:
+						for (Pieces p : blanc.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (test.getY() == positionRoi.y && test.getX() <= echec.get(0).getAttaquant().getEmplacement().x
+										&& test.getX() > positionRoi.x)
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 2:
+						for (Pieces p : blanc.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (test.getY() == positionRoi.y && test.getX() >= echec.get(0).getAttaquant().getEmplacement().x
+										&& test.getX() < positionRoi.x)
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 3:
+						for (Pieces p : blanc.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (test.getX() == positionRoi.x && test.getY() <= echec.get(0).getAttaquant().getEmplacement().y
+										&& test.getY() > positionRoi.y)
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 4:
+						for (Pieces p : blanc.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (test.getX() == positionRoi.x && test.getY() >= echec.get(0).getAttaquant().getEmplacement().y
+										&& test.getY() < positionRoi.y)
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 5:
+						testage = new ArrayList<Point>();
+						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
+								j = echec.get(0).getAttaquant().getEmplacement().y; 
+								i > positionRoi.x; i--, j--)
+						{
+							testage.add(new Point(i,j));
+						}
+						for (Pieces p : blanc.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (testage.contains(test))
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 8:
+						testage = new ArrayList<Point>();
+						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
+								j = echec.get(0).getAttaquant().getEmplacement().y; 
+								i < positionRoi.x; i++, j++)
+						{
+							testage.add(new Point(i,j));
+						}
+						for (Pieces p : blanc.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (testage.contains(test))
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 6:
+						testage = new ArrayList<Point>();
+						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
+								j = echec.get(0).getAttaquant().getEmplacement().y; 
+								i > positionRoi.x; i--, j++)
+						{
+							testage.add(new Point(i,j));
+						}
+						for (Pieces p : blanc.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (testage.contains(test))
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 7:
+						testage = new ArrayList<Point>();
+						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
+								j = echec.get(0).getAttaquant().getEmplacement().y; 
+								i < positionRoi.x; i++, j--)
+						{
+							testage.add(new Point(i,j));
+						}
+						for (Pieces p : blanc.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (testage.contains(test))
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+				}
+			}
+			else
+			{
+				noir.clearMouvementJouable();
+				ArrayList<Point> testage;
+				switch (echec.get(0).getState())
+				{
+					case 1:
+						for (Pieces p : noir.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (test.getY() == positionRoi.y && test.getX() <= echec.get(0).getAttaquant().getEmplacement().x
+										&& test.getX() > positionRoi.x)
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 2:
+						for (Pieces p : noir.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (test.getY() == positionRoi.y && test.getX() >= echec.get(0).getAttaquant().getEmplacement().x
+										&& test.getX() < positionRoi.x)
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 3:
+						for (Pieces p : noir.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (test.getX() == positionRoi.x && test.getY() <= echec.get(0).getAttaquant().getEmplacement().y
+										&& test.getY() > positionRoi.y)
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 4:
+						for (Pieces p : noir.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (test.getX() == positionRoi.x && test.getY() >= echec.get(0).getAttaquant().getEmplacement().y
+										&& test.getY() < positionRoi.y)
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 5:
+						testage = new ArrayList<Point>();
+						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
+								j = echec.get(0).getAttaquant().getEmplacement().y; 
+								i > positionRoi.x; i--, j--)
+						{
+							testage.add(new Point(i,j));
+						}
+						for (Pieces p : noir.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (testage.contains(test))
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 8:
+						testage = new ArrayList<Point>();
+						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
+								j = echec.get(0).getAttaquant().getEmplacement().y; 
+								i < positionRoi.x; i++, j++)
+						{
+							testage.add(new Point(i,j));
+						}
+						for (Pieces p : noir.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (testage.contains(test))
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 6:
+						testage = new ArrayList<Point>();
+						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
+								j = echec.get(0).getAttaquant().getEmplacement().y; 
+								i > positionRoi.x; i--, j++)
+						{
+							testage.add(new Point(i,j));
+						}
+						for (Pieces p : noir.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (testage.contains(test))
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+					case 7:
+						testage = new ArrayList<Point>();
+						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
+								j = echec.get(0).getAttaquant().getEmplacement().y; 
+								i < positionRoi.x; i++, j--)
+						{
+							testage.add(new Point(i,j));
+						}
+						for (Pieces p : noir.listePiece)
+						{
+							for (Point test : p.getMouvementPossible())
+							{
+								if (testage.contains(test))
+								{
+									p.getMouvementJouable().add(test);
+								}
+							}
+						}
+						break;
+				}
+			}
+
+		}
+		if(equipe)
+		{
+			for(Point p : blanc.getRoi().getMouvementPossible())
+			{
+				if(!noir.getAttaquePossible().contains(p))
+				{
+					blanc.getRoi().getMouvementJouable().add(p);
+				}
+			}
+		}
+		else
+		{
+			for(Point p : noir.getRoi().getMouvementPossible())
+			{
+				if(!blanc.getAttaquePossible().contains(p))
+				{
+					noir.getRoi().getMouvementJouable().add(p);
+				}
+			}
 		}
 	}
 
@@ -559,11 +748,9 @@ public class Plateau
 
 	public void remplacerPion(Pieces changement)
 	{
-		plateau[changement.getEmplacement().x][changement
-				.getEmplacement().y] = changement;
+		plateau[changement.getEmplacement().x][changement.getEmplacement().y] = changement;
 		actualiserTeam();
 		actualiserToutLesMouvementJouable();
-
 	}
 
 	public boolean saveGame()
@@ -575,7 +762,7 @@ public class Plateau
 
 	public class Equipe
 	{
-		private ArrayList<Point> mouvementPossible;
+		private ArrayList<Point> attaquePossible;
 		private ArrayList<Point> mouvementJouable;
 		private ArrayList<Pieces> listePiece;
 
@@ -583,7 +770,7 @@ public class Plateau
 		{
 			listePiece = pieces;
 			getPositionRoi();
-			mouvementPossible = new ArrayList<Point>();
+			attaquePossible = new ArrayList<Point>();
 			mouvementJouable = new ArrayList<Point>();
 		}
 
@@ -597,8 +784,7 @@ public class Plateau
 			int index = 0;
 			for (int i = 0; i < listePiece.size(); i++)
 			{
-				if (listePiece.get(i).getClass().toString()
-						.equals("class modele.Roi"))
+				if (listePiece.get(i).getClass().toString().equals("class modele.Roi"))
 				{
 					index = i;
 				}
@@ -617,50 +803,40 @@ public class Plateau
 			return (Roi) listePiece.get(indexOfKing());
 		}
 
-		public void actualiserMouvementPossible()
+		public void actualiserAttaquePossible()
 		{
-			mouvementPossible.clear();
-			for (Pieces p : listePiece)
-			{
-				switch (p.getClass().toString())
-				{
-					case "class modele.Tour":
-						((Tour) p).setMouvementPossible(plateau);
-						break;
-					case "class modele.Cavalier":
-						((Cavalier) p).setMouvementPossible(plateau);
-						break;
-					case "class modele.Fou":
-						((Fou) p).setMouvementPossible(plateau);
-						break;
-					case "class modele.Reine":
-						((Reine) p).setMouvementPossible(plateau);
-						break;
-					case "class modele.Pion":
-						((Pion) p).setMouvementPossible(plateau);
-						break;
-					case "class modele.Roi":
-						((Roi) p).setMouvementPossible(plateau);
-						break;
-				}
-			}
 			for (Pieces p : listePiece)
 			{
 				if (p.getClass().toString() != "class modele.Pion")
 				{
-					mouvementPossible.addAll(p.getMouvementPossible());
+					attaquePossible.addAll(p.getMouvementPossible());
 				}
 				else
 				{
-					mouvementPossible
-							.addAll(((Pion) p).getMouvementDangereux(plateau));
+					attaquePossible.addAll(((Pion) p).getMouvementDangereux(plateau));
 				}
 			}
 		}
 
-		public ArrayList<Point> getMouvementPossible()
+		public void actualiserMouvementJouable()
 		{
-			return mouvementPossible;
+			for (Pieces p : listePiece)
+			{
+				mouvementJouable.addAll(p.getMouvementJouable());
+			}
+		}
+
+		public void clearMouvementJouable()
+		{
+			for (Pieces p : listePiece)
+			{
+				p.getMouvementJouable().clear();
+			}
+		}
+
+		public ArrayList<Point> getAttaquePossible()
+		{
+			return attaquePossible;
 		}
 
 		public ArrayList<Point> getMouvementJouable()
