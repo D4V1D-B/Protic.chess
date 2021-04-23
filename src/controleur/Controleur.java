@@ -873,7 +873,7 @@ public class Controleur implements Initializable
 		}
 		if (tourJoueur == false)
 		{
-			String position = bot.jouerBot(this.plateau);
+			String position = bot.jouerBotTest(this.plateau);
 			Point pointFinale = new Point((position.charAt(4) - 48),
 					(position.charAt(5) - 48));
 			Point pointInitiale = new Point((position.charAt(0) - 48),
