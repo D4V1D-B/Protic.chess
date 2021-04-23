@@ -31,6 +31,8 @@ public class ChessApp extends Application
 		primaryStage.setTitle("Échec");
 		primaryStage.setMinHeight(740);
 		primaryStage.setMinWidth(1100);
+		primaryStage.setMaxHeight(740);
+		primaryStage.setMaxWidth(1100);
 		primaryStage.show();
 
 	}
