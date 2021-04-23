@@ -114,7 +114,7 @@ public class Tour extends Pieces
 	}
 
 	@Override
-	public int setValeur()
+	public int getValeur()
 	{
 		return 50;
 	}

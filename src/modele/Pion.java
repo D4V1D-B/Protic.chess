@@ -159,7 +159,7 @@ public class Pion extends Pieces
 	}
 
 	@Override
-	public int setValeur()
+	public int getValeur()
 	{
 		return 10;
 	}

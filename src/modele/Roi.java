@@ -129,7 +129,7 @@ public class Roi extends Pieces
 	}
 
 	@Override
-	public int setValeur()
+	public int getValeur()
 	{
 		return 900;
 	}

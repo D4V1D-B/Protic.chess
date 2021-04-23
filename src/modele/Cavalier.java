@@ -61,7 +61,7 @@ public class Cavalier extends Pieces
 	}
 
 	@Override
-	public int setValeur()
+	public int getValeur()
 	{
 		return 30;
 	}

@@ -170,7 +170,7 @@ public class Reine extends Pieces
 	}
 
 	@Override
-	public int setValeur()
+	public int getValeur()
 	{
 		return 90;
 	}
