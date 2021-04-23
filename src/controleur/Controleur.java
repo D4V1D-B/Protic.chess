@@ -951,6 +951,36 @@ public class Controleur implements Initializable
 				{
 
 					deplacer(pieceSelect, paneClick);
+					
+					if(tourJoueur)
+					{
+						if(plateau.getEchecMathNoir())
+						{
+							if(plateau.getEchecNoir())
+							{
+								afficherFinDePartie("Les blancs ont gagné! Félicitation!");
+							}
+							else
+							{
+								afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
+							}
+						}
+					}
+					if(tourJoueur)
+					{
+						if(plateau.getEchecMathBlanc())
+						{
+							if(plateau.getEchecBlanc())
+							{
+								afficherFinDePartie("Les blancs ont gagné! Félicitation!");
+							}
+							else
+							{
+								afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
+							}
+						}
+					}
+					
 					tourJoueur = !tourJoueur;
 					paneSelect = null;
 					pieceSelect = null;

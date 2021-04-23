@@ -36,16 +36,26 @@ public class Plateau
 		return blanc;
 	}
 
-	public boolean getEchecMath()
+	public boolean getEchecMathBlanc()
 	{
-		return noir.getMouvementJouable().size() == 0 || blanc.getMouvementJouable().size() == 0;
+		return blanc.getMouvementJouable().size()==0;
 	}
 
-	public boolean getEchec()
+	public boolean getEchecBlanc()
 	{
-		return noir.getMouvementJouable().size() == 0 || blanc.getMouvementJouable().size() == 0;
+		return noir.getAttaquePossible().contains(blanc.getRoi().getEmplacement());
 	}
 
+	public boolean getEchecMathNoir()
+	{
+		return noir.getMouvementJouable().size()==0;
+	}
+
+	public boolean getEchecNoir()
+	{
+		return blanc.getAttaquePossible().contains(noir.getRoi().getEmplacement());
+	}
+	
 	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc, ArrayList<Pieces> pieceNoir)
 	{
 		ArrayList<Pieces> allPieces = new ArrayList<Pieces>();
@@ -421,13 +431,12 @@ public class Plateau
 		{
 				equipeDefense.clearMouvementJouable();
 				ArrayList<Point> testage;
-				ArrayList<Pieces> equipeSansRoi = equipeDefense.listePiece;
-				equipeSansRoi.remove(equipeDefense.getRoi());
 				switch (echec.get(0).getState())
 				{
 					case 1:
-						for (Pieces p : equipeSansRoi)
+						for (Pieces p : equipeDefense.listePiece)
 						{
+							if(!p.getEmplacement().equals(positionRoi))
 							for (Point test : p.getMouvementPossible())
 							{
 								if (test.getY() == positionRoi.y
@@ -440,8 +449,9 @@ public class Plateau
 						}
 						break;
 					case 2:
-						for (Pieces p : equipeSansRoi)
+						for (Pieces p : equipeDefense.listePiece)
 						{
+							if(!p.getEmplacement().equals(positionRoi))
 							for (Point test : p.getMouvementPossible())
 							{
 								if (test.getY() == positionRoi.y
@@ -454,8 +464,9 @@ public class Plateau
 						}
 						break;
 					case 3:
-						for (Pieces p : equipeSansRoi)
+						for (Pieces p : equipeDefense.listePiece)
 						{
+							if(!p.getEmplacement().equals(positionRoi))
 							for (Point test : p.getMouvementPossible())
 							{
 								if (test.getX() == positionRoi.x
@@ -468,8 +479,9 @@ public class Plateau
 						}
 						break;
 					case 4:
-						for (Pieces p : equipeSansRoi)
+						for (Pieces p : equipeDefense.listePiece)
 						{
+							if(!p.getEmplacement().equals(positionRoi))
 							for (Point test : p.getMouvementPossible())
 							{
 								if (test.getX() == positionRoi.x
@@ -488,8 +500,9 @@ public class Plateau
 						{
 							testage.add(new Point(i, j));
 						}
-						for (Pieces p : equipeSansRoi)
+						for (Pieces p : equipeDefense.listePiece)
 						{
+							if(!p.getEmplacement().equals(positionRoi))
 							for (Point test : p.getMouvementPossible())
 							{
 								if (testage.contains(test))
@@ -506,8 +519,9 @@ public class Plateau
 						{
 							testage.add(new Point(i, j));
 						}
-						for (Pieces p : equipeSansRoi)
+						for (Pieces p : equipeDefense.listePiece)
 						{
+							if(!p.getEmplacement().equals(positionRoi))
 							for (Point test : p.getMouvementPossible())
 							{
 								if (testage.contains(test))
@@ -524,8 +538,9 @@ public class Plateau
 						{
 							testage.add(new Point(i, j));
 						}
-						for (Pieces p : equipeSansRoi)
+						for (Pieces p : equipeDefense.listePiece)
 						{
+							if(!p.getEmplacement().equals(positionRoi))
 							for (Point test : p.getMouvementPossible())
 							{
 								if (testage.contains(test))
@@ -542,8 +557,9 @@ public class Plateau
 						{
 							testage.add(new Point(i, j));
 						}
-						for (Pieces p : equipeSansRoi)
+						for (Pieces p : equipeDefense.listePiece)
 						{
+							if(!p.getEmplacement().equals(positionRoi))
 							for (Point test : p.getMouvementPossible())
 							{
 								if (testage.contains(test))
@@ -634,7 +650,7 @@ public class Plateau
 			int index = 0;
 			for (int i = 0; i < listePiece.size(); i++)
 			{
-				if (listePiece.get(i).getClass().toString().equals("class modele.Roi"))
+				if (listePiece.get(i).getClass().toString().contains("Roi"))
 				{
 					index = i;
 				}

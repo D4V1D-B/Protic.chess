@@ -39,7 +39,7 @@ public class Bot
 			return new Pair<Integer, Move>((int) Double.NEGATIVE_INFINITY, null);
 		}
 
-		bestMovement = new Pair<Integer, Move>(null, null); //instancier best move
+		bestMovement = new Pair<Integer, Move>((int) Double.NEGATIVE_INFINITY, null); //instancier best move
 		for (Move mov : movePossible) //pour chaque move
 		{
 			Pieces piece = mov.getPieces(); //prend 1 pieces
