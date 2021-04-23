@@ -102,9 +102,6 @@ public class Controleur implements Initializable
 
 	@FXML
 	private Pane h8;
-	
-	
-	
 
 	@FXML
 	private Pane a7;
@@ -416,18 +413,17 @@ public class Controleur implements Initializable
 		resetTotal();
 
 	}
-	
+
 	@FXML
 	void aideEchec(ActionEvent event)
 	{
 		Stage upgrade = new Stage();
 		upgrade.setTitle("Règle du jeu !");
- 
+
 		VBox root = new VBox();
 		upgrade.setScene(new Scene(root));
 		upgrade.show();
 	}
-
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
@@ -948,6 +944,7 @@ public class Controleur implements Initializable
 						.contains(rechercheCoordonnee(paneClick.getId()))
 						&& pieceSelect.isWhite() == tourJoueur)
 				{
+					System.out.println("planeblick = " + paneClick);
 					deplacer(pieceSelect, paneClick);
 					tourJoueur = !tourJoueur;
 					paneSelect = null;
@@ -1366,6 +1363,9 @@ public class Controleur implements Initializable
 			}
 			else
 			{
+				
+				if(plateau
+						.trouverPieces(rechercheCoordonnee(pane.getId())) != null)
 				plateauFen += plateau
 						.trouverPieces(rechercheCoordonnee(pane.getId()))
 						.getNom();
