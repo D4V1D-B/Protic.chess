@@ -36,13 +36,12 @@ public class Plateau
 		return blanc;
 	}
 
-	// TODO À refaire probablement
 	public boolean getEchecMath()
 	{
 		return noir.getMouvementJouable().size() == 0 || blanc.getMouvementJouable().size() == 0;
 	}
 
-	// TODO À refaire probablement
+	// TODO À enlever
 	public boolean getEchec()
 	{
 		return noir.verifierEchec(blanc.attaquePossible) || blanc.verifierEchec(noir.attaquePossible);

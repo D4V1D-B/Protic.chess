@@ -16,33 +16,34 @@ import modele.Tour;
 public class Bot
 {
 	public Plateau plateau;
+
 	public String jouerBot(Plateau plateau)
 	{
-		this.plateau=plateau;
-		String bestMovement="";
-		int bestMovementPoint=0;
-		
+		this.plateau = plateau;
+		String bestMovement = "";
+		int bestMovementPoint = 0;
+
 		ArrayList<Point> faireLeTourDesMov = new ArrayList<Point>();
 		ArrayList<Pieces> faireLeTourDesPieces = (ArrayList<Pieces>) plateau.getNoir().getListePieces().clone();
 
 		for (Pieces p : faireLeTourDesPieces)
 		{
 			Point anciennePosition = p.getEmplacement();
-			
+
 			faireLeTourDesMov.clear();
-			faireLeTourDesMov=(ArrayList<Point>) p.getMouvementJouable().clone();
-			
+			faireLeTourDesMov = (ArrayList<Point>) p.getMouvementJouable().clone();
+
 			for (Point mov : faireLeTourDesMov)
 			{
-				int oldMov=p.getMouvementJouable().size();
+				int oldMov = p.getMouvementJouable().size();
 				p.setEmplacement(mov);
-				Pieces manger = deplacementTest(anciennePosition,p);
-				if(evalMouvement(manger,p,oldMov)>bestMovementPoint)
+				Pieces manger = deplacementTest(anciennePosition, p);
+				if (evalMouvement(manger, p, oldMov) > bestMovementPoint)
 				{
-					bestMovementPoint = evalMouvement(manger,p,oldMov);
-					bestMovement= anciennePosition.x +" " +  anciennePosition.y + p.getNom()+mov.x+mov.y;
+					bestMovementPoint = evalMouvement(manger, p, oldMov);
+					bestMovement = anciennePosition.x + " " + anciennePosition.y + p.getNom() + mov.x + mov.y;
 				}
-				
+
 				this.plateau.getPlateau()[p.getEmplacement().x][p.getEmplacement().y] = manger;
 				p.setEmplacement(anciennePosition);
 				this.plateau.replacerPieces(p);
@@ -53,7 +54,7 @@ public class Bot
 
 		return bestMovement;
 	}
-	
+
 	public Pieces deplacementTest(Point anciennePosition, Pieces piecesDeplacer)
 	{
 		// On enleve la pieces de son ancien deplacement
@@ -66,34 +67,33 @@ public class Bot
 
 		if (piecesDeplacer.getClass().toString().contains("Pion")
 				&& (anciennePosition.y - piecesDeplacer.getEmplacement().y == 2
-						|| anciennePosition.y
-								- piecesDeplacer.getEmplacement().y == -2))
+						|| anciennePosition.y - piecesDeplacer.getEmplacement().y == -2))
 		{
 			plateau.ajouterEnPassant(anciennePosition, piecesDeplacer);
 		}
-			
+
 		return manger;
 	}
-	
+
 	public int evalMouvement(Pieces manger, Pieces piecesActuel, int oldMov)
 	{
-		int nbrDePoint=0;
-		if(manger!=null)
+		int nbrDePoint = 0;
+		if (manger != null)
 		{
-			nbrDePoint+=manger.getValeur();
+			nbrDePoint += manger.getValeur();
 		}
-		if(piecesActuel.getMouvementJouable()!=null)
+		if (piecesActuel.getMouvementJouable() != null)
 		{
-			nbrDePoint+=piecesActuel.getMouvementJouable().size();
+			nbrDePoint += piecesActuel.getMouvementJouable().size();
 		}
-		if(manger!=null)
+		if (manger != null)
 		{
-			nbrDePoint-=oldMov;
+			nbrDePoint -= oldMov;
 		}
-		
+
 		return nbrDePoint;
 	}
-	
+
 	public String jouerBotTest(Plateau plateau)
 	{
 		this.plateau = plateau;
@@ -101,9 +101,8 @@ public class Bot
 		Move move = recherche(3).getValue();
 		// 1 7n25
 		Pieces piece = move.getPieces();
-		deplacement += piece.getEmplacement().x + " " + piece.getEmplacement().y
-				+ move.getPieces().getNom() + move.getPoint().x
-				+ move.getPoint().y;
+		deplacement += piece.getEmplacement().x + " " + piece.getEmplacement().y + move.getPieces().getNom()
+				+ move.getPoint().x + move.getPoint().y;
 		System.out.println(deplacement);
 		return deplacement;
 
@@ -123,14 +122,12 @@ public class Bot
 		{
 			if (plateau.getEchec())
 			{
-				return new Pair<Integer, Move>((int) Double.NEGATIVE_INFINITY,
-						null);
+				return new Pair<Integer, Move>((int) Double.NEGATIVE_INFINITY, null);
 			}
 			return new Pair<Integer, Move>(0, null);
 		}
 
-		bestMovement = new Pair<Integer, Move>((int) Double.NEGATIVE_INFINITY,
-				null);
+		bestMovement = new Pair<Integer, Move>((int) Double.NEGATIVE_INFINITY, null);
 		for (Move mov : movePossible)
 		{
 			Pieces piece = mov.getPieces();
@@ -158,7 +155,7 @@ public class Bot
 		return bestMovement;
 
 	}
-	
+
 	private Move deplacementDavid(Point anciennePosition, Pieces piecesDeplacer)
 	{
 		// On enleve la pieces de son ancien deplacement
@@ -166,19 +163,19 @@ public class Bot
 
 		// On déplace la pieces et on store ce qui a été bouffe
 		Pieces manger = plateau.deplacerPieces(piecesDeplacer);
-		Point positionManger = plateau.posManger(piecesDeplacer);
-
-		plateau.actualiserToutLesMouvementJouable();
 
 		if (piecesDeplacer.getClass().toString().contains("Pion")
 				&& (anciennePosition.y - piecesDeplacer.getEmplacement().y == 2
-						|| anciennePosition.y
-								- piecesDeplacer.getEmplacement().y == -2))
+						|| anciennePosition.y - piecesDeplacer.getEmplacement().y == -2))
 		{
 			plateau.ajouterEnPassant(anciennePosition, piecesDeplacer);
 		}
 
-		Move reverseMove = new Move(manger, positionManger);
+		Move reverseMove = null;
+		if (manger != null)
+		{
+			reverseMove = new Move(manger, manger.getEmplacement());
+		}
 		return reverseMove;
 	}
 	//
@@ -203,10 +200,8 @@ public class Bot
 
 	private int evaluerEquipe()
 	{
-		ArrayList<Pieces> PiecesBlanche = (ArrayList<Pieces>) plateau.getBlanc()
-				.getListePieces();
-		ArrayList<Pieces> PiecesNoir = (ArrayList<Pieces>) plateau.getNoir()
-				.getListePieces();
+		ArrayList<Pieces> PiecesBlanche = (ArrayList<Pieces>) plateau.getBlanc().getListePieces();
+		ArrayList<Pieces> PiecesNoir = (ArrayList<Pieces>) plateau.getNoir().getListePieces();
 		int BlancValeurTotal = compterValeur(PiecesBlanche);
 		int NoirValeurTotal = compterValeur(PiecesNoir);
 		int evaluer = BlancValeurTotal - NoirValeurTotal;
@@ -218,8 +213,7 @@ public class Bot
 	public ArrayList<Move> generationMove()
 	{
 
-		ArrayList<Pieces> tousPieces = (ArrayList<Pieces>) plateau.getNoir()
-				.getListePieces();
+		ArrayList<Pieces> tousPieces = (ArrayList<Pieces>) plateau.getNoir().getListePieces();
 		ArrayList<Move> tousMoves = new ArrayList<Move>();
 
 		for (Pieces pieces : tousPieces)
@@ -244,5 +238,4 @@ public class Bot
 		return valeur;
 	}
 
-	
 }
