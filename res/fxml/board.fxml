@@ -42,7 +42,8 @@
             <Menu mnemonicParsing="false" text="Sauvegarde">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#saveGame" text="Sauvegarder la partie" />
-                  <MenuItem mnemonicParsing="false" onAction="#chargerPartie" text="Charcher une partie" />
+                  <MenuItem mnemonicParsing="false" onAction="#chargerPartie" text="Charger une partie" />
+                  <MenuItem mnemonicParsing="false" onAction="#effacerLesSauvegardes" text="Effacer les sauvegardes" />
               </items>
             </Menu>
         </menus>
@@ -387,7 +388,7 @@
                <children>
                   <VBox layoutX="16.0" layoutY="14.0" prefHeight="661.0" prefWidth="303.0" spacing="50.0" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="14.0">
                      <children>
-                        <VBox prefHeight="502.0" prefWidth="273.0">
+                        <VBox prefHeight="604.0" prefWidth="253.0">
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="276.0" text="Mouvement">
                                  <font>
@@ -400,7 +401,10 @@
                               <VBox prefHeight="61.0" prefWidth="283.0">
                                  <children>
                                     <Label alignment="CENTER" prefHeight="17.0" prefWidth="284.0" text="Au tour de :" textAlignment="CENTER" />
-                                    <Label fx:id="labelTourCouleur" alignment="CENTER" prefHeight="45.0" prefWidth="283.0" text="Blanc" />
+                                    <Label fx:id="labelTourCouleur" alignment="CENTER" prefHeight="45.0" prefWidth="283.0" text="Blanc">
+                                       <font>
+                                          <Font name="Arial Bold" size="25.0" />
+                                       </font></Label>
                                  </children>
                                  <VBox.margin>
                                     <Insets bottom="10.0" top="10.0" />
@@ -414,34 +418,32 @@
                                     <Insets bottom="10.0" top="10.0" />
                                  </VBox.margin>
                               </Button>
-                              <HBox prefHeight="42.0" prefWidth="253.0">
+                              <VBox prefHeight="149.0" prefWidth="253.0" spacing="10.0" style="-fx-background-color: silver;">
                                  <children>
-                                    <Button fx:id="boutonChargerMouvements" mnemonicParsing="false" onMouseClicked="#chargerMouvement" prefHeight="40.0" prefWidth="130.0" text="Charger un mouvement" textAlignment="CENTER">
-                                       <HBox.margin>
-                                          <Insets right="20.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="boutonRevenirAuJeu" mnemonicParsing="false" onMouseClicked="#revenirAuJeu" prefHeight="40.0" prefWidth="130.0" text="Revenir au jeu">
-                                       <HBox.margin>
-                                          <Insets left="20.0" />
-                                       </HBox.margin>
-                                    </Button>
+                                    <Button fx:id="boutonChargerMouvements" mnemonicParsing="false" onMouseClicked="#chargerMouvement" prefHeight="40.0" prefWidth="257.0" text="Charger un mouvement" textAlignment="CENTER" />
+                                    <HBox prefHeight="42.0" prefWidth="253.0">
+                                       <children>
+                                          <Button fx:id="boutonMouvementArriere" mnemonicParsing="false" onMouseClicked="#mouvementArriere" prefHeight="40.0" prefWidth="117.0" text="Précédent" textAlignment="CENTER">
+                                             <HBox.margin>
+                                                <Insets right="10.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                          <Button fx:id="boutonMouvementAvant" mnemonicParsing="false" onMouseClicked="#mouvementAvant" prefHeight="40.0" prefWidth="117.0" text="Suivant">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <Button fx:id="boutonRevenirAuJeu" mnemonicParsing="false" onMouseClicked="#revenirAuJeu" prefHeight="40.0" prefWidth="256.0" text="Revenir au jeu" />
                                  </children>
-                              </HBox>
-                              <HBox layoutX="10.0" layoutY="370.0" prefHeight="42.0" prefWidth="253.0">
-                                 <children>
-                                    <Button fx:id="boutonMouvementArriere" mnemonicParsing="false" onMouseClicked="#mouvementArriere" prefHeight="40.0" prefWidth="130.0" text="&lt;-" textAlignment="CENTER">
-                                       <HBox.margin>
-                                          <Insets right="20.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="boutonMouvementAvant" mnemonicParsing="false" onMouseClicked="#mouvementAvant" prefHeight="40.0" prefWidth="130.0" text="--&gt;">
-                                       <HBox.margin>
-                                          <Insets left="20.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                 </children>
-                              </HBox>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </padding>
+                              </VBox>
                            </children>
                         </VBox>
                      </children>

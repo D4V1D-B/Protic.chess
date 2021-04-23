@@ -102,6 +102,9 @@ public class Controleur implements Initializable
 
 	@FXML
 	private Pane h8;
+	
+	
+	
 
 	@FXML
 	private Pane a7;
@@ -314,7 +317,7 @@ public class Controleur implements Initializable
 				.getSelectedIndex();
 		if (indiceDuMouvement != -1)
 		{
-			
+
 			placementActuel = creerFen();
 
 			Mouvement mouvementSelect = arrayMouvement.get(indiceDuMouvement);
@@ -348,7 +351,7 @@ public class Controleur implements Initializable
 	@FXML
 	void chargerPartie(ActionEvent event)
 	{
-		
+
 		chargerUnePartie();
 	}
 
@@ -371,6 +374,26 @@ public class Controleur implements Initializable
 			e.printStackTrace();
 		}
 
+	}
+
+	@FXML
+	void effacerLesSauvegardes(ActionEvent event)
+	{
+		try
+		{
+			BufferedWriter writer = new BufferedWriter(
+					new FileWriter(file, false));
+
+			writer.append("");
+
+			writer.close();
+		}
+		catch (IOException e)
+		{
+			System.out
+					.println("Erreur dans lors de effacement des sauvegardes.");
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -439,6 +462,7 @@ public class Controleur implements Initializable
 
 	public void placerPiecesString(String placement)
 	{
+
 		association.put("r", new Image("images/TourNoir.png"));
 		association.put("n", new Image("images/CavalierNoir.png"));
 		association.put("b", new Image("images/FouNoir.png"));
@@ -822,16 +846,7 @@ public class Controleur implements Initializable
 			}
 
 		}
-		// for (Pieces p : blanc)
-		// {
-		// System.out.println(p.getNom() + " " + p.getEmplacement());
-		//
-		// }
-		// for (Pieces p : noir)
-		// {
-		// System.out.println(p.getNom() + " " + p.getEmplacement());
-		//
-		// }
+
 		plateau = new Plateau(blanc, noir);
 	}
 
@@ -1369,20 +1384,19 @@ public class Controleur implements Initializable
 
 		lesAnciennesParties.setScene(new Scene(vBox));
 		lesAnciennesParties.show();
-		String s;
 
 		try
 		{
 			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String s = reader.readLine();
 
-			do
+			while (s != null)
 			{
 				s = reader.readLine();
-
-				ListAnciennesParties.add(s);
+				if (s != null)
+					ListAnciennesParties.add(s);
 
 			}
-			while (s != null);
 
 			reader.close();
 		}

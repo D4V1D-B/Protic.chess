@@ -9,16 +9,49 @@ public class Mouvement
 	private SimpleStringProperty nouvelleEmplacement;
 	private boolean isWhite;
 	private SimpleStringProperty fen;
+	private String nomCompletDeLaPiece;
 
 	public Mouvement(SimpleStringProperty pieceBouge,
-			SimpleStringProperty nouvelleEmplacement, SimpleStringProperty fen, boolean isWhite)
+			SimpleStringProperty nouvelleEmplacement, SimpleStringProperty fen,
+			boolean isWhite)
 	{
 		super();
 		this.pieceBouge = pieceBouge;
 		this.nouvelleEmplacement = nouvelleEmplacement;
 		this.isWhite = isWhite;
 		this.fen = fen;
-		
+		String nom;
+
+		switch (pieceBouge.get().toLowerCase())
+		{
+			case "r":
+				nom = "tour ";
+				break;
+			case "n":
+				nom = "cavalier ";
+				break;
+			case "b":
+				nom = "fou ";
+				break;
+			case "q":
+				nom = "reine ";
+				break;
+			case "k":
+				nom = "roi ";
+				break;
+
+			default:
+				nom = "pion ";
+				break;
+		}
+
+		this.nomCompletDeLaPiece = nom;
+
+	}
+
+	public String getNomCompletDeLaPiece()
+	{
+		return nomCompletDeLaPiece;
 	}
 
 	public StringProperty getPieceBouge()
@@ -64,24 +97,30 @@ public class Mouvement
 	@Override
 	public String toString()
 	{
-		String c = "B";
+		String determinant = getNomCompletDeLaPiece() == "reine " ? "La "
+				: "Le ";
+		String c = getNomCompletDeLaPiece() == "reine " ? "noire " : "noir ";
 		if (isWhite)
 		{
-			c = "W";
+			c = getNomCompletDeLaPiece() == "reine " ? "blanche " : "blanc ";
 		}
 
-		return c + getPieceBouge().get() + " - "
-				+ getNouvelleEmplacement().get();
+		return determinant + getNomCompletDeLaPiece() + c + "se déplace sur "
+				+ getNouvelleEmplacement().get() + ".";
 	}
+
 	public String toStringCastle()
 	{
-		String c = "B";
+		String determinant = getNomCompletDeLaPiece() == "reine " ? "La "
+				: "Le ";
+		String c = getNomCompletDeLaPiece() == "reine " ? "noire " : "noir ";
 		if (isWhite)
 		{
-			c = "W";
+			c = getNomCompletDeLaPiece() == "reine " ? "blanche " : "blanc ";
 		}
-		return c + " " + getNouvelleEmplacement().get();
-		
+		return determinant + getNomCompletDeLaPiece() + c + "castle sur "
+				+ getNouvelleEmplacement() + ".";
+
 	}
-	
+
 }
