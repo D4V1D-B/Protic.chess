@@ -421,10 +421,12 @@ public class Plateau
 		{
 				equipeDefense.clearMouvementJouable();
 				ArrayList<Point> testage;
+				ArrayList<Pieces> equipeSansRoi = equipeDefense.listePiece;
+				equipeSansRoi.remove(equipeDefense.getRoi());
 				switch (echec.get(0).getState())
 				{
 					case 1:
-						for (Pieces p : equipeDefense.listePiece)
+						for (Pieces p : equipeSansRoi)
 						{
 							for (Point test : p.getMouvementPossible())
 							{
@@ -438,7 +440,7 @@ public class Plateau
 						}
 						break;
 					case 2:
-						for (Pieces p : equipeDefense.listePiece)
+						for (Pieces p : equipeSansRoi)
 						{
 							for (Point test : p.getMouvementPossible())
 							{
@@ -452,7 +454,7 @@ public class Plateau
 						}
 						break;
 					case 3:
-						for (Pieces p : equipeDefense.listePiece)
+						for (Pieces p : equipeSansRoi)
 						{
 							for (Point test : p.getMouvementPossible())
 							{
@@ -466,7 +468,7 @@ public class Plateau
 						}
 						break;
 					case 4:
-						for (Pieces p : equipeDefense.listePiece)
+						for (Pieces p : equipeSansRoi)
 						{
 							for (Point test : p.getMouvementPossible())
 							{
@@ -486,7 +488,7 @@ public class Plateau
 						{
 							testage.add(new Point(i, j));
 						}
-						for (Pieces p : equipeDefense.listePiece)
+						for (Pieces p : equipeSansRoi)
 						{
 							for (Point test : p.getMouvementPossible())
 							{
@@ -504,7 +506,7 @@ public class Plateau
 						{
 							testage.add(new Point(i, j));
 						}
-						for (Pieces p : equipeDefense.listePiece)
+						for (Pieces p : equipeSansRoi)
 						{
 							for (Point test : p.getMouvementPossible())
 							{
@@ -522,7 +524,7 @@ public class Plateau
 						{
 							testage.add(new Point(i, j));
 						}
-						for (Pieces p : equipeDefense.listePiece)
+						for (Pieces p : equipeSansRoi)
 						{
 							for (Point test : p.getMouvementPossible())
 							{
@@ -540,7 +542,7 @@ public class Plateau
 						{
 							testage.add(new Point(i, j));
 						}
-						for (Pieces p : equipeDefense.listePiece)
+						for (Pieces p : equipeSansRoi)
 						{
 							for (Point test : p.getMouvementPossible())
 							{
@@ -553,7 +555,7 @@ public class Plateau
 						break;
 				}
 		}
-		else 
+		else if(!echec.isEmpty())
 		{
 			equipeDefense.clearMouvementJouable();
 			for(Point p : equipeDefense.getRoi().getMouvementPossible())

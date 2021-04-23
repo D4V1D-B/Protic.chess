@@ -961,18 +961,6 @@ public class Controleur implements Initializable
 					pieceSelect = (null);
 				}
 
-				if (plateau.getEchecMath())
-				{
-					afficherFinDePartie("Les " + labelTourCouleur.getText()
-							+ "s ont gagnés la partie !");
-				}
-				else
-					if (plateau.getEchecMath())
-					{
-						afficherFinDePartie(
-								"Partie nulle, meilleur chance la prochaine fois!");
-					}
-
 				setLabelTourCouleur(labelTourCouleur);
 			}
 		}
