@@ -944,7 +944,7 @@ public class Controleur implements Initializable
 						.contains(rechercheCoordonnee(paneClick.getId()))
 						&& pieceSelect.isWhite() == tourJoueur)
 				{
-					System.out.println("planeblick = " + paneClick);
+
 					deplacer(pieceSelect, paneClick);
 					tourJoueur = !tourJoueur;
 					paneSelect = null;
@@ -1363,12 +1363,12 @@ public class Controleur implements Initializable
 			}
 			else
 			{
-				
-				if(plateau
-						.trouverPieces(rechercheCoordonnee(pane.getId())) != null)
-				plateauFen += plateau
-						.trouverPieces(rechercheCoordonnee(pane.getId()))
-						.getNom();
+
+				if (plateau.trouverPieces(
+						rechercheCoordonnee(pane.getId())) != null)
+					plateauFen += plateau
+							.trouverPieces(rechercheCoordonnee(pane.getId()))
+							.getNom();
 			}
 			entre0et7++;
 
