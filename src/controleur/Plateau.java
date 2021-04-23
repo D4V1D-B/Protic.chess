@@ -872,4 +872,39 @@ public class Plateau
 		}
 
 	}
+
+		public Point posManger(Pieces piecesDeplacer)
+	{
+		Pieces temp = null;
+		if (plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+				.getEmplacement().y] == null
+				&& piecesDeplacer.getClass().toString().contains("Pion"))
+		{
+			if (piecesDeplacer.isWhite())
+			{
+				temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+						.getEmplacement().y - 1];
+	
+			}
+			else
+			{
+				temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+						.getEmplacement().y + 1];
+			
+			}
+		}
+		else
+		{
+			temp = plateau[piecesDeplacer.getEmplacement().x][piecesDeplacer
+					.getEmplacement().y];
+		}
+
+		if (temp != null)
+		{
+			return temp.getEmplacement();
+		}
+		return null;
+
+	}
+
 }
