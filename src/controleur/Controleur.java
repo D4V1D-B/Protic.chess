@@ -393,6 +393,18 @@ public class Controleur implements Initializable
 		resetTotal();
 
 	}
+	
+	@FXML
+	void aideEchec(ActionEvent event)
+	{
+		Stage upgrade = new Stage();
+		upgrade.setTitle("Règle du jeu !");
+ 
+		VBox root = new VBox();
+		upgrade.setScene(new Scene(root));
+		upgrade.show();
+	}
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
