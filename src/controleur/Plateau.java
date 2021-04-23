@@ -41,12 +41,6 @@ public class Plateau
 		return noir.getMouvementJouable().size() == 0 || blanc.getMouvementJouable().size() == 0;
 	}
 
-	// TODO À enlever
-	public boolean getEchec()
-	{
-		return noir.verifierEchec(blanc.attaquePossible) || blanc.verifierEchec(noir.attaquePossible);
-	}
-
 	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc, ArrayList<Pieces> pieceNoir)
 	{
 		ArrayList<Pieces> allPieces = new ArrayList<Pieces>();

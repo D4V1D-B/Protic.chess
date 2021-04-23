@@ -17,7 +17,6 @@ public class Bot
 		this.plateau = plateau;  //prend le plateau
 		String deplacement = "";  //pour déplacer l'image
 		Move move = recherche(3).getValue(); //recherche du meilleur movement
-		// 1 7n25
 		Pieces piece = move.getPieces();  //prend la pièce du meilleur mouvement
 		deplacement += piece.getEmplacement().x + " " + piece.getEmplacement().y + move.getPieces().getNom() 
 				+ move.getPoint().x + move.getPoint().y; //Déplacement l'image
@@ -37,11 +36,7 @@ public class Bot
 		ArrayList<Move> movePossible = generationMove(); //mouvement jouable
 		if (movePossible.size() == 0) //regarde si la liste est pas vide
 		{
-			if (plateau.getEchec())
-			{
-				return new Pair<Integer, Move>((int) Double.NEGATIVE_INFINITY, null); //vérifier /changer parce que ici on est en échec et mat
-			}
-			return new Pair<Integer, Move>(0, null);
+			return new Pair<Integer, Move>((int) Double.NEGATIVE_INFINITY, null);
 		}
 
 		bestMovement = new Pair<Integer, Move>(null, null); //instancier best move
