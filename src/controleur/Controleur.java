@@ -304,10 +304,7 @@ public class Controleur implements Initializable
 	void revenirAuJeu(MouseEvent event)
 	{
 		placerPiecesString(placementActuel);
-		tuPeuxBoujerLesPieces = true;
-		boutonRevenirAuJeu.setDisable(true);
-		boutonMouvementArriere.setDisable(true);
-		boutonMouvementAvant.setDisable(true);
+		boutonDisable(true);
 	}
 
 	@FXML
@@ -317,14 +314,12 @@ public class Controleur implements Initializable
 				.getSelectedIndex();
 		if (indiceDuMouvement != -1)
 		{
-			tuPeuxBoujerLesPieces = false;
+			
 			placementActuel = creerFen();
 
 			Mouvement mouvementSelect = arrayMouvement.get(indiceDuMouvement);
 			placerPiecesString(mouvementSelect.getFen().get());
-			boutonRevenirAuJeu.setDisable(false);
-			boutonMouvementArriere.setDisable(false);
-			boutonMouvementAvant.setDisable(false);
+			boutonDisable(false);
 		}
 	}
 
@@ -335,11 +330,7 @@ public class Controleur implements Initializable
 		if (indiceDuMouvement >= 1)
 		{
 			indiceDuMouvement--;
-			tuPeuxBoujerLesPieces = false;
-
-			Mouvement mouvementSelect = arrayMouvement.get(indiceDuMouvement);
-			placerPiecesString(mouvementSelect.getFen().get());
-			boutonRevenirAuJeu.setDisable(false);
+			avantArriereMouvement();
 		}
 	}
 
@@ -350,18 +341,14 @@ public class Controleur implements Initializable
 		if (indiceDuMouvement < arrayMouvement.size() - 1)
 		{
 			indiceDuMouvement++;
-			tuPeuxBoujerLesPieces = false;
-
-			Mouvement mouvementSelect = arrayMouvement.get(indiceDuMouvement);
-			placerPiecesString(mouvementSelect.getFen().get());
-			boutonRevenirAuJeu.setDisable(false);
+			avantArriereMouvement();
 		}
 	}
 
 	@FXML
 	void chargerPartie(ActionEvent event)
 	{
-		System.out.println("allo");
+		
 		chargerUnePartie();
 	}
 
@@ -369,7 +356,21 @@ public class Controleur implements Initializable
 	void saveGame(ActionEvent event)
 	{
 
-		saveGame();
+		try
+		{
+			BufferedWriter writer = new BufferedWriter(
+					new FileWriter(file, true));
+
+			writer.append(creerFen() + "\n");
+
+			writer.close();
+		}
+		catch (IOException e)
+		{
+			System.out.println("Erreur dans la sauvegarde!");
+			e.printStackTrace();
+		}
+
 	}
 
 	@FXML
@@ -397,9 +398,7 @@ public class Controleur implements Initializable
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		resetTotal();
-		boutonRevenirAuJeu.setDisable(true);
-		boutonMouvementArriere.setDisable(true);
-		boutonMouvementAvant.setDisable(true);
+		boutonDisable(true);
 
 	}
 
@@ -425,83 +424,12 @@ public class Controleur implements Initializable
 		{
 			arrayMouvement.clear();
 		}
+		tuPeuxBoujerLesPieces = true;
+		boutonRevenirAuJeu.setDisable(true);
+		boutonMouvementArriere.setDisable(true);
+		boutonMouvementAvant.setDisable(true);
 		list = FXCollections.observableArrayList();
 		listDeMouvement.setItems(list);
-		// Tour R1 = new Tour("R", true, new Point(0, 0));
-		// Cavalier N1 = new Cavalier("N", true, new Point(1, 0));
-		// Fou B1 = new Fou("B", true, new Point(2, 0));
-		// Reine Q = new Reine("Q", true, new Point(3, 0));
-		// Roi K = new Roi("K", true, new Point(4, 0));
-		// Fou B2 = new Fou("B", true, new Point(5, 0));
-		// Cavalier N2 = new Cavalier("N", true, new Point(6, 0));
-		// Tour R2 = new Tour("R", true, new Point(7, 0));
-		//
-		// Pion P1 = new Pion("P", true, new Point(0, 1));
-		// Pion P2 = new Pion("P", true, new Point(1, 1));
-		// Pion P3 = new Pion("P", true, new Point(2, 1));
-		// Pion P4 = new Pion("P", true, new Point(3, 1));
-		// Pion P5 = new Pion("P", true, new Point(4, 1));
-		// Pion P6 = new Pion("P", true, new Point(5, 1));
-		// Pion P7 = new Pion("P", true, new Point(6, 1));
-		// Pion P8 = new Pion("P", true, new Point(7, 1));
-		//
-		// Tour r1 = new Tour("r", false, new Point(0, 7));
-		// Cavalier n1 = new Cavalier("n", false, new Point(1, 7));
-		// Fou b1 = new Fou("b", false, new Point(2, 7));
-		// Reine q = new Reine("q", false, new Point(3, 7));
-		// Roi k = new Roi("k", false, new Point(4, 7));
-		// Fou b2 = new Fou("b", false, new Point(5, 7));
-		// Cavalier n2 = new Cavalier("n", false, new Point(6, 7));
-		// Tour r2 = new Tour("r", false, new Point(7, 7));
-		//
-		// Pion p1 = new Pion("p", false, new Point(0, 6));
-		// Pion p2 = new Pion("p", false, new Point(1, 6));
-		// Pion p3 = new Pion("p", false, new Point(2, 6));
-		// Pion p4 = new Pion("p", false, new Point(3, 6));
-		// Pion p5 = new Pion("p", false, new Point(4, 6));
-		// Pion p6 = new Pion("p", false, new Point(5, 6));
-		// Pion p7 = new Pion("p", false, new Point(6, 6));
-		// Pion p8 = new Pion("p", false, new Point(7, 6));
-
-		// ArrayList<Pieces> blanc = new ArrayList<Pieces>();
-		// blanc.add(R1);
-		// blanc.add(N1);
-		// blanc.add(B1);
-		// blanc.add(Q);
-		// blanc.add(K);
-		// blanc.add(B2);
-		// blanc.add(N2);
-		// blanc.add(R2);
-		// blanc.add(P1);
-		// blanc.add(P2);
-		// blanc.add(P3);
-		// blanc.add(P4);
-		// blanc.add(P5);
-		// blanc.add(P6);
-		// blanc.add(P7);
-		// blanc.add(P8);
-		//
-		// ArrayList<Pieces> noir = new ArrayList<Pieces>();
-		// noir.add(r1);
-		// noir.add(n1);
-		// noir.add(b1);
-		// noir.add(q);
-		// noir.add(k);
-		// noir.add(b2);
-		// noir.add(n2);
-		// noir.add(r2);
-		// noir.add(p1);
-		// noir.add(p2);
-		// noir.add(p3);
-		// noir.add(p4);
-		// noir.add(p5);
-		// noir.add(p6);
-		// noir.add(p7);
-		// noir.add(p8);
-
-		// plateau = new Plateau(blanc, noir);
-
-		// placementDepart.indexOf('R');
 
 		placerPiecesString(placementDepart);
 		resetCouleur();
@@ -1372,38 +1300,12 @@ public class Controleur implements Initializable
 		}
 	}
 
-	public boolean saveGame()
-	{
-
-		try
-		{
-			BufferedWriter writer = new BufferedWriter(
-					new FileWriter(file, true));
-
-			writer.append(creerFen() + "\n");
-
-			writer.close();
-		}
-		catch (IOException e)
-		{
-			System.out.println("Erreur dans la sauvegarde!");
-			e.printStackTrace();
-		}
-
-		return false;
-
-	}
-
 	private String creerFen()
 	{
-		String tousLesMouvements = "";
 		String plateauFen = "";
 		int entre0et7 = 0;
 		int nombreDEspace = 0;
-		for (String m : list)
-		{
-			tousLesMouvements += m + ", ";
-		}
+
 		Pane[] tableauPane = new Pane[64];
 
 		for (int nb = 0; nb < 64; nb++)
@@ -1437,7 +1339,7 @@ public class Controleur implements Initializable
 			}
 			else
 			{
-				plateauFen += ((Plateau) plateau)
+				plateauFen += plateau
 						.trouverPieces(rechercheCoordonnee(pane.getId()))
 						.getNom();
 			}
@@ -1531,4 +1433,20 @@ public class Controleur implements Initializable
 
 	}
 
+	private void avantArriereMouvement()
+	{
+		tuPeuxBoujerLesPieces = false;
+
+		Mouvement mouvementSelect = arrayMouvement.get(indiceDuMouvement);
+		placerPiecesString(mouvementSelect.getFen().get());
+		boutonRevenirAuJeu.setDisable(false);
+	}
+
+	private void boutonDisable(boolean b)
+	{
+		tuPeuxBoujerLesPieces = b;
+		boutonRevenirAuJeu.setDisable(b);
+		boutonMouvementArriere.setDisable(b);
+		boutonMouvementAvant.setDisable(b);
+	}
 }

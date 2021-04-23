@@ -83,4 +83,5 @@ public class Mouvement
 		return c + " " + getNouvelleEmplacement().get();
 		
 	}
+	
 }
