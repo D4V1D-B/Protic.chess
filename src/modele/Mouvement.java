@@ -118,7 +118,7 @@ public class Mouvement
 		{
 			c = getNomCompletDeLaPiece() == "reine " ? "blanche " : "blanc ";
 		}
-		return determinant + getNomCompletDeLaPiece() + c + "castle=.";
+		return determinant + getNomCompletDeLaPiece() + c + "castle.";
 
 	}
 
