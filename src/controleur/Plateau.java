@@ -72,7 +72,8 @@ public class Plateau
 
 		actualiserToutLesMouvementJouable();
 
-		if (piecesDeplacer.getClass().toString().contains("Pion") && Math.abs(anciennePosition.y - piecesDeplacer.getEmplacement().y) == 2)
+		if (piecesDeplacer.getClass().toString().contains("Pion")
+				&& Math.abs(anciennePosition.y - piecesDeplacer.getEmplacement().y) == 2)
 		{
 			ajouterEnPassant(anciennePosition, piecesDeplacer);
 		}
@@ -85,7 +86,8 @@ public class Plateau
 		{
 			if (piecesDeplacer.getEmplacement().x - 1 >= 0
 					&& plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y] != null
-					&& plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].getClass().toString().contains("Pion")
+					&& plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].getClass()
+							.toString().contains("Pion")
 					&& !plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].isWhite())
 			{
 				plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].getMouvementJouable()
@@ -94,7 +96,8 @@ public class Plateau
 
 			if (piecesDeplacer.getEmplacement().x + 1 <= 7
 					&& plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y] != null
-					&& plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].getClass().toString().contains("Pion")
+					&& plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].getClass()
+							.toString().contains("Pion")
 					&& !plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].isWhite())
 			{
 				plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].getMouvementJouable()
@@ -106,19 +109,21 @@ public class Plateau
 			{
 				if (piecesDeplacer.getEmplacement().x - 1 >= 0
 						&& plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y] != null
-						&& plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].getClass().toString().contains("Pion")
+						&& plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].getClass()
+								.toString().contains("Pion")
 						&& plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].isWhite())
 				{
-					plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y].getMouvementJouable()
-							.add(new Point(anciennePosition.x, anciennePosition.y - 1));
+					plateau[piecesDeplacer.getEmplacement().x - 1][piecesDeplacer.getEmplacement().y]
+							.getMouvementJouable().add(new Point(anciennePosition.x, anciennePosition.y - 1));
 				}
 				if (piecesDeplacer.getEmplacement().x + 1 <= 7
 						&& plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y] != null
-						&& plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].getClass().toString().contains("Pion")
+						&& plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].getClass()
+								.toString().contains("Pion")
 						&& plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].isWhite())
 				{
-					plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y].getMouvementJouable()
-							.add(new Point(anciennePosition.x, anciennePosition.y - 1));
+					plateau[piecesDeplacer.getEmplacement().x + 1][piecesDeplacer.getEmplacement().y]
+							.getMouvementJouable().add(new Point(anciennePosition.x, anciennePosition.y - 1));
 				}
 			}
 	}
@@ -298,7 +303,7 @@ public class Plateau
 					p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
-						piecesNoirPin.add(temp);
+						piecesBlanchePin.add(temp);
 						temp = null;
 					}
 					break;
@@ -307,7 +312,7 @@ public class Plateau
 					p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
-						piecesNoirPin.add(temp);
+						piecesBlanchePin.add(temp);
 						temp = null;
 					}
 					break;
@@ -316,7 +321,7 @@ public class Plateau
 					p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
-						piecesNoirPin.add(temp);
+						piecesBlanchePin.add(temp);
 						temp = null;
 					}
 					break;
@@ -325,7 +330,7 @@ public class Plateau
 					p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
-						piecesNoirPin.add(temp);
+						piecesBlanchePin.add(temp);
 						temp = null;
 					}
 					break;
@@ -334,7 +339,7 @@ public class Plateau
 					p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
-						piecesNoirPin.add(temp);
+						piecesBlanchePin.add(temp);
 						temp = null;
 					}
 					break;
@@ -389,7 +394,8 @@ public class Plateau
 						p.getDefendant().getMouvementJouable().clear();
 						for (Point test : p.getDefendant().getMouvementPossible())
 						{
-							if (test.getX() - p.getAttaquant().getEmplacement().x == test.getY() - p.getAttaquant().getEmplacement().y)
+							if (test.getX() - p.getAttaquant().getEmplacement().x == test.getY()
+									- p.getAttaquant().getEmplacement().y)
 							{
 								p.getDefendant().getMouvementJouable().add(test);
 							}
@@ -400,7 +406,8 @@ public class Plateau
 						p.getDefendant().getMouvementJouable().clear();
 						for (Point test : p.getDefendant().getMouvementPossible())
 						{
-							if (-(test.getX() - p.getAttaquant().getEmplacement().x) == test.getY() - p.getAttaquant().getEmplacement().y)
+							if (-(test.getX() - p.getAttaquant().getEmplacement().x) == test.getY()
+									- p.getAttaquant().getEmplacement().y)
 							{
 								p.getDefendant().getMouvementJouable().add(test);
 							}
@@ -427,7 +434,8 @@ public class Plateau
 						{
 							for (Point test : p.getMouvementPossible())
 							{
-								if (test.getY() == positionRoi.y && test.getX() <= echec.get(0).getAttaquant().getEmplacement().x
+								if (test.getY() == positionRoi.y
+										&& test.getX() <= echec.get(0).getAttaquant().getEmplacement().x
 										&& test.getX() > positionRoi.x)
 								{
 									p.getMouvementJouable().add(test);
@@ -440,7 +448,8 @@ public class Plateau
 						{
 							for (Point test : p.getMouvementPossible())
 							{
-								if (test.getY() == positionRoi.y && test.getX() >= echec.get(0).getAttaquant().getEmplacement().x
+								if (test.getY() == positionRoi.y
+										&& test.getX() >= echec.get(0).getAttaquant().getEmplacement().x
 										&& test.getX() < positionRoi.x)
 								{
 									p.getMouvementJouable().add(test);
@@ -453,7 +462,8 @@ public class Plateau
 						{
 							for (Point test : p.getMouvementPossible())
 							{
-								if (test.getX() == positionRoi.x && test.getY() <= echec.get(0).getAttaquant().getEmplacement().y
+								if (test.getX() == positionRoi.x
+										&& test.getY() <= echec.get(0).getAttaquant().getEmplacement().y
 										&& test.getY() > positionRoi.y)
 								{
 									p.getMouvementJouable().add(test);
@@ -466,7 +476,8 @@ public class Plateau
 						{
 							for (Point test : p.getMouvementPossible())
 							{
-								if (test.getX() == positionRoi.x && test.getY() >= echec.get(0).getAttaquant().getEmplacement().y
+								if (test.getX() == positionRoi.x
+										&& test.getY() >= echec.get(0).getAttaquant().getEmplacement().y
 										&& test.getY() < positionRoi.y)
 								{
 									p.getMouvementJouable().add(test);
@@ -477,10 +488,9 @@ public class Plateau
 					case 5:
 						testage = new ArrayList<Point>();
 						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
-								j = echec.get(0).getAttaquant().getEmplacement().y; 
-								i > positionRoi.x; i--, j--)
+								j = echec.get(0).getAttaquant().getEmplacement().y; i > positionRoi.x; i--, j--)
 						{
-							testage.add(new Point(i,j));
+							testage.add(new Point(i, j));
 						}
 						for (Pieces p : blanc.listePiece)
 						{
@@ -496,10 +506,9 @@ public class Plateau
 					case 8:
 						testage = new ArrayList<Point>();
 						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
-								j = echec.get(0).getAttaquant().getEmplacement().y; 
-								i < positionRoi.x; i++, j++)
+								j = echec.get(0).getAttaquant().getEmplacement().y; i < positionRoi.x; i++, j++)
 						{
-							testage.add(new Point(i,j));
+							testage.add(new Point(i, j));
 						}
 						for (Pieces p : blanc.listePiece)
 						{
@@ -515,10 +524,9 @@ public class Plateau
 					case 6:
 						testage = new ArrayList<Point>();
 						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
-								j = echec.get(0).getAttaquant().getEmplacement().y; 
-								i > positionRoi.x; i--, j++)
+								j = echec.get(0).getAttaquant().getEmplacement().y; i > positionRoi.x; i--, j++)
 						{
-							testage.add(new Point(i,j));
+							testage.add(new Point(i, j));
 						}
 						for (Pieces p : blanc.listePiece)
 						{
@@ -534,10 +542,9 @@ public class Plateau
 					case 7:
 						testage = new ArrayList<Point>();
 						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
-								j = echec.get(0).getAttaquant().getEmplacement().y; 
-								i < positionRoi.x; i++, j--)
+								j = echec.get(0).getAttaquant().getEmplacement().y; i < positionRoi.x; i++, j--)
 						{
-							testage.add(new Point(i,j));
+							testage.add(new Point(i, j));
 						}
 						for (Pieces p : blanc.listePiece)
 						{
@@ -563,7 +570,8 @@ public class Plateau
 						{
 							for (Point test : p.getMouvementPossible())
 							{
-								if (test.getY() == positionRoi.y && test.getX() <= echec.get(0).getAttaquant().getEmplacement().x
+								if (test.getY() == positionRoi.y
+										&& test.getX() <= echec.get(0).getAttaquant().getEmplacement().x
 										&& test.getX() > positionRoi.x)
 								{
 									p.getMouvementJouable().add(test);
@@ -576,7 +584,8 @@ public class Plateau
 						{
 							for (Point test : p.getMouvementPossible())
 							{
-								if (test.getY() == positionRoi.y && test.getX() >= echec.get(0).getAttaquant().getEmplacement().x
+								if (test.getY() == positionRoi.y
+										&& test.getX() >= echec.get(0).getAttaquant().getEmplacement().x
 										&& test.getX() < positionRoi.x)
 								{
 									p.getMouvementJouable().add(test);
@@ -589,7 +598,8 @@ public class Plateau
 						{
 							for (Point test : p.getMouvementPossible())
 							{
-								if (test.getX() == positionRoi.x && test.getY() <= echec.get(0).getAttaquant().getEmplacement().y
+								if (test.getX() == positionRoi.x
+										&& test.getY() <= echec.get(0).getAttaquant().getEmplacement().y
 										&& test.getY() > positionRoi.y)
 								{
 									p.getMouvementJouable().add(test);
@@ -602,7 +612,8 @@ public class Plateau
 						{
 							for (Point test : p.getMouvementPossible())
 							{
-								if (test.getX() == positionRoi.x && test.getY() >= echec.get(0).getAttaquant().getEmplacement().y
+								if (test.getX() == positionRoi.x
+										&& test.getY() >= echec.get(0).getAttaquant().getEmplacement().y
 										&& test.getY() < positionRoi.y)
 								{
 									p.getMouvementJouable().add(test);
@@ -613,10 +624,9 @@ public class Plateau
 					case 5:
 						testage = new ArrayList<Point>();
 						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
-								j = echec.get(0).getAttaquant().getEmplacement().y; 
-								i > positionRoi.x; i--, j--)
+								j = echec.get(0).getAttaquant().getEmplacement().y; i > positionRoi.x; i--, j--)
 						{
-							testage.add(new Point(i,j));
+							testage.add(new Point(i, j));
 						}
 						for (Pieces p : noir.listePiece)
 						{
@@ -632,10 +642,9 @@ public class Plateau
 					case 8:
 						testage = new ArrayList<Point>();
 						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
-								j = echec.get(0).getAttaquant().getEmplacement().y; 
-								i < positionRoi.x; i++, j++)
+								j = echec.get(0).getAttaquant().getEmplacement().y; i < positionRoi.x; i++, j++)
 						{
-							testage.add(new Point(i,j));
+							testage.add(new Point(i, j));
 						}
 						for (Pieces p : noir.listePiece)
 						{
@@ -651,10 +660,9 @@ public class Plateau
 					case 6:
 						testage = new ArrayList<Point>();
 						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
-								j = echec.get(0).getAttaquant().getEmplacement().y; 
-								i > positionRoi.x; i--, j++)
+								j = echec.get(0).getAttaquant().getEmplacement().y; i > positionRoi.x; i--, j++)
 						{
-							testage.add(new Point(i,j));
+							testage.add(new Point(i, j));
 						}
 						for (Pieces p : noir.listePiece)
 						{
@@ -670,10 +678,9 @@ public class Plateau
 					case 7:
 						testage = new ArrayList<Point>();
 						for (int i = echec.get(0).getAttaquant().getEmplacement().x,
-								j = echec.get(0).getAttaquant().getEmplacement().y; 
-								i < positionRoi.x; i++, j--)
+								j = echec.get(0).getAttaquant().getEmplacement().y; i < positionRoi.x; i++, j--)
 						{
-							testage.add(new Point(i,j));
+							testage.add(new Point(i, j));
 						}
 						for (Pieces p : noir.listePiece)
 						{
@@ -690,11 +697,11 @@ public class Plateau
 			}
 
 		}
-		if(equipe)
+		if (equipe)
 		{
-			for(Point p : blanc.getRoi().getMouvementPossible())
+			for (Point p : blanc.getRoi().getMouvementPossible())
 			{
-				if(!noir.getAttaquePossible().contains(p))
+				if (!noir.getAttaquePossible().contains(p))
 				{
 					blanc.getRoi().getMouvementJouable().add(p);
 				}
@@ -702,9 +709,9 @@ public class Plateau
 		}
 		else
 		{
-			for(Point p : noir.getRoi().getMouvementPossible())
+			for (Point p : noir.getRoi().getMouvementPossible())
 			{
-				if(!blanc.getAttaquePossible().contains(p))
+				if (!blanc.getAttaquePossible().contains(p))
 				{
 					noir.getRoi().getMouvementJouable().add(p);
 				}

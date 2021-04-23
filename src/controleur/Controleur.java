@@ -65,6 +65,11 @@ public class Controleur implements Initializable
 	int indiceDuMouvement = 0;
 	private final ArrayList<Point> LISTPOINTROCK = new ArrayList<Point>()
 	{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		{
 			add(new Point(6, 0));
 			add(new Point(2, 0));
