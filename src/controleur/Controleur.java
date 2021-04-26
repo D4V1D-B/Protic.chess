@@ -307,6 +307,7 @@ public class Controleur implements Initializable
 
 	@FXML
 	private Button boutonMouvementAvant;
+	private Stage fenetreAide;
 
 	@FXML
 	void boutonTest(ActionEvent event)
@@ -426,12 +427,14 @@ public class Controleur implements Initializable
 	@FXML
 	void aideEchec(ActionEvent event)
 	{
-		Stage upgrade = new Stage();
-		upgrade.setTitle("Règle du jeu !");
-
-		VBox root = new VBox();
-		upgrade.setScene(new Scene(root));
-		upgrade.show();
+		if (fenetreAide.isShowing())
+		{
+			fenetreAide.toFront();
+		}
+		else
+		{
+			fenetreAide.show();
+		}
 	}
 
 	@Override
@@ -1415,5 +1418,11 @@ public class Controleur implements Initializable
 		boutonRevenirAuJeu.setDisable(b);
 		boutonMouvementArriere.setDisable(b);
 		boutonMouvementAvant.setDisable(b);
+	}
+
+	public void setFenetreAide(Stage aide)
+	{
+		this.fenetreAide = aide; 
+		
 	}
 }
