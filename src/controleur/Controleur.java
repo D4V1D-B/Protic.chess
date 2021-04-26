@@ -306,6 +306,12 @@ public class Controleur implements Initializable
 	private Button boutonMouvementAvant;
 
 	@FXML
+	void boutonTest(ActionEvent event)
+	{
+
+	}
+
+	@FXML
 	void revenirAuJeu(MouseEvent event)
 	{
 		placerPiecesString(placementActuel);
@@ -315,8 +321,7 @@ public class Controleur implements Initializable
 	@FXML
 	void chargerMouvement(MouseEvent event)
 	{
-		indiceDuMouvement = listDeMouvement.getSelectionModel()
-				.getSelectedIndex();
+		indiceDuMouvement = listDeMouvement.getSelectionModel().getSelectedIndex();
 		if (indiceDuMouvement != -1)
 		{
 
@@ -363,8 +368,7 @@ public class Controleur implements Initializable
 
 		try
 		{
-			BufferedWriter writer = new BufferedWriter(
-					new FileWriter(file, true));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 
 			writer.append(creerFen() + "\n");
 
@@ -383,8 +387,7 @@ public class Controleur implements Initializable
 	{
 		try
 		{
-			BufferedWriter writer = new BufferedWriter(
-					new FileWriter(file, false));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
 
 			writer.append("");
 
@@ -392,8 +395,7 @@ public class Controleur implements Initializable
 		}
 		catch (IOException e)
 		{
-			System.out
-					.println("Erreur dans lors de effacement des sauvegardes.");
+			System.out.println("Erreur dans lors de effacement des sauvegardes.");
 			e.printStackTrace();
 		}
 	}
@@ -525,16 +527,13 @@ public class Controleur implements Initializable
 					if (Character.isDigit(charDeLaPiece))
 					{
 						int caseVide = charDeLaPiece - 48;
-						emplacementSurLeBoard = emplacementSurLeBoard
-								+ caseVide;
+						emplacementSurLeBoard = emplacementSurLeBoard + caseVide;
 
 					}
 					else
 					{
-						ImageView paneActuel = (ImageView) allPanes[emplacementSurLeBoard]
-								.getChildren().get(0);
-						paneActuel.setImage(
-								association.get(String.valueOf(charDeLaPiece)));
+						ImageView paneActuel = (ImageView) allPanes[emplacementSurLeBoard].getChildren().get(0);
+						paneActuel.setImage(association.get(String.valueOf(charDeLaPiece)));
 
 						int nbr = 0;
 						int nbn = 0;
@@ -586,16 +585,14 @@ public class Controleur implements Initializable
 								if (nbr == 0)
 								{
 									r1 = new Tour("r", false,
-											pointSelonEmplacementDansLeTableau(
-													emplacementSurLeBoard));
+											pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 									noir.add(r1);
 									nbr++;
 								}
 								else
 								{
 									r2 = new Tour("r", false,
-											pointSelonEmplacementDansLeTableau(
-													emplacementSurLeBoard));
+											pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 									noir.add(r2);
 								}
 
@@ -604,16 +601,14 @@ public class Controleur implements Initializable
 								if (nbn == 0)
 								{
 									n1 = new Cavalier("n", false,
-											pointSelonEmplacementDansLeTableau(
-													emplacementSurLeBoard));
+											pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 									noir.add(n1);
 									nbn++;
 								}
 								else
 								{
 									n2 = new Cavalier("n", false,
-											pointSelonEmplacementDansLeTableau(
-													emplacementSurLeBoard));
+											pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 									noir.add(n2);
 								}
 
@@ -621,30 +616,22 @@ public class Controleur implements Initializable
 							case 'b':
 								if (nbb == 0)
 								{
-									b1 = new Fou("b", false,
-											pointSelonEmplacementDansLeTableau(
-													emplacementSurLeBoard));
+									b1 = new Fou("b", false, pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 									noir.add(b1);
 									nbn++;
 								}
 								else
 								{
-									b2 = new Fou("b", false,
-											pointSelonEmplacementDansLeTableau(
-													emplacementSurLeBoard));
+									b2 = new Fou("b", false, pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 									noir.add(b2);
 								}
 								break;
 							case 'k':
-								k = new Roi("k", false,
-										pointSelonEmplacementDansLeTableau(
-												emplacementSurLeBoard));
+								k = new Roi("k", false, pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 								noir.add(k);
 								break;
 							case 'q':
-								q = new Reine("q", false,
-										pointSelonEmplacementDansLeTableau(
-												emplacementSurLeBoard));
+								q = new Reine("q", false, pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 								noir.add(q);
 								break;
 							case 'p':
@@ -652,58 +639,50 @@ public class Controleur implements Initializable
 								{
 									case 0:
 										p1 = new Pion("p", false,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										noir.add(p1);
 										nbp++;
 										break;
 
 									case 1:
 										p2 = new Pion("p", false,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										noir.add(p2);
 										nbp++;
 										break;
 									case 2:
 										p3 = new Pion("p", false,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										noir.add(p3);
 										nbp++;
 										break;
 									case 3:
 										p4 = new Pion("p", false,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										noir.add(p4);
 										nbp++;
 										break;
 									case 4:
 										p5 = new Pion("p", false,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										noir.add(p5);
 										nbp++;
 										break;
 									case 5:
 										p6 = new Pion("p", false,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										noir.add(p6);
 										nbp++;
 										break;
 									case 6:
 										p7 = new Pion("p", false,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										noir.add(p7);
 										nbp++;
 										break;
 									case 7:
 										p8 = new Pion("p", false,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										noir.add(p8);
 										nbp++;
 										break;
@@ -713,17 +692,13 @@ public class Controleur implements Initializable
 							case 'R':
 								if (nbR == 0)
 								{
-									R1 = new Tour("R", true,
-											pointSelonEmplacementDansLeTableau(
-													emplacementSurLeBoard));
+									R1 = new Tour("R", true, pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 									blanc.add(R1);
 									nbR++;
 								}
 								else
 								{
-									R2 = new Tour("R", true,
-											pointSelonEmplacementDansLeTableau(
-													emplacementSurLeBoard));
+									R2 = new Tour("R", true, pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 									blanc.add(R2);
 								}
 								break;
@@ -731,16 +706,14 @@ public class Controleur implements Initializable
 								if (nbN == 0)
 								{
 									N1 = new Cavalier("N", true,
-											pointSelonEmplacementDansLeTableau(
-													emplacementSurLeBoard));
+											pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 									blanc.add(N1);
 									nbN++;
 								}
 								else
 								{
 									N2 = new Cavalier("N", true,
-											pointSelonEmplacementDansLeTableau(
-													emplacementSurLeBoard));
+											pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 									blanc.add(N2);
 
 								}
@@ -749,30 +722,22 @@ public class Controleur implements Initializable
 							case 'B':
 								if (nbB == 0)
 								{
-									B1 = new Fou("B", true,
-											pointSelonEmplacementDansLeTableau(
-													emplacementSurLeBoard));
+									B1 = new Fou("B", true, pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 									blanc.add(B1);
 									nbB++;
 								}
 								else
 								{
-									B2 = new Fou("B", true,
-											pointSelonEmplacementDansLeTableau(
-													emplacementSurLeBoard));
+									B2 = new Fou("B", true, pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 									blanc.add(B2);
 								}
 								break;
 							case 'K':
-								K = new Roi("K", true,
-										pointSelonEmplacementDansLeTableau(
-												emplacementSurLeBoard));
+								K = new Roi("K", true, pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 								blanc.add(K);
 								break;
 							case 'Q':
-								Q = new Reine("Q", true,
-										pointSelonEmplacementDansLeTableau(
-												emplacementSurLeBoard));
+								Q = new Reine("Q", true, pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 								blanc.add(Q);
 								break;
 							case 'P':
@@ -780,8 +745,7 @@ public class Controleur implements Initializable
 								{
 									case 0:
 										P1 = new Pion("P", true,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										blanc.add(P1);
 										nbP++;
 
@@ -789,56 +753,49 @@ public class Controleur implements Initializable
 
 									case 1:
 										P2 = new Pion("P", true,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										blanc.add(P2);
 										nbP++;
 
 										break;
 									case 2:
 										P3 = new Pion("P", true,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										blanc.add(P3);
 										nbP++;
 
 										break;
 									case 3:
 										P4 = new Pion("P", true,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										blanc.add(P4);
 										nbP++;
 
 										break;
 									case 4:
 										P5 = new Pion("P", true,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										blanc.add(P5);
 										nbP++;
 
 										break;
 									case 5:
 										P6 = new Pion("P", true,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										blanc.add(P6);
 										nbP++;
 
 										break;
 									case 6:
 										P7 = new Pion("P", true,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										blanc.add(P7);
 										nbP++;
 
 										break;
 									case 7:
 										P8 = new Pion("P", true,
-												pointSelonEmplacementDansLeTableau(
-														emplacementSurLeBoard));
+												pointSelonEmplacementDansLeTableau(emplacementSurLeBoard));
 										blanc.add(P8);
 										nbP++;
 
@@ -874,10 +831,8 @@ public class Controleur implements Initializable
 		if (tourJoueur == false)
 		{
 			String position = bot.jouerBotTest(this.plateau);
-			Point pointFinale = new Point((position.charAt(4) - 48),
-					(position.charAt(5) - 48));
-			Point pointInitiale = new Point((position.charAt(0) - 48),
-					(position.charAt(2) - 48));
+			Point pointFinale = new Point((position.charAt(4) - 48), (position.charAt(5) - 48));
+			Point pointInitiale = new Point((position.charAt(0) - 48), (position.charAt(2) - 48));
 			Pane paneFinale = null;
 			for (int i = 0; i < allPanes.length; i++)
 			{
@@ -913,29 +868,23 @@ public class Controleur implements Initializable
 
 			if (pieceSelect == null)
 			{
-				paneClick.setStyle(
-						"-fx-background-color:gold; -fx-border-color: black");
-				pieceSelect = plateau
-						.trouverPieces(rechercheCoordonnee(paneClick.getId()));
+				paneClick.setStyle("-fx-background-color:gold; -fx-border-color: black");
+				pieceSelect = plateau.trouverPieces(rechercheCoordonnee(paneClick.getId()));
 				paneSelect = paneClick;
 
 				if (pieceSelect != null && pieceSelect.isWhite() == tourJoueur)
 				{
-					paneSelect.setStyle(
-							"-fx-background-color:deeppink; -fx-border-color: black");
-					ArrayList<Point> tableau = pieceSelect
-							.getMouvementJouable();
+					paneSelect.setStyle("-fx-background-color:deeppink; -fx-border-color: black");
+					ArrayList<Point> tableau = pieceSelect.getMouvementJouable();
 
 					for (int i = 0; i < tableau.size(); i++)
 					{
 						listeCercle.add(new Circle(37, 37, 10, Color.GREY));
 						for (int j = 0; j < tableauPane.length; j++)
 						{
-							if (tableauPane[j].getId()
-									.equals(recherchePane(tableau.get(i))))
+							if (tableauPane[j].getId().equals(recherchePane(tableau.get(i))))
 							{
-								tableauPane[j].getChildren()
-										.add(listeCercle.get(i));
+								tableauPane[j].getChildren().add(listeCercle.get(i));
 							}
 						}
 					}
@@ -945,18 +894,17 @@ public class Controleur implements Initializable
 			else
 			{
 
-				if (pieceSelect.getMouvementJouable()
-						.contains(rechercheCoordonnee(paneClick.getId()))
+				if (pieceSelect.getMouvementJouable().contains(rechercheCoordonnee(paneClick.getId()))
 						&& pieceSelect.isWhite() == tourJoueur)
 				{
 
 					deplacer(pieceSelect, paneClick);
-					
-					if(tourJoueur)
+
+					if (tourJoueur)
 					{
-						if(plateau.getEchecMathNoir())
+						if (plateau.getEchecMathNoir())
 						{
-							if(plateau.getEchecNoir())
+							if (plateau.getEchecNoir())
 							{
 								afficherFinDePartie("Les blancs ont gagné! Félicitation!");
 							}
@@ -966,11 +914,11 @@ public class Controleur implements Initializable
 							}
 						}
 					}
-					if(tourJoueur)
+					if (tourJoueur)
 					{
-						if(plateau.getEchecMathBlanc())
+						if (plateau.getEchecMathBlanc())
 						{
-							if(plateau.getEchecBlanc())
+							if (plateau.getEchecBlanc())
 							{
 								afficherFinDePartie("Les blancs ont gagné! Félicitation!");
 							}
@@ -980,7 +928,7 @@ public class Controleur implements Initializable
 							}
 						}
 					}
-					
+
 					tourJoueur = !tourJoueur;
 					paneSelect = null;
 					pieceSelect = null;
@@ -1000,12 +948,10 @@ public class Controleur implements Initializable
 	{
 		pieceSelect.setEmplacement(rechercheCoordonnee(paneClick.getId()));
 
-		if (pieceSelect.getClass().toString().contains("Roi")
-				&& !((Roi) pieceSelect).isaBouger() && LISTPOINTROCK
-						.contains(rechercheCoordonnee(paneClick.getId())))
+		if (pieceSelect.getClass().toString().contains("Roi") && !((Roi) pieceSelect).isaBouger()
+				&& LISTPOINTROCK.contains(rechercheCoordonnee(paneClick.getId())))
 		{
-			Point rockValide = plateau
-					.refreshDeplacementRock(((Roi) pieceSelect));
+			Point rockValide = plateau.refreshDeplacementRock(((Roi) pieceSelect));
 			if (rockValide != null)
 			{
 				deplacerImage(paneClick, paneSelect, pieceSelect);
@@ -1015,22 +961,18 @@ public class Controleur implements Initializable
 		}
 		else
 			if (pieceSelect.getClass().toString().contains("Pion")
-					&& pieceSelect.getEmplacement().x != rechercheCoordonnee(
-							paneSelect.getId()).x
-					&& plateau.trouverPieces(
-							pieceSelect.getEmplacement()) == null)
+					&& pieceSelect.getEmplacement().x != rechercheCoordonnee(paneSelect.getId()).x
+					&& plateau.trouverPieces(pieceSelect.getEmplacement()) == null)
 			{
 				deplacerProg(pieceSelect, paneClick);
 				deplacerImage(paneClick, paneSelect, pieceSelect);
 				if (pieceSelect.isWhite())
 				{
-					SupprimerImage(new Point(pieceSelect.getEmplacement().x,
-							pieceSelect.getEmplacement().y - 1));
+					SupprimerImage(new Point(pieceSelect.getEmplacement().x, pieceSelect.getEmplacement().y - 1));
 				}
 				else
 				{
-					SupprimerImage(new Point(pieceSelect.getEmplacement().x,
-							pieceSelect.getEmplacement().y + 1));
+					SupprimerImage(new Point(pieceSelect.getEmplacement().x, pieceSelect.getEmplacement().y + 1));
 				}
 				ajouterTableView(pieceSelect, paneClick.getId());
 			}
@@ -1051,10 +993,8 @@ public class Controleur implements Initializable
 					}
 			}
 
-		if ((pieceSelect.getNom().equals("P")
-				&& rechercheCoordonnee(paneClick.getId()).y == 7)
-				|| (pieceSelect.getNom().equals("p")
-						&& rechercheCoordonnee(paneClick.getId()).y == 0))
+		if ((pieceSelect.getNom().equals("P") && rechercheCoordonnee(paneClick.getId()).y == 7)
+				|| (pieceSelect.getNom().equals("p") && rechercheCoordonnee(paneClick.getId()).y == 0))
 		{
 			afficherPionUgrade(pieceSelect.isWhite(), paneClick);
 		}
@@ -1082,29 +1022,24 @@ public class Controleur implements Initializable
 			else
 				if (emplacement.equals(new Point(3, 7)))
 				{
-					deplacerImage(d8, a8,
-							new Tour("r", false, new Point(3, 0)));
+					deplacerImage(d8, a8, new Tour("r", false, new Point(3, 0)));
 				}
 				else
 					if (emplacement.equals(new Point(5, 7)))
 					{
-						deplacerImage(f8, h8,
-								new Tour("r", false, new Point(3, 0)));
+						deplacerImage(f8, h8, new Tour("r", false, new Point(3, 0)));
 					}
 
 	}
 
-	private void deplacerImage(Pane paneArriver, Pane paneDepart,
-			Pieces pieceADeplacer)
+	private void deplacerImage(Pane paneArriver, Pane paneDepart, Pieces pieceADeplacer)
 	{
 		resetCouleur();
 		ImageView emplacementFin = (ImageView) paneArriver.getChildren().get(0);
 		emplacementFin.setImage(association.get(pieceADeplacer.getNom()));
-		ImageView emplacementDepart = (ImageView) paneDepart.getChildren()
-				.get(0);
+		ImageView emplacementDepart = (ImageView) paneDepart.getChildren().get(0);
 		emplacementDepart.setImage(null);
-		paneSelect
-				.setStyle("-fx-background-color:pink; -fx-border-color: black");
+		paneSelect.setStyle("-fx-background-color:pink; -fx-border-color: black");
 	}
 
 	private void SupprimerImage(Point emplacementASupprimer)
@@ -1112,11 +1047,9 @@ public class Controleur implements Initializable
 		Pane tableauPane[] = allPane();
 		for (int j = 0; j < tableauPane.length; j++)
 		{
-			if (tableauPane[j].getId()
-					.equals(recherchePane(emplacementASupprimer)))
+			if (tableauPane[j].getId().equals(recherchePane(emplacementASupprimer)))
 			{
-				ImageView emplacementDepart = (ImageView) tableauPane[j]
-						.getChildren().get(0);
+				ImageView emplacementDepart = (ImageView) tableauPane[j].getChildren().get(0);
 				emplacementDepart.setImage(null);
 			}
 		}
@@ -1172,13 +1105,11 @@ public class Controleur implements Initializable
 		{
 			if (i % 2 == 0)
 			{
-				tableauPane[i].setStyle(
-						"-fx-background-color:brown; -fx-border-color: black");
+				tableauPane[i].setStyle("-fx-background-color:brown; -fx-border-color: black");
 			}
 			else
 			{
-				tableauPane[i].setStyle(
-						"-fx-background-color:cornsilk; -fx-border-color: black");
+				tableauPane[i].setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
 			}
 		}
 	}
@@ -1186,10 +1117,9 @@ public class Controleur implements Initializable
 	private Pane[] allPane()
 	{
 		Pane tableauAllPane[] =
-		{ a1, a2, a3, a4, a5, a6, a7, a8, b8, b7, b6, b5, b4, b3, b2, b1, c1,
-				c2, c3, c4, c5, c6, c7, c8, d8, d7, d6, d5, d4, d3, d2, d1, e1,
-				e2, e3, e4, e5, e6, e7, e8, f8, f7, f6, f5, f4, f3, f2, f1, g1,
-				g2, g3, g4, g5, g6, g7, g8, h8, h7, h6, h5, h4, h3, h2, h1 };
+		{ a1, a2, a3, a4, a5, a6, a7, a8, b8, b7, b6, b5, b4, b3, b2, b1, c1, c2, c3, c4, c5, c6, c7, c8, d8, d7, d6,
+				d5, d4, d3, d2, d1, e1, e2, e3, e4, e5, e6, e7, e8, f8, f7, f6, f5, f4, f3, f2, f1, g1, g2, g3, g4, g5,
+				g6, g7, g8, h8, h7, h6, h5, h4, h3, h2, h1 };
 		return tableauAllPane;
 
 	}
@@ -1235,8 +1165,7 @@ public class Controleur implements Initializable
 	{
 		if (positionFinale.equals("Castle"))
 		{
-			Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
-					new SimpleStringProperty(positionFinale),
+			Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()), new SimpleStringProperty(positionFinale),
 					new SimpleStringProperty(creerFen()), p.isWhite());
 
 			list.add(m.toStringCastle());
@@ -1244,8 +1173,7 @@ public class Controleur implements Initializable
 		}
 		else
 		{
-			Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()),
-					new SimpleStringProperty(positionFinale),
+			Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()), new SimpleStringProperty(positionFinale),
 					new SimpleStringProperty(creerFen()), p.isWhite());
 
 			list.add(m.toString());
@@ -1294,8 +1222,7 @@ public class Controleur implements Initializable
 			tourImage.setImage(association.get("r"));
 		}
 
-		images.getChildren().addAll(reineImage, tourImage, cavalierImage,
-				fouImage);
+		images.getChildren().addAll(reineImage, tourImage, cavalierImage, fouImage);
 		boutons.getChildren().addAll(reine, tour, cavalier, fou);
 		boutons.setPadding(new Insets(7));
 		images.setSpacing(5);
@@ -1306,27 +1233,23 @@ public class Controleur implements Initializable
 		ImageView imageNouvelle = (ImageView) paneClick.getChildren().get(0);
 		reine.setOnAction((a) -> {
 			imageNouvelle.setImage(reineImage.getImage());
-			plateau.remplacerPion(new Reine("Q", equipe,
-					rechercheCoordonnee(paneClick.getId())));
+			plateau.remplacerPion(new Reine("Q", equipe, rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 
 		fou.setOnAction((a) -> {
 			imageNouvelle.setImage(fouImage.getImage());
-			plateau.remplacerPion(new Fou("B", equipe,
-					rechercheCoordonnee(paneClick.getId())));
+			plateau.remplacerPion(new Fou("B", equipe, rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 		tour.setOnAction((a) -> {
 			imageNouvelle.setImage(tourImage.getImage());
-			plateau.remplacerPion(new Tour("R", equipe,
-					rechercheCoordonnee(paneClick.getId())));
+			plateau.remplacerPion(new Tour("R", equipe, rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 		cavalier.setOnAction((a) -> {
 			imageNouvelle.setImage(cavalierImage.getImage());
-			plateau.remplacerPion(new Cavalier("N", equipe,
-					rechercheCoordonnee(paneClick.getId())));
+			plateau.remplacerPion(new Cavalier("N", equipe, rechercheCoordonnee(paneClick.getId())));
 			upgrade.close();
 		});
 	}
@@ -1369,13 +1292,10 @@ public class Controleur implements Initializable
 			}
 			if (ImageDansLePane.getImage() == null)
 			{
-				if (Character
-						.isDigit(plateauFen.charAt(plateauFen.length() - 1)))
+				if (Character.isDigit(plateauFen.charAt(plateauFen.length() - 1)))
 				{
-					nombreDEspace = Character.getNumericValue(
-							plateauFen.charAt(plateauFen.length() - 1)) + 1;
-					plateauFen = plateauFen.substring(0,
-							plateauFen.length() - 1);
+					nombreDEspace = Character.getNumericValue(plateauFen.charAt(plateauFen.length() - 1)) + 1;
+					plateauFen = plateauFen.substring(0, plateauFen.length() - 1);
 					plateauFen += nombreDEspace;
 
 				}
@@ -1387,11 +1307,8 @@ public class Controleur implements Initializable
 			else
 			{
 
-				if (plateau.trouverPieces(
-						rechercheCoordonnee(pane.getId())) != null)
-					plateauFen += plateau
-							.trouverPieces(rechercheCoordonnee(pane.getId()))
-							.getNom();
+				if (plateau.trouverPieces(rechercheCoordonnee(pane.getId())) != null)
+					plateauFen += plateau.trouverPieces(rechercheCoordonnee(pane.getId())).getNom();
 			}
 			entre0et7++;
 
@@ -1449,8 +1366,7 @@ public class Controleur implements Initializable
 		charger.setOnAction((a) -> {
 
 			Optional<String> partieSelectionner = Optional
-					.ofNullable(listViewAnciennesParties.getSelectionModel()
-							.getSelectedItem());
+					.ofNullable(listViewAnciennesParties.getSelectionModel().getSelectedItem());
 
 			if (partieSelectionner.isPresent())
 			{
