@@ -32,5 +32,6 @@
          </font>
       </Label>
       <Label fx:id="bulleInformation" layoutX="911.0" layoutY="93.0" prefHeight="283.0" prefWidth="275.0" textAlignment="CENTER" />
+      <Button layoutX="939.0" layoutY="606.0" mnemonicParsing="false" onMouseClicked="#regleDuJeu" prefHeight="27.0" prefWidth="219.0" style="-fx-background-color: null; -fx-border-color: black;" text="Règle du jeu" />
    </children>
 </AnchorPane>
