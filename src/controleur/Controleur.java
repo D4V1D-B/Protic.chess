@@ -3,6 +3,7 @@ package controleur;
 import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -36,6 +37,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -308,7 +311,6 @@ public class Controleur implements Initializable
 	@FXML
 	void boutonTest(ActionEvent event)
 	{
-
 	}
 
 	@FXML
