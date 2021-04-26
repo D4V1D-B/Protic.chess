@@ -49,6 +49,7 @@ import modele.Pieces;
 import modele.Pion;
 import modele.Reine;
 import modele.Roi;
+import modele.SonFX;
 import modele.Tour;
 
 public class Controleur implements Initializable
@@ -312,6 +313,8 @@ public class Controleur implements Initializable
 	@FXML
 	void boutonTest(ActionEvent event)
 	{
+		SonFX son = new SonFX();
+		son.jouerSon(SonFX.CAPTURE);
 	}
 
 	@FXML
