@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="683.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurAide">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="683.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurAide">
    <children>
       <ImageView fx:id="image" fitHeight="660.0" fitWidth="903.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -22,16 +22,15 @@
       <Button layoutX="325.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#point" prefHeight="51.0" prefWidth="51.0" style="-fx-background-color: null; -fx-border-color: black;" />
       <Button layoutX="327.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#pion" prefHeight="51.0" prefWidth="51.0" style="-fx-background-color: null; -fx-border-color: black;" />
       <Button layoutX="663.0" layoutY="115.0" mnemonicParsing="false" onMouseClicked="#mouvement" prefHeight="172.0" prefWidth="219.0" style="-fx-background-color: null; -fx-border-color: black;" />
-      <Button layoutX="663.0" layoutY="380.0" mnemonicParsing="false" onContextMenuRequested="#recommencer" prefHeight="27.0" prefWidth="219.0" style="-fx-background-color: null; -fx-border-color: black;" />
+      <Button layoutX="663.0" layoutY="380.0" mnemonicParsing="false" onMouseClicked="#recommencer" prefHeight="27.0" prefWidth="219.0" style="-fx-background-color: null; -fx-border-color: black;" />
       <Button layoutX="663.0" layoutY="428.0" mnemonicParsing="false" onMouseClicked="#charger" prefHeight="27.0" prefWidth="219.0" style="-fx-background-color: null; -fx-border-color: black;" />
       <Button layoutX="663.0" layoutY="472.0" mnemonicParsing="false" onMouseClicked="#precedentSuivant" prefHeight="27.0" prefWidth="219.0" style="-fx-background-color: null; -fx-border-color: black;" />
       <Button layoutX="663.0" layoutY="523.0" mnemonicParsing="false" onMouseClicked="#revenir" prefHeight="27.0" prefWidth="219.0" style="-fx-background-color: null; -fx-border-color: black;" />
-      <Label layoutX="911.0" layoutY="13.0" prefHeight="80.0" prefWidth="275.0" style="-fx-border-color: black;" text="Cliquer sur les carrés noir pour obtenir de l'informations" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="bulleInformation" layoutX="911.0" layoutY="66.0" prefHeight="297.0" prefWidth="275.0" style="-fx-border-color: black;" text="Cliquer sur les carrés noir pour obtenir de l'informations" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="bulleInformation" layoutX="911.0" layoutY="93.0" prefHeight="283.0" prefWidth="275.0" textAlignment="CENTER" />
       <Button layoutX="939.0" layoutY="606.0" mnemonicParsing="false" onMouseClicked="#regleDuJeu" prefHeight="27.0" prefWidth="219.0" style="-fx-background-color: null; -fx-border-color: black;" text="Règle du jeu" />
    </children>
 </AnchorPane>
