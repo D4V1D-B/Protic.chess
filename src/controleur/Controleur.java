@@ -312,7 +312,7 @@ public class Controleur implements Initializable
 	@FXML
 	void boutonTest(ActionEvent event)
 	{
-		
+
 	}
 
 	@FXML
@@ -479,6 +479,7 @@ public class Controleur implements Initializable
 		resetCouleur();
 		tourJoueur = true;
 		setLabelTourCouleur(labelTourCouleur);
+		jouerSon("/son/Game_start.mp3");
 	}
 
 	public void placerPiecesString(String placement)
@@ -903,7 +904,7 @@ public class Controleur implements Initializable
 				if (pieceSelect.getMouvementJouable().contains(rechercheCoordonnee(paneClick.getId()))
 						&& pieceSelect.isWhite() == tourJoueur)
 				{
-
+					jouerSon("/son/Move.mp3");
 					deplacer(pieceSelect, paneClick);
 
 					if (tourJoueur)
@@ -912,7 +913,9 @@ public class Controleur implements Initializable
 						{
 							if (plateau.getEchecNoir())
 							{
+								jouerSon("/son/Checkmate.mp3");
 								afficherFinDePartie("Les blancs ont gagné! Félicitation!");
+
 							}
 							else
 							{
@@ -926,11 +929,15 @@ public class Controleur implements Initializable
 						{
 							if (plateau.getEchecBlanc())
 							{
+								jouerSon("/son/Checkmate.mp3");
 								afficherFinDePartie("Les blancs ont gagné! Félicitation!");
+
 							}
 							else
 							{
+								jouerSon("/son/Checkmate.mp3");
 								afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
+
 							}
 						}
 					}
@@ -1421,9 +1428,16 @@ public class Controleur implements Initializable
 		boutonMouvementAvant.setDisable(b);
 	}
 
+	public void jouerSon(String son)
+	{
+		Media sound = new Media(getClass().getResource(son).toExternalForm());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.play();
+	}
+
 	public void setFenetreAide(Stage aide)
 	{
-		this.fenetreAide = aide; 
-		
+		this.fenetreAide = aide;
+
 	}
 }
