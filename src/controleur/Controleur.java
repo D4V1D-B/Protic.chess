@@ -316,7 +316,14 @@ public class Controleur implements Initializable
 	@FXML
 	void boutonTest(ActionEvent event)
 	{
+		TextInputDialog inDialog = new TextInputDialog("p/P/p/P/p/P/p/p/");
+		inDialog.setTitle("Information demandée");
+		inDialog.setHeaderText("Entrer une Fen.");
+		inDialog.setContentText("Fen :");
 
+		Optional<String> textIn = inDialog.showAndWait();
+		
+		placerPiecesString(textIn.get());
 	}
 
 	@FXML
