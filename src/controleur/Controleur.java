@@ -1023,8 +1023,13 @@ public class Controleur implements Initializable
 	private void deplacerProg(Pieces pieces, Pane positionFinale)
 	{
 		// deplacement dans la prog
+<<<<<<< HEAD
 		pieces.setEmplacement(rechercheCoordonnee(paneSelect.getId()));
 		plateau.deplacementProg(rechercheCoordonnee(positionFinale.getId()), pieces);
+=======
+		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
+		plateau.deplacementProg(lastEmplacement, pieceSelect);
+>>>>>>> parent of 4a69284 (quelque changement)
 	}
 
 	private void deplacerTour(Point emplacement)
@@ -1369,11 +1374,19 @@ public class Controleur implements Initializable
 				s = reader.readLine();
 				if (s != null)
 				{
+<<<<<<< HEAD
 
 					entreNomEtFen = s.indexOf("*");
 					leNom = s.substring(0, entreNomEtFen);
 					laFen = s.substring(entreNomEtFen + 1, s.length());
 
+=======
+
+					entreNomEtFen = s.indexOf("*");
+					leNom = s.substring(0, entreNomEtFen);
+					laFen = s.substring(entreNomEtFen + 1, s.length());
+
+>>>>>>> parent of 4a69284 (quelque changement)
 					ListAnciennesParties.add(leNom + " (" + laFen + ")");
 				}
 			}
@@ -1445,6 +1458,7 @@ public class Controleur implements Initializable
 	}
 
 	private void jouerSon(String son)
+<<<<<<< HEAD
 	{
 		if (!CheckMenuItemSon.isSelected())
 		{
@@ -1471,6 +1485,32 @@ public class Controleur implements Initializable
 			}
 		});
 
+=======
+	{
+		if (!CheckMenuItemSon.isSelected())
+		{
+			Media sound = new Media(getClass().getResource(son).toExternalForm());
+			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+			mediaPlayer.play();
+		}
+
+	}
+
+	private void CheckMenuSon()
+	{
+		CheckMenuItemSon.setText("Désactiver le son");
+		CheckMenuItemSon.selectedProperty().addListener((a,o,n)->{
+			SimpleStringProperty ActiverPropertyString = new SimpleStringProperty("Activer le son");
+			SimpleStringProperty DesactiverPropertyString = new SimpleStringProperty("Désactiver le son");
+			if(a.getValue()) {
+				CheckMenuItemSon.textProperty().bind(ActiverPropertyString);
+			}
+			else {
+				CheckMenuItemSon.textProperty().bind(DesactiverPropertyString);
+			}
+		});
+		
+>>>>>>> parent of 4a69284 (quelque changement)
 	}
 
 	public void setFenetreAide(Stage aide)
