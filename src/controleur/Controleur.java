@@ -1411,7 +1411,7 @@ public class Controleur implements Initializable
 
 				placerPiecesString(partieSelectionner.get().substring(partieSelectionner.get().indexOf("(") + 1,
 						partieSelectionner.get().length() - 1) + "/");
-
+				tourJoueur = true;
 			}
 
 		});
@@ -1488,10 +1488,11 @@ public class Controleur implements Initializable
 		this.fenetreAide = aide;
 
 	}
-	
+
 	@FXML
-    void boutonTestNbrMove(ActionEvent event) {
+	void boutonTestNbrMove(ActionEvent event)
+	{
 		bot.setPlateau(plateau);
 		System.out.println(bot.MoveGenerationTest(2));
-    }
+	}
 }
