@@ -1447,6 +1447,7 @@ public class Controleur implements Initializable
 	
 	@FXML
     void boutonTestNbrMove(ActionEvent event) {
-		
+		bot.setPlateau(plateau);
+		System.out.println(bot.MoveGenerationTest(1));
     }
 }

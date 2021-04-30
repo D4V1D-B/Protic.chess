@@ -93,7 +93,7 @@ public class Plateau
 
 		deplacerPieces(pieces);
 
-		actualiserToutLesMouvementJouable(pieces.isWhite());
+		actualiserToutLesMouvementJouable(!pieces.isWhite());
 
 		if (pieces.getClass().toString().contains("Pion")
 				&& Math.abs(anciennePosition.y - pieces.getEmplacement().y) == 2)

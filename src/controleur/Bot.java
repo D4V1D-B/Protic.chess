@@ -101,8 +101,11 @@ public class Bot
 
 	{
 		ArrayList<Move> tousMoves = new ArrayList<Move>();
-
-		for (Pieces pieces : plateau.getNoir().getListePieces())
+		ArrayList<Pieces> touteslesPieces = new ArrayList<Pieces>();
+		touteslesPieces.addAll(plateau.getBlanc().getListePieces());
+		touteslesPieces.addAll(plateau.getNoir().getListePieces());
+		
+		for (Pieces pieces : touteslesPieces)
 		{
 			for (Point point : pieces.getMouvementJouable())
 			{
@@ -145,6 +148,11 @@ public class Bot
 
 			return nbmove;
 		}
+	}
+	
+	public void setPlateau(Plateau plateau)
+	{
+		this.plateau=plateau;
 	}
 }
 

@@ -445,7 +445,6 @@
                                  </padding>
                               </VBox>
                               <Button mnemonicParsing="false" onAction="#boutonTest" text="Test" />
-                              <Button mnemonicParsing="false" onAction="#boutonTestNbrMove" text="Test nbr move" />
                            </children>
                         </VBox>
                      </children>
