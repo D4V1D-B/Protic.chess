@@ -322,13 +322,8 @@ public class Controleur implements Initializable
 		inDialog.setContentText("Fen :");
 
 		Optional<String> textIn = inDialog.showAndWait();
-<<<<<<< HEAD
 		textIn.ifPresent(str -> placerPiecesString(textIn.get()));
-
-=======
-		
 		placerPiecesString(textIn.get());
->>>>>>> parent of 98a7039 (bug correction)
 	}
 
 	@FXML
