@@ -1462,10 +1462,10 @@ public class Controleur implements Initializable
 
 	private void CheckMenuSon()
 	{
+		CheckMenuItemSon.setText("Désactiver le son");
 		CheckMenuItemSon.selectedProperty().addListener((a,o,n)->{
 			SimpleStringProperty ActiverPropertyString = new SimpleStringProperty("Activer le son");
 			SimpleStringProperty DesactiverPropertyString = new SimpleStringProperty("Désactiver le son");
-//			Bindings.bindBidirectional()
 			if(a.getValue()) {
 				CheckMenuItemSon.textProperty().bind(ActiverPropertyString);
 			}
@@ -1473,7 +1473,6 @@ public class Controleur implements Initializable
 				CheckMenuItemSon.textProperty().bind(DesactiverPropertyString);
 			}
 		});
-		
 		
 	}
 
