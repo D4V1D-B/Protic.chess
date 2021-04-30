@@ -101,8 +101,11 @@ public class Bot
 
 	{
 		ArrayList<Move> tousMoves = new ArrayList<Move>();
-
-		for (Pieces pieces : plateau.getNoir().getListePieces())
+		ArrayList<Pieces> touteslesPieces = new ArrayList<Pieces>();
+		touteslesPieces.addAll(plateau.getBlanc().getListePieces());
+		touteslesPieces.addAll(plateau.getNoir().getListePieces());
+		
+		for (Pieces pieces : touteslesPieces)
 		{
 			for (Point point : pieces.getMouvementJouable())
 			{
@@ -124,9 +127,36 @@ public class Bot
 		return valeur;
 	}
 
+	public int MoveGenerationTest(int depth)
+	{
+		if (depth == 0)
+		{
+			return 1;
+		}
+		else
+		{
+			ArrayList<Move> tousMoves = generationMove();
+			int nbmove = 0;
+
+			for (Move move : tousMoves)
+			{
+				Point ancinennePosition = move.getPieces().getEmplacement();
+				Pieces manger = plateau.deplacementProg(move.getPieces(), move.getPoint());
+				nbmove += MoveGenerationTest(depth - 1);
+				plateau.unMakeMove(ancinennePosition, move.getPieces(), manger);
+			}
+
+			return nbmove;
+		}
+	}
+	
+	public void setPlateau(Plateau plateau)
+	{
+		this.plateau=plateau;
+	}
 }
 
-//
+
 // private int mininmum(int depth) {
 // int bestMovement = (int) Double.POSITIVE_INFINITY ;
 // return bestMovement;
