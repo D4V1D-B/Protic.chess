@@ -1317,6 +1317,7 @@ public class Controleur implements Initializable
 			}
 			if (ImageDansLePane.getImage() == null)
 			{
+			
 				if (Character.isDigit(plateauFen.charAt(plateauFen.length() - 1)))
 				{
 					nombreDEspace = Character.getNumericValue(plateauFen.charAt(plateauFen.length() - 1)) + 1;
@@ -1463,17 +1464,19 @@ public class Controleur implements Initializable
 	private void CheckMenuSon()
 	{
 		CheckMenuItemSon.setText("Désactiver le son");
-		CheckMenuItemSon.selectedProperty().addListener((a,o,n)->{
+		CheckMenuItemSon.selectedProperty().addListener((a, o, n) -> {
 			SimpleStringProperty ActiverPropertyString = new SimpleStringProperty("Activer le son");
 			SimpleStringProperty DesactiverPropertyString = new SimpleStringProperty("Désactiver le son");
-			if(a.getValue()) {
+			if (a.getValue())
+			{
 				CheckMenuItemSon.textProperty().bind(ActiverPropertyString);
 			}
-			else {
+			else
+			{
 				CheckMenuItemSon.textProperty().bind(DesactiverPropertyString);
 			}
 		});
-		
+
 	}
 
 	public void setFenetreAide(Stage aide)
