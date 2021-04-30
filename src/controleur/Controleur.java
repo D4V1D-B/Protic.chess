@@ -88,6 +88,9 @@ public class Controleur implements Initializable
 	private CheckMenuItem CheckAI;
 
 	@FXML
+	private CheckMenuItem CheckMenuItemSon;
+
+	@FXML
 	private Pane a8;
 
 	@FXML
@@ -443,7 +446,7 @@ public class Controleur implements Initializable
 	{
 		resetTotal();
 		boutonDisable(true);
-
+		CheckMenuSon();
 	}
 
 	public void setLabelTourCouleur(Label labelTourCouleur)
@@ -1428,11 +1431,32 @@ public class Controleur implements Initializable
 		boutonMouvementAvant.setDisable(b);
 	}
 
-	public void jouerSon(String son)
+	private void jouerSon(String son)
 	{
-		Media sound = new Media(getClass().getResource(son).toExternalForm());
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.play();
+		if (!CheckMenuItemSon.isSelected())
+		{
+			Media sound = new Media(getClass().getResource(son).toExternalForm());
+			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+			mediaPlayer.play();
+		}
+
+	}
+
+	private void CheckMenuSon()
+	{
+		CheckMenuItemSon.selectedProperty().addListener((a,o,n)->{
+			SimpleStringProperty ActiverPropertyString = new SimpleStringProperty("Activer le son");
+			SimpleStringProperty DesactiverPropertyString = new SimpleStringProperty("Désactiver le son");
+//			Bindings.bindBidirectional()
+			if(a.getValue()) {
+				CheckMenuItemSon.textProperty().bind(ActiverPropertyString);
+			}
+			else {
+				CheckMenuItemSon.textProperty().bind(DesactiverPropertyString);
+			}
+		});
+		
+		
 	}
 
 	public void setFenetreAide(Stage aide)
