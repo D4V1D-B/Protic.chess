@@ -86,6 +86,9 @@ public class Controleur implements Initializable
 
 	@FXML
 	private CheckMenuItem CheckAI;
+	
+    @FXML
+    private CheckMenuItem CheckMenuItemSon;
 
 	@FXML
 	private Pane a8;
@@ -1417,11 +1420,11 @@ public class Controleur implements Initializable
 
 	public void jouerSon(String son)
 	{
-<<<<<<< Updated upstream
+
 		Media sound = new Media(getClass().getResource(son).toExternalForm());
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.play();
-=======
+
 		CheckMenuItemSon.setText("Désactiver le son");
 		CheckMenuItemSon.selectedProperty().addListener((a,o,n)->{
 			SimpleStringProperty ActiverPropertyString = new SimpleStringProperty("Son désactivée");
@@ -1433,8 +1436,7 @@ public class Controleur implements Initializable
 				CheckMenuItemSon.textProperty().bind(DesactiverPropertyString);
 			}
 		});
-		
->>>>>>> Stashed changes
+
 	}
 
 	public void setFenetreAide(Stage aide)
