@@ -30,6 +30,7 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -86,6 +87,9 @@ public class Controleur implements Initializable
 
 	@FXML
 	private CheckMenuItem CheckAI;
+
+	@FXML
+	private CheckMenuItem CheckMenuItemSon;
 
 	@FXML
 	private Pane a8;
@@ -370,20 +374,28 @@ public class Controleur implements Initializable
 	void saveGame(ActionEvent event)
 	{
 
-		try
+		TextInputDialog inDialog = new TextInputDialog("");
+		inDialog.setTitle("Information demandée");
+		inDialog.setHeaderText("Entrer le nom de la partie.");
+		inDialog.setContentText("Le nom de la partie est :");
+
+		Optional<String> textIn = inDialog.showAndWait();
+		if (textIn.isPresent())
 		{
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+			try
+			{
+				BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 
-			writer.append(creerFen() + "\n");
+				writer.append(textIn.get() + "*" + creerFen() + "\n");
 
-			writer.close();
+				writer.close();
+			}
+			catch (IOException e)
+			{
+				System.out.println("Erreur dans la sauvegarde!");
+				e.printStackTrace();
+			}
 		}
-		catch (IOException e)
-		{
-			System.out.println("Erreur dans la sauvegarde!");
-			e.printStackTrace();
-		}
-
 	}
 
 	@FXML
@@ -443,7 +455,7 @@ public class Controleur implements Initializable
 	{
 		resetTotal();
 		boutonDisable(true);
-
+		CheckMenuSon();
 	}
 
 	public void setLabelTourCouleur(Label labelTourCouleur)
@@ -1318,7 +1330,9 @@ public class Controleur implements Initializable
 
 	private void chargerUnePartie()
 	{
-
+		int entreNomEtFen;
+		String leNom;
+		String laFen;
 		Stage lesAnciennesParties = new Stage();
 		lesAnciennesParties.setTitle("Sauvegardes");
 
@@ -1340,14 +1354,20 @@ public class Controleur implements Initializable
 		try
 		{
 			BufferedReader reader = new BufferedReader(new FileReader(file));
-			String s = reader.readLine();
+			String s = "0";
 
 			while (s != null)
 			{
 				s = reader.readLine();
 				if (s != null)
-					ListAnciennesParties.add(s);
+				{
 
+					entreNomEtFen = s.indexOf("*");
+					leNom = s.substring(0, entreNomEtFen);
+					laFen = s.substring(entreNomEtFen + 1, s.length());
+
+					ListAnciennesParties.add(leNom + " (" + laFen + ")");
+				}
 			}
 
 			reader.close();
@@ -1371,7 +1391,8 @@ public class Controleur implements Initializable
 			if (partieSelectionner.isPresent())
 			{
 
-				placerPiecesString(partieSelectionner.get() + "/");
+				placerPiecesString(partieSelectionner.get().substring(partieSelectionner.get().indexOf("(") + 1,
+						partieSelectionner.get().length() - 1) + "/");
 
 			}
 
@@ -1415,11 +1436,31 @@ public class Controleur implements Initializable
 		boutonMouvementAvant.setDisable(b);
 	}
 
-	public void jouerSon(String son)
+	private void jouerSon(String son)
 	{
-		Media sound = new Media(getClass().getResource(son).toExternalForm());
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.play();
+		if (!CheckMenuItemSon.isSelected())
+		{
+			Media sound = new Media(getClass().getResource(son).toExternalForm());
+			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+			mediaPlayer.play();
+		}
+
+	}
+
+	private void CheckMenuSon()
+	{
+		CheckMenuItemSon.setText("Désactiver le son");
+		CheckMenuItemSon.selectedProperty().addListener((a,o,n)->{
+			SimpleStringProperty ActiverPropertyString = new SimpleStringProperty("Activer le son");
+			SimpleStringProperty DesactiverPropertyString = new SimpleStringProperty("Désactiver le son");
+			if(a.getValue()) {
+				CheckMenuItemSon.textProperty().bind(ActiverPropertyString);
+			}
+			else {
+				CheckMenuItemSon.textProperty().bind(DesactiverPropertyString);
+			}
+		});
+		
 	}
 
 	public void setFenetreAide(Stage aide)
