@@ -2,8 +2,6 @@ package controleur;
 
 import java.awt.Point;
 import java.util.ArrayList;
-
-import controleur.Plateau.Equipe;
 import modele.Pieces;
 import modele.Tour;
 import modele.triplets;
@@ -40,12 +38,12 @@ public class Plateau
 
 	public boolean getEchecMathBlanc()
 	{
-		return blanc.isEchecEtMath();
+		return blanc.isEchec()&&blanc.getMouvementJouable().isEmpty();
 	}
 
 	public boolean getEchecMathNoir()
 	{
-		return noir.isEchecEtMath();
+		return noir.isEchec()&&noir.getMouvementJouable().isEmpty();
 	}
 
 	public boolean partieNulle()
@@ -66,14 +64,10 @@ public class Plateau
 		return plateau;
 	}
 
-	public void deplacementProg(Point anciennePosition, Pieces piecesDeplacer)
+	public Pieces deplacementProg(Pieces pieces, Point newEmplacement)
 	{
-		// On enleve la pieces de son ancien deplacement
-		plateau[anciennePosition.x][anciennePosition.y] = null;
-		deplacerPieces(piecesDeplacer);
-
-		actualiserToutLesMouvementJouable(piecesDeplacer.isWhite());
-		pieces.setEmplacement(piecesDeplacer);
+		Point anciennePosition = pieces.getEmplacement();
+		pieces.setEmplacement(newEmplacement);
 		Pieces manger = deplacerPieces(pieces);
 
 		actualiserToutLesMouvementJouable(pieces.isWhite());
@@ -258,6 +252,8 @@ public class Plateau
 		noir.clearMouvementJouable();
 		blanc.mouvementJouable.clear();
 		noir.mouvementJouable.clear();
+		blanc.setEchec(false);
+		noir.setEchec(false);
 		Point positionRoiNoir = noir.getPositionRoi();
 
 		for (Pieces p : blanc.listePiece)
@@ -478,6 +474,7 @@ public class Plateau
 		{
 				equipeDefense.clearMouvementJouable();
 				ArrayList<Point> testage;
+				equipeDefense.setEchec(true);
 				switch (echec.get(0).getState())
 				{
 					case 0:
@@ -633,15 +630,9 @@ public class Plateau
 		else if(!echec.isEmpty())
 		{
 			equipeDefense.clearMouvementJouable();
-			equipeDefense.setEchecEtMath(true);
+			equipeDefense.setEchec(true);
 		}
 		
-		for(Point p : trouverPieces(equipeDefense.getPositionRoi()).getMouvementPossible())
-		else if (!echec.isEmpty())
-			{
-				equipeDefense.clearMouvementJouable();
-				equipeDefense.setEchec(true);
-			}
 
 		if(!trouverPieces(equipeDefense.getPositionRoi2()).getMouvementPossible().isEmpty())
 		for (Point p : trouverPieces(equipeDefense.getPositionRoi()).getMouvementPossible())
@@ -701,7 +692,7 @@ public class Plateau
 		private ArrayList<Point> mouvementJouable;
 		private ArrayList<Pieces> listePiece;
 		private Point positionRoi = new Point(-1, -1);
-		boolean echecEtMath = false;
+		boolean echec = false;
 
 		public Equipe(ArrayList<Pieces> pieces)
 		{
@@ -802,14 +793,14 @@ public class Plateau
 			positionRoi = setPositionRoi;
 		}
 
-		public boolean isEchecEtMath()
+		public boolean isEchec()
 		{
-			return echecEtMath;
+			return echec;
 		}
 
-		public void setEchecEtMath(boolean echecEtMath)
+		public void setEchec(boolean echecEtMath)
 		{
-			this.echecEtMath = echecEtMath;
+			this.echec = echecEtMath;
 		}
 	}
 
