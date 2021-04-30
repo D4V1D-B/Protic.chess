@@ -1025,8 +1025,8 @@ public class Controleur implements Initializable
 	private void deplacerProg(Pieces pieces, Pane positionFinale)
 	{
 		// deplacement dans la prog
-		Point lastEmplacement = rechercheCoordonnee(paneSelect.getId());
-		plateau.deplacementProg(lastEmplacement, pieceSelect);
+		pieces.setEmplacement(rechercheCoordonnee(paneSelect.getId()));
+		plateau.deplacementProg(pieces, rechercheCoordonnee(positionFinale.getId()));
 	}
 
 	private void deplacerTour(Point emplacement)
@@ -1488,4 +1488,10 @@ public class Controleur implements Initializable
 		this.fenetreAide = aide;
 
 	}
+	
+	@FXML
+    void boutonTestNbrMove(ActionEvent event) {
+		bot.setPlateau(plateau);
+		System.out.println(bot.MoveGenerationTest(2));
+    }
 }
