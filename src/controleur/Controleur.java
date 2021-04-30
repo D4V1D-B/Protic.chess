@@ -1488,4 +1488,13 @@ public class Controleur implements Initializable
 		this.fenetreAide = aide;
 
 	}
+<<<<<<< Updated upstream
+=======
+	
+	@FXML
+    void boutonTestNbrMove(ActionEvent event) {
+		bot.setPlateau(plateau);
+		System.out.println(bot.MoveGenerationTest(2));
+    }
+>>>>>>> Stashed changes
 }

@@ -70,16 +70,42 @@ public class Plateau
 	{
 		// On enleve la pieces de son ancien deplacement
 		plateau[anciennePosition.x][anciennePosition.y] = null;
+<<<<<<< Updated upstream
 
 		deplacerPieces(piecesDeplacer);
 
 		actualiserToutLesMouvementJouable(piecesDeplacer.isWhite());
+=======
+		pieces.setEmplacement(deplacement);
+		Pieces manger = deplacerPieces(pieces);
+
+		actualiserToutLesMouvementJouable(pieces.isWhite());
+
+		if (pieces.getClass().toString().contains("Pion")
+				&& Math.abs(anciennePosition.y - pieces.getEmplacement().y) == 2)
+		{
+			ajouterEnPassant(anciennePosition, pieces);
+		}
+		return manger;
+	}
+	
+	public void unMakeMove(Point newPosition, Pieces pieces, Pieces manger)
+	{
+		Point anciennePosition=pieces.getEmplacement();
+		pieces.setEmplacement(newPosition);
+		// On enleve la pieces de son ancien deplacement
+		plateau[anciennePosition.x][anciennePosition.y] = manger;
+		plateau[pieces.getEmplacement().x][pieces.getEmplacement().y] = pieces;
+		
+		actualiserToutLesMouvementJouable(!pieces.isWhite());
+>>>>>>> Stashed changes
 
 		if (piecesDeplacer.getClass().toString().contains("Pion")
 				&& Math.abs(anciennePosition.y - piecesDeplacer.getEmplacement().y) == 2)
 		{
 			ajouterEnPassant(anciennePosition, piecesDeplacer);
 		}
+		actualiserTeam();
 	}
 
 	public void ajouterEnPassant(Point anciennePosition, Pieces piecesDeplacer)
@@ -608,6 +634,7 @@ public class Plateau
 						break;
 				}
 		}
+<<<<<<< Updated upstream
 		else if(!echec.isEmpty())
 		{
 			equipeDefense.clearMouvementJouable();
@@ -615,6 +642,17 @@ public class Plateau
 		}
 		
 		for(Point p : trouverPieces(equipeDefense.getPositionRoi()).getMouvementPossible())
+=======
+		else
+			if (!echec.isEmpty())
+			{
+				equipeDefense.clearMouvementJouable();
+				equipeDefense.setEchec(true);
+			}
+
+		if(!trouverPieces(equipeDefense.getPositionRoi2()).getMouvementPossible().isEmpty())
+		for (Point p : trouverPieces(equipeDefense.getPositionRoi()).getMouvementPossible())
+>>>>>>> Stashed changes
 		{
 			if(!equipeAttaque.getAttaquePossible().contains(p))
 			{
