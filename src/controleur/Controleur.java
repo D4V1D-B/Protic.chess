@@ -1417,9 +1417,24 @@ public class Controleur implements Initializable
 
 	public void jouerSon(String son)
 	{
+<<<<<<< Updated upstream
 		Media sound = new Media(getClass().getResource(son).toExternalForm());
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.play();
+=======
+		CheckMenuItemSon.setText("Désactiver le son");
+		CheckMenuItemSon.selectedProperty().addListener((a,o,n)->{
+			SimpleStringProperty ActiverPropertyString = new SimpleStringProperty("Son désactivée");
+			SimpleStringProperty DesactiverPropertyString = new SimpleStringProperty("Désactiver le son");
+			if(a.getValue()) {
+				CheckMenuItemSon.textProperty().bind(ActiverPropertyString);
+			}
+			else {
+				CheckMenuItemSon.textProperty().bind(DesactiverPropertyString);
+			}
+		});
+		
+>>>>>>> Stashed changes
 	}
 
 	public void setFenetreAide(Stage aide)
