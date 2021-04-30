@@ -911,35 +911,22 @@ public class Controleur implements Initializable
 					{
 						if (plateau.getEchecMathNoir())
 						{
-							if (plateau.getEchecNoir())
-							{
-								jouerSon("/son/Checkmate.mp3");
-								afficherFinDePartie("Les blancs ont gagné! Félicitation!");
-
-							}
-							else
-							{
-								afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
-							}
+							jouerSon("/son/Checkmate.mp3");
+							afficherFinDePartie("Les blancs ont gagné! Félicitation!");
 						}
 					}
-					if (tourJoueur)
+					else
 					{
 						if (plateau.getEchecMathBlanc())
 						{
-							if (plateau.getEchecBlanc())
-							{
-								jouerSon("/son/Checkmate.mp3");
-								afficherFinDePartie("Les blancs ont gagné! Félicitation!");
-
-							}
-							else
-							{
-								jouerSon("/son/Checkmate.mp3");
-								afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
-
-							}
+							jouerSon("/son/Checkmate.mp3");
+							afficherFinDePartie("Les noirs ont gagné! Félicitation!");
 						}
+					}
+					
+					if(!plateau.getEchecMathBlanc()&&!plateau.getEchecMathNoir()&&plateau.partieNulle())
+					{
+						afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
 					}
 
 					tourJoueur = !tourJoueur;
