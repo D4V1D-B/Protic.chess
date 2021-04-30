@@ -1444,4 +1444,9 @@ public class Controleur implements Initializable
 		this.fenetreAide = aide;
 
 	}
+	
+	@FXML
+    void boutonTestNbrMove(ActionEvent event) {
+		
+    }
 }

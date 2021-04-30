@@ -66,12 +66,31 @@ public class Plateau
 		return plateau;
 	}
 
-	public void deplacementProg(Pieces pieces, Point deplacement)
+	public Pieces deplacementProg(Pieces pieces, Point deplacement)
 	{
 		Point anciennePosition = pieces.getEmplacement();
 		// On enleve la pieces de son ancien deplacement
 		plateau[anciennePosition.x][anciennePosition.y] = null;
 		pieces.setEmplacement(deplacement);
+		Pieces manger = deplacerPieces(pieces);
+
+		actualiserToutLesMouvementJouable(pieces.isWhite());
+
+		if (pieces.getClass().toString().contains("Pion")
+				&& Math.abs(anciennePosition.y - pieces.getEmplacement().y) == 2)
+		{
+			ajouterEnPassant(anciennePosition, pieces);
+		}
+		return manger;
+	}
+	
+	public void unMakeMove(Point newPosition, Pieces pieces, Pieces manger)
+	{
+		Point anciennePosition=pieces.getEmplacement();
+		pieces.setEmplacement(newPosition);
+		// On enleve la pieces de son ancien deplacement
+		plateau[anciennePosition.x][anciennePosition.y] = manger;
+
 		deplacerPieces(pieces);
 
 		actualiserToutLesMouvementJouable(pieces.isWhite());

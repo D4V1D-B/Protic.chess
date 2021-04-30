@@ -124,9 +124,31 @@ public class Bot
 		return valeur;
 	}
 
+	public int MoveGenerationTest(int depth)
+	{
+		if (depth == 0)
+		{
+			return 1;
+		}
+		else
+		{
+			ArrayList<Move> tousMoves = generationMove();
+			int nbmove = 0;
+
+			for (Move move : tousMoves)
+			{
+				Point ancinennePosition = move.getPieces().getEmplacement();
+				Pieces manger = plateau.deplacementProg(move.getPieces(), move.getPoint());
+				nbmove += MoveGenerationTest(depth - 1);
+				plateau.unMakeMove(ancinennePosition, move.getPieces(), manger);
+			}
+
+			return nbmove;
+		}
+	}
 }
 
-//
+
 // private int mininmum(int depth) {
 // int bestMovement = (int) Double.POSITIVE_INFINITY ;
 // return bestMovement;
