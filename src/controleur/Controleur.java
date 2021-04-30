@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.ConsoleHandler;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -1486,12 +1484,11 @@ public class Controleur implements Initializable
 	public void setFenetreAide(Stage aide)
 	{
 		this.fenetreAide = aide;
-
 	}
 	
 	@FXML
     void boutonTestNbrMove(ActionEvent event) {
 		bot.setPlateau(plateau);
-		System.out.println(bot.MoveGenerationTest(2));
+		System.out.println(bot.MoveGenerationTest(4));
     }
 }

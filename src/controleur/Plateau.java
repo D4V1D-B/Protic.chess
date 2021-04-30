@@ -90,8 +90,7 @@ public class Plateau
 		pieces.setEmplacement(newPosition);
 		// On enleve la pieces de son ancien deplacement
 		plateau[anciennePosition.x][anciennePosition.y] = manger;
-
-		deplacerPieces(pieces);
+		plateau[newPosition.x][newPosition.y] = pieces;
 
 		actualiserToutLesMouvementJouable(!pieces.isWhite());
 
