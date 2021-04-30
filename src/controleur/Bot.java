@@ -101,8 +101,11 @@ public class Bot
 
 	{
 		ArrayList<Move> tousMoves = new ArrayList<Move>();
-
-		for (Pieces pieces : plateau.getNoir().getListePieces())
+		ArrayList<Pieces> toutesLesPieces = new ArrayList<Pieces>();
+		toutesLesPieces.addAll(plateau.getBlanc().getListePieces());
+		toutesLesPieces.addAll(plateau.getNoir().getListePieces());
+		
+		for (Pieces pieces : toutesLesPieces)
 		{
 			for (Point point : pieces.getMouvementJouable())
 			{
@@ -110,7 +113,6 @@ public class Bot
 			}
 		}
 		return tousMoves;
-
 	}
 
 	private int compterValeur(ArrayList<Pieces> equipe) // compte les valeurs de

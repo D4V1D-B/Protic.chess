@@ -2,6 +2,8 @@ package controleur;
 
 import java.awt.Point;
 import java.util.ArrayList;
+
+import controleur.Plateau.Equipe;
 import modele.Pieces;
 import modele.Tour;
 import modele.triplets;
@@ -64,10 +66,12 @@ public class Plateau
 		return plateau;
 	}
 
-	public Pieces deplacementProg(Pieces pieces, Point newEmplacement)
+	public Pieces deplacementProg(Pieces pieces, Point deplacement)
 	{
 		Point anciennePosition = pieces.getEmplacement();
-		pieces.setEmplacement(newEmplacement);
+		// On enleve la pieces de son ancien deplacement
+		plateau[anciennePosition.x][anciennePosition.y] = null;
+		pieces.setEmplacement(deplacement);
 		Pieces manger = deplacerPieces(pieces);
 
 		actualiserToutLesMouvementJouable(pieces.isWhite());
@@ -86,7 +90,8 @@ public class Plateau
 		pieces.setEmplacement(newPosition);
 		// On enleve la pieces de son ancien deplacement
 		plateau[anciennePosition.x][anciennePosition.y] = manger;
-		plateau[pieces.getEmplacement().x][pieces.getEmplacement().y] = pieces;
+
+		deplacerPieces(pieces);
 
 		actualiserToutLesMouvementJouable(!pieces.isWhite());
 
@@ -95,8 +100,6 @@ public class Plateau
 		{
 			ajouterEnPassant(anciennePosition, pieces);
 		}
-
-		actualiserTeam();
 	}
 
 	public void ajouterEnPassant(Point anciennePosition, Pieces piecesDeplacer)
@@ -472,9 +475,9 @@ public class Plateau
 
 		if (echec.size() == 1)
 		{
+			equipeDefense.setEchec(true);
 			equipeDefense.clearMouvementJouable();
 			ArrayList<Point> testage;
-			equipeDefense.setEchec(true);
 			switch (echec.get(0).getState())
 			{
 				case 0:
@@ -634,14 +637,13 @@ public class Plateau
 				equipeDefense.setEchec(true);
 			}
 
-		if (!trouverPieces(equipeDefense.getPositionRoi2()).getMouvementPossible().isEmpty())
-			for (Point p : trouverPieces(equipeDefense.getPositionRoi()).getMouvementPossible())
+		for (Point p : trouverPieces(equipeDefense.getPositionRoi()).getMouvementPossible())
+		{
+			if (!equipeAttaque.getAttaquePossible().contains(p))
 			{
-				if (!equipeAttaque.getAttaquePossible().contains(p))
-				{
-					trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(p);
-				}
+				trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(p);
 			}
+		}
 
 	}
 
@@ -798,9 +800,9 @@ public class Plateau
 			return echec;
 		}
 
-		public void setEchec(boolean echecEtMath)
+		public void setEchec(boolean echec)
 		{
-			this.echec = echecEtMath;
+			this.echec = echec;
 		}
 	}
 
