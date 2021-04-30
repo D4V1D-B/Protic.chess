@@ -47,10 +47,10 @@ public class Plateau
 	{
 		return noir.isEchecEtMath();
 	}
-	
+
 	public boolean partieNulle()
 	{
-		return noir.getMouvementJouable().isEmpty()&& blanc.getMouvementJouable().isEmpty();
+		return noir.getMouvementJouable().isEmpty() && blanc.getMouvementJouable().isEmpty();
 	}
 
 	public Pieces[][] refreshPlateau(ArrayList<Pieces> pieceBlanc, ArrayList<Pieces> pieceNoir)
@@ -70,13 +70,10 @@ public class Plateau
 	{
 		// On enleve la pieces de son ancien deplacement
 		plateau[anciennePosition.x][anciennePosition.y] = null;
-<<<<<<< Updated upstream
-
 		deplacerPieces(piecesDeplacer);
 
 		actualiserToutLesMouvementJouable(piecesDeplacer.isWhite());
-=======
-		pieces.setEmplacement(deplacement);
+		pieces.setEmplacement(piecesDeplacer);
 		Pieces manger = deplacerPieces(pieces);
 
 		actualiserToutLesMouvementJouable(pieces.isWhite());
@@ -88,22 +85,21 @@ public class Plateau
 		}
 		return manger;
 	}
-	
+
 	public void unMakeMove(Point newPosition, Pieces pieces, Pieces manger)
 	{
-		Point anciennePosition=pieces.getEmplacement();
+		Point anciennePosition = pieces.getEmplacement();
 		pieces.setEmplacement(newPosition);
 		// On enleve la pieces de son ancien deplacement
 		plateau[anciennePosition.x][anciennePosition.y] = manger;
 		plateau[pieces.getEmplacement().x][pieces.getEmplacement().y] = pieces;
-		
-		actualiserToutLesMouvementJouable(!pieces.isWhite());
->>>>>>> Stashed changes
 
-		if (piecesDeplacer.getClass().toString().contains("Pion")
-				&& Math.abs(anciennePosition.y - piecesDeplacer.getEmplacement().y) == 2)
+		actualiserToutLesMouvementJouable(!pieces.isWhite());
+
+		if (pieces.getClass().toString().contains("Pion")
+				&& Math.abs(anciennePosition.y - pieces.getEmplacement().y) == 2)
 		{
-			ajouterEnPassant(anciennePosition, piecesDeplacer);
+			ajouterEnPassant(anciennePosition, pieces);
 		}
 		actualiserTeam();
 	}
@@ -270,8 +266,8 @@ public class Plateau
 			{
 				case "class modele.Tour":
 					temp = ((Tour) p).setMouvementPossible(plateau, positionRoiNoir);
-					if(!tour)
-					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (!tour)
+						p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
 						piecesNoirPin.add(temp);
@@ -280,8 +276,8 @@ public class Plateau
 					break;
 				case "class modele.Cavalier":
 					temp = ((Cavalier) p).setMouvementPossible(plateau, positionRoiNoir);
-					if(!tour)
-					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (!tour)
+						p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
 						piecesNoirPin.add(temp);
@@ -290,8 +286,8 @@ public class Plateau
 					break;
 				case "class modele.Fou":
 					temp = ((Fou) p).setMouvementPossible(plateau, positionRoiNoir);
-					if(!tour)
-					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (!tour)
+						p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
 						piecesNoirPin.add(temp);
@@ -300,8 +296,8 @@ public class Plateau
 					break;
 				case "class modele.Reine":
 					temp = ((Reine) p).setMouvementPossible(plateau, positionRoiNoir);
-					if(!tour)
-					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (!tour)
+						p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
 						piecesNoirPin.add(temp);
@@ -310,8 +306,8 @@ public class Plateau
 					break;
 				case "class modele.Pion":
 					temp = ((Pion) p).setMouvementPossible(plateau, positionRoiNoir);
-					if(!tour)
-					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (!tour)
+						p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
 						piecesNoirPin.add(temp);
@@ -320,15 +316,15 @@ public class Plateau
 					break;
 				case "class modele.Roi":
 					((Roi) p).setMouvementPossible(plateau);
-					if(p.getEmplacement()!=blanc.getPositionRoi2())
+					if (p.getEmplacement() != blanc.getPositionRoi2())
 					{
 						blanc.setPositionRoi(p.getEmplacement());
 					}
 					break;
 			}
 		}
-		if(tour)
-		blanc.actualiserAttaquePossible();
+		if (tour)
+			blanc.actualiserAttaquePossible();
 
 		Point positionRoiBlanc = blanc.getPositionRoi();
 
@@ -338,8 +334,8 @@ public class Plateau
 			{
 				case "class modele.Tour":
 					temp = ((Tour) p).setMouvementPossible(plateau, positionRoiBlanc);
-					if(tour)
-					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (tour)
+						p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
 						piecesBlanchePin.add(temp);
@@ -348,8 +344,8 @@ public class Plateau
 					break;
 				case "class modele.Cavalier":
 					temp = ((Cavalier) p).setMouvementPossible(plateau, positionRoiBlanc);
-					if(tour)
-					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (tour)
+						p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
 						piecesBlanchePin.add(temp);
@@ -358,8 +354,8 @@ public class Plateau
 					break;
 				case "class modele.Fou":
 					temp = ((Fou) p).setMouvementPossible(plateau, positionRoiBlanc);
-					if(tour)
-					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (tour)
+						p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
 						piecesBlanchePin.add(temp);
@@ -368,8 +364,8 @@ public class Plateau
 					break;
 				case "class modele.Reine":
 					temp = ((Reine) p).setMouvementPossible(plateau, positionRoiBlanc);
-					if(tour)
-					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (tour)
+						p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
 						piecesBlanchePin.add(temp);
@@ -378,8 +374,8 @@ public class Plateau
 					break;
 				case "class modele.Pion":
 					temp = ((Pion) p).setMouvementPossible(plateau, positionRoiBlanc);
-					if(tour)
-					p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (tour)
+						p.getMouvementJouable().addAll(p.getMouvementPossible());
 					if (temp != null)
 					{
 						piecesBlanchePin.add(temp);
@@ -388,29 +384,29 @@ public class Plateau
 					break;
 				case "class modele.Roi":
 					((Roi) p).setMouvementPossible(plateau);
-					if(tour)
-					p.getMouvementJouable().addAll(p.getMouvementPossible());
-					if(p.getEmplacement()!=noir.getPositionRoi2())
+					if (tour)
+						p.getMouvementJouable().addAll(p.getMouvementPossible());
+					if (p.getEmplacement() != noir.getPositionRoi2())
 					{
 						noir.setPositionRoi(p.getEmplacement());
 					}
 					break;
 			}
 		}
-		if(!tour)
-		noir.actualiserAttaquePossible();
+		if (!tour)
+			noir.actualiserAttaquePossible();
 
-		if(tour)
-		filtrerCoup(piecesNoirPin, blanc, noir);
-		
-		if(!tour)
-		filtrerCoup(piecesNoirPin, noir, blanc);
-		
-		if(!tour)
-		blanc.actualiserMouvementJouable();
-		
-		if(tour)
-		noir.actualiserMouvementJouable();
+		if (tour)
+			filtrerCoup(piecesNoirPin, blanc, noir);
+
+		if (!tour)
+			filtrerCoup(piecesNoirPin, noir, blanc);
+
+		if (!tour)
+			blanc.actualiserMouvementJouable();
+
+		if (tour)
+			noir.actualiserMouvementJouable();
 	}
 
 	public void filtrerCoup(ArrayList<triplets> piecesPin, Equipe equipeAttaque,
@@ -634,7 +630,6 @@ public class Plateau
 						break;
 				}
 		}
-<<<<<<< Updated upstream
 		else if(!echec.isEmpty())
 		{
 			equipeDefense.clearMouvementJouable();
@@ -642,9 +637,7 @@ public class Plateau
 		}
 		
 		for(Point p : trouverPieces(equipeDefense.getPositionRoi()).getMouvementPossible())
-=======
-		else
-			if (!echec.isEmpty())
+		else if (!echec.isEmpty())
 			{
 				equipeDefense.clearMouvementJouable();
 				equipeDefense.setEchec(true);
@@ -652,7 +645,6 @@ public class Plateau
 
 		if(!trouverPieces(equipeDefense.getPositionRoi2()).getMouvementPossible().isEmpty())
 		for (Point p : trouverPieces(equipeDefense.getPositionRoi()).getMouvementPossible())
->>>>>>> Stashed changes
 		{
 			if(!equipeAttaque.getAttaquePossible().contains(p))
 			{
@@ -661,7 +653,6 @@ public class Plateau
 		}
 
 	}
-		
 
 	public void actualiserTeam()
 	{
@@ -709,8 +700,8 @@ public class Plateau
 		private ArrayList<Point> attaquePossible;
 		private ArrayList<Point> mouvementJouable;
 		private ArrayList<Pieces> listePiece;
-		private Point positionRoi= new Point(-1,-1);
-		boolean echecEtMath=false;
+		private Point positionRoi = new Point(-1, -1);
+		boolean echecEtMath = false;
 
 		public Equipe(ArrayList<Pieces> pieces)
 		{
@@ -800,15 +791,15 @@ public class Plateau
 
 			return temp;
 		}
-		
+
 		public Point getPositionRoi2()
 		{
 			return positionRoi;
 		}
-		
+
 		public void setPositionRoi(Point setPositionRoi)
 		{
-			positionRoi= setPositionRoi;
+			positionRoi = setPositionRoi;
 		}
 
 		public boolean isEchecEtMath()

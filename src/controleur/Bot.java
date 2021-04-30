@@ -124,8 +124,6 @@ public class Bot
 		return valeur;
 	}
 
-<<<<<<< Updated upstream
-=======
 	public int MoveGenerationTest(int depth)
 	{
 		if (depth == 0)
@@ -152,7 +150,6 @@ public class Bot
 	{
 		this.plateau=plateau;
 	}
->>>>>>> Stashed changes
 }
 
 //
