@@ -3,7 +3,6 @@ package controleur;
 import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.ConsoleHandler;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -324,8 +322,13 @@ public class Controleur implements Initializable
 		inDialog.setContentText("Fen :");
 
 		Optional<String> textIn = inDialog.showAndWait();
+<<<<<<< HEAD
 		textIn.ifPresent(str -> placerPiecesString(textIn.get()));
 
+=======
+		
+		placerPiecesString(textIn.get());
+>>>>>>> parent of 98a7039 (bug correction)
 	}
 
 	@FXML
@@ -944,8 +947,8 @@ public class Controleur implements Initializable
 							afficherFinDePartie("Les noirs ont gagné! Félicitation!");
 						}
 					}
-
-					if (!plateau.getEchecMathBlanc() && !plateau.getEchecMathNoir() && plateau.partieNulle())
+					
+					if(!plateau.getEchecMathBlanc()&&!plateau.getEchecMathNoir()&&plateau.partieNulle())
 					{
 						afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
 					}
@@ -1305,33 +1308,26 @@ public class Controleur implements Initializable
 		}
 		for (Pane pane : tableauPane)
 		{
-			ImageView imageDansLePane = (ImageView) pane.getChildren().get(0);
-
+			ImageView ImageDansLePane = (ImageView) pane.getChildren().get(0);
 			if (entre0et7 >= 8)
 			{
 				plateauFen += "/";
 				entre0et7 = 0;
 			}
-
-			if (imageDansLePane.getImage() == null)
+			if (ImageDansLePane.getImage() == null)
 			{
-				if (plateauFen.equalsIgnoreCase(""))
+			
+				if (Character.isDigit(plateauFen.charAt(plateauFen.length() - 1)))
 				{
-					plateauFen = "1";
+					nombreDEspace = Character.getNumericValue(plateauFen.charAt(plateauFen.length() - 1)) + 1;
+					plateauFen = plateauFen.substring(0, plateauFen.length() - 1);
+					plateauFen += nombreDEspace;
+
 				}
 				else
-					if (Character.isDigit(plateauFen.charAt(plateauFen.length() - 1)))
-					{
-						nombreDEspace = Character.getNumericValue(plateauFen.charAt(plateauFen.length() - 1)) + 1;
-						plateauFen = plateauFen.substring(0, plateauFen.length() - 1);
-						plateauFen += nombreDEspace;
-
-					}
-					else
-					{
-						plateauFen += "1";
-					}
-
+				{
+					plateauFen += "1";
+				}
 			}
 			else
 			{
@@ -1342,7 +1338,6 @@ public class Controleur implements Initializable
 			entre0et7++;
 
 		}
-		System.out.println("");
 		return plateauFen + "/";
 	}
 
