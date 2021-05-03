@@ -23,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -407,8 +408,7 @@ public class Controleur implements Initializable
 		}
 	}
 
-	@FXML
-	void effacerLesSauvegardes(ActionEvent event)
+	private void effacerLesSauvegardes()
 	{
 		try
 		{
@@ -1354,20 +1354,29 @@ public class Controleur implements Initializable
 		Stage lesAnciennesParties = new Stage();
 		lesAnciennesParties.setTitle("Sauvegardes");
 
-		lesAnciennesParties.setMaxHeight(600);
-		lesAnciennesParties.setMinHeight(600);
+		lesAnciennesParties.setMaxHeight(400);
+		lesAnciennesParties.setMinHeight(400);
 		lesAnciennesParties.setMaxWidth(500);
 		lesAnciennesParties.setMinWidth(500);
 
 		ListAnciennesParties = FXCollections.observableArrayList();
 		listViewAnciennesParties = new ListView<String>();
-
+		Button effacer = new Button("Effacer");
+		effacer.setMinWidth(175);
 		Button charger = new Button("Charger");
-		VBox vBox = new VBox(listViewAnciennesParties, charger);
+		charger.setMinWidth(175);
+		HBox hBox = new HBox(charger, effacer);
+		hBox.setPadding(new Insets(20.0));
+		hBox.setAlignment(Pos.CENTER);
+		hBox.setSpacing(50.0);
+		VBox vBox = new VBox(listViewAnciennesParties, hBox);
+
 		listViewAnciennesParties.setItems(ListAnciennesParties);
 
 		lesAnciennesParties.setScene(new Scene(vBox));
 		lesAnciennesParties.show();
+
+		ArrayList<String> ouiOui = new ArrayList<String>();
 
 		try
 		{
@@ -1379,7 +1388,7 @@ public class Controleur implements Initializable
 				s = reader.readLine();
 				if (s != null)
 				{
-
+					ouiOui.add(s);
 					entreNomEtFen = s.indexOf("*");
 					leNom = s.substring(0, entreNomEtFen);
 					laFen = s.substring(entreNomEtFen + 1, s.length());
@@ -1412,6 +1421,43 @@ public class Controleur implements Initializable
 				placerPiecesString(partieSelectionner.get().substring(partieSelectionner.get().indexOf("(") + 1,
 						partieSelectionner.get().length() - 1) + "/");
 				tourJoueur = true;
+			}
+
+		});
+		effacer.setOnAction((a) -> {
+			Optional<String> partieSelectionner = Optional
+					.ofNullable(listViewAnciennesParties.getSelectionModel().getSelectedItem());
+
+			if (partieSelectionner.isPresent())
+			{
+				ListAnciennesParties.remove(partieSelectionner.get());
+
+				String reformate = partieSelectionner.get();
+				reformate = reformate.replace(" ", "*");
+				reformate = reformate.replace("(", "");
+				reformate = reformate.replace(")", "");
+
+				ouiOui.remove(reformate);
+
+				effacerLesSauvegardes();
+
+				try
+				{
+					BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+
+					for (String string : ouiOui)
+					{
+						writer.append(string + "\n");
+					}
+
+					writer.close();
+				}
+				catch (IOException e)
+				{
+					System.out.println("Erreur dans lors de effacement des sauvegardes.");
+					e.printStackTrace();
+				}
+
 			}
 
 		});
