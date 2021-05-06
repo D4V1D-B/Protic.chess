@@ -121,10 +121,10 @@ public class ControleurAide
 	void sauvegarde(MouseEvent event)
 	{
 		bulleInformation.setAlignment(Pos.TOP_CENTER);
-		bulleInformation.setText("Dans ce menu se trouve 3 sous menus."
-				+ " Le premier, sauvegarder la partie, sauvegarde le positionnement de chaque pièce de la partie en cours."
-				+ " Le deuxième, charger une partie, permet d’ouvrir une nouvelle fenêtre montrant tous les sauvegardes des parties antérieurs. Il suffit d’en sélectionner une et d’appuyer sur le bouton « Charger »."
-				+ " La dernière, effacer les sauvegardes, efface l’entièreté des parties sauvegardées.");
+		bulleInformation.setText("Dans ce menu se trouve 2 sous menus."
+				+ " Le premier, sauvegarder la partie, sauvegarde le positionnement de chaque pièce de la partie en cours, la partie est associé avec un nom."
+				+ "\n\nLe deuxième, charger et effacer une partie, permet d’ouvrir une nouvelle fenêtre montrant tous les sauvegardes des parties antérieurs. Il suffit d’en sélectionner une et d’appuyer sur le bouton « Charger » ou « Effacer »."
+				);
 	}
 
 }
