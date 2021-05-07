@@ -53,11 +53,11 @@
         <items>
           <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Pane fx:id="a8" layoutX="38.0" layoutY="41.0" onMouseClicked="#mouseClick" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
+                  <Pane id="caseClaire" fx:id="a8" layoutX="38.0" layoutY="41.0" onMouseClicked="#mouseClick" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>
-                  <Pane fx:id="b8" layoutX="112.0" layoutY="41.0" onMouseClicked="#mouseClick" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
+                  <Pane id="caseSombre" fx:id="b8" layoutX="112.0" layoutY="41.0" onMouseClicked="#mouseClick" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>

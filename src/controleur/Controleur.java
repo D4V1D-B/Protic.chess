@@ -24,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -331,8 +332,7 @@ public class Controleur implements Initializable
 
 	private Stage fenetreAide;
 
-	@FXML
-	private BorderPane leParent;
+
 
 	@FXML
 	void radioClaire(ActionEvent event)
@@ -340,6 +340,9 @@ public class Controleur implements Initializable
 		themeClaire = true;
 		radioSombre.setSelected(false);
 		radioClaire.setSelected(true);
+
+		changementDeStyle(themeClaire);
+
 	}
 
 	@FXML
@@ -348,6 +351,79 @@ public class Controleur implements Initializable
 		themeClaire = false;
 		radioClaire.setSelected(false);
 		radioSombre.setSelected(true);
+
+		changementDeStyle(themeClaire);
+	}
+
+	private void changementDeStyle(boolean b)
+	{
+		BorderPane leParent = (BorderPane) recommencerPartie.getParent().getParent().getParent().getParent().getParent().getParent();
+		if (b)
+		{
+			
+			String defaultButton = "-fx-default-button: #ABD8ED;";
+			String textColor = "-fx-text-fill: black;";
+			
+			//Buttons
+			recommencerPartie.setStyle(defaultButton);
+			boutonChargerMouvements.setStyle(defaultButton);
+			boutonMouvementArriere.setStyle(defaultButton);
+			boutonMouvementAvant.setStyle(defaultButton);
+			boutonRevenirAuJeu.setStyle(defaultButton);
+			boutonAnalyse.setStyle(defaultButton);
+			
+			//le reste
+			leParent.getChildren().get(0).setStyle("-fx-background-color: null;");
+			
+			
+			for (Pane pane : allPane())
+			{
+
+				if (pane.getStyleClass().get(0).equals("caseClaire"))
+				{
+					pane.setStyle("-fx-background-color: cornsilk; -fx-border-color: black;");
+				}
+				else
+				{
+					pane.setStyle("-fx-background-color: brown; -fx-border-color: black;");
+				}
+			}
+
+		}
+		else
+		{
+			String backColor = "-fx-background-color: black;";
+			String textColor = "-fx-text-fill: white;";
+			String borderColor = "-fx-border-color: grey;";
+			
+			//Buttons
+			recommencerPartie.setStyle(backColor +textColor+borderColor);
+			boutonChargerMouvements.setStyle(backColor+textColor+borderColor);
+			boutonMouvementArriere.setStyle(backColor+textColor+borderColor);
+			boutonMouvementAvant.setStyle(backColor+textColor+borderColor);
+			boutonRevenirAuJeu.setStyle(backColor+textColor+borderColor);
+			boutonAnalyse.setStyle(backColor+textColor+borderColor);
+			
+			//le reste
+			for (Node n : leParent.getChildren())
+			{
+				n.setStyle("-fx-background-color: black;");
+			}
+			
+			
+			for (Pane pane : allPane())
+			{
+
+				if (pane.getStyleClass().get(0).equals("caseClaire"))
+				{
+					pane.setStyle("-fx-background-color: dimgray; -fx-border-color: black;");
+				}
+				else
+				{
+					pane.setStyle("-fx-background-color: brown; -fx-border-color: black;");
+				}
+			}
+		}
 	}
 
 	@FXML
