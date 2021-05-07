@@ -10,7 +10,7 @@ public abstract class Pieces
 	private int valeur = 0;
 	private boolean couleur = true;
 	private Point emplacement;
-	
+
 	private ArrayList<Point> mouvementPossible;
 	private ArrayList<Point> mouvementJouable;
 
@@ -23,7 +23,7 @@ public abstract class Pieces
 		mouvementPossible = new ArrayList<Point>();
 		mouvementJouable = new ArrayList<Point>();
 	}
-	
+
 	public abstract int getValeur();
 
 	public Point getEmplacement()
@@ -55,16 +55,15 @@ public abstract class Pieces
 	{
 		this.couleur = couleur;
 	}
-	
+
 	public ArrayList<Point> getMouvementPossible()
 	{
 		return mouvementPossible;
 	}
-	
+
 	public ArrayList<Point> getMouvementJouable()
 	{
 		return mouvementJouable;
 	}
-
 
 }
