@@ -26,8 +26,8 @@
                <items>
                   <Menu mnemonicParsing="false" text="Apparence">
                     <items>
-                        <RadioMenuItem fx:id="radioClaire" mnemonicParsing="false" onAction="#radioClaire" text="Claire" />
-                        <RadioMenuItem fx:id="radioSombre" mnemonicParsing="false" onAction="#radioSombre" text="Sombre" />
+                        <RadioMenuItem mnemonicParsing="false" text="Claire" />
+                        <RadioMenuItem mnemonicParsing="false" text="Sombre" />
                     </items>
                   </Menu>
                   <CheckMenuItem fx:id="CheckAI" mnemonicParsing="false" text="Jouer contre AI" />
@@ -51,13 +51,13 @@
    <center>
       <SplitPane dividerPositions="0.6713426853707415" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <AnchorPane id="anchor" fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Pane id="caseClaire" fx:id="a8" layoutX="38.0" layoutY="41.0" onMouseClicked="#mouseClick" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
+                  <Pane fx:id="a8" layoutX="38.0" layoutY="41.0" onMouseClicked="#mouseClick" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: cornsilk;" styleClass="caseClaire">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>
-                  <Pane id="caseSombre" fx:id="b8" layoutX="112.0" layoutY="41.0" onMouseClicked="#mouseClick" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
+                  <Pane fx:id="b8" layoutX="112.0" layoutY="41.0" onMouseClicked="#mouseClick" prefHeight="74.0" prefWidth="74.0" style="-fx-border-color: black; -fx-background-color: brown;" styleClass="caseSombre">
                      <children>
                         <ImageView fitHeight="74.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" />
                      </children></Pane>
@@ -417,7 +417,7 @@
                                     <Insets bottom="10.0" top="10.0" />
                                  </VBox.margin>
                               </Button>
-                              <VBox prefHeight="192.0" prefWidth="253.0" spacing="10.0" style="-fx-background-color: silver;">
+                              <VBox prefHeight="191.0" prefWidth="253.0" spacing="10.0" style="-fx-background-color: silver;">
                                  <children>
                                     <Button fx:id="boutonChargerMouvements" mnemonicParsing="false" onMouseClicked="#chargerMouvement" prefHeight="40.0" prefWidth="257.0" text="Charger un mouvement" textAlignment="CENTER" />
                                     <HBox prefHeight="42.0" prefWidth="253.0">
@@ -435,7 +435,7 @@
                                        </children>
                                     </HBox>
                                     <Button fx:id="boutonRevenirAuJeu" mnemonicParsing="false" onMouseClicked="#revenirAuJeu" prefHeight="40.0" prefWidth="256.0" text="Revenir au jeu" />
-                                    <Button mnemonicParsing="false" onMouseClicked="#analyse" prefHeight="40.0" prefWidth="256.0" text="Analyse" />
+                                    <Button fx:id="boutonAnalyse" mnemonicParsing="false" onMouseClicked="#analyse" prefHeight="38.0" prefWidth="249.0" text="Analyse" />
                                  </children>
                                  <VBox.margin>
                                     <Insets />
