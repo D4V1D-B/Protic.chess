@@ -123,8 +123,7 @@ public class ControleurAide
 		bulleInformation.setAlignment(Pos.TOP_CENTER);
 		bulleInformation.setText("Dans ce menu se trouve 2 sous menus."
 				+ " Le premier, sauvegarder la partie, sauvegarde le positionnement de chaque pièce de la partie en cours, la partie est associé avec un nom."
-				+ "\n\nLe deuxième, charger et effacer une partie, permet d’ouvrir une nouvelle fenêtre montrant tous les sauvegardes des parties antérieurs. Il suffit d’en sélectionner une et d’appuyer sur le bouton « Charger » ou « Effacer »."
-				);
+				+ "\n\nLe deuxième, charger et effacer une partie, permet d’ouvrir une nouvelle fenêtre montrant tous les sauvegardes des parties antérieurs. Il suffit d’en sélectionner une et d’appuyer sur le bouton « Charger » ou « Effacer ».");
 	}
 
 }
