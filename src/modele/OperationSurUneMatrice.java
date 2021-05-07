@@ -21,21 +21,4 @@ public class OperationSurUneMatrice
 		}
 		return positionVide;
 	}
-	
-	public static ArrayList<Point> getFillSpace(Pieces[][] plateau)
-	{
-		ArrayList<Point> positionPlein = new ArrayList<Point>();
-
-		for (int i = 0; i < plateau.length; i++)
-		{
-			for (int j = 0; j < plateau[i].length; j++)
-			{
-				if (plateau[i][j] != null)
-				{
-					positionPlein.add(new Point(i, j));
-				}
-			}
-		}
-		return positionPlein;
-	}
 }

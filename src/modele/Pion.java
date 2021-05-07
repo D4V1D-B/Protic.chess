@@ -12,11 +12,6 @@ public class Pion extends Pieces
 		super(nom, couleur, emplacement);
 	}
 
-	public Pion(String nom, boolean couleur, Point position, Pieces[][] plateau)
-	{
-		super(nom, couleur, position);
-	}
-
 	public Triplets setMouvementPossible(Pieces[][] plateau, Point positionRoiEnemy)
 	{
 		this.getMouvementPossible().clear();

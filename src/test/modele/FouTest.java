@@ -14,25 +14,16 @@ public class FouTest
 {
 	Cavalier cavalierBlanc, cavalierNoir;
 	Pieces[][] vide, blanc,noir;
-	Point pointRoi= new Point(0,0);
+	Point pointRoi= new Point(5,4);
 	Fou fouNoir, fouBlanc,fouTestBasGauche;
 
-	// public Cavalier(String nom, boolean couleur, Point position, Plateau
-	// plateau,
-	// ArrayList<Point> positionEnemie)
-	// {
-	// super(nom, couleur, position);
-	// setMouvementPossible(plateau, positionEnemie);
-	// }
 	@Before
-	public void testCavalier()
+	public void testFou()
 	{
 		vide = new Pieces[8][8];
 		blanc = new Pieces[8][8];
 		noir = new Pieces[8][8];
-		// cavalier sur le bord
 		cavalierBlanc = new Cavalier("cavalierB", true, new Point(4, 0));
-		// cavalier au centre
 		cavalierNoir = new Cavalier("cavalierC", false, new Point(4, 0));		
 		for(int i = 0; i< vide.length ;i++)
 		{
@@ -42,11 +33,8 @@ public class FouTest
 				noir[i][j]=cavalierNoir;
 			}
 		}	
-		Roi roi = new Roi("roi",false,pointRoi);
-		vide[pointRoi.x][pointRoi.y]=roi;
 		
 		fouBlanc = new Fou("fou", true, new Point(4, 4));
-
 		fouNoir = new Fou("fou", false, new Point(4, 4));		
 	}
 
@@ -56,7 +44,7 @@ public class FouTest
 		fouBlanc.setMouvementPossible(vide, pointRoi);
 		fouNoir.setMouvementPossible(vide, pointRoi);
 		//test mouvement de base 
-		assertEquals(12,
+		assertEquals(13,
 				fouNoir.getMouvementPossible().size());
 		assertEquals(13,
 				fouBlanc.getMouvementPossible().size());
@@ -121,7 +109,7 @@ public class FouTest
 		assertEquals(true, test.getDefendant().equals(roi));
 
 		//--
-		roi.setEmplacement(pointRoi);
+		roi.setEmplacement(new Point(0,0));
 		vide[roi.getEmplacement().x][roi.getEmplacement().y] = roi;
 		test = attaqueRoi.setMouvementPossible(vide, roi.getEmplacement());
 		assertEquals(true, test.getState()==5);
@@ -137,5 +125,33 @@ public class FouTest
 		vide[roi.getEmplacement().x][roi.getEmplacement().y] = roi;
 		test = attaqueRoi.setMouvementPossible(vide, roi.getEmplacement());
 		assertEquals(true, test.getState()==7);
+		
+		//Test triplets
+		//++
+		Fou attaqueRoiNoir = new Fou("cavalierc", false, new Point(4, 4));
+		Roi roiBlanc = new Roi("roi", true, new Point(7,7));
+		vide[roiBlanc.getEmplacement().x][roiBlanc.getEmplacement().y] = roiBlanc;
+		Triplets testNoir = attaqueRoiNoir.setMouvementPossible(vide, roiBlanc.getEmplacement());
+		assertEquals(true, testNoir.getState()==8);
+		assertEquals(true, testNoir.getAttaquant().equals(attaqueRoiNoir));
+		assertEquals(true, testNoir.getDefendant().equals(roiBlanc));
+
+		//--
+		roiBlanc.setEmplacement(new Point(0,0));
+		vide[roiBlanc.getEmplacement().x][roiBlanc.getEmplacement().y] = roiBlanc;
+		testNoir = attaqueRoiNoir.setMouvementPossible(vide, roiBlanc.getEmplacement());
+		assertEquals(true, testNoir.getState() == 5);
+
+		//-+
+		roiBlanc.setEmplacement(new Point(3,5));
+		vide[roiBlanc.getEmplacement().x][roiBlanc.getEmplacement().y] = roiBlanc;
+		testNoir = attaqueRoiNoir.setMouvementPossible(vide, roiBlanc.getEmplacement());
+		assertEquals(true, testNoir.getState()==6);
+				
+		//+-
+		roiBlanc.setEmplacement(new Point(5,3));
+		vide[roiBlanc.getEmplacement().x][roiBlanc.getEmplacement().y] = roiBlanc;
+		testNoir = attaqueRoiNoir.setMouvementPossible(vide, roiBlanc.getEmplacement());
+		assertEquals(true, testNoir.getState()==7);
 	}
 }

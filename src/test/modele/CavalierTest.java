@@ -15,14 +15,6 @@ public class CavalierTest
 	Pieces[][] vide, blanc, noir;
 	Point pointRoi = new Point(0, 0);
 	
-
-	// public Cavalier(String nom, boolean couleur, Point position, Plateau
-	// plateau,
-	// ArrayList<Point> positionEnemie)
-	// {
-	// super(nom, couleur, position);
-	// setMouvementPossible(plateau, positionEnemie);
-	// }
 	@Before
 	public void testCavalier()
 	{
@@ -111,8 +103,27 @@ public class CavalierTest
 		assertEquals(true, test.getAttaquant().equals(attaqueRoi));
 		assertEquals(true, test.getDefendant().equals(roi));
 		
-		assertEquals(true, attaqueRoi.getMouvementJouable().isEmpty());
+		Cavalier attaqueRoiNoir = new Cavalier("cavalierc", false, new Point(2, 1));
+		Roi roiBlanc = new Roi("roi", true, pointRoi);
+		vide[pointRoi.x][pointRoi.y] = roiBlanc;
+		Triplets testNoir = attaqueRoiNoir.setMouvementPossible(vide, pointRoi);
+		
+		assertEquals(true, testNoir.getState()==0);
+		assertEquals(true, testNoir.getAttaquant().equals(attaqueRoiNoir));
+		assertEquals(true, testNoir.getDefendant().equals(roiBlanc));
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		assertEquals(true, attaqueRoiNoir.getMouvementJouable().isEmpty());
 	}
+	
 
 	@Test
 	public void testGetEmplacementPiece()
