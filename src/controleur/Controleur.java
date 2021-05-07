@@ -339,7 +339,7 @@ public class Controleur implements Initializable
 	{
 		themeClaire = true;
 		radioSombre.setSelected(false);
-
+		radioClaire.setSelected(true);
 	}
 
 	@FXML
@@ -347,7 +347,7 @@ public class Controleur implements Initializable
 	{
 		themeClaire = false;
 		radioClaire.setSelected(false);
-
+		radioSombre.setSelected(true);
 	}
 
 	@FXML

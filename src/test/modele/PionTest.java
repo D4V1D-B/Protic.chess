@@ -94,11 +94,47 @@ public class PionTest
 		assertEquals(true, test.getDefendant().equals(roi));
 
 		//roi droite devant
-		roi.setEmplacement(new Point());
+		roi.setEmplacement(new Point(5,2));
 		vide[roi.getEmplacement().x][roi.getEmplacement().y] = roi;
 		test = attaqueRoi.setMouvementPossible(vide, roi.getEmplacement());
-//		assertEquals(true, test.getState()==0);
+		assertEquals(true, test.getAttaquant().equals(attaqueRoi));
 		
 		//roi devant
+		roi.setEmplacement(new Point(4,2));
+		vide[roi.getEmplacement().x][roi.getEmplacement().y] = roi;
+		test = attaqueRoi.setMouvementPossible(vide, roi.getEmplacement());
+		assertEquals(null, test);
+		roi.setEmplacement(new Point(4,3));
+		vide[roi.getEmplacement().x][roi.getEmplacement().y] = roi;
+		test = attaqueRoi.setMouvementPossible(vide, roi.getEmplacement());
+		assertEquals(null, test);
+		
+		
+		
+		Pion attaqueRoiNoir = new Pion("Pion", false, new Point(4, 6));
+		Roi roiNoir = new Roi("roi", true, new Point(3,5));
+		vide[roiNoir.getEmplacement().x][roiNoir.getEmplacement().y] = roiNoir;
+		Triplets testNoir = attaqueRoiNoir.setMouvementPossible(vide, roiNoir.getEmplacement());
+		
+		//roi gauche devant
+		assertEquals(true, testNoir.getState()==0);
+		assertEquals(true, testNoir.getAttaquant().equals(attaqueRoiNoir));
+		assertEquals(true, testNoir.getDefendant().equals(roiNoir));
+
+		//roi droite devant
+		roiNoir.setEmplacement(new Point(5,5));
+		vide[roiNoir.getEmplacement().x][roiNoir.getEmplacement().y] = roiNoir;
+		testNoir = attaqueRoiNoir.setMouvementPossible(vide, roiNoir.getEmplacement());
+		assertEquals(true, testNoir.getAttaquant().equals(attaqueRoiNoir));
+		
+		//roi devant
+		roiNoir.setEmplacement(new Point(4,5));
+		vide[roiNoir.getEmplacement().x][roiNoir.getEmplacement().y] = roiNoir;
+		testNoir = attaqueRoiNoir.setMouvementPossible(vide, roiNoir.getEmplacement());
+		assertEquals(null, testNoir);
+		roiNoir.setEmplacement(new Point(4,4));
+		vide[roiNoir.getEmplacement().x][roiNoir.getEmplacement().y] = roiNoir;
+		testNoir = attaqueRoiNoir.setMouvementPossible(vide, roiNoir.getEmplacement());
+		assertEquals(null, testNoir);
 	}
 }
