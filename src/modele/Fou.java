@@ -201,7 +201,7 @@ public class Fou extends Pieces
 		Triplets temp=null;
 		if(piecesPin!=null)
 		{
-			temp =new Triplets(situationRoiEnememy,this,piecesPin);
+			temp = new Triplets(situationRoiEnememy,this,piecesPin);
 		}
 		
 		return temp;
