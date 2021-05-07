@@ -58,6 +58,7 @@ import modele.Tour;
 
 public class Controleur implements Initializable
 {
+	private boolean themeClaire = true;
 	private HashMap<String, Image> association = new HashMap<String, Image>();
 	private String placementActuel = null;
 	private ArrayList<Mouvement> arrayMouvement = new ArrayList<Mouvement>();
@@ -68,8 +69,6 @@ public class Controleur implements Initializable
 	private Pane paneSelect;
 	private ArrayList<Circle> listeCercle = new ArrayList<Circle>();
 	private boolean tourJoueur = true;
-
-
 
 	private String file = "sauvegard.txt";
 	private Bot bot = new Bot();
@@ -92,6 +91,12 @@ public class Controleur implements Initializable
 
 	private ListView<String> listViewAnciennesParties;
 	private ObservableList<String> ListAnciennesParties;
+
+	@FXML
+	private RadioMenuItem radioClaire;
+
+	@FXML
+	private RadioMenuItem radioSombre;
 
 	@FXML
 	private CheckMenuItem CheckAI;
@@ -326,6 +331,18 @@ public class Controleur implements Initializable
 	private Stage fenetreAide;
 
 	@FXML
+	void radioClaire(ActionEvent event)
+	{
+
+	}
+
+	@FXML
+	void radioSombre(ActionEvent event)
+	{
+
+	}
+
+	@FXML
 	void analyse(MouseEvent event)
 	{
 		// utiliser mouvementSelect.getFen() pour trouver la fen du plateau
@@ -399,6 +416,8 @@ public class Controleur implements Initializable
 		{
 			indiceDuMouvement--;
 			avantArriereMouvement();
+			resetCouleur();
+			listDeMouvement.getSelectionModel().select(indiceDuMouvement);
 		}
 	}
 
@@ -410,6 +429,8 @@ public class Controleur implements Initializable
 		{
 			indiceDuMouvement++;
 			avantArriereMouvement();
+			resetCouleur();
+			listDeMouvement.getSelectionModel().select(indiceDuMouvement);
 		}
 	}
 
@@ -505,7 +526,9 @@ public class Controleur implements Initializable
 		resetTotal();
 		boutonDisable(true);
 		CheckMenuSon();
-		
+		radioClaire.setSelected(themeClaire);
+		radioSombre.setSelected(!themeClaire);
+
 	}
 
 	public void setLabelTourCouleur(Label labelTourCouleur)
@@ -517,7 +540,7 @@ public class Controleur implements Initializable
 		else
 		{
 			this.labelTourCouleur.setText("Noir");
-			if ( CheckAI.isSelected())
+			if (CheckAI.isSelected())
 			{
 				JouerAI();
 			}
@@ -928,14 +951,12 @@ public class Controleur implements Initializable
 	@FXML
 	void mouseClick(MouseEvent event)
 	{
-		
+
 		if (tuPeuxBoujerLesPieces)
 		{
 			Pane tableauPane[] = allPane();
 
 			Pane paneClick = (Pane) event.getSource();
-			
-	
 
 			if (pieceSelect == null)
 			{
@@ -1243,7 +1264,7 @@ public class Controleur implements Initializable
 			list.add(m.toString());
 			arrayMouvement.add(m);
 		}
-
+		listDeMouvement.getSelectionModel().select(list.size() - 1);
 	}
 
 	private void afficherPionUgrade(boolean equipe, Pane paneClick)
@@ -1575,12 +1596,11 @@ public class Controleur implements Initializable
 		this.fenetreAide = aide;
 
 	}
-	
+
 	public boolean isTourJoueur()
 	{
 		return tourJoueur;
 	}
-
 
 	@FXML
 	void boutonTestNbrMove(ActionEvent event)
