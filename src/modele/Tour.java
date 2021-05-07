@@ -13,12 +13,6 @@ public class Tour extends Pieces
 		aBouger = false;
 	}
 
-	public Tour(String nom, boolean couleur, Point position, Pieces[][] plateau)
-	{
-		super(nom, couleur, position);
-		aBouger = false;
-	} 
-
 	public boolean isaBouger()
 	{
 		return aBouger;

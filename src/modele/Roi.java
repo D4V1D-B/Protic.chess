@@ -13,13 +13,6 @@ public class Roi extends Pieces
 		aBouger = false;
 	}
 
-	public Roi(String nom, boolean couleur, Point position, Pieces[][] plateau)
-	{
-		super(nom, couleur, position);
-		aBouger = false;
-		setMouvementPossible(plateau);
-	}
-
 	public boolean isaBouger()
 	{
 		return aBouger;
