@@ -93,6 +93,5 @@ public class RoiTest
 				roiNoir.getMouvementPossible().contains(new Point(3, 4)));
 			
 //				ROCK VÉRIFIER MANUELLEMENT
-
 	}
 }
