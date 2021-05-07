@@ -67,6 +67,9 @@ public class Controleur implements Initializable
 	private Pane paneSelect;
 	private ArrayList<Circle> listeCercle = new ArrayList<Circle>();
 	private boolean tourJoueur = true;
+
+
+
 	private String file = "sauvegard.txt";
 	private Bot bot = new Bot();
 	int indiceDuMouvement = 0;
@@ -465,18 +468,19 @@ public class Controleur implements Initializable
 		resetTotal();
 		boutonDisable(true);
 		CheckMenuSon();
+		
 	}
 
 	public void setLabelTourCouleur(Label labelTourCouleur)
 	{
-		if (this.tourJoueur)
+		if (this.isTourJoueur())
 		{
 			this.labelTourCouleur.setText("Blanc");
 		}
 		else
 		{
 			this.labelTourCouleur.setText("Noir");
-			if (CheckAI.isSelected())
+			if ( CheckAI.isSelected())
 			{
 				JouerAI();
 			}
@@ -856,9 +860,9 @@ public class Controleur implements Initializable
 		{
 			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
 		}
-		if (tourJoueur == false)
+		if (isTourJoueur() == false)
 		{
-			String position = bot.jouerBotTest(this.plateau);
+			String position = bot.jouerBot(this.plateau);
 			Point pointFinale = new Point((position.charAt(4) - 48), (position.charAt(5) - 48));
 			Point pointInitiale = new Point((position.charAt(0) - 48), (position.charAt(2) - 48));
 			Pane paneFinale = null;
@@ -881,18 +885,21 @@ public class Controleur implements Initializable
 				}
 			}
 			deplacerImage(paneSelect, paneInitiale, pieceSelect);
-			tourJoueur = !tourJoueur;
+			tourJoueur = !isTourJoueur();
 		}
 	}
 
 	@FXML
 	void mouseClick(MouseEvent event)
 	{
+		
 		if (tuPeuxBoujerLesPieces)
 		{
 			Pane tableauPane[] = allPane();
 
 			Pane paneClick = (Pane) event.getSource();
+			
+	
 
 			if (pieceSelect == null)
 			{
@@ -900,7 +907,7 @@ public class Controleur implements Initializable
 				pieceSelect = plateau.trouverPieces(rechercheCoordonnee(paneClick.getId()));
 				paneSelect = paneClick;
 
-				if (pieceSelect != null && pieceSelect.isWhite() == tourJoueur)
+				if (pieceSelect != null && pieceSelect.isWhite() == isTourJoueur())
 				{
 					paneSelect.setStyle("-fx-background-color:deeppink; -fx-border-color: black");
 					ArrayList<Point> tableau = pieceSelect.getMouvementJouable();
@@ -923,12 +930,12 @@ public class Controleur implements Initializable
 			{
 
 				if (pieceSelect.getMouvementJouable().contains(rechercheCoordonnee(paneClick.getId()))
-						&& pieceSelect.isWhite() == tourJoueur)
+						&& pieceSelect.isWhite() == isTourJoueur())
 				{
 					jouerSon("/son/Move.mp3");
 					deplacer(pieceSelect, paneClick);
 
-					if (tourJoueur)
+					if (isTourJoueur())
 					{
 						if (plateau.getEchecMathNoir())
 						{
@@ -950,7 +957,7 @@ public class Controleur implements Initializable
 						afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
 					}
 
-					tourJoueur = !tourJoueur;
+					tourJoueur = !isTourJoueur();
 					paneSelect = null;
 					pieceSelect = null;
 				}
@@ -1534,6 +1541,12 @@ public class Controleur implements Initializable
 		this.fenetreAide = aide;
 
 	}
+	
+	public boolean isTourJoueur()
+	{
+		return tourJoueur;
+	}
+
 
 	@FXML
 	void boutonTestNbrMove(ActionEvent event)

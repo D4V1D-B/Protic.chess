@@ -7,58 +7,141 @@ import javafx.util.Pair;
 import modele.Move;
 import modele.Pieces;
 
-
 public class Bot
 {
 	public Plateau plateau;
 
-	public String jouerBotTest(Plateau plateau)
+	public String jouerBot(Plateau plateau)
 	{
-		this.plateau = plateau;  //prend le plateau
-		String deplacement = "";  //pour déplacer l'image
-		Move move = recherche(3).getValue(); //recherche du meilleur movement
-		Pieces piece = move.getPieces();  //prend la pièce du meilleur mouvement
-		deplacement += piece.getEmplacement().x + " " + piece.getEmplacement().y + move.getPieces().getNom() 
-				+ move.getPoint().x + move.getPoint().y; //Déplacement l'image
-		return deplacement; //retourne le déplacement pour l'image seulement
+		this.plateau = plateau; // prend le plateau
+		String deplacement = ""; // pour déplacer l'image
+		Move move = MinMax(3).getValue(); // recherche du meilleur movement
+		Pieces piece = move.getPieces(); // prend la pièce du meilleur mouvement
+		deplacement += piece.getEmplacement().x + " " + piece.getEmplacement().y + move.getPieces().getNom()
+				+ move.getPoint().x + move.getPoint().y; // Déplacement l'image
+		return deplacement; // retourne le déplacement pour l'image seulement
 
 	}
 
-	private Pair<Integer, Move> recherche(int depth)
+	private Pair<Integer, Move> MinMax(int depth)
+	{
+		if (plateau.getBlanc().getMouvementJouable().equals(null))
+		{
+			return rechercheMax(3);
+		}
+		else
+		{
+			return rechercheMin(3);
+		}
+
+	}
+
+	private Pair<Integer, Move> rechercheMax(int depth)
 	{
 		Pair<Integer, Move> bestMovement;
-		int valeur = 0;
-		if (depth == 0)
+		if (depth <= 0)
 		{
 			return new Pair<Integer, Move>(evaluerEquipe(), null);
 		}
 
-		ArrayList<Move> movePossible = generationMove(); //mouvement jouable
-		if (movePossible.size() == 0) //regarde si la liste est pas vide
+		ArrayList<Move> movePossible = generationMove(); // mouvement jouable
+		if (movePossible.size() == 0) // regarde si la liste est pas vide
 		{
 			return new Pair<Integer, Move>((int) Double.NEGATIVE_INFINITY, null);
 		}
 
-		bestMovement = new Pair<Integer, Move>((int) Double.NEGATIVE_INFINITY, null); //instancier best move
-		for (Move mov : movePossible) //pour chaque move
+		bestMovement = new Pair<Integer, Move>((int) Double.NEGATIVE_INFINITY, null); // instancier
+																						// best
+																						// move
+		for (Move mov : movePossible) // pour chaque move
 		{
-			Pieces piece = mov.getPieces(); //prend 1 pieces
-			Point anciennePosition = piece.getEmplacement(); //ancienne emplacement
+			Pieces piece = mov.getPieces(); // prend 1 pieces
+			Point anciennePosition = piece.getEmplacement(); // ancienne
+																// emplacement
 
-			Move reverseMove = deplacementDavid(anciennePosition, piece); //ancien emplacement / pieces pour faire le déplacememnt
-			int evaluation = -(recherche(depth - 1)).getKey(); //prend le meilleur move des noirs et regarde le meilleurs des blanc.
-			if (bestMovement.getKey() < evaluation)  //vérifie si le movement actuelle c'est le meilleur
+			Pieces reverseMove = deplacement(anciennePosition, piece); // ancien
+																		// emplacement
+																		// /
+																		// pieces
+																		// pour
+																		// faire
+																		// le
+																		// déplacememnt
+			int evaluation = (rechercheMin(depth - 1)).getKey(); // prend le
+																	// meilleur
+																	// move des
+																	// noirs et
+																	// regarde
+																	// le
+																	// meilleurs
+																	// des
+																	// blanc.
+			if (evaluation> bestMovement.getKey()) // vérifie si le movement
+													// actuelle c'est le
+													// meilleur
 			{
 				bestMovement = new Pair<Integer, Move>(evaluation, mov);
 			}
 
-			piece.setEmplacement(anciennePosition); //inversé le movement
-			plateau.deplacerPieces(piece);
-			if (reverseMove.getPieces() != null)
+			plateau.unMakeMove(bestMovement.getValue().getPoint(), piece, reverseMove );
+			plateau.actualiserTeam();
+
+		}
+
+		return bestMovement;
+
+	}
+
+	private Pair<Integer, Move> rechercheMin(int depth)
+	{
+
+		Pair<Integer, Move> bestMovement;
+		if (depth <= 0)
+		{
+			return new Pair<Integer, Move>(evaluerEquipe(), null);
+		}
+
+		ArrayList<Move> movePossible = generationMove(); // mouvement jouable
+		if (movePossible.size() == 0) // regarde si la liste est pas vide
+		{
+			return new Pair<Integer, Move>((int) Double.POSITIVE_INFINITY, null);
+		}
+
+		bestMovement = new Pair<Integer, Move>((int) Double.POSITIVE_INFINITY, null); // instancier
+																						// best
+																						// move
+		for (Move mov : movePossible) // pour chaque move
+		{
+			Pieces piece = mov.getPieces(); // prend 1 pieces
+			Point anciennePosition = piece.getEmplacement(); // ancienne
+																// emplacement
+
+			Pieces reverseMove = deplacement(anciennePosition, piece); // ancien
+																		// emplacement
+																		// /
+																		// pieces
+																		// pour
+																		// faire
+																		// le
+																		// déplacememnt
+			int evaluation = (rechercheMax(depth - 1)).getKey(); // prend le
+																	// meilleur
+																	// move des
+																	// noirs et
+																	// regarde
+																	// le
+																	// meilleurs
+																	// des
+																	// blanc.
+			if (evaluation < bestMovement.getKey()) // vérifie si le movement
+													// actuelle c'est le
+													// meilleur
 			{
-				reverseMove.getPieces().setEmplacement(reverseMove.getPoint());
-				plateau.deplacerPieces(reverseMove.getPieces());
+				bestMovement = new Pair<Integer, Move>(evaluation, mov);
 			}
+
+			
+			plateau.unMakeMove(bestMovement.getValue().getPoint(), piece, reverseMove);
 
 			plateau.actualiserTeam();
 
@@ -68,7 +151,7 @@ public class Bot
 
 	}
 
-	private Move deplacementDavid(Point anciennePosition, Pieces piecesDeplacer) 
+	private Pieces deplacement(Point anciennePosition, Pieces piecesDeplacer)
 	{
 		// On enleve la pieces de son ancien deplacement
 		plateau.getPlateau()[anciennePosition.x][anciennePosition.y] = null;
@@ -83,12 +166,8 @@ public class Bot
 			plateau.ajouterEnPassant(anciennePosition, piecesDeplacer);
 		}
 
-		Move reverseMove = null;
-		if (manger != null)
-		{
-			reverseMove = new Move(manger, manger.getEmplacement());
-		}
-		return reverseMove;
+		
+		return manger;
 	}
 
 	private int evaluerEquipe() // compare les valeur des équipe
@@ -97,14 +176,16 @@ public class Bot
 
 	}
 
-	public ArrayList<Move> generationMove() // créer un arrayList de Pieces/Point TODO movementjouable liste de move?
+	public ArrayList<Move> generationMove() // créer un arrayList de
+											// Pieces/Point TODO movementjouable
+											// liste de move?
 
 	{
 		ArrayList<Move> tousMoves = new ArrayList<Move>();
 		ArrayList<Pieces> toutesLesPieces = new ArrayList<Pieces>();
 		toutesLesPieces.addAll(plateau.getBlanc().getListePieces());
 		toutesLesPieces.addAll(plateau.getNoir().getListePieces());
-		
+
 		for (Pieces pieces : toutesLesPieces)
 		{
 			for (Point point : pieces.getMouvementJouable())
@@ -147,10 +228,10 @@ public class Bot
 			return nbmove;
 		}
 	}
-	
+
 	public void setPlateau(Plateau plateau)
 	{
-		this.plateau=plateau;
+		this.plateau = plateau;
 	}
 }
 
