@@ -11,21 +11,16 @@ public class Bot
 {
 	public Plateau plateau;
 
-	public String jouerBot(Plateau plateau)
+	public Move jouerBot(Plateau plateau)
 	{
 		this.plateau = plateau; // prend le plateau
-		String deplacement = ""; // pour déplacer l'image
-		Move move = MinMax(3).getValue(); // recherche du meilleur movement
-		Pieces piece = move.getPieces(); // prend la pièce du meilleur mouvement
-		deplacement += piece.getEmplacement().x + " " + piece.getEmplacement().y + move.getPieces().getNom()
-				+ move.getPoint().x + move.getPoint().y; // Déplacement l'image
-		return deplacement; // retourne le déplacement pour l'image seulement
+		return MinMax(3).getValue(); // retourne le déplacement pour l'image seulement
 
 	}
 
 	private Pair<Integer, Move> MinMax(int depth)
 	{
-		if (plateau.getBlanc().getMouvementJouable().equals(null))
+		if (!plateau.getNoir().getMouvementJouable().equals(null))
 		{
 			return rechercheMax(3);
 		}
