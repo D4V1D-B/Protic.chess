@@ -1187,7 +1187,7 @@ public class Controleur implements Initializable
 		if (positionFinale.equals("Castle"))
 		{
 			Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()), new SimpleStringProperty(positionFinale),
-					new SimpleStringProperty(creerFen()), p.isWhite());
+					new SimpleStringProperty(creerFen()));
 
 			list.add(m.toStringCastle());
 			arrayMouvement.add(m);
@@ -1195,7 +1195,7 @@ public class Controleur implements Initializable
 		else
 		{
 			Mouvement m = new Mouvement(new SimpleStringProperty(p.getNom()), new SimpleStringProperty(positionFinale),
-					new SimpleStringProperty(creerFen()), p.isWhite());
+					new SimpleStringProperty(creerFen()));
 
 			list.add(m.toString());
 			arrayMouvement.add(m);
