@@ -54,11 +54,8 @@ public class CavalierTest
 	{
 		cavalierBlanc.setMouvementPossible(vide, pointRoi);
 		cavalierNoir.setMouvementPossible(vide, pointRoi);
-<<<<<<< Updated upstream
 		// Pieces[][] plateau, Point positionRoiEnemy
-=======
 //		Pieces[][] plateau, Point positionRoiEnemy
->>>>>>> Stashed changes
 		// cavalier du bord peut aller sur 1,6 / 2,5 / 2,3 / 1,2
 		assertEquals(true,
 				cavalierBlanc.getMouvementPossible().contains(new Point(2, 1)));
@@ -81,7 +78,6 @@ public class CavalierTest
 
 		//test manger par pieces
 		cavalierNoir.getMouvementPossible().clear();
-<<<<<<< Updated upstream
 		cavalierNoir.setMouvementPossible(blanc, pointRoi);
 		cavalierCoin.setMouvementPossible(noir, pointRoi);
 		// noir
@@ -99,7 +95,7 @@ public class CavalierTest
 		// assertEquals(true,
 		// cavalierNoir.getMouvementPossible().contains(new Point(2, 1)));
 		// blanc
-		assertEquals(true, cavalierCoin.getMouvementPossible().contains(new Point(6, 5)));
+		assertEquals(false, cavalierCoin.getMouvementPossible().contains(new Point(6, 5)));
 		Cavalier attaqueRoi = new Cavalier("cavalierc", true, new Point(2, 1));
 		Roi roi = new Roi("roi", false, pointRoi);
 		vide[pointRoi.x][pointRoi.y] = roi;
@@ -115,7 +111,6 @@ public class CavalierTest
 //		vide[pointRoi.x][pointRoi.y] = roi;
 //		Triplets test = attaqueRoi.setMouvementPossible(vide, pointRoi);
 //		assertEquals(false, test.equals(null));
-=======
 		blanc[cavalierNoir.getEmplacement().x][cavalierNoir.getEmplacement().y]=cavalierNoir;
 		noir[cavalierCoin.getEmplacement().x][cavalierCoin.getEmplacement().y]=cavalierCoin;
 		cavalierNoir.setMouvementPossible(blanc, pointRoi);
@@ -143,14 +138,12 @@ public class CavalierTest
 		assertEquals(true,
 				!cavalierCoin.getMouvementPossible().contains(new Point(6, 5)));
 		
-		Cavalier attaqueRoi = new Cavalier("cavalierc", true, new Point(2, 1));
-		Roi roi = new Roi("roi",false,pointRoi);
-		vide[pointRoi.x][pointRoi.y]=roi;
-		Triplets test = attaqueRoi.setMouvementPossible(vide, pointRoi);
+		Cavalier attaqueRoi1 = new Cavalier("cavalierc", true, new Point(2, 1));
+		Roi roi1 = new Roi("roi",false,pointRoi);
+		vide[pointRoi.x][pointRoi.y]=roi1;
+		Triplets test1 = attaqueRoi1.setMouvementPossible(vide, pointRoi);
 		assertEquals(false,
-				test.equals(null));
-
->>>>>>> Stashed changes
+				test1.equals(null));
 	}
 
 	@Test
