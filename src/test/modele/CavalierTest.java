@@ -6,12 +6,14 @@ import org.junit.Before;
 import org.junit.Test;
 import modele.Cavalier;
 import modele.Pieces;
+import modele.Roi;
+import modele.Triplets;
 
 public class CavalierTest
 {
 	Cavalier cavalierBlanc, cavalierNoir, cavalierCoin;
 	Pieces[][] vide, blanc, noir;
-	Point roi = new Point(0, 0);
+	Point pointRoi = new Point(0, 0);
 
 	// public Cavalier(String nom, boolean couleur, Point position, Plateau
 	// plateau,
@@ -129,25 +131,43 @@ public class CavalierTest
 		assertEquals("cavalier2", cavalierNoir.getNom());
 		assertEquals("cavalier3", cavalierCoin.getNom());
 	}
-	
+
 	@Test
 	public void testIsWhitePiece()
 	{
-	
+
 		assertEquals(true, cavalierBlanc.isWhite());
 		assertEquals(false, cavalierNoir.isWhite());
 		assertEquals(true, cavalierCoin.isWhite());
 	}
-	
+
 	@Test
 	public void testSetCouleurPiece()
 	{
 		cavalierBlanc.setCouleur(false);
 		cavalierNoir.setCouleur(true);
 		cavalierCoin.setCouleur(false);
-		
+
 		assertEquals(false, cavalierBlanc.isWhite());
 		assertEquals(true, cavalierNoir.isWhite());
 		assertEquals(false, cavalierCoin.isWhite());
+	}
+
+	{
+		Cavalier attaqueRoi = new Cavalier("cavalierc", true, new Point(2, 1));
+		Roi roi = new Roi("roi", false, pointRoi);
+		vide[pointRoi.x][pointRoi.y] = roi;
+		Triplets test = attaqueRoi.setMouvementPossible(vide, pointRoi);
+		assertEquals(false, test.equals(null));
+		// noir
+		assertEquals(true, !cavalierNoir.getMouvementPossible().contains(new Point(2, 1)));
+		// //blanc
+		assertEquals(true, !cavalierCoin.getMouvementPossible().contains(new Point(6, 5)));
+
+//		Cavalier attaqueRoi = new Cavalier("cavalierc", true, new Point(2, 1));
+//		Roi roi = new Roi("roi", false, pointRoi);
+//		vide[pointRoi.x][pointRoi.y] = roi;
+//		Triplets test = attaqueRoi.setMouvementPossible(vide, pointRoi);
+//		assertEquals(false, test.equals(null));
 	}
 }
