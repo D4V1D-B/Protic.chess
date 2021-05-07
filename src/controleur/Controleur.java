@@ -49,6 +49,7 @@ import javafx.stage.Stage;
 import modele.Cavalier;
 import modele.Fou;
 import modele.Mouvement;
+import modele.Move;
 import modele.Pieces;
 import modele.Pion;
 import modele.Reine;
@@ -317,12 +318,40 @@ public class Controleur implements Initializable
 	private Button boutonMouvementArriere;
 
 	@FXML
+	private Button boutonAnalyse;
+
+	@FXML
 	private Button boutonMouvementAvant;
+
 	private Stage fenetreAide;
 
 	@FXML
 	void analyse(MouseEvent event)
 	{
+		// utiliser mouvementSelect.getFen() pour trouver la fen du plateau
+		// charger.
+		Move m = new Move(new Pion("p", true, new Point(3, 1)), new Point(3, 2));
+		// J'imagine que l'emplacement de la piece est celle avant le mouvement
+		// et que le point de move est le mouvement suggéré
+
+		String nomDuPane = recherchePane(m.getPoint());
+		Pane paneConseil = null;
+		Pane panePiece = null;
+		for (Pane pane : allPane())
+		{
+
+			if (pane.getId().equals(nomDuPane))
+			{
+				paneConseil = pane;
+
+			}
+			if (pane.getId().equals(recherchePane(m.getPieces().getEmplacement())))
+			{
+				panePiece = pane;
+			}
+		}
+		paneConseil.setStyle("-fx-background-color:blue; -fx-border-color: black");
+		panePiece.setStyle("-fx-background-color:blue; -fx-border-color: black");
 
 	}
 
@@ -500,10 +529,7 @@ public class Controleur implements Initializable
 		{
 			arrayMouvement.clear();
 		}
-		tuPeuxBoujerLesPieces = true;
-		boutonRevenirAuJeu.setDisable(true);
-		boutonMouvementArriere.setDisable(true);
-		boutonMouvementAvant.setDisable(true);
+
 		list = FXCollections.observableArrayList();
 		listDeMouvement.setItems(list);
 
@@ -1295,14 +1321,11 @@ public class Controleur implements Initializable
 		alert.setTitle("Fin de Partie !");
 		alert.setHeaderText(finParti);
 		alert.setContentText(null);
-		ButtonType analyse = new ButtonType("Analyse");
-		alert.getButtonTypes().setAll(analyse, ButtonType.OK);
-		Optional<ButtonType> choice = alert.showAndWait();
 
-		if (choice.get() == analyse)
-		{
+		alert.getButtonTypes().setAll(ButtonType.OK);
+		alert.showAndWait();
 
-		}
+		chargerMouvement(null);
 	}
 
 	private String creerFen()
@@ -1512,6 +1535,7 @@ public class Controleur implements Initializable
 		boutonRevenirAuJeu.setDisable(b);
 		boutonMouvementArriere.setDisable(b);
 		boutonMouvementAvant.setDisable(b);
+		boutonAnalyse.setDisable(b);
 	}
 
 	private void jouerSon(String son)
