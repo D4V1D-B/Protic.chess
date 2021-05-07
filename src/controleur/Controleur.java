@@ -347,7 +347,7 @@ public class Controleur implements Initializable
 	{
 		// utiliser mouvementSelect.getFen() pour trouver la fen du plateau
 		// charger.
-		
+
 		Move m = bot.jouerBot(plateau);
 		// J'imagine que l'emplacement de la piece est celle avant le mouvement
 		// et que le point de move est le mouvement suggéré
@@ -920,8 +920,9 @@ public class Controleur implements Initializable
 		if (isTourJoueur() == false)
 		{
 			Move m = bot.jouerBot(this.plateau);
-			Pieces piece = m.getPieces(); // prend la pièce du meilleur mouvement
-			
+			Pieces piece = m.getPieces(); // prend la pièce du meilleur
+											// mouvement
+
 			Point pointFinale = piece.getEmplacement();
 			Point pointInitiale = m.getPoint();
 			Pane paneFinale = null;
