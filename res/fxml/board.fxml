@@ -26,8 +26,8 @@
                <items>
                   <Menu mnemonicParsing="false" text="Apparence">
                     <items>
-                        <RadioMenuItem mnemonicParsing="false" text="Claire" />
-                        <RadioMenuItem mnemonicParsing="false" text="Sombre" />
+                        <RadioMenuItem fx:id="radioClaire" mnemonicParsing="false" onAction="#radioClaire" text="Claire" />
+                        <RadioMenuItem fx:id="radioSombre" mnemonicParsing="false" onAction="#radioSombre" text="Sombre" />
                     </items>
                   </Menu>
                   <CheckMenuItem fx:id="CheckAI" mnemonicParsing="false" text="Jouer contre AI" />
