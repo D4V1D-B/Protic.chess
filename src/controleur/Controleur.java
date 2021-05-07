@@ -38,6 +38,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -331,14 +332,21 @@ public class Controleur implements Initializable
 	private Stage fenetreAide;
 
 	@FXML
+	private BorderPane leParent;
+
+	@FXML
 	void radioClaire(ActionEvent event)
 	{
+		themeClaire = true;
+		radioSombre.setSelected(false);
 
 	}
 
 	@FXML
 	void radioSombre(ActionEvent event)
 	{
+		themeClaire = false;
+		radioClaire.setSelected(false);
 
 	}
 
