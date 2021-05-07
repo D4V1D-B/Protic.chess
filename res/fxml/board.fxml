@@ -417,7 +417,7 @@
                                     <Insets bottom="10.0" top="10.0" />
                                  </VBox.margin>
                               </Button>
-                              <VBox prefHeight="149.0" prefWidth="253.0" spacing="10.0" style="-fx-background-color: silver;">
+                              <VBox prefHeight="191.0" prefWidth="253.0" spacing="10.0" style="-fx-background-color: silver;">
                                  <children>
                                     <Button fx:id="boutonChargerMouvements" mnemonicParsing="false" onMouseClicked="#chargerMouvement" prefHeight="40.0" prefWidth="257.0" text="Charger un mouvement" textAlignment="CENTER" />
                                     <HBox prefHeight="42.0" prefWidth="253.0">
@@ -435,6 +435,7 @@
                                        </children>
                                     </HBox>
                                     <Button fx:id="boutonRevenirAuJeu" mnemonicParsing="false" onMouseClicked="#revenirAuJeu" prefHeight="40.0" prefWidth="256.0" text="Revenir au jeu" />
+                                    <Button fx:id="boutonAnalyse" mnemonicParsing="false" onMouseClicked="#analyse" prefHeight="38.0" prefWidth="249.0" text="Analyse" />
                                  </children>
                                  <VBox.margin>
                                     <Insets />
@@ -445,7 +446,6 @@
                               </VBox>
                               <Button mnemonicParsing="false" onAction="#boutonTest" text="Test" />
                               <Button mnemonicParsing="false" onAction="#boutonTestNbrMove" text="Testnbmove" />
-                              <Button mnemonicParsing="false" onMouseClicked="#analyse" text="Analyse" />
                            </children>
                         </VBox>
                      </children>

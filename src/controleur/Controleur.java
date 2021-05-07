@@ -49,6 +49,7 @@ import javafx.stage.Stage;
 import modele.Cavalier;
 import modele.Fou;
 import modele.Mouvement;
+import modele.Move;
 import modele.Pieces;
 import modele.Pion;
 import modele.Reine;
@@ -67,6 +68,9 @@ public class Controleur implements Initializable
 	private Pane paneSelect;
 	private ArrayList<Circle> listeCercle = new ArrayList<Circle>();
 	private boolean tourJoueur = true;
+
+
+
 	private String file = "sauvegard.txt";
 	private Bot bot = new Bot();
 	int indiceDuMouvement = 0;
@@ -314,12 +318,41 @@ public class Controleur implements Initializable
 	private Button boutonMouvementArriere;
 
 	@FXML
+	private Button boutonAnalyse;
+
+	@FXML
 	private Button boutonMouvementAvant;
+
 	private Stage fenetreAide;
 
 	@FXML
 	void analyse(MouseEvent event)
 	{
+		// utiliser mouvementSelect.getFen() pour trouver la fen du plateau
+		// charger.
+		
+		Move m = bot.jouerBot(plateau);
+		// J'imagine que l'emplacement de la piece est celle avant le mouvement
+		// et que le point de move est le mouvement suggéré
+
+		String nomDuPane = recherchePane(m.getPoint());
+		Pane paneConseil = null;
+		Pane panePiece = null;
+		for (Pane pane : allPane())
+		{
+
+			if (pane.getId().equals(nomDuPane))
+			{
+				paneConseil = pane;
+
+			}
+			if (pane.getId().equals(recherchePane(m.getPieces().getEmplacement())))
+			{
+				panePiece = pane;
+			}
+		}
+		paneConseil.setStyle("-fx-background-color:blue; -fx-border-color: black");
+		panePiece.setStyle("-fx-background-color:blue; -fx-border-color: black");
 
 	}
 
@@ -472,18 +505,19 @@ public class Controleur implements Initializable
 		resetTotal();
 		boutonDisable(true);
 		CheckMenuSon();
+		
 	}
 
 	public void setLabelTourCouleur(Label labelTourCouleur)
 	{
-		if (this.tourJoueur)
+		if (this.isTourJoueur())
 		{
 			this.labelTourCouleur.setText("Blanc");
 		}
 		else
 		{
 			this.labelTourCouleur.setText("Noir");
-			if (CheckAI.isSelected())
+			if ( CheckAI.isSelected())
 			{
 				JouerAI();
 			}
@@ -496,10 +530,7 @@ public class Controleur implements Initializable
 		{
 			arrayMouvement.clear();
 		}
-		tuPeuxBoujerLesPieces = true;
-		boutonRevenirAuJeu.setDisable(true);
-		boutonMouvementArriere.setDisable(true);
-		boutonMouvementAvant.setDisable(true);
+
 		list = FXCollections.observableArrayList();
 		listDeMouvement.setItems(list);
 
@@ -863,11 +894,13 @@ public class Controleur implements Initializable
 		{
 			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
 		}
-		if (tourJoueur == false)
+		if (isTourJoueur() == false)
 		{
-			String position = bot.jouerBotTest(this.plateau);
-			Point pointFinale = new Point((position.charAt(4) - 48), (position.charAt(5) - 48));
-			Point pointInitiale = new Point((position.charAt(0) - 48), (position.charAt(2) - 48));
+			Move m = bot.jouerBot(this.plateau);
+			Pieces piece = m.getPieces(); // prend la pièce du meilleur mouvement
+			
+			Point pointFinale = piece.getEmplacement();
+			Point pointInitiale = m.getPoint();
 			Pane paneFinale = null;
 			for (int i = 0; i < allPanes.length; i++)
 			{
@@ -888,18 +921,21 @@ public class Controleur implements Initializable
 				}
 			}
 			deplacerImage(paneSelect, paneInitiale, pieceSelect);
-			tourJoueur = !tourJoueur;
+			tourJoueur = !isTourJoueur();
 		}
 	}
 
 	@FXML
 	void mouseClick(MouseEvent event)
 	{
+		
 		if (tuPeuxBoujerLesPieces)
 		{
 			Pane tableauPane[] = allPane();
 
 			Pane paneClick = (Pane) event.getSource();
+			
+	
 
 			if (pieceSelect == null)
 			{
@@ -907,7 +943,7 @@ public class Controleur implements Initializable
 				pieceSelect = plateau.trouverPieces(rechercheCoordonnee(paneClick.getId()));
 				paneSelect = paneClick;
 
-				if (pieceSelect != null && pieceSelect.isWhite() == tourJoueur)
+				if (pieceSelect != null && pieceSelect.isWhite() == isTourJoueur())
 				{
 					paneSelect.setStyle("-fx-background-color:deeppink; -fx-border-color: black");
 					ArrayList<Point> tableau = pieceSelect.getMouvementJouable();
@@ -930,12 +966,12 @@ public class Controleur implements Initializable
 			{
 
 				if (pieceSelect.getMouvementJouable().contains(rechercheCoordonnee(paneClick.getId()))
-						&& pieceSelect.isWhite() == tourJoueur)
+						&& pieceSelect.isWhite() == isTourJoueur())
 				{
 					jouerSon("/son/Move.mp3");
 					deplacer(pieceSelect, paneClick);
 
-					if (tourJoueur)
+					if (isTourJoueur())
 					{
 						if (plateau.getEchecMathNoir())
 						{
@@ -957,7 +993,7 @@ public class Controleur implements Initializable
 						afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
 					}
 
-					tourJoueur = !tourJoueur;
+					tourJoueur = !isTourJoueur();
 					paneSelect = null;
 					pieceSelect = null;
 				}
@@ -1288,14 +1324,11 @@ public class Controleur implements Initializable
 		alert.setTitle("Fin de Partie !");
 		alert.setHeaderText(finParti);
 		alert.setContentText(null);
-		ButtonType analyse = new ButtonType("Analyse");
-		alert.getButtonTypes().setAll(analyse, ButtonType.OK);
-		Optional<ButtonType> choice = alert.showAndWait();
 
-		if (choice.get() == analyse)
-		{
+		alert.getButtonTypes().setAll(ButtonType.OK);
+		alert.showAndWait();
 
-		}
+		chargerMouvement(null);
 	}
 
 	private String creerFen()
@@ -1505,6 +1538,7 @@ public class Controleur implements Initializable
 		boutonRevenirAuJeu.setDisable(b);
 		boutonMouvementArriere.setDisable(b);
 		boutonMouvementAvant.setDisable(b);
+		boutonAnalyse.setDisable(b);
 	}
 
 	private void jouerSon(String son)
@@ -1541,6 +1575,12 @@ public class Controleur implements Initializable
 		this.fenetreAide = aide;
 
 	}
+	
+	public boolean isTourJoueur()
+	{
+		return tourJoueur;
+	}
+
 
 	@FXML
 	void boutonTestNbrMove(ActionEvent event)
