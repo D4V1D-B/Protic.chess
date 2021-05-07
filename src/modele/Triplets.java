@@ -8,9 +8,9 @@ public class Triplets
 	public Triplets(Integer state, Pieces attaquant, Pieces defendant)
 	{
 		super();
-		this.state = state;
-		this.attaquant = attaquant;
-		this.defendant = defendant;
+		setState(state);
+		 setAttaquant(attaquant);
+		 setDefendant(defendant);
 	}
 	public Integer getState()
 	{
