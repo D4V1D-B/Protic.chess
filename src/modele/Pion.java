@@ -49,25 +49,10 @@ public class Pion extends Pieces
 				this.getMouvementPossible().add(new Point(i, j - 1));
 			}
 		}
-		ArrayList<Point> temp = getMouvementDangereux(plateau);
-		getMouvementPossible().addAll(temp);
-		Triplets tripletstemp = null;
-
-		for (Point p : temp)
-		{
-			if (p.equals(positionRoiEnemy))
-				tripletstemp = new Triplets(0,this, plateau[positionRoiEnemy.x][positionRoiEnemy.y]);
-		}
-
-		return tripletstemp;
-	}
-
-	public ArrayList<Point> getMouvementDangereux(Pieces[][] plateau)
-	{
 		ArrayList<Point> mouvementDangereux = new ArrayList<Point>();
 
-		int i = this.getEmplacement().x;
-		int j = this.getEmplacement().y;
+		 i = this.getEmplacement().x;
+		 j = this.getEmplacement().y;
 
 		if (this.isWhite())
 		{
@@ -104,8 +89,56 @@ public class Pion extends Pieces
 				mouvementDangereux.add(new Point(i - 1, j - 1));
 			}
 		}
-		return mouvementDangereux;
+		getMouvementPossible().addAll(mouvementDangereux);
+		Triplets tripletstemp = null;
 
+		for (Point p : mouvementDangereux)
+		{
+			if (p.equals(positionRoiEnemy))
+				tripletstemp = new Triplets(0,this, plateau[positionRoiEnemy.x][positionRoiEnemy.y]);
+		}
+
+		return tripletstemp;
+	}
+
+	public ArrayList<Point> getMouvementDangereux()
+	{
+		ArrayList<Point> mouvementDangereux = new ArrayList<Point>();
+
+		int i = this.getEmplacement().x;
+		int j = this.getEmplacement().y;
+
+		if (this.isWhite())
+		{
+			// droite case diagonal
+			if (i + 1 <= 7 && j + 1 <= 7)
+			{
+				mouvementDangereux.add(new Point(i + 1, j + 1));
+			}
+
+			// gauche case diagonal
+			if (i - 1 >= 0 && j + 1 <= 7)
+			{
+				mouvementDangereux.add(new Point(i - 1, j + 1));
+			}
+
+		}
+		else
+		{
+			// droite case diagonal
+
+			if (i + 1 <= 7 && j - 1 >= 0)
+			{
+				mouvementDangereux.add(new Point(i + 1, j - 1));
+			}
+
+			// gauche case diagonal
+			if (i - 1 >= 0 && j - 1 >= 0)
+			{
+				mouvementDangereux.add(new Point(i - 1, j - 1));
+			}
+		}
+		return mouvementDangereux;
 	}
 
 	@Override
