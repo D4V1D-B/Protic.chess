@@ -738,7 +738,7 @@ public class Plateau
 		{
 			for (Pieces p : listePiece)
 			{
-				if (p.getClass().toString() != "class modele.Pion")
+				if (!p.getClass().toString().contains("Pion"))
 				{
 					attaquePossible.addAll(p.getMouvementPossible());
 				}

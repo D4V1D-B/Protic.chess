@@ -193,7 +193,7 @@ public class Bot
 			// meilleurs
 			// des
 			// blanc.
-			plateau.unMakeMove(bestMovement.getValue().getPoint(), piece, reverseMove);
+			plateau.unMakeMove(anciennePosition, piece, reverseMove);
 
 			if (evaluation >= beta)
 			{
