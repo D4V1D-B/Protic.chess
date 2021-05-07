@@ -927,27 +927,22 @@ public class Controleur implements Initializable
 		}
 		if (isTourJoueur() == false)
 		{
-			Move m = bot.jouerBot(this.plateau);
-			Pieces piece = m.getPieces(); // prend la pièce du meilleur
-											// mouvement
-
-			Point pointFinale = piece.getEmplacement();
-			Point pointInitiale = m.getPoint();
+			Move move = bot.jouerBot(this.plateau);
 			Pane paneFinale = null;
 			for (int i = 0; i < allPanes.length; i++)
 			{
-				if (allPanes[i].getId().equals(recherchePane(pointFinale)))
+				if (allPanes[i].getId().equals(recherchePane(move.getPoint())))
 				{
 					paneFinale = allPanes[i];
 				}
 			}
 			paneSelect = paneFinale;
-			pieceSelect = plateau.trouverPieces(pointInitiale);
+			pieceSelect = plateau.trouverPieces(move.getPieces().getEmplacement());
 			deplacer(pieceSelect, paneSelect);
 			Pane paneInitiale = null;
 			for (int i = 0; i < allPanes.length; i++)
 			{
-				if (allPanes[i].getId().equals(recherchePane(pointInitiale)))
+				if (allPanes[i].getId().equals(recherchePane(move.getPieces().getEmplacement())))
 				{
 					paneInitiale = allPanes[i];
 				}
