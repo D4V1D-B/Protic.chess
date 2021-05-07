@@ -10,7 +10,7 @@ import modele.Mouvement;
 
 public class MouvementTest
 {
-	Mouvement mTourB, mTourN, mReineN, mReineB, mFouN, mRoiB, mRoiN;
+	Mouvement mTourB, mTourN, mReineN, mReineB, mFouN, mRoiB, mRoiN, mCavalierB,mPionB;
 
 	@Before
 	public void testMouvement()
@@ -29,6 +29,11 @@ public class MouvementTest
 				new SimpleStringProperty("/8/8/8/8/8/8/8/8"));
 		mRoiN = new Mouvement(new SimpleStringProperty("k"), new SimpleStringProperty("nouvelEmplacement"),
 				new SimpleStringProperty("/8/8/8/8/8/8/8/8"));
+		mCavalierB = new Mouvement(new SimpleStringProperty("N"), new SimpleStringProperty("nouvelEmplacement"),
+				new SimpleStringProperty("/8/8/8/8/8/8/8/8"));
+		mPionB = new Mouvement(new SimpleStringProperty("P"), new SimpleStringProperty("nouvelEmplacement"),
+				new SimpleStringProperty("/8/8/8/8/8/8/8/8"));
+
 
 	}
 
@@ -40,6 +45,8 @@ public class MouvementTest
 		assertEquals("reine ", mReineN.getNomCompletDeLaPiece());
 		assertEquals("reine ", mReineB.getNomCompletDeLaPiece());
 		assertEquals("fou ", mFouN.getNomCompletDeLaPiece());
+		assertEquals("cavalier ", mCavalierB.getNomCompletDeLaPiece());
+		assertEquals("pion ", mPionB.getNomCompletDeLaPiece());
 	}
 
 	@Test

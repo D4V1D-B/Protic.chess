@@ -10,11 +10,6 @@ public class Fou extends Pieces
 		super(nom, couleur, position);
 	}
 
-	public Fou(String nom, boolean couleur, Point position, Pieces[][] plateau)
-	{
-		super(nom, couleur, position);
-	}
-
 	public Triplets setMouvementPossible(Pieces[][] plateau, Point positionRoiEnemy)
 	{
 		this.getMouvementPossible().clear();

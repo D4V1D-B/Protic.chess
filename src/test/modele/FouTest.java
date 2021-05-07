@@ -15,7 +15,7 @@ public class FouTest
 	Cavalier cavalierBlanc, cavalierNoir;
 	Pieces[][] vide, blanc,noir;
 	Point pointRoi= new Point(0,0);
-	Fou fouNoir, fouBlanc;
+	Fou fouNoir, fouBlanc,fouTestBasGauche;
 
 	// public Cavalier(String nom, boolean couleur, Point position, Plateau
 	// plateau,
@@ -53,16 +53,13 @@ public class FouTest
 	@Test
 	public void testSetMouvementPossible()
 	{
-		Triplets test = fouBlanc.setMouvementPossible(vide, pointRoi);
-		assertEquals(false,
-				test.equals(null));
+		fouBlanc.setMouvementPossible(vide, pointRoi);
 		fouNoir.setMouvementPossible(vide, pointRoi);
-		//Pieces[][] plateau, Point positionRoiEnemy
 		//test mouvement de base 
-		assertEquals(false,
-				fouNoir.getMouvementPossible().contains(new Point(0, 0)));
-		assertEquals(true,
-				fouBlanc.getMouvementPossible().contains(new Point(0, 0)));
+		assertEquals(12,
+				fouNoir.getMouvementPossible().size());
+		assertEquals(13,
+				fouBlanc.getMouvementPossible().size());
 		assertEquals(true,
 				fouNoir.getMouvementPossible().contains(new Point(7, 7)));
 		assertEquals(true,
@@ -71,43 +68,74 @@ public class FouTest
 				fouNoir.getMouvementPossible().contains(new Point(5, 3)));
 		assertEquals(true,
 				fouBlanc.getMouvementPossible().contains(new Point(7, 1)));
-		assertEquals(true,
-				fouNoir.getMouvementPossible().contains(new Point(1, 7)));
-		assertEquals(true,
-				fouBlanc.getMouvementPossible().contains(new Point(2, 6)));
+
+		//essaie de sortir par la droite 
 		assertEquals(false,
-				fouNoir.getMouvementPossible().contains(new Point(-1, -1)));
+				fouBlanc.getMouvementPossible().contains(new Point(8, 0)));
+		//essaie de sortir par la droite par en haut
 		assertEquals(false,
-				fouBlanc.getMouvementPossible().contains(new Point(8, 8)));
+				fouBlanc.getMouvementPossible().contains(new Point(0, 8)));
+		//essaie sortir bas
+		fouTestBasGauche = new Fou("fou", false, new Point(0, 0));	
+		fouTestBasGauche.setMouvementPossible(vide, pointRoi);
+		assertEquals(false,
+				fouTestBasGauche.getMouvementPossible().contains(new Point(1, -1)));
+		//essaie de sortir par gauche
+		assertEquals(false,
+				fouTestBasGauche.getMouvementPossible().contains(new Point(-1, 1)));
+		
 		
 		//test manger par pieces
 		fouNoir.getMouvementPossible().clear();
 		fouBlanc.getMouvementPossible().clear();
 		fouNoir.setMouvementPossible(blanc, pointRoi);
 		fouBlanc.setMouvementPossible(noir, pointRoi);
-		assertEquals(true,
-				fouBlanc.getMouvementPossible().contains(new Point(3, 3)));
-		assertEquals(true,
-				fouNoir.getMouvementPossible().contains(new Point(5, 5)));
-		assertEquals(false,
-				fouBlanc.getMouvementPossible().contains(new Point(6, 2)));
-		assertEquals(false,
-				fouNoir.getMouvementPossible().contains(new Point(2, 6)));
-		
+		fouTestBasGauche.getMouvementPossible().clear();
+		fouTestBasGauche.setMouvementPossible(blanc, pointRoi);
+		assertEquals(4,
+				fouBlanc.getMouvementPossible().size());
+		assertEquals(4,
+				fouNoir.getMouvementPossible().size());
+		assertEquals(1,
+				fouTestBasGauche.getMouvementPossible().size());
+
 		
 		//test bloquer par pieces
 		fouNoir.getMouvementPossible().clear();
 		fouBlanc.getMouvementPossible().clear();
 		fouNoir.setMouvementPossible(noir, pointRoi);
 		fouBlanc.setMouvementPossible(blanc, pointRoi);
-		assertEquals(false,
-				fouBlanc.getMouvementPossible().contains(new Point(3, 3)));
-		assertEquals(false,
-				fouNoir.getMouvementPossible().contains(new Point(5, 5)));
-		assertEquals(false,
-				fouBlanc.getMouvementPossible().contains(new Point(6, 2)));
-		assertEquals(false,
-				fouNoir.getMouvementPossible().contains(new Point(2, 6)));
+		assertEquals(0,
+				fouBlanc.getMouvementPossible().size());
+		assertEquals(0,
+				fouNoir.getMouvementPossible().size());
+		
+		//Test triplets
+		//++
+		Fou attaqueRoi = new Fou("cavalierc", true, new Point(4, 4));
+		Roi roi = new Roi("roi", false, new Point(7,7));
+		vide[roi.getEmplacement().x][roi.getEmplacement().y] = roi;
+		Triplets test = attaqueRoi.setMouvementPossible(vide, roi.getEmplacement());
+		assertEquals(true, test.getState()==8);
+		assertEquals(true, test.getAttaquant().equals(attaqueRoi));
+		assertEquals(true, test.getDefendant().equals(roi));
 
+		//--
+		roi.setEmplacement(pointRoi);
+		vide[roi.getEmplacement().x][roi.getEmplacement().y] = roi;
+		test = attaqueRoi.setMouvementPossible(vide, roi.getEmplacement());
+		assertEquals(true, test.getState()==5);
+		
+		//-+
+		roi.setEmplacement(new Point(3,5));
+		vide[roi.getEmplacement().x][roi.getEmplacement().y] = roi;
+		test = attaqueRoi.setMouvementPossible(vide, roi.getEmplacement());
+		assertEquals(true, test.getState()==6);
+		
+		//+-
+		roi.setEmplacement(new Point(5,3));
+		vide[roi.getEmplacement().x][roi.getEmplacement().y] = roi;
+		test = attaqueRoi.setMouvementPossible(vide, roi.getEmplacement());
+		assertEquals(true, test.getState()==7);
 	}
 }

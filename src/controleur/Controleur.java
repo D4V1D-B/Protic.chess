@@ -73,6 +73,7 @@ public class Controleur implements Initializable
 	private String file = "sauvegard.txt";
 	private Bot bot = new Bot();
 	int indiceDuMouvement = 0;
+	Mouvement mouvementSelect;
 	private final ArrayList<Point> LISTPOINTROCK = new ArrayList<Point>()
 	{
 		/**
@@ -320,6 +321,12 @@ public class Controleur implements Initializable
 	private Stage fenetreAide;
 
 	@FXML
+	void analyse(MouseEvent event)
+	{
+
+	}
+
+	@FXML
 	void boutonTest(ActionEvent event)
 	{
 		TextInputDialog inDialog = new TextInputDialog("p6p/2Q2q2/8/3rR3/3Bb3/8/2q2Q2/P6P/");
@@ -348,7 +355,7 @@ public class Controleur implements Initializable
 
 			placementActuel = creerFen();
 
-			Mouvement mouvementSelect = arrayMouvement.get(indiceDuMouvement);
+			mouvementSelect = arrayMouvement.get(indiceDuMouvement);
 			placerPiecesString(mouvementSelect.getFen().get());
 			boutonDisable(false);
 		}

@@ -640,7 +640,10 @@ public class Plateau
 		{
 			if (!equipeAttaque.getAttaquePossible().contains(p))
 			{
-				trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(p);
+				if((p.getX()-1==equipeDefense.getPositionRoi().x||p.getX()+1==equipeDefense.getPositionRoi().x)||echec.isEmpty())
+				{
+					trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(p);
+				}
 			}
 		}
 
