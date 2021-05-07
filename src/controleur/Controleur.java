@@ -339,7 +339,7 @@ public class Controleur implements Initializable
 	{
 		themeClaire = true;
 		radioSombre.setSelected(false);
-		leParent.getStylesheets().add("/res/css/claire.css");
+
 	}
 
 	@FXML
@@ -347,7 +347,7 @@ public class Controleur implements Initializable
 	{
 		themeClaire = false;
 		radioClaire.setSelected(false);
-		leParent.getStylesheets().add("/res/css/sombre.css");
+
 	}
 
 	@FXML
