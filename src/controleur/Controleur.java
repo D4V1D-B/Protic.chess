@@ -928,10 +928,12 @@ public class Controleur implements Initializable
 		if (isTourJoueur() == false)
 		{
 			Move move = bot.jouerBot(this.plateau);
+			System.out.println(move.getPoint());
+			System.out.println(move.getPieces().getEmplacement());
 			Pane paneFinale = null;
 			for (int i = 0; i < allPanes.length; i++)
 			{
-				if (allPanes[i].getId().equals(recherchePane(move.getPoint())))
+				if (allPanes[i].getId().equals(recherchePane(move.getPieces().getEmplacement())))
 				{
 					paneFinale = allPanes[i];
 				}
@@ -942,12 +944,15 @@ public class Controleur implements Initializable
 			Pane paneInitiale = null;
 			for (int i = 0; i < allPanes.length; i++)
 			{
-				if (allPanes[i].getId().equals(recherchePane(move.getPieces().getEmplacement())))
+				if (allPanes[i].getId().equals(recherchePane(move.getPoint())))
 				{
 					paneInitiale = allPanes[i];
 				}
 			}
-			deplacerImage(paneSelect, paneInitiale, pieceSelect);
+			System.out.println(paneSelect);
+			System.out.println(paneInitiale);
+			System.out.println(pieceSelect);
+			deplacerImage(paneInitiale, paneSelect, pieceSelect);
 			tourJoueur = !isTourJoueur();
 		}
 	}
