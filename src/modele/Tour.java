@@ -29,7 +29,7 @@ public class Tour extends Pieces
 		this.aBouger = true;
 	}
 
-	public triplets setMouvementPossible(Pieces[][] plateau, Point positionRoiEnemy)
+	public Triplets setMouvementPossible(Pieces[][] plateau, Point positionRoiEnemy)
 	{
 		this.getMouvementPossible().clear();
 		int situationRoiEnememy = 0;
@@ -213,10 +213,10 @@ public class Tour extends Pieces
 		pinPiecePossible = null;
 
 
-		triplets temp=null;
+		Triplets temp=null;
 		if(piecesPin!=null)
 		{
-			temp =new triplets(situationRoiEnememy,this,piecesPin);
+			temp =new Triplets(situationRoiEnememy,this,piecesPin);
 		}
 		
 		return temp;

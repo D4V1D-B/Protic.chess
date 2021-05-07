@@ -1,11 +1,11 @@
 package modele;
 
-public class triplets
+public class Triplets
 {
 	private Integer state;
 	private Pieces attaquant;
 	private Pieces defendant;
-	public triplets(Integer state, Pieces attaquant, Pieces defendant)
+	public Triplets(Integer state, Pieces attaquant, Pieces defendant)
 	{
 		super();
 		this.state = state;

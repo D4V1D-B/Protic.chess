@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import controleur.Plateau.Equipe;
 import modele.Pieces;
 import modele.Tour;
-import modele.triplets;
+import modele.Triplets;
 import modele.Fou;
 import modele.Roi;
 import modele.Pion;
@@ -246,9 +246,9 @@ public class Plateau
 
 	public void actualiserToutLesMouvementJouable(boolean tour)
 	{
-		ArrayList<triplets> piecesNoirPin = new ArrayList<triplets>();
-		ArrayList<triplets> piecesBlanchePin = new ArrayList<triplets>();
-		triplets temp = null;
+		ArrayList<Triplets> piecesNoirPin = new ArrayList<Triplets>();
+		ArrayList<Triplets> piecesBlanchePin = new ArrayList<Triplets>();
+		Triplets temp = null;
 		blanc.attaquePossible.clear();
 		noir.attaquePossible.clear();
 		blanc.clearMouvementJouable();
@@ -408,11 +408,11 @@ public class Plateau
 			noir.actualiserMouvementJouable();
 	}
 
-	public void filtrerCoup(ArrayList<triplets> piecesPin, Equipe equipeAttaque, Equipe equipeDefense)
+	public void filtrerCoup(ArrayList<Triplets> piecesPin, Equipe equipeAttaque, Equipe equipeDefense)
 	{
-		ArrayList<triplets> echec = new ArrayList<triplets>();
+		ArrayList<Triplets> echec = new ArrayList<Triplets>();
 
-		for (triplets p : piecesPin)
+		for (Triplets p : piecesPin)
 		{
 			if (p.getDefendant().getEmplacement() != equipeDefense.positionRoi)
 			{

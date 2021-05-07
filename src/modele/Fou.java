@@ -15,7 +15,7 @@ public class Fou extends Pieces
 		super(nom, couleur, position);
 	}
 
-	public triplets setMouvementPossible(Pieces[][] plateau, Point positionRoiEnemy)
+	public Triplets setMouvementPossible(Pieces[][] plateau, Point positionRoiEnemy)
 	{
 		this.getMouvementPossible().clear();
 
@@ -198,10 +198,10 @@ public class Fou extends Pieces
 		finMouvementPossible = false;
 		pinPiecePossible = null;
 		
-		triplets temp=null;
+		Triplets temp=null;
 		if(piecesPin!=null)
 		{
-			temp =new triplets(situationRoiEnememy,this,piecesPin);
+			temp =new Triplets(situationRoiEnememy,this,piecesPin);
 		}
 		
 		return temp;

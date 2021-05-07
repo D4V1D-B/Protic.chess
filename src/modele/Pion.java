@@ -17,7 +17,7 @@ public class Pion extends Pieces
 		super(nom, couleur, position);
 	}
 
-	public triplets setMouvementPossible(Pieces[][] plateau, Point positionRoiEnemy)
+	public Triplets setMouvementPossible(Pieces[][] plateau, Point positionRoiEnemy)
 	{
 		this.getMouvementPossible().clear();
 
@@ -56,12 +56,12 @@ public class Pion extends Pieces
 		}
 		ArrayList<Point> temp = getMouvementDangereux(plateau);
 		getMouvementPossible().addAll(temp);
-		triplets tripletstemp = null;
+		Triplets tripletstemp = null;
 
 		for (Point p : temp)
 		{
 			if (p.equals(positionRoiEnemy))
-				tripletstemp = new triplets(0,this, plateau[positionRoiEnemy.x][positionRoiEnemy.y]);
+				tripletstemp = new Triplets(0,this, plateau[positionRoiEnemy.x][positionRoiEnemy.y]);
 		}
 
 		return tripletstemp;
