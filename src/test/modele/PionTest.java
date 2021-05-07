@@ -1,4 +1,4 @@
-package test.modele;
+ package test.modele;
 
 import static org.junit.Assert.*;
 import java.awt.Point;
@@ -47,6 +47,13 @@ public class PionTest
 	{
 		pionBlanc.setMouvementPossible(vide, pointRoi);
 		pionNoir.setMouvementPossible(vide, pointRoi);
+		
+		assertEquals(2, pionBlanc.getMouvementDangereux().size());
+		assertEquals(true, pionBlanc.getMouvementDangereux().contains(new Point(5, 6)));
+		assertEquals(true, pionBlanc.getMouvementDangereux().contains(new Point(7, 6)));
+		assertEquals(2, pionNoir.getMouvementDangereux().size());
+		assertEquals(true, pionNoir.getMouvementDangereux().contains(new Point(3, 5)));
+		assertEquals(true, pionNoir.getMouvementDangereux().contains(new Point(1, 5)));
 
 		// test mouvement de base
 		assertEquals(1, pionBlanc.getMouvementPossible().size());
@@ -136,5 +143,7 @@ public class PionTest
 		vide[roiNoir.getEmplacement().x][roiNoir.getEmplacement().y] = roiNoir;
 		testNoir = attaqueRoiNoir.setMouvementPossible(vide, roiNoir.getEmplacement());
 		assertEquals(null, testNoir);
+		
+		
 	}
 }

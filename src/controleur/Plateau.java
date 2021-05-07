@@ -744,7 +744,7 @@ public class Plateau
 				}
 				else
 				{
-					attaquePossible.addAll(((Pion) p).getMouvementDangereux(plateau));
+					attaquePossible.addAll(((Pion) p).getMouvementDangereux());
 				}
 			}
 		}
