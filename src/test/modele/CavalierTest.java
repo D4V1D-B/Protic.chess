@@ -54,21 +54,34 @@ public class CavalierTest
 	{
 		cavalierBlanc.setMouvementPossible(vide, pointRoi);
 		cavalierNoir.setMouvementPossible(vide, pointRoi);
+<<<<<<< Updated upstream
 		// Pieces[][] plateau, Point positionRoiEnemy
+=======
+//		Pieces[][] plateau, Point positionRoiEnemy
+>>>>>>> Stashed changes
 		// cavalier du bord peut aller sur 1,6 / 2,5 / 2,3 / 1,2
-		assertEquals(true, cavalierBlanc.getMouvementPossible().contains(new Point(2, 1)));
-		assertEquals(true, cavalierBlanc.getMouvementPossible().contains(new Point(3, 2)));
-		assertEquals(true, cavalierBlanc.getMouvementPossible().contains(new Point(5, 2)));
-		assertEquals(true, cavalierBlanc.getMouvementPossible().contains(new Point(6, 1)));
+		assertEquals(true,
+				cavalierBlanc.getMouvementPossible().contains(new Point(2, 1)));
+		assertEquals(true,
+				cavalierBlanc.getMouvementPossible().contains(new Point(3, 2)));
+		assertEquals(true,
+				cavalierBlanc.getMouvementPossible().contains(new Point(5, 2)));
+		assertEquals(true,
+				cavalierBlanc.getMouvementPossible().contains(new Point(6, 1)));
+		
+		//test noir
+		assertEquals(true,
+				cavalierNoir.getMouvementPossible().contains(new Point(2, 1)));
+		assertEquals(true,
+				cavalierNoir.getMouvementPossible().contains(new Point(3, 2)));
+		assertEquals(true,
+				cavalierNoir.getMouvementPossible().contains(new Point(5, 2)));
+		assertEquals(true,
+				cavalierNoir.getMouvementPossible().contains(new Point(6, 1)));
 
-		// test noir
-		assertEquals(true, cavalierNoir.getMouvementPossible().contains(new Point(2, 1)));
-		assertEquals(true, cavalierNoir.getMouvementPossible().contains(new Point(3, 2)));
-		assertEquals(true, cavalierNoir.getMouvementPossible().contains(new Point(5, 2)));
-		assertEquals(true, cavalierNoir.getMouvementPossible().contains(new Point(6, 1)));
-
-		// test bloquer par pieces
+		//test manger par pieces
 		cavalierNoir.getMouvementPossible().clear();
+<<<<<<< Updated upstream
 		cavalierNoir.setMouvementPossible(blanc, pointRoi);
 		cavalierCoin.setMouvementPossible(noir, pointRoi);
 		// noir
@@ -102,6 +115,42 @@ public class CavalierTest
 //		vide[pointRoi.x][pointRoi.y] = roi;
 //		Triplets test = attaqueRoi.setMouvementPossible(vide, pointRoi);
 //		assertEquals(false, test.equals(null));
+=======
+		blanc[cavalierNoir.getEmplacement().x][cavalierNoir.getEmplacement().y]=cavalierNoir;
+		noir[cavalierCoin.getEmplacement().x][cavalierCoin.getEmplacement().y]=cavalierCoin;
+		cavalierNoir.setMouvementPossible(blanc, pointRoi);
+		cavalierCoin.setMouvementPossible(noir, pointRoi);
+		//noir
+		assertEquals(true,
+				cavalierNoir.getMouvementPossible().contains(new Point(2, 1)));
+		//blanc
+		assertEquals(true,
+				cavalierCoin.getMouvementPossible().contains(new Point(6, 5)));
+		
+		
+		//test bloquer par pieces
+		cavalierNoir.getMouvementPossible().clear();
+		cavalierCoin.getMouvementPossible().clear();
+		noir[cavalierNoir.getEmplacement().x][cavalierNoir.getEmplacement().y]=cavalierNoir;
+		blanc[cavalierCoin.getEmplacement().x][cavalierCoin.getEmplacement().y]=cavalierCoin;
+		cavalierNoir.setMouvementPossible(noir, pointRoi);
+		cavalierCoin.setMouvementPossible(blanc, pointRoi);
+
+//		//noir
+		assertEquals(true,
+				!cavalierNoir.getMouvementPossible().contains(new Point(2, 1)));
+//		//blanc
+		assertEquals(true,
+				!cavalierCoin.getMouvementPossible().contains(new Point(6, 5)));
+		
+		Cavalier attaqueRoi = new Cavalier("cavalierc", true, new Point(2, 1));
+		Roi roi = new Roi("roi",false,pointRoi);
+		vide[pointRoi.x][pointRoi.y]=roi;
+		Triplets test = attaqueRoi.setMouvementPossible(vide, pointRoi);
+		assertEquals(false,
+				test.equals(null));
+
+>>>>>>> Stashed changes
 	}
 
 	@Test
