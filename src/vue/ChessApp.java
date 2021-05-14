@@ -26,6 +26,7 @@ public class ChessApp extends Application
 		Scene scene = new Scene(root);
 
 		scene.getStylesheets().setAll(this.getClass().getResource("/css/claire.css").toString());
+		System.out.println(scene.getStylesheets());
 		Controleur controleurChess = loaderChess.getController();
 
 		Stage aide = new Stage();
