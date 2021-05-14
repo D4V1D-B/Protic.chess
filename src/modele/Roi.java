@@ -118,7 +118,6 @@ public class Roi extends Pieces
 		{
 			getMouvementPossible().add(new Point(6, 7));
 		}
-
 	}
 
 	@Override
