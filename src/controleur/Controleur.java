@@ -33,6 +33,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
@@ -326,13 +327,11 @@ public class Controleur implements Initializable
 
 	@FXML
 	private Button boutonAnalyse;
-
+	
 	@FXML
 	private Button boutonMouvementAvant;
 
 	private Stage fenetreAide;
-
-
 
 	@FXML
 	void radioClaire(ActionEvent event)
@@ -357,25 +356,30 @@ public class Controleur implements Initializable
 
 	private void changementDeStyle(boolean b)
 	{
-		BorderPane leParent = (BorderPane) recommencerPartie.getParent().getParent().getParent().getParent().getParent().getParent();
+		BorderPane leParent = (BorderPane) recommencerPartie.getParent().getParent().getParent().getParent().getParent()
+				.getParent();
+		AnchorPane anchorPane = (AnchorPane) allPane()[0].getParent();
+		
 		if (b)
 		{
-			
+
 			String defaultButton = "-fx-default-button: #ABD8ED;";
 			String textColor = "-fx-text-fill: black;";
-			
-			//Buttons
+
+			// Buttons
 			recommencerPartie.setStyle(defaultButton);
 			boutonChargerMouvements.setStyle(defaultButton);
 			boutonMouvementArriere.setStyle(defaultButton);
 			boutonMouvementAvant.setStyle(defaultButton);
 			boutonRevenirAuJeu.setStyle(defaultButton);
 			boutonAnalyse.setStyle(defaultButton);
-			
-			//le reste
-			leParent.getChildren().get(0).setStyle("-fx-background-color: null;");
-			
-			
+
+			// le reste
+			for (Node n : leParent.getChildren())
+			{
+				n.setStyle("-fx-background-color: null;");
+			}
+
 			for (Pane pane : allPane())
 			{
 
@@ -395,22 +399,30 @@ public class Controleur implements Initializable
 			String backColor = "-fx-background-color: black;";
 			String textColor = "-fx-text-fill: white;";
 			String borderColor = "-fx-border-color: grey;";
+
+			// Buttons
+			recommencerPartie.setStyle(backColor + textColor + borderColor);
+			boutonChargerMouvements.setStyle(backColor + textColor + borderColor);
+			boutonMouvementArriere.setStyle(backColor + textColor + borderColor);
+			boutonMouvementAvant.setStyle(backColor + textColor + borderColor);
+			boutonRevenirAuJeu.setStyle(backColor + textColor + borderColor);
+			boutonAnalyse.setStyle(backColor + textColor + borderColor);
+
+			//MenuBar
+			MenuBar menu = (MenuBar)leParent.getTop();
+			menu.getChildrenUnmodifiable().get(0).get.setStyle(textColor);
 			
-			//Buttons
-			recommencerPartie.setStyle(backColor +textColor+borderColor);
-			boutonChargerMouvements.setStyle(backColor+textColor+borderColor);
-			boutonMouvementArriere.setStyle(backColor+textColor+borderColor);
-			boutonMouvementAvant.setStyle(backColor+textColor+borderColor);
-			boutonRevenirAuJeu.setStyle(backColor+textColor+borderColor);
-			boutonAnalyse.setStyle(backColor+textColor+borderColor);
+			// le reste
+			for (Node n : anchorPane.getChildren())
+			{
+				n.setStyle(textColor);
+			}
 			
-			//le reste
 			for (Node n : leParent.getChildren())
 			{
 				n.setStyle("-fx-background-color: black;");
 			}
-			
-			
+
 			for (Pane pane : allPane())
 			{
 
@@ -643,6 +655,7 @@ public class Controleur implements Initializable
 
 		placerPiecesString(placementDepart);
 		resetCouleur();
+
 		tourJoueur = true;
 		setLabelTourCouleur(labelTourCouleur);
 		jouerSon("/son/Game_start.mp3");
@@ -1273,13 +1286,27 @@ public class Controleur implements Initializable
 
 		for (int i = 0; i < tableauPane.length; i++)
 		{
-			if (i % 2 == 0)
+			if (themeClaire)
 			{
-				tableauPane[i].setStyle("-fx-background-color:brown; -fx-border-color: black");
+				if (i % 2 == 0)
+				{
+					tableauPane[i].setStyle("-fx-background-color:brown; -fx-border-color: black");
+				}
+				else
+				{
+					tableauPane[i].setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
+				}
 			}
 			else
 			{
-				tableauPane[i].setStyle("-fx-background-color:cornsilk; -fx-border-color: black");
+				if (i % 2 == 0)
+				{
+					tableauPane[i].setStyle("-fx-background-color:brown; -fx-border-color: black");
+				}
+				else
+				{
+					tableauPane[i].setStyle("-fx-background-color: dimgray; -fx-border-color: black;");
+				}
 			}
 		}
 	}
