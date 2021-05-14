@@ -300,6 +300,12 @@ public class Controleur implements Initializable
 	private Pane h1;
 
 	@FXML
+	private Label timerNoir;
+
+	@FXML
+	private Label timerBlanc;
+
+	@FXML
 	private Label labelTourCouleur;
 
 	@FXML
@@ -1508,8 +1514,7 @@ public class Controleur implements Initializable
 			}
 			else
 			{
-				
-				
+
 				if (plateau.trouverPieces(rechercheCoordonnee(pane.getId())) != null)
 					plateauFen += plateau.trouverPieces(rechercheCoordonnee(pane.getId())).getNom();
 			}
@@ -1719,6 +1724,6 @@ public class Controleur implements Initializable
 	void boutonTestNbrMove(ActionEvent event)
 	{
 		bot.setPlateau(plateau);
-		System.out.println(bot.MoveGenerationTest(2));
+		System.out.println(bot.getCompteur());
 	}
 }
