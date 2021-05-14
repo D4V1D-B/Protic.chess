@@ -104,17 +104,17 @@ public class Bot
 			Point anciennePosition = piece.getEmplacement();
 			Pieces reverseMove = plateau.deplacementProg(piece, mov.getPoint());
 
-			int evaluation = -(alphaBetaMax(depth - 1, -beta, -alpha)).getKey();
+			int evaluation = alphaBetaMax(depth - 1, beta, alpha).getKey();
 
 			plateau.unMakeMove(anciennePosition, piece, reverseMove);
 
-			if (evaluation >= beta)
+			if (evaluation <= beta)
 			{
 				beta = evaluation;
 				return new Pair<Integer, Move>(beta, mov);
 			}
 
-			if (evaluation > alpha)
+			if (evaluation < alpha)
 			{
 				bestMovement = new Pair<Integer, Move>(evaluation, mov);
 			}
