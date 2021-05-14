@@ -17,8 +17,10 @@ import java.util.ResourceBundle;
 import java.util.logging.ConsoleHandler;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.ScheduledService;
@@ -102,6 +104,9 @@ public class Controleur implements Initializable
 	private ListView<String> listViewAnciennesParties;
 	private ObservableList<String> ListAnciennesParties;
 
+	private StringProperty timerStringBlanc;
+	private DoubleProperty timerDoubleBlanc;
+	
 	@FXML
 	private RadioMenuItem radioClaire;
 
@@ -641,25 +646,26 @@ public class Controleur implements Initializable
 		radioSombre.setSelected(!themeClaire);
 
 		TimerServiceBlanc = new TimerAnimationService(0);
-		TimerServiceBlanc.setPeriod(new Duration(1000));
+		TimerServiceBlanc.setPeriod(new Duration(10));
 
 		this.bindTemperatureServiceToLabel();
 
-		if (temperatureService.getState() != State.READY)
+		if (TimerServiceBlanc.getState() != State.READY)
 		{
-			temperatureService.reset();
+			TimerServiceBlanc.reset();
 		}
-		temperatureService.start();
+		TimerServiceBlanc.start();
 	}
+	//TODO
 
 	public void bindTemperatureServiceToLabel()
 	{
-		tempratureDouble = new SimpleDoubleProperty();
-		tempratureDouble.bind(temperatureService.lastValueProperty());
-		temperatureString = new SimpleStringProperty();
+		timerDoubleBlanc = new SimpleDoubleProperty();
+		timerDoubleBlanc.bind(TimerServiceBlanc.lastValueProperty());
+		timerStringBlanc = new SimpleStringProperty();
 		NumberStringConverter numberString = new NumberStringConverter();
-		Bindings.bindBidirectional(temperatureString, tempratureDouble, numberString);
-		labelService.textProperty().bind(Bindings.concat(temperatureString, " deg C"));
+		Bindings.bindBidirectional(timerStringBlanc, timerDoubleBlanc, numberString);
+		timerBlanc.textProperty().bind(timerStringBlanc);
 	}
 
 	public void setLabelTourCouleur(Label labelTourCouleur)

@@ -22,9 +22,8 @@ public class TimerAnimationService extends ScheduledService<Float>
 			@Override
 			protected Float call() throws Exception
 			{
-				float value = depart+1;
-				updateValue(value);
-				return value;
+				updateValue(getValue());
+				return getValue();
 			};
 		};
 	}
