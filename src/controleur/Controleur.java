@@ -1691,6 +1691,6 @@ public class Controleur implements Initializable
 	void boutonTestNbrMove(ActionEvent event)
 	{
 		bot.setPlateau(plateau);
-		System.out.println(bot.MoveGenerationTest(2));
+		System.out.println(bot.getCompteur());
 	}
 }
