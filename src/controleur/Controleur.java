@@ -327,7 +327,7 @@ public class Controleur implements Initializable
 
 	@FXML
 	private Button boutonAnalyse;
-	
+
 	@FXML
 	private Button boutonMouvementAvant;
 
@@ -359,7 +359,7 @@ public class Controleur implements Initializable
 		BorderPane leParent = (BorderPane) recommencerPartie.getParent().getParent().getParent().getParent().getParent()
 				.getParent();
 		AnchorPane anchorPane = (AnchorPane) allPane()[0].getParent();
-		
+
 		if (b)
 		{
 
@@ -408,16 +408,16 @@ public class Controleur implements Initializable
 			boutonRevenirAuJeu.setStyle(backColor + textColor + borderColor);
 			boutonAnalyse.setStyle(backColor + textColor + borderColor);
 
-			//MenuBar
-			MenuBar menu = (MenuBar)leParent.getTop();
-			menu.getChildrenUnmodifiable().get(0).get.setStyle(textColor);
-			
+			// MenuBar
+			MenuBar menu = (MenuBar) leParent.getTop();
+			// menu.getChildrenUnmodifiable().get(0).get.setStyle(textColor);
+
 			// le reste
 			for (Node n : anchorPane.getChildren())
 			{
 				n.setStyle(textColor);
 			}
-			
+
 			for (Node n : leParent.getChildren())
 			{
 				n.setStyle("-fx-background-color: black;");
