@@ -399,7 +399,7 @@ public class Plateau
 			filtrerCoup(piecesNoirPin, blanc, noir);
 
 		if (!tour)
-			filtrerCoup(piecesNoirPin, noir, blanc);
+			filtrerCoup(piecesBlanchePin, noir, blanc);
 
 		if (!tour)
 			blanc.actualiserMouvementJouable();
@@ -630,7 +630,7 @@ public class Plateau
 			}
 		}
 		else
-			if (!echec.isEmpty())
+			if (echec.size() >= 2)
 			{
 				equipeDefense.clearMouvementJouable();
 				equipeDefense.setEchec(true);
@@ -713,8 +713,8 @@ public class Plateau
 
 		public int indexOfKing()
 		{
-			int index = 0;
-			for (int i = 0; i < listePiece.size(); i++)
+			int index = -1;
+			for (int i = 0; i < listePiece.size()&&index==-1; i++)
 			{
 				if (listePiece.get(i).getClass().toString().contains("Roi"))
 				{
