@@ -1508,8 +1508,7 @@ public class Controleur implements Initializable
 			}
 			else
 			{
-				System.out.println(rechercheCoordonnee(pane.getId()));
-				System.out.println(pane.getId());
+				
 				
 				if (plateau.trouverPieces(rechercheCoordonnee(pane.getId())) != null)
 					plateauFen += plateau.trouverPieces(rechercheCoordonnee(pane.getId())).getNom();
