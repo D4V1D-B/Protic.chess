@@ -399,7 +399,7 @@ public class Plateau
 			filtrerCoup(piecesNoirPin, blanc, noir);
 
 		if (!tour)
-			filtrerCoup(piecesBlanchePin, noir, blanc);
+			filtrerCoup(piecesNoirPin, noir, blanc);
 
 		if (!tour)
 			blanc.actualiserMouvementJouable();
@@ -630,7 +630,7 @@ public class Plateau
 			}
 		}
 		else
-			if (echec.size() >= 2)
+			if (!echec.isEmpty())
 			{
 				equipeDefense.clearMouvementJouable();
 				equipeDefense.setEchec(true);
@@ -640,15 +640,13 @@ public class Plateau
 		{
 			if (!equipeAttaque.getAttaquePossible().contains(p))
 			{
-				if ((p.x == equipeDefense.getPositionRoi().x + 2 || p.x == equipeDefense.getPositionRoi().x - 2)
-						&& !equipeAttaque.getAttaquePossible().contains(equipeDefense.getPositionRoi()))
+				if((p.getX()-1==equipeDefense.getPositionRoi().x||p.getX()+1==equipeDefense.getPositionRoi().x)||echec.isEmpty())
 				{
 					trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(p);
 				}
-				else
-					trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(p);
 			}
 		}
+
 	}
 
 	public void actualiserTeam()
@@ -715,8 +713,8 @@ public class Plateau
 
 		public int indexOfKing()
 		{
-			int index = -1;
-			for (int i = 0; i < listePiece.size() && index == -1; i++)
+			int index = 0;
+			for (int i = 0; i < listePiece.size(); i++)
 			{
 				if (listePiece.get(i).getClass().toString().contains("Roi"))
 				{

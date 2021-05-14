@@ -4,9 +4,12 @@ import static org.junit.Assert.*;
 
 import java.awt.Point;
 import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import controleur.Plateau;
+import controleur.Plateau.Equipe;
 import modele.Cavalier;
 import modele.Fou;
 import modele.Pieces;
@@ -14,6 +17,7 @@ import modele.Pion;
 import modele.Reine;
 import modele.Roi;
 import modele.Tour;
+import modele.Triplets;
 
 public class PlateauTest
 {
@@ -59,8 +63,8 @@ public class PlateauTest
 	@Before
 	public void testPlateauPrep()
 	{
-		listBlanc = new ArrayList<Pieces>();
-		listNoir = new ArrayList<Pieces>();
+		ArrayList<Pieces> listBlanc = new ArrayList<Pieces>();
+		ArrayList<Pieces> listNoir = new ArrayList<Pieces>();
 		
 		listBlanc.add(R1);
 		listBlanc.add(R2);
@@ -100,93 +104,18 @@ public class PlateauTest
 		plateau= new Plateau(listBlanc, listNoir);
 	}
 
-	@Test
-	public void testgetListePieces()
-	{
-		assertEquals(listNoir, plateau.getNoir().getListePieces());
-		assertEquals(listBlanc, plateau.getBlanc().getListePieces());
-	}
-
-	@Test
-	public void testindexOfKing()
-	{
-		assertEquals(5, plateau.getNoir().indexOfKing());
-		assertEquals(5, plateau.getBlanc().indexOfKing());
-	}
-
-	@Test
-	public void testgetPositionRoi()
-	{
-		assertEquals(new Point(4, 7), plateau.getNoir().getPositionRoi());
-		assertEquals(new Point(4, 0), plateau.getBlanc().getPositionRoi());
-	}
-
-	@Test
-	public void testgetRoi()
+	@Test	
+	public void testgetNoir()
 	{
 
 	}
 
 	@Test
-	public void testactualiserAttaquePossible()
+	public void testgetBlanc()
 	{
 
 	}
 
-	@Test
-	public void testactualiserMouvementJouable()
-	{
-
-	}
-
-	@Test
-	public void testclearMouvementJouable()
-	{
-
-	}
-
-	@Test
-	public void testgetAttaquePossible()
-	{
-		
-	}
-
-	@Test
-	public void testgetMouvementJouable()
-	{
-
-	}
-
-	@Test
-	public void testgetPositionEquipe()
-	{
-
-	}
-
-	@Test
-	public void testgetPositionRoi2()
-	{
-
-	}
-
-	@Test
-	public void testsetPositionRoi()
-	{
-
-	}
-
-	@Test
-	public void testisEchec()
-	{
-
-	}
-
-	@Test
-	public void testsetEchec()
-	{
-
-	}
-	
 	@Test
 	public void testgetEchecMathBlanc()
 	{
@@ -275,7 +204,5 @@ public class PlateauTest
 	{
 		
 	}
-	
-	
 
 }
