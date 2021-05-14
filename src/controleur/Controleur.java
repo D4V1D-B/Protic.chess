@@ -16,9 +16,14 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.ConsoleHandler;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
+import javafx.concurrent.Worker.State;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,6 +54,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import javafx.util.converter.NumberStringConverter;
 import modele.Cavalier;
 import modele.Fou;
 import modele.Mouvement;
@@ -338,6 +345,8 @@ public class Controleur implements Initializable
 	private Button boutonMouvementAvant;
 
 	private Stage fenetreAide;
+
+	private TimerAnimationService TimerServiceBlanc;
 
 	@FXML
 	void radioClaire(ActionEvent event)
@@ -631,6 +640,26 @@ public class Controleur implements Initializable
 		radioClaire.setSelected(themeClaire);
 		radioSombre.setSelected(!themeClaire);
 
+		TimerServiceBlanc = new TimerAnimationService(0);
+		TimerServiceBlanc.setPeriod(new Duration(1000));
+
+		this.bindTemperatureServiceToLabel();
+
+		if (temperatureService.getState() != State.READY)
+		{
+			temperatureService.reset();
+		}
+		temperatureService.start();
+	}
+
+	public void bindTemperatureServiceToLabel()
+	{
+		tempratureDouble = new SimpleDoubleProperty();
+		tempratureDouble.bind(temperatureService.lastValueProperty());
+		temperatureString = new SimpleStringProperty();
+		NumberStringConverter numberString = new NumberStringConverter();
+		Bindings.bindBidirectional(temperatureString, tempratureDouble, numberString);
+		labelService.textProperty().bind(Bindings.concat(temperatureString, " deg C"));
 	}
 
 	public void setLabelTourCouleur(Label labelTourCouleur)
@@ -1726,4 +1755,5 @@ public class Controleur implements Initializable
 		bot.setPlateau(plateau);
 		System.out.println(bot.getCompteur());
 	}
+
 }
