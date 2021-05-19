@@ -88,11 +88,7 @@ public class Controleur implements Initializable
 	Mouvement mouvementSelect;
 	private final ArrayList<Point> LISTPOINTROCK = new ArrayList<Point>()
 	{
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
-
 		{
 			add(new Point(6, 0));
 			add(new Point(2, 0));
@@ -1048,41 +1044,29 @@ public class Controleur implements Initializable
 
 	private void JouerAI()
 	{
-		Pane[] allPanes = new Pane[64];
-
-		for (int nb = 0; nb < 64; nb++)
-		{
-			allPanes[nb] = (Pane) anchor.getChildren().get(nb);
-		}
 		if (isTourJoueur() == false)
 		{
 			Move move = bot.jouerBot(this.plateau);
-		//	System.out.println(move.getPoint());
-		//	System.out.println(move.getPieces().getEmplacement());
 			Pane paneFinale = null;
-			for (int i = 0; i < allPanes.length; i++)
+			for (int i = 0; i < allPane().length&&paneFinale==null; i++)
 			{
-				if (allPanes[i].getId().equals(recherchePane(move.getPieces().getEmplacement())))
+				if (allPane()[i].getId().equals(recherchePane(move.getPieces().getEmplacement())))
 				{
-					paneFinale = allPanes[i];
+					paneFinale = allPane()[i];
+				}
+			}
+			Pane paneClick = null;
+			for (int i = 0; i < allPane().length&&paneClick==null; i++)
+			{
+				if (allPane()[i].getId().equals(recherchePane(move.getPoint())))
+				{
+					paneClick = allPane()[i];
 				}
 			}
 			paneSelect = paneFinale;
-		//	pieceSelect = plateau.trouverPieces(move.getPieces().getEmplacement());
 			pieceSelect = move.getPieces();
-			deplacer(pieceSelect, paneSelect);
-			Pane paneInitiale = null;
-			for (int i = 0; i < allPanes.length; i++)
-			{
-				if (allPanes[i].getId().equals(recherchePane(move.getPoint())))
-				{
-					paneInitiale = allPanes[i];
-				}
-			}
-		//	System.out.println(paneSelect);
-		//	System.out.println(paneInitiale);
-		//	System.out.println(pieceSelect);
-			deplacerImage(paneInitiale, paneSelect, pieceSelect);
+			deplacer(pieceSelect, paneClick);
+			deplacerImage(paneClick, paneSelect, pieceSelect);
 			tourJoueur = !isTourJoueur();
 		}
 	}
