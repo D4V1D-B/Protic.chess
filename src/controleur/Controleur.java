@@ -384,7 +384,7 @@ public class Controleur implements Initializable
 		{
 
 			String defaultButton = "-fx-default-button: #ABD8ED;";
-			String textColor = "-fx-text-fill: black;";
+		
 
 			// Buttons
 			recommencerPartie.setStyle(defaultButton);
@@ -467,7 +467,7 @@ public class Controleur implements Initializable
 		Move m = bot.jouerBot(plateau);
 		// J'imagine que l'emplacement de la piece est celle avant le mouvement
 		// et que le point de move est le mouvement suggéré
-
+		
 		String nomDuPane = recherchePane(m.getPoint());
 		Pane paneConseil = null;
 		Pane panePiece = null;
