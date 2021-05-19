@@ -645,7 +645,7 @@ public class Controleur implements Initializable
 		radioSombre.setSelected(!themeClaire);
 
 		TimerServiceBlanc = new TimerAnimationService(0);
-		TimerServiceBlanc.setPeriod(new Duration(10));
+		TimerServiceBlanc.setPeriod(Duration.seconds(1));
 
 		this.bindTemperatureServiceToLabel();
 
