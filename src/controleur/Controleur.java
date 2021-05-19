@@ -1,10 +1,11 @@
 package controleur;
 
+import java.text.SimpleDateFormat;
 import java.awt.Point;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.Console;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,8 +15,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.ConsoleHandler;
-
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -24,7 +23,6 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.ScheduledService;
-import javafx.concurrent.Task;
 import javafx.concurrent.Worker.State;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -102,6 +100,8 @@ public class Controleur implements Initializable
 
 	private StringProperty timerStringBlanc;
 	private DoubleProperty timerDoubleBlanc;
+	private StringProperty timerStringNoir;
+	private DoubleProperty timerDoubleNoir;
 
 	@FXML
 	private RadioMenuItem radioClaire;
@@ -347,7 +347,13 @@ public class Controleur implements Initializable
 
 	private Stage fenetreAide;
 
-	private TimerAnimationService TimerServiceBlanc;
+	private ScheduledService<Double> timerServiceBlanc;
+
+	private ScheduledService<Double> timerServiceNoir;
+	
+
+	private double tempsBlanc = 0;
+	private double tempsNoir = 0;
 
 	@FXML
 	void radioClaire(ActionEvent event)
@@ -425,7 +431,6 @@ public class Controleur implements Initializable
 
 			// MenuBar
 			MenuBar menu = (MenuBar) leParent.getTop();
-			// menu.getChildrenUnmodifiable().get(0).get.setStyle(textColor);
 
 			// le reste
 			for (Node n : anchorPane.getChildren())
@@ -639,28 +644,106 @@ public class Controleur implements Initializable
 		CheckMenuSon();
 		radioClaire.setSelected(themeClaire);
 		radioSombre.setSelected(!themeClaire);
-
-		TimerServiceBlanc = new TimerAnimationService(0);
-		TimerServiceBlanc.setPeriod(Duration.seconds(1));
-
-		this.bindTemperatureServiceToLabel();
-
-		if (TimerServiceBlanc.getState() != State.READY)
-		{
-			TimerServiceBlanc.reset();
-		}
-		TimerServiceBlanc.start();
+		initializeTimerBlanc();
+		initializeTimerNoir();
 	}
-	// TODO
 
-	public void bindTemperatureServiceToLabel()
+	private void initializeTimerBlanc()
+	{
+		timerServiceBlanc = new ScheduledService<Double>()
+		{
+			@Override
+			protected Task<Double> createTask()
+			{
+				return new Task<Double>()
+				{
+					@Override
+					protected Double call() throws Exception
+					{
+						double value;
+						if (timerServiceBlanc.getLastValue() == null)
+						{
+							value = tempsBlanc;
+						}
+						else
+						{
+							value = timerServiceBlanc.getLastValue()+1;
+						}
+						updateValue(value);
+						return value;
+					}
+				};
+			}
+		};
+		timerServiceBlanc.setPeriod(new Duration(1000));
+
+		this.bindTimerServiceToLabelBlanc();
+
+		if (timerServiceBlanc.getState() != State.READY)
+		{
+			timerServiceBlanc.reset();
+		}
+		timerServiceBlanc.start();
+	}
+
+	// TODO
+	public void bindTimerServiceToLabelBlanc()
 	{
 		timerDoubleBlanc = new SimpleDoubleProperty();
-		timerDoubleBlanc.bind(TimerServiceBlanc.lastValueProperty());
+		timerDoubleBlanc.bind(timerServiceBlanc.lastValueProperty());
 		timerStringBlanc = new SimpleStringProperty();
 		NumberStringConverter numberString = new NumberStringConverter();
 		Bindings.bindBidirectional(timerStringBlanc, timerDoubleBlanc, numberString);
-		timerBlanc.textProperty().bind(timerStringBlanc);
+		timerBlanc.textProperty().bind(Bindings.concat(":",timerStringBlanc));
+
+	}
+
+	private void initializeTimerNoir()
+	{
+		timerServiceNoir = new ScheduledService<Double>()
+		{
+
+			@Override
+			protected Task<Double> createTask()
+			{
+				return new Task<Double>()
+				{
+					@Override
+					protected Double call() throws Exception
+					{
+						double value;
+						if (timerServiceNoir.getLastValue() == null)
+						{
+							value = tempsNoir;
+						}
+						else
+						{
+							value = timerServiceNoir.getLastValue() + 1;
+						}
+						updateValue(value);
+						return value;
+					}
+				};
+			}
+		};
+		timerServiceNoir.setPeriod(new Duration(1000));
+
+		this.bindTimerServiceToLabelNoir();
+
+		if (timerServiceNoir.getState() != State.READY)
+		{
+			timerServiceNoir.reset();
+		}
+	}
+
+	public void bindTimerServiceToLabelNoir()
+	{
+		timerDoubleNoir = new SimpleDoubleProperty();
+		timerDoubleNoir.bind(timerServiceNoir.lastValueProperty());
+		timerStringNoir = new SimpleStringProperty();
+		NumberStringConverter numberString = new NumberStringConverter();
+		Bindings.bindBidirectional(timerStringNoir, timerDoubleNoir, numberString);
+		timerNoir.textProperty().bind(timerStringNoir);
 	}
 
 	public void setLabelTourCouleur(Label labelTourCouleur)
@@ -1048,7 +1131,7 @@ public class Controleur implements Initializable
 		{
 			Move move = bot.jouerBot(this.plateau);
 			Pane paneFinale = null;
-			for (int i = 0; i < allPane().length&&paneFinale==null; i++)
+			for (int i = 0; i < allPane().length && paneFinale == null; i++)
 			{
 				if (allPane()[i].getId().equals(recherchePane(move.getPieces().getEmplacement())))
 				{
@@ -1056,7 +1139,7 @@ public class Controleur implements Initializable
 				}
 			}
 			Pane paneClick = null;
-			for (int i = 0; i < allPane().length&&paneClick==null; i++)
+			for (int i = 0; i < allPane().length && paneClick == null; i++)
 			{
 				if (allPane()[i].getId().equals(recherchePane(move.getPoint())))
 				{
@@ -1119,6 +1202,8 @@ public class Controleur implements Initializable
 					{
 						if (plateau.getEchecMathNoir())
 						{
+							timerServiceBlanc.cancel();
+							timerServiceNoir.cancel();
 							jouerSon("/son/Checkmate.mp3");
 							afficherFinDePartie("Les blancs ont gagné! Félicitation!");
 						}
@@ -1127,6 +1212,8 @@ public class Controleur implements Initializable
 					{
 						if (plateau.getEchecMathBlanc())
 						{
+							timerServiceBlanc.cancel();
+							timerServiceNoir.cancel();
 							jouerSon("/son/Checkmate.mp3");
 							afficherFinDePartie("Les noirs ont gagné! Félicitation!");
 						}
@@ -1134,8 +1221,23 @@ public class Controleur implements Initializable
 
 					if (!plateau.getEchecMathBlanc() && !plateau.getEchecMathNoir() && plateau.partieNulle())
 					{
+						timerServiceBlanc.cancel();
+						timerServiceNoir.cancel();
 						afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
 					}
+
+					if (tourJoueur)
+					{
+						tempsBlanc = timerServiceBlanc.getLastValue();
+						timerServiceBlanc.cancel();
+						timerServiceNoir.restart();
+					}
+					else
+					{
+						tempsNoir = timerServiceNoir.getLastValue();
+						timerServiceBlanc.restart();
+						timerServiceNoir.cancel();
+					} // TODO
 
 					tourJoueur = !isTourJoueur();
 					paneSelect = null;
@@ -1204,7 +1306,7 @@ public class Controleur implements Initializable
 		if ((pieceSelect.getNom().equals("P") && rechercheCoordonnee(paneClick.getId()).y == 7)
 				|| (pieceSelect.getNom().equals("p") && rechercheCoordonnee(paneClick.getId()).y == 0))
 		{
-			//System.out.println(pieceSelect.isWhite());
+			// System.out.println(pieceSelect.isWhite());
 			afficherPionUgrade(pieceSelect.isWhite(), paneClick);
 		}
 
@@ -1571,7 +1673,7 @@ public class Controleur implements Initializable
 			entre0et7++;
 
 		}
-		//System.out.println("");
+		// System.out.println("");
 		System.out.println(plateauFen + "/");
 		return plateauFen + "/";
 	}
