@@ -106,7 +106,7 @@ public class Controleur implements Initializable
 
 	private StringProperty timerStringBlanc;
 	private DoubleProperty timerDoubleBlanc;
-	
+
 	@FXML
 	private RadioMenuItem radioClaire;
 
@@ -384,7 +384,6 @@ public class Controleur implements Initializable
 		{
 
 			String defaultButton = "-fx-default-button: #ABD8ED;";
-		
 
 			// Buttons
 			recommencerPartie.setStyle(defaultButton);
@@ -467,7 +466,7 @@ public class Controleur implements Initializable
 		Move m = bot.jouerBot(plateau);
 		// J'imagine que l'emplacement de la piece est celle avant le mouvement
 		// et que le point de move est le mouvement suggéré
-		
+
 		String nomDuPane = recherchePane(m.getPoint());
 		Pane paneConseil = null;
 		Pane panePiece = null;
@@ -656,7 +655,7 @@ public class Controleur implements Initializable
 		}
 		TimerServiceBlanc.start();
 	}
-	//TODO
+	// TODO
 
 	public void bindTemperatureServiceToLabel()
 	{
@@ -1220,6 +1219,7 @@ public class Controleur implements Initializable
 		if ((pieceSelect.getNom().equals("P") && rechercheCoordonnee(paneClick.getId()).y == 7)
 				|| (pieceSelect.getNom().equals("p") && rechercheCoordonnee(paneClick.getId()).y == 0))
 		{
+			System.out.println(pieceSelect.isWhite());
 			afficherPionUgrade(pieceSelect.isWhite(), paneClick);
 		}
 
@@ -1470,24 +1470,54 @@ public class Controleur implements Initializable
 		upgrade.show();
 		ImageView imageNouvelle = (ImageView) paneClick.getChildren().get(0);
 		reine.setOnAction((a) -> {
+
 			imageNouvelle.setImage(reineImage.getImage());
-			plateau.remplacerPion(new Reine("Q", equipe, rechercheCoordonnee(paneClick.getId())));
+			if (equipe)
+			{
+
+				plateau.remplacerPion(new Reine("Q", equipe, rechercheCoordonnee(paneClick.getId())));
+			}
+			else
+			{
+				plateau.remplacerPion(new Reine("q", equipe, rechercheCoordonnee(paneClick.getId())));
+			}
 			upgrade.close();
 		});
 
 		fou.setOnAction((a) -> {
 			imageNouvelle.setImage(fouImage.getImage());
-			plateau.remplacerPion(new Fou("B", equipe, rechercheCoordonnee(paneClick.getId())));
+			if (equipe)
+			{
+				plateau.remplacerPion(new Fou("B", equipe, rechercheCoordonnee(paneClick.getId())));
+			}
+			else
+			{
+				plateau.remplacerPion(new Fou("b", equipe, rechercheCoordonnee(paneClick.getId())));
+			}
 			upgrade.close();
 		});
 		tour.setOnAction((a) -> {
 			imageNouvelle.setImage(tourImage.getImage());
-			plateau.remplacerPion(new Tour("R", equipe, rechercheCoordonnee(paneClick.getId())));
+			if (equipe)
+			{
+				plateau.remplacerPion(new Tour("R", equipe, rechercheCoordonnee(paneClick.getId())));
+			}
+			else
+			{
+				plateau.remplacerPion(new Tour("r", equipe, rechercheCoordonnee(paneClick.getId())));
+			}
 			upgrade.close();
 		});
 		cavalier.setOnAction((a) -> {
 			imageNouvelle.setImage(cavalierImage.getImage());
-			plateau.remplacerPion(new Cavalier("N", equipe, rechercheCoordonnee(paneClick.getId())));
+			if (equipe)
+			{
+				plateau.remplacerPion(new Cavalier("N", equipe, rechercheCoordonnee(paneClick.getId())));
+			}
+			else
+			{
+				plateau.remplacerPion(new Tour("n", equipe, rechercheCoordonnee(paneClick.getId())));
+			}
 			upgrade.close();
 		});
 	}
