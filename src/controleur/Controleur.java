@@ -1057,8 +1057,8 @@ public class Controleur implements Initializable
 		if (isTourJoueur() == false)
 		{
 			Move move = bot.jouerBot(this.plateau);
-			System.out.println(move.getPoint());
-			System.out.println(move.getPieces().getEmplacement());
+		//	System.out.println(move.getPoint());
+		//	System.out.println(move.getPieces().getEmplacement());
 			Pane paneFinale = null;
 			for (int i = 0; i < allPanes.length; i++)
 			{
@@ -1068,7 +1068,8 @@ public class Controleur implements Initializable
 				}
 			}
 			paneSelect = paneFinale;
-			pieceSelect = plateau.trouverPieces(move.getPieces().getEmplacement());
+		//	pieceSelect = plateau.trouverPieces(move.getPieces().getEmplacement());
+			pieceSelect = move.getPieces();
 			deplacer(pieceSelect, paneSelect);
 			Pane paneInitiale = null;
 			for (int i = 0; i < allPanes.length; i++)
@@ -1078,9 +1079,9 @@ public class Controleur implements Initializable
 					paneInitiale = allPanes[i];
 				}
 			}
-			System.out.println(paneSelect);
-			System.out.println(paneInitiale);
-			System.out.println(pieceSelect);
+		//	System.out.println(paneSelect);
+		//	System.out.println(paneInitiale);
+		//	System.out.println(pieceSelect);
 			deplacerImage(paneInitiale, paneSelect, pieceSelect);
 			tourJoueur = !isTourJoueur();
 		}
@@ -1219,7 +1220,7 @@ public class Controleur implements Initializable
 		if ((pieceSelect.getNom().equals("P") && rechercheCoordonnee(paneClick.getId()).y == 7)
 				|| (pieceSelect.getNom().equals("p") && rechercheCoordonnee(paneClick.getId()).y == 0))
 		{
-			System.out.println(pieceSelect.isWhite());
+			//System.out.println(pieceSelect.isWhite());
 			afficherPionUgrade(pieceSelect.isWhite(), paneClick);
 		}
 
@@ -1579,14 +1580,15 @@ public class Controleur implements Initializable
 			}
 			else
 			{
-
+				System.out.println(pane.getId() + " ----" + plateau.trouverPieces(rechercheCoordonnee(pane.getId())));
 				if (plateau.trouverPieces(rechercheCoordonnee(pane.getId())) != null)
 					plateauFen += plateau.trouverPieces(rechercheCoordonnee(pane.getId())).getNom();
 			}
 			entre0et7++;
 
 		}
-		System.out.println("");
+		//System.out.println("");
+		System.out.println(plateauFen + "/");
 		return plateauFen + "/";
 	}
 
