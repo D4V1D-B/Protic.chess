@@ -590,6 +590,7 @@ public class Controleur implements Initializable
 	@FXML
 	void recommencerPartie(MouseEvent event)
 	{
+		boutonDisable(true);
 		Pane[] allPanes = new Pane[64];
 
 		for (int nb = 0; nb < 64; nb++)
