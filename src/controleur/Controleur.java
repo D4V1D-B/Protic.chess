@@ -1638,7 +1638,7 @@ public class Controleur implements Initializable
 			}
 			else
 			{
-				plateau.remplacerPion(new Tour("n", equipe, rechercheCoordonnee(paneClick.getId())));
+				plateau.remplacerPion(new Cavalier("n", equipe, rechercheCoordonnee(paneClick.getId())));
 			}
 			upgrade.close();
 		});
