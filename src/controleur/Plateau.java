@@ -2,8 +2,6 @@ package controleur;
 
 import java.awt.Point;
 import java.util.ArrayList;
-
-import controleur.Plateau.Equipe;
 import modele.Pieces;
 import modele.Tour;
 import modele.Triplets;
@@ -27,7 +25,7 @@ public class Plateau
 		noir = new Equipe(pieceNoir);
 		actualiserToutLesMouvementJouable(false);
 	}
-	
+
 	public Plateau(ArrayList<Pieces> pieceBlanc, ArrayList<Pieces> pieceNoir, boolean tour)
 	{
 		refreshPlateau(pieceBlanc, pieceNoir);
@@ -497,6 +495,16 @@ public class Plateau
 								p.getMouvementJouable().add(test);
 							}
 						}
+						if (p.getClass().toString().contains("Roi"))
+						{
+							for (Point t : equipeDefense.getRoi().getMouvementPossible())
+							{
+								if (!equipeAttaque.getAttaquePossible().contains(t))
+								{
+									trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
+								}
+							}
+						}
 					}
 					break;
 				case 1:
@@ -512,6 +520,20 @@ public class Plateau
 									p.getMouvementJouable().add(test);
 								}
 							}
+						else
+						{
+							for (Point t : equipeDefense.getRoi().getMouvementPossible())
+							{
+								if (!equipeAttaque.getAttaquePossible().contains(t))
+								{
+									if (t.getY() - 1 == equipeDefense.getPositionRoi().y
+											|| t.getY() + 1 == equipeDefense.getPositionRoi().y)
+									{
+										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
+									}
+								}
+							}
+						}
 					}
 					break;
 				case 2:
@@ -527,6 +549,20 @@ public class Plateau
 									p.getMouvementJouable().add(test);
 								}
 							}
+						else
+						{
+							for (Point t : equipeDefense.getRoi().getMouvementPossible())
+							{
+								if (!equipeAttaque.getAttaquePossible().contains(t))
+								{
+									if (t.getY() - 1 == equipeDefense.getPositionRoi().y
+											|| t.getY() + 1 == equipeDefense.getPositionRoi().y)
+									{
+										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
+									}
+								}
+							}
+						}
 					}
 					break;
 				case 3:
@@ -542,12 +578,27 @@ public class Plateau
 									p.getMouvementJouable().add(test);
 								}
 							}
+						else
+						{
+							for (Point t : equipeDefense.getRoi().getMouvementPossible())
+							{
+								if (!equipeAttaque.getAttaquePossible().contains(t))
+								{
+									if (t.getX() - 1 == equipeDefense.getPositionRoi().x
+											|| t.getX() + 1 == equipeDefense.getPositionRoi().x)
+									{
+										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
+									}
+								}
+							}
+						}
 					}
 					break;
 				case 4:
 					for (Pieces p : equipeDefense.listePiece)
 					{
 						if (!p.getEmplacement().equals(equipeDefense.positionRoi))
+						{
 							for (Point test : p.getMouvementPossible())
 							{
 								if (test.getX() == equipeDefense.positionRoi.x
@@ -557,6 +608,21 @@ public class Plateau
 									p.getMouvementJouable().add(test);
 								}
 							}
+						}
+						else
+						{
+							for (Point t : equipeDefense.getRoi().getMouvementPossible())
+							{
+								if (!equipeAttaque.getAttaquePossible().contains(t))
+								{
+									if (t.getX() - 1 == equipeDefense.getPositionRoi().x
+											|| t.getX() + 1 == equipeDefense.getPositionRoi().x)
+									{
+										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
+									}
+								}
+							}
+						}
 					}
 					break;
 				case 5:
@@ -576,6 +642,20 @@ public class Plateau
 									p.getMouvementJouable().add(test);
 								}
 							}
+						else
+						{
+							for (Point t : equipeDefense.getRoi().getMouvementPossible())
+							{
+								if (!equipeAttaque.getAttaquePossible().contains(t))
+								{
+									if ( t.getX() + 1 == equipeDefense.getPositionRoi().x
+											&& t.getY() + 1 == equipeDefense.getPositionRoi().y)
+									{
+										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
+									}
+								}
+							}
+						}
 					}
 					break;
 				case 8:
@@ -595,6 +675,20 @@ public class Plateau
 									p.getMouvementJouable().add(test);
 								}
 							}
+						else
+						{
+							for (Point t : equipeDefense.getRoi().getMouvementPossible())
+							{
+								if (!equipeAttaque.getAttaquePossible().contains(t))
+								{
+									if ( t.getX() - 1 == equipeDefense.getPositionRoi().x
+											&& t.getY() - 1 == equipeDefense.getPositionRoi().y)
+									{
+										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
+									}
+								}
+							}
+						}
 					}
 					break;
 				case 6:
@@ -614,6 +708,20 @@ public class Plateau
 									p.getMouvementJouable().add(test);
 								}
 							}
+						else
+						{
+							for (Point t : equipeDefense.getRoi().getMouvementPossible())
+							{
+								if (!equipeAttaque.getAttaquePossible().contains(t))
+								{
+									if ( t.getX() + 1 == equipeDefense.getPositionRoi().x
+											&& t.getY() - 1 == equipeDefense.getPositionRoi().y)
+									{
+										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
+									}
+								}
+							}
+						}
 					}
 					break;
 				case 7:
@@ -633,6 +741,20 @@ public class Plateau
 									p.getMouvementJouable().add(test);
 								}
 							}
+						else
+						{
+							for (Point t : equipeDefense.getRoi().getMouvementPossible())
+							{
+								if (!equipeAttaque.getAttaquePossible().contains(t))
+								{
+									if ( t.getX() - 1 == equipeDefense.getPositionRoi().x
+											&& t.getY() + 1 == equipeDefense.getPositionRoi().y)
+									{
+										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
+									}
+								}
+							}
+						}
 					}
 					break;
 			}
@@ -644,16 +766,14 @@ public class Plateau
 				equipeDefense.setEchec(true);
 			}
 
-		for (Point p : trouverPieces(equipeDefense.getPositionRoi()).getMouvementPossible())
-		{
-			if (!equipeAttaque.getAttaquePossible().contains(p))
+		if (echec.isEmpty())
+			for (Point t : equipeDefense.getRoi().getMouvementPossible())
 			{
-				if((p.getX()-1==equipeDefense.getPositionRoi().x||p.getX()+1==equipeDefense.getPositionRoi().x)||echec.isEmpty())
+				if (!equipeAttaque.getAttaquePossible().contains(t))
 				{
-					trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(p);
+					trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
 				}
 			}
-		}
 
 	}
 
@@ -722,7 +842,7 @@ public class Plateau
 		public int indexOfKing()
 		{
 			int index = -1;
-			for (int i = 0; i < listePiece.size()&&index==-1; i++)
+			for (int i = 0; i < listePiece.size() && index == -1; i++)
 			{
 				if (listePiece.get(i).getClass().toString().contains("Roi"))
 				{

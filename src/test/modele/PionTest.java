@@ -5,11 +5,9 @@ import java.awt.Point;
 import org.junit.Before;
 import org.junit.Test;
 import modele.Cavalier;
-import modele.Fou;
 import modele.Pieces;
 import modele.Pion;
 import modele.Roi;
-import modele.Tour;
 import modele.Triplets;
 
 public class PionTest

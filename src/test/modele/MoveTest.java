@@ -5,11 +5,9 @@ import java.awt.Point;
 import org.junit.Before;
 import org.junit.Test;
 import modele.Cavalier;
-import modele.Fou;
 import modele.Move;
 import modele.Pieces;
-import modele.Roi;
-import modele.Triplets;
+
 
 public class MoveTest
 {

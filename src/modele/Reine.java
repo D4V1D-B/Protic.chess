@@ -20,11 +20,11 @@ public class Reine extends Pieces
 		{
 			if (this.getEmplacement().x > positionRoiEnemy.x)
 			{
-				situationRoiEnememy = 1;
+				situationRoiEnememy = 1; //+ en x
 			}
 			else
 			{
-				situationRoiEnememy = 2;
+				situationRoiEnememy = 2; //- en x
 			}
 		}
 		else

@@ -1231,6 +1231,8 @@ public class Controleur implements Initializable
 						if (plateau.getEchecMathNoir())
 						{
 							tempsNoir = timerServiceNoir.getLastValue();
+							if(!(tempsNoir==null))
+							{
 							int secondeBlanc = Integer.parseInt(tempsBlanc.substring(tempsBlanc.indexOf(":") + 1));
 							int secondeNoir = Integer.parseInt(tempsNoir.substring(tempsNoir.indexOf(":") + 1));
 							String minuteBlanc = tempsBlanc.substring(0, tempsBlanc.indexOf(":"));
@@ -1242,6 +1244,8 @@ public class Controleur implements Initializable
 									+ " minutes et " + secondeBlanc + " secondes.\nLes noirs eux ont utilisé "
 									+ minuteNoir + " minutes et " + secondeNoir + " secondes.\nLa partie a duré "
 									+ minute + " minutes et " + seconde + " secondes!");
+							}
+							else {afficherFinDePartie("Les blancs ont gagné! Félicitation!");}
 						}
 						timerServiceNoir.restart();
 					}
@@ -1251,6 +1255,8 @@ public class Controleur implements Initializable
 						if (plateau.getEchecMathBlanc())
 						{
 							tempsBlanc = timerServiceBlanc.getLastValue();
+							if(!(tempsBlanc==null))
+							{
 							int secondeBlanc = Integer.parseInt(tempsBlanc.substring(tempsBlanc.indexOf(":") + 1));
 							int secondeNoir = Integer.parseInt(tempsNoir.substring(tempsNoir.indexOf(":") + 1));
 							String minuteBlanc = tempsBlanc.substring(0, tempsBlanc.indexOf(":"));
@@ -1262,6 +1268,8 @@ public class Controleur implements Initializable
 									+ " minutes et " + secondeNoir + " secondes.\nLes noirs eux ont utilisé "
 									+ minuteBlanc + " minutes et " + secondeBlanc + " secondes.\nLa partie a duré "
 									+ minute + " minutes et " + seconde + " secondes!");
+							}
+							else {afficherFinDePartie("Les blancs ont gagné! Félicitation!");}
 						}
 						timerServiceBlanc.restart();
 					}

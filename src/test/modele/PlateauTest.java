@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import controleur.Plateau;
-import controleur.Plateau.Equipe;
 import modele.Cavalier;
 import modele.Fou;
 import modele.Pieces;
@@ -17,7 +16,6 @@ import modele.Pion;
 import modele.Reine;
 import modele.Roi;
 import modele.Tour;
-import modele.Triplets;
 
 public class PlateauTest
 {

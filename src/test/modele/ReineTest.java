@@ -9,7 +9,6 @@ import modele.Fou;
 import modele.Pieces;
 import modele.Reine;
 import modele.Roi;
-import modele.Tour;
 import modele.Triplets;
 
 public class ReineTest
