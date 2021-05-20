@@ -1,6 +1,5 @@
 package controleur;
 
-import java.text.SimpleDateFormat;
 import java.awt.Point;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
@@ -15,14 +14,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Worker.State;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +32,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
@@ -55,7 +48,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.util.converter.NumberStringConverter;
 import modele.Cavalier;
 import modele.Fou;
 import modele.Mouvement;
@@ -97,11 +89,6 @@ public class Controleur implements Initializable
 
 	private ListView<String> listViewAnciennesParties;
 	private ObservableList<String> ListAnciennesParties;
-
-	private StringProperty timerStringBlanc;
-	private DoubleProperty timerDoubleBlanc;
-	private StringProperty timerStringNoir;
-	private DoubleProperty timerDoubleNoir;
 
 	@FXML
 	private RadioMenuItem radioClaire;
@@ -347,13 +334,12 @@ public class Controleur implements Initializable
 
 	private Stage fenetreAide;
 
-	private ScheduledService<Double> timerServiceBlanc;
+	private ScheduledService<String> timerServiceBlanc;
 
-	private ScheduledService<Double> timerServiceNoir;
-	
+	private ScheduledService<String> timerServiceNoir;
 
-	private double tempsBlanc = 0;
-	private double tempsNoir = 0;
+	private String tempsBlanc = "0:00";
+	private String tempsNoir = "0:00";
 
 	@FXML
 	void radioClaire(ActionEvent event)
@@ -429,9 +415,6 @@ public class Controleur implements Initializable
 			boutonRevenirAuJeu.setStyle(backColor + textColor + borderColor);
 			boutonAnalyse.setStyle(backColor + textColor + borderColor);
 
-			// MenuBar
-			MenuBar menu = (MenuBar) leParent.getTop();
-
 			// le reste
 			for (Node n : anchorPane.getChildren())
 			{
@@ -461,13 +444,7 @@ public class Controleur implements Initializable
 	@FXML
 	void analyse(MouseEvent event)
 	{
-		// utiliser mouvementSelect.getFen() pour trouver la fen du plateau
-		// charger.
-
 		Move m = bot.jouerBot(plateau);
-		// J'imagine que l'emplacement de la piece est celle avant le mouvement
-		// et que le point de move est le mouvement suggéré
-
 		String nomDuPane = recherchePane(m.getPoint());
 		Pane paneConseil = null;
 		Pane panePiece = null;
@@ -620,7 +597,6 @@ public class Controleur implements Initializable
 
 		placerPiecesString(placementDepart);
 		resetTotal();
-
 	}
 
 	@FXML
@@ -639,35 +615,54 @@ public class Controleur implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		initializeTimerBlanc();
+		initializeTimerNoir();
 		resetTotal();
 		boutonDisable(true);
 		CheckMenuSon();
 		radioClaire.setSelected(themeClaire);
 		radioSombre.setSelected(!themeClaire);
-		initializeTimerBlanc();
-		initializeTimerNoir();
 	}
 
 	private void initializeTimerBlanc()
 	{
-		timerServiceBlanc = new ScheduledService<Double>()
+		timerServiceBlanc = new ScheduledService<String>()
 		{
 			@Override
-			protected Task<Double> createTask()
+			protected Task<String> createTask()
 			{
-				return new Task<Double>()
+				return new Task<String>()
 				{
 					@Override
-					protected Double call() throws Exception
+					protected String call() throws Exception
 					{
-						double value;
+						String value;
 						if (timerServiceBlanc.getLastValue() == null)
 						{
 							value = tempsBlanc;
 						}
 						else
 						{
-							value = timerServiceBlanc.getLastValue()+1;
+							String manip = timerServiceBlanc.getLastValue();
+							int minute = Integer.parseInt(manip.substring(0, manip.indexOf(":")));
+							int seconde = Integer.parseInt(manip.substring(manip.indexOf(":") + 1));
+
+							seconde++;
+
+							if (seconde == 60)
+							{
+								seconde = 0;
+								minute++;
+							}
+
+							if (seconde < 10)
+							{
+								value = minute + ":0" + seconde;
+							}
+							else
+							{
+								value = minute + ":" + seconde;
+							}
 						}
 						updateValue(value);
 						return value;
@@ -677,48 +672,53 @@ public class Controleur implements Initializable
 		};
 		timerServiceBlanc.setPeriod(new Duration(1000));
 
-		this.bindTimerServiceToLabelBlanc();
+		timerBlanc.textProperty().bind(timerServiceBlanc.lastValueProperty());
 
 		if (timerServiceBlanc.getState() != State.READY)
 		{
 			timerServiceBlanc.reset();
 		}
-		timerServiceBlanc.start();
-	}
-
-	// TODO
-	public void bindTimerServiceToLabelBlanc()
-	{
-		timerDoubleBlanc = new SimpleDoubleProperty();
-		timerDoubleBlanc.bind(timerServiceBlanc.lastValueProperty());
-		timerStringBlanc = new SimpleStringProperty();
-		NumberStringConverter numberString = new NumberStringConverter();
-		Bindings.bindBidirectional(timerStringBlanc, timerDoubleBlanc, numberString);
-		timerBlanc.textProperty().bind(Bindings.concat(":",timerStringBlanc));
-
 	}
 
 	private void initializeTimerNoir()
 	{
-		timerServiceNoir = new ScheduledService<Double>()
+		timerServiceNoir = new ScheduledService<String>()
 		{
-
 			@Override
-			protected Task<Double> createTask()
+			protected Task<String> createTask()
 			{
-				return new Task<Double>()
+				return new Task<String>()
 				{
 					@Override
-					protected Double call() throws Exception
+					protected String call() throws Exception
 					{
-						double value;
+						String value;
 						if (timerServiceNoir.getLastValue() == null)
 						{
 							value = tempsNoir;
 						}
 						else
 						{
-							value = timerServiceNoir.getLastValue() + 1;
+							String manip = timerServiceNoir.getLastValue();
+							int minute = Integer.parseInt(manip.substring(0, manip.indexOf(":")));
+							int seconde = Integer.parseInt(manip.substring(manip.indexOf(":") + 1));
+
+							seconde++;
+
+							if (seconde == 60)
+							{
+								seconde = 0;
+								minute++;
+							}
+
+							if (seconde < 10)
+							{
+								value = minute + ":0" + seconde;
+							}
+							else
+							{
+								value = minute + ":" + seconde;
+							}
 						}
 						updateValue(value);
 						return value;
@@ -728,22 +728,12 @@ public class Controleur implements Initializable
 		};
 		timerServiceNoir.setPeriod(new Duration(1000));
 
-		this.bindTimerServiceToLabelNoir();
+		timerNoir.textProperty().bind(timerServiceNoir.lastValueProperty());
 
 		if (timerServiceNoir.getState() != State.READY)
 		{
 			timerServiceNoir.reset();
 		}
-	}
-
-	public void bindTimerServiceToLabelNoir()
-	{
-		timerDoubleNoir = new SimpleDoubleProperty();
-		timerDoubleNoir.bind(timerServiceNoir.lastValueProperty());
-		timerStringNoir = new SimpleStringProperty();
-		NumberStringConverter numberString = new NumberStringConverter();
-		Bindings.bindBidirectional(timerStringNoir, timerDoubleNoir, numberString);
-		timerNoir.textProperty().bind(timerStringNoir);
 	}
 
 	public void setLabelTourCouleur(Label labelTourCouleur)
@@ -777,7 +767,17 @@ public class Controleur implements Initializable
 
 		tourJoueur = true;
 		setLabelTourCouleur(labelTourCouleur);
+
 		jouerSon("/son/Game_start.mp3");
+
+		timerServiceNoir.cancel();
+		timerServiceBlanc.cancel();
+		tempsBlanc = "0:00";
+		tempsNoir = "0:00";
+		timerServiceBlanc.reset();
+		timerServiceNoir.reset();
+		timerServiceBlanc.start();
+
 	}
 
 	public void placerPiecesString(String placement)
@@ -1195,49 +1195,68 @@ public class Controleur implements Initializable
 				if (pieceSelect.getMouvementJouable().contains(rechercheCoordonnee(paneClick.getId()))
 						&& pieceSelect.isWhite() == isTourJoueur())
 				{
+					timerServiceBlanc.cancel();
+					timerServiceNoir.cancel();
+
 					jouerSon("/son/Move.mp3");
 					deplacer(pieceSelect, paneClick);
 
-					if (isTourJoueur())
-					{
-						if (plateau.getEchecMathNoir())
-						{
-							timerServiceBlanc.cancel();
-							timerServiceNoir.cancel();
-							jouerSon("/son/Checkmate.mp3");
-							afficherFinDePartie("Les blancs ont gagné! Félicitation!");
-						}
-					}
-					else
-					{
-						if (plateau.getEchecMathBlanc())
-						{
-							timerServiceBlanc.cancel();
-							timerServiceNoir.cancel();
-							jouerSon("/son/Checkmate.mp3");
-							afficherFinDePartie("Les noirs ont gagné! Félicitation!");
-						}
-					}
-
 					if (!plateau.getEchecMathBlanc() && !plateau.getEchecMathNoir() && plateau.partieNulle())
 					{
-						timerServiceBlanc.cancel();
-						timerServiceNoir.cancel();
-						afficherFinDePartie("Partie nulle, meilleur chance la prochaine fois!");
+						tempsBlanc = timerServiceBlanc.getLastValue();
+						tempsNoir = timerServiceNoir.getLastValue();
+						int secondeBlanc = Integer.parseInt(tempsBlanc.substring(tempsBlanc.indexOf(":") + 1));
+						int secondeNoir = Integer.parseInt(tempsNoir.substring(tempsNoir.indexOf(":") + 1));
+						String minuteBlanc = tempsBlanc.substring(0, tempsBlanc.indexOf(":"));
+						String minuteNoir = tempsNoir.substring(0, tempsNoir.indexOf(":"));
+						int minute = Integer.parseInt(minuteBlanc) + Integer.parseInt(minuteNoir);
+						int seconde = secondeBlanc + secondeNoir;
+						jouerSon("/son/Checkmate.mp3");
+						afficherFinDePartie("Partie nulle! Meilleurs chance la prochaine fois!\nLes blancs ont utilisé " + minuteBlanc
+								+ " minutes et " + secondeBlanc + " secondes.\nLes noirs eux ont utilisé "
+								+ minuteNoir + " minutes et " + secondeNoir + " secondes.\nLa partie a duré "
+								+ minute + " minutes et " + seconde + " secondes!");
 					}
-
-					if (tourJoueur)
+					if (isTourJoueur())
 					{
 						tempsBlanc = timerServiceBlanc.getLastValue();
-						timerServiceBlanc.cancel();
+						if (plateau.getEchecMathNoir())
+						{
+							tempsNoir = timerServiceNoir.getLastValue();
+							int secondeBlanc = Integer.parseInt(tempsBlanc.substring(tempsBlanc.indexOf(":") + 1));
+							int secondeNoir = Integer.parseInt(tempsNoir.substring(tempsNoir.indexOf(":") + 1));
+							String minuteBlanc = tempsBlanc.substring(0, tempsBlanc.indexOf(":"));
+							String minuteNoir = tempsNoir.substring(0, tempsNoir.indexOf(":"));
+							int minute = Integer.parseInt(minuteBlanc) + Integer.parseInt(minuteNoir);
+							int seconde = secondeBlanc + secondeNoir;
+							jouerSon("/son/Checkmate.mp3");
+							afficherFinDePartie("Les blancs ont gagné! Félicitation!\nIls ont utilisé " + minuteBlanc
+									+ " minutes et " + secondeBlanc + " secondes.\nLes noirs eux ont utilisé "
+									+ minuteNoir + " minutes et " + secondeNoir + " secondes.\nLa partie a duré "
+									+ minute + " minutes et " + seconde + " secondes!");
+						}
 						timerServiceNoir.restart();
 					}
 					else
 					{
 						tempsNoir = timerServiceNoir.getLastValue();
+						if (plateau.getEchecMathBlanc())
+						{
+							tempsBlanc = timerServiceBlanc.getLastValue();
+							int secondeBlanc = Integer.parseInt(tempsBlanc.substring(tempsBlanc.indexOf(":") + 1));
+							int secondeNoir = Integer.parseInt(tempsNoir.substring(tempsNoir.indexOf(":") + 1));
+							String minuteBlanc = tempsBlanc.substring(0, tempsBlanc.indexOf(":"));
+							String minuteNoir = tempsNoir.substring(0, tempsNoir.indexOf(":"));
+							int minute = Integer.parseInt(minuteBlanc) + Integer.parseInt(minuteNoir);
+							int seconde = secondeBlanc + secondeNoir;
+							jouerSon("/son/Checkmate.mp3");
+							afficherFinDePartie("Les noirs ont gagné! Félicitation!\nIls ont utilisé " + minuteNoir
+									+ " minutes et " + secondeNoir + " secondes.\nLes noirs eux ont utilisé "
+									+ minuteBlanc + " minutes et " + secondeBlanc + " secondes.\nLa partie a duré "
+									+ minute + " minutes et " + seconde + " secondes!");
+						}
 						timerServiceBlanc.restart();
-						timerServiceNoir.cancel();
-					} // TODO
+					}
 
 					tourJoueur = !isTourJoueur();
 					paneSelect = null;
@@ -1666,15 +1685,12 @@ public class Controleur implements Initializable
 			}
 			else
 			{
-				System.out.println(pane.getId() + " ----" + plateau.trouverPieces(rechercheCoordonnee(pane.getId())));
 				if (plateau.trouverPieces(rechercheCoordonnee(pane.getId())) != null)
 					plateauFen += plateau.trouverPieces(rechercheCoordonnee(pane.getId())).getNom();
 			}
 			entre0et7++;
 
 		}
-		// System.out.println("");
-		System.out.println(plateauFen + "/");
 		return plateauFen + "/";
 	}
 

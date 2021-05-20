@@ -26,13 +26,10 @@ public class ChessApp extends Application
 		Scene scene = new Scene(root);
 
 		scene.getStylesheets().setAll(this.getClass().getResource("/css/claire.css").toString());
-		System.out.println(scene.getStylesheets());
 		Controleur controleurChess = loaderChess.getController();
 
 		Stage aide = new Stage();
 		FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/fxml/aide.fxml"));
-
-		ControleurAide controleurAide = loader2.getController();
 		controleurChess.setFenetreAide(aide);
 
 		aide.setScene(new Scene(loader2.load()));
