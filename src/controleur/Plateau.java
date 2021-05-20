@@ -191,7 +191,7 @@ public class Plateau
 	public Point refreshDeplacementRock(Roi roiDeplacer)
 	{
 		Point rockEstValide = null;
-
+		roiDeplacer.setaBouger();
 		if (roiDeplacer.getEmplacement().equals(new Point(2, 0)))
 		{
 			plateau[4][0] = null;
