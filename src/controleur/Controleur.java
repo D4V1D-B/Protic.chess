@@ -381,6 +381,10 @@ public class Controleur implements Initializable
 			boutonRevenirAuJeu.setStyle(defaultButton);
 			boutonAnalyse.setStyle(defaultButton);
 
+			for (Node n : anchorPane.getChildren())
+			{
+				n.setStyle("-fx-text-fill: black;");
+			}
 			// le reste
 			for (Node n : leParent.getChildren())
 			{
@@ -469,7 +473,7 @@ public class Controleur implements Initializable
 	@FXML
 	void boutonTest(ActionEvent event)
 	{
-		TextInputDialog inDialog = new TextInputDialog("p6p/2Q2q2/8/3rR3/3Bb3/8/2q2Q2/P6P/");
+		TextInputDialog inDialog = new TextInputDialog("p2k3p/2Q2q2/8/3rR3/3Bb3/8/2q2Q2/P3K2P/");
 		inDialog.setTitle("Information demandée");
 		inDialog.setHeaderText("Entrer une Fen.");
 		inDialog.setContentText("Fen :");
@@ -553,7 +557,8 @@ public class Controleur implements Initializable
 				tempsBlanc = timerServiceBlanc.getLastValue();
 				tempsNoir = timerServiceBlanc.getLastValue();
 
-				writer.append(textIn.get() + "É"+ isTourJoueur() +"." + tempsBlanc + "!" + tempsNoir + "*" + creerFen() + "\n");
+				writer.append(textIn.get() + "É" + isTourJoueur() + "." + tempsBlanc + "!" + tempsNoir + "*"
+						+ creerFen() + "\n");
 
 				writer.close();
 			}
@@ -1740,15 +1745,15 @@ public class Controleur implements Initializable
 				{
 					ouiOui.add(s);
 					leNom = s.substring(0, s.indexOf("É"));
-					tourJoueur= s.substring(s.indexOf("É")+1, s.indexOf(".")).equals("true");
-					tempsBlanc = s.substring(s.indexOf(".")+1,s.indexOf("!"));
-					tempsNoir = s.substring(s.indexOf("!")+1, s.indexOf("*"));
+					tourJoueur = s.substring(s.indexOf("É") + 1, s.indexOf(".")).equals("true");
+					tempsBlanc = s.substring(s.indexOf(".") + 1, s.indexOf("!"));
+					tempsNoir = s.substring(s.indexOf("!") + 1, s.indexOf("*"));
 					laFen = s.substring(s.indexOf("*") + 1, s.length());
 
 					ListAnciennesParties.add(leNom + " (" + laFen + ")");
 				}
 			}
-	
+
 			reader.close();
 		}
 		catch (FileNotFoundException e)
@@ -1771,12 +1776,12 @@ public class Controleur implements Initializable
 			{
 				placerPiecesString(partieSelectionner.get().substring(partieSelectionner.get().indexOf("(") + 1,
 						partieSelectionner.get().length() - 1) + "/");
-				System.out.println(tempsBlanc+"    "+tempsNoir);
+				System.out.println(tempsBlanc + "    " + tempsNoir);
 				timerServiceNoir.cancel();
 				timerServiceBlanc.cancel();
 				timerServiceBlanc.reset();
 				timerServiceNoir.reset();
-				if(tourJoueur)
+				if (tourJoueur)
 				{
 					timerServiceBlanc.start();
 				}
@@ -1904,11 +1909,5 @@ public class Controleur implements Initializable
 		return tourJoueur;
 	}
 
-	@FXML
-	void boutonTestNbrMove(ActionEvent event)
-	{
-		bot.setPlateau(plateau);
-		System.out.println(bot.getCompteur());
-	}
-
+	
 }
