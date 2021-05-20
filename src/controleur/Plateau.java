@@ -27,6 +27,14 @@ public class Plateau
 		noir = new Equipe(pieceNoir);
 		actualiserToutLesMouvementJouable(false);
 	}
+	
+	public Plateau(ArrayList<Pieces> pieceBlanc, ArrayList<Pieces> pieceNoir, boolean tour)
+	{
+		refreshPlateau(pieceBlanc, pieceNoir);
+		blanc = new Equipe(pieceBlanc);
+		noir = new Equipe(pieceNoir);
+		actualiserToutLesMouvementJouable(!tour);
+	}
 
 	public Equipe getNoir()
 	{

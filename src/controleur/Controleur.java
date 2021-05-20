@@ -550,7 +550,10 @@ public class Controleur implements Initializable
 			{
 				BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 
-				writer.append(textIn.get() + "*" + creerFen() + "\n");
+				tempsBlanc = timerServiceBlanc.getLastValue();
+				tempsNoir = timerServiceBlanc.getLastValue();
+
+				writer.append(textIn.get() + "É"+ isTourJoueur() +"." + tempsBlanc + "!" + tempsNoir + "*" + creerFen() + "\n");
 
 				writer.close();
 			}
@@ -1122,7 +1125,7 @@ public class Controleur implements Initializable
 
 		}
 
-		plateau = new Plateau(blanc, noir);
+		plateau = new Plateau(blanc, noir, tourJoueur);
 	}
 
 	private void JouerAI()
@@ -1212,10 +1215,10 @@ public class Controleur implements Initializable
 						int minute = Integer.parseInt(minuteBlanc) + Integer.parseInt(minuteNoir);
 						int seconde = secondeBlanc + secondeNoir;
 						jouerSon("/son/Checkmate.mp3");
-						afficherFinDePartie("Partie nulle! Meilleurs chance la prochaine fois!\nLes blancs ont utilisé " + minuteBlanc
-								+ " minutes et " + secondeBlanc + " secondes.\nLes noirs eux ont utilisé "
-								+ minuteNoir + " minutes et " + secondeNoir + " secondes.\nLa partie a duré "
-								+ minute + " minutes et " + seconde + " secondes!");
+						afficherFinDePartie("Partie nulle! Meilleurs chance la prochaine fois!\nLes blancs ont utilisé "
+								+ minuteBlanc + " minutes et " + secondeBlanc + " secondes.\nLes noirs eux ont utilisé "
+								+ minuteNoir + " minutes et " + secondeNoir + " secondes.\nLa partie a duré " + minute
+								+ " minutes et " + seconde + " secondes!");
 					}
 					if (isTourJoueur())
 					{
@@ -1696,7 +1699,6 @@ public class Controleur implements Initializable
 
 	private void chargerUnePartie()
 	{
-		int entreNomEtFen;
 		String leNom;
 		String laFen;
 		Stage lesAnciennesParties = new Stage();
@@ -1737,14 +1739,16 @@ public class Controleur implements Initializable
 				if (s != null)
 				{
 					ouiOui.add(s);
-					entreNomEtFen = s.indexOf("*");
-					leNom = s.substring(0, entreNomEtFen);
-					laFen = s.substring(entreNomEtFen + 1, s.length());
+					leNom = s.substring(0, s.indexOf("É"));
+					tourJoueur= s.substring(s.indexOf("É")+1, s.indexOf(".")).equals("true");
+					tempsBlanc = s.substring(s.indexOf(".")+1,s.indexOf("!"));
+					tempsNoir = s.substring(s.indexOf("!")+1, s.indexOf("*"));
+					laFen = s.substring(s.indexOf("*") + 1, s.length());
 
 					ListAnciennesParties.add(leNom + " (" + laFen + ")");
 				}
 			}
-
+	
 			reader.close();
 		}
 		catch (FileNotFoundException e)
@@ -1765,10 +1769,21 @@ public class Controleur implements Initializable
 
 			if (partieSelectionner.isPresent())
 			{
-
 				placerPiecesString(partieSelectionner.get().substring(partieSelectionner.get().indexOf("(") + 1,
 						partieSelectionner.get().length() - 1) + "/");
-				tourJoueur = true;
+				System.out.println(tempsBlanc+"    "+tempsNoir);
+				timerServiceNoir.cancel();
+				timerServiceBlanc.cancel();
+				timerServiceBlanc.reset();
+				timerServiceNoir.reset();
+				if(tourJoueur)
+				{
+					timerServiceBlanc.start();
+				}
+				else
+				{
+					timerServiceNoir.start();
+				}
 			}
 
 		});
