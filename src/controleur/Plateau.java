@@ -499,7 +499,8 @@ public class Plateau
 						{
 							for (Point t : equipeDefense.getRoi().getMouvementPossible())
 							{
-								if (!equipeAttaque.getAttaquePossible().contains(t))
+								if (!equipeAttaque.getAttaquePossible().contains(t)
+										|| t.equals(echec.get(0).getAttaquant().getEmplacement()))
 								{
 									trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
 								}
@@ -527,7 +528,8 @@ public class Plateau
 								if (!equipeAttaque.getAttaquePossible().contains(t))
 								{
 									if (t.getY() - 1 == equipeDefense.getPositionRoi().y
-											|| t.getY() + 1 == equipeDefense.getPositionRoi().y)
+											|| t.getY() + 1 == equipeDefense.getPositionRoi().y
+											|| t.equals(echec.get(0).getAttaquant().getEmplacement()))
 									{
 										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
 									}
@@ -556,7 +558,8 @@ public class Plateau
 								if (!equipeAttaque.getAttaquePossible().contains(t))
 								{
 									if (t.getY() - 1 == equipeDefense.getPositionRoi().y
-											|| t.getY() + 1 == equipeDefense.getPositionRoi().y)
+											|| t.getY() + 1 == equipeDefense.getPositionRoi().y
+											|| t.equals(echec.get(0).getAttaquant().getEmplacement()))
 									{
 										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
 									}
@@ -585,7 +588,8 @@ public class Plateau
 								if (!equipeAttaque.getAttaquePossible().contains(t))
 								{
 									if (t.getX() - 1 == equipeDefense.getPositionRoi().x
-											|| t.getX() + 1 == equipeDefense.getPositionRoi().x)
+											|| t.getX() + 1 == equipeDefense.getPositionRoi().x
+											|| t.equals(echec.get(0).getAttaquant().getEmplacement()))
 									{
 										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
 									}
@@ -616,7 +620,8 @@ public class Plateau
 								if (!equipeAttaque.getAttaquePossible().contains(t))
 								{
 									if (t.getX() - 1 == equipeDefense.getPositionRoi().x
-											|| t.getX() + 1 == equipeDefense.getPositionRoi().x)
+											|| t.getX() + 1 == equipeDefense.getPositionRoi().x
+											|| t.equals(echec.get(0).getAttaquant().getEmplacement()))
 									{
 										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
 									}
@@ -648,8 +653,9 @@ public class Plateau
 							{
 								if (!equipeAttaque.getAttaquePossible().contains(t))
 								{
-									if ( t.getX() + 1 == equipeDefense.getPositionRoi().x
-											&& t.getY() + 1 == equipeDefense.getPositionRoi().y)
+									if (t.getX() + 1 == equipeDefense.getPositionRoi().x
+											&& t.getY() + 1 == equipeDefense.getPositionRoi().y
+											|| t.equals(echec.get(0).getAttaquant().getEmplacement()))
 									{
 										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
 									}
@@ -681,8 +687,9 @@ public class Plateau
 							{
 								if (!equipeAttaque.getAttaquePossible().contains(t))
 								{
-									if ( t.getX() - 1 == equipeDefense.getPositionRoi().x
-											&& t.getY() - 1 == equipeDefense.getPositionRoi().y)
+									if (t.getX() - 1 == equipeDefense.getPositionRoi().x
+											&& t.getY() - 1 == equipeDefense.getPositionRoi().y
+											|| t.equals(echec.get(0).getAttaquant().getEmplacement()))
 									{
 										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
 									}
@@ -714,8 +721,9 @@ public class Plateau
 							{
 								if (!equipeAttaque.getAttaquePossible().contains(t))
 								{
-									if ( t.getX() + 1 == equipeDefense.getPositionRoi().x
-											&& t.getY() - 1 == equipeDefense.getPositionRoi().y)
+									if (t.getX() + 1 == equipeDefense.getPositionRoi().x
+											&& t.getY() - 1 == equipeDefense.getPositionRoi().y
+											|| t.equals(echec.get(0).getAttaquant().getEmplacement()))
 									{
 										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
 									}
@@ -747,8 +755,9 @@ public class Plateau
 							{
 								if (!equipeAttaque.getAttaquePossible().contains(t))
 								{
-									if ( t.getX() - 1 == equipeDefense.getPositionRoi().x
-											&& t.getY() + 1 == equipeDefense.getPositionRoi().y)
+									if (t.getX() - 1 == equipeDefense.getPositionRoi().x
+											&& t.getY() + 1 == equipeDefense.getPositionRoi().y
+											|| t.equals(echec.get(0).getAttaquant().getEmplacement()))
 									{
 										trouverPieces(equipeDefense.getPositionRoi()).getMouvementJouable().add(t);
 									}
