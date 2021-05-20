@@ -1333,7 +1333,6 @@ public class Controleur implements Initializable
 		if ((pieceSelect.getNom().equals("P") && rechercheCoordonnee(paneClick.getId()).y == 7)
 				|| (pieceSelect.getNom().equals("p") && rechercheCoordonnee(paneClick.getId()).y == 0))
 		{
-			// System.out.println(pieceSelect.isWhite());
 			afficherPionUgrade(pieceSelect.isWhite(), paneClick);
 		}
 
@@ -1776,7 +1775,6 @@ public class Controleur implements Initializable
 			{
 				placerPiecesString(partieSelectionner.get().substring(partieSelectionner.get().indexOf("(") + 1,
 						partieSelectionner.get().length() - 1) + "/");
-				System.out.println(tempsBlanc + "    " + tempsNoir);
 				timerServiceNoir.cancel();
 				timerServiceBlanc.cancel();
 				timerServiceBlanc.reset();
