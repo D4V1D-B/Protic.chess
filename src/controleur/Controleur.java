@@ -1138,7 +1138,7 @@ public class Controleur implements Initializable
 	{
 		if (isTourJoueur() == false)
 		{
-			Move move = bot.jouerBot(this.plateau);
+			Move move = new Bot().jouerBot(this.plateau);
 			Pane paneFinale = null;
 			for (int i = 0; i < allPane().length && paneFinale == null; i++)
 			{

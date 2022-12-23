@@ -15,7 +15,7 @@ public class Bot
 	public Move jouerBot(Plateau plateau)
 	{
 		this.plateau = plateau; // prend le plateau
-		return alphaBetaMinMax(3, (int) Double.NEGATIVE_INFINITY, (int) Double.POSITIVE_INFINITY).getValue();
+		return alphaBetaMinMax(8, (int) Double.NEGATIVE_INFINITY, (int) Double.POSITIVE_INFINITY).getValue();
 
 	}
 
